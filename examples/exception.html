@@ -1,0 +1,1374 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Error dumper</title>
+    <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAVFFOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEAABEAAAABEAAAARAAAAEQAAABEAAAARAAAAEQAAABEAAAARAAABEAAAAAEQABEAAAAAABEAEQAAAAAAEQABEAAAAAEQAAARAAAAEQAAABEAAAARAAAAEQAAABEAAAARAAAAEQAAAAEQAAEQAAAAAAAAAAAAD//wAA888AAOfnAADn5wAA5+cAAOfnAADP8wAAn/kAAJ/5AADP8wAA5+cAAOfnAADn5wAA5+cAAPPPAAD//wAA" rel="icon" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="&#x2F;&#x2F;maxcdn.bootstrapcdn.com&#x2F;bootstrap&#x2F;3.3.5&#x2F;css&#x2F;bootstrap.min.css" crossorigin="anonymous" />
+    <style type="text/css">
+        .error-line
+        {
+            font-weight: bold;
+            color: red;
+            font-style: italic;
+        }
+        a.var-header
+        {
+            display: block;
+        }
+        a.var-header:after
+        {
+            font-family: 'Glyphicons Halflings';
+            content: "\e114";
+            float: right;
+            color: grey;
+        }
+        a.var-header.collapsed:after
+        {
+            content:"\e080";
+        }
+        .code-box
+        {
+            overflow: auto;
+            background-color: #f5f5f5;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+            font-size: 13px;
+        }
+        .code-box:not(.rounded)
+        {
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+        .code-box > span
+        {
+            white-space: pre;
+            display: block;
+        }
+        .max-height
+        {
+            max-height: 400px;
+            overflow: auto;
+        }
+        .panel-group:last-child
+        {
+            margin-bottom: 0;
+        }
+        a
+        {
+            cursor: pointer;
+        }
+        pre, pre *
+        {
+            word-wrap: normal !important;
+        }
+        pre > pre
+        {
+            padding: 0;
+        }
+        pre
+        {
+            margin-bottom: 0;
+        }
+        pre:last-child
+        {
+            margin-bottom: 0;
+        }
+        .nav-tabs
+        {
+            border-bottom: 0;
+        }
+        .panel-collapse > .panel-body
+        {
+            padding: 0;
+        }
+        .panel-collapse pre
+        {
+            border: 0;
+            background: #fff;
+        }
+    </style></head>
+<body>
+<div class="container">
+    <h1>Error!</h1>
+
+    <!-- @ErrorDumper under title -->
+
+
+
+    <h2>Message</h2>
+    <pre><strong>TmpException</strong> My test exception</pre>
+
+    <h2>Stack trace</h2>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+
+
+            (...)/bin/scripts/testStackTrace.php:31
+
+
+        </div>
+
+
+        <div class="panel-body">
+            <div>
+                <div class="tab-content">
+                    <div class="tab-pane fade active in" id="source-step-0">
+                        <div class="code-box max-height rounded">
+
+
+                            <span class="">24        public static function __callStatic($name, $arguments)</span>
+
+
+                            <span class="">25        {</span>
+
+
+                            <span class="">26            return new static();</span>
+
+
+                            <span class="">27        }</span>
+
+
+                            <span class="">28    </span>
+
+
+                            <span class="">29        public static function myStaticMethod()</span>
+
+
+                            <span class="">30        {</span>
+
+
+                            <span class="error-line">31            $clone = new \Awesomite\ErrorDumper\Cloners\ClonedException(new TmpException(&#039;My test exception&#039;));</span>
+
+
+                            <span class="">32            $clone-&gt;getStackTrace()-&gt;setVarDumper(new \Awesomite\StackTrace\VarDumpers\LightVarDumper());</span>
+
+
+                            <span class="">33    </span>
+
+
+                            <span class="">34            if (php_sapi_name() === &#039;cli&#039;) {</span>
+
+
+                            <span class="">35                $view = new \Awesomite\ErrorDumper\Views\ViewCli();</span>
+
+
+                            <span class="">36                $view-&gt;display($clone);</span>
+
+
+                            <span class="">37                exit;</span>
+
+
+                            <span class="">38            }</span>
+                        </div>
+                    </div>                    </div>
+            </div>
+        </div></div>                            <div class="panel panel-default">
+    <div class="panel-heading">
+
+
+        (...)/bin/scripts/testStackTrace.php:21
+
+
+        <strong>TestClass::myStaticMethod()</strong>
+    </div>
+
+
+    <div class="panel-body">
+        <div class="padding-menu">
+            <ul class="nav nav-tabs" data-tabs="tabs-step-1">
+                <li class="active">
+                    <a href="#source-step-1" data-toggle="tab">Source</a>
+                </li>
+                <li class="">
+                    <a href="#colorized-key-step-1" data-toggle="tab">Arguments</a>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <div class="tab-content">
+                <div class="tab-pane fade active in" id="source-step-1">
+                    <div class="code-box max-height ">
+
+
+                        <span class="">14        public function __construct()</span>
+
+
+                        <span class="">15        {</span>
+
+
+                        <span class="">16            $this-&gt;callDynamic(1, 2, 3);</span>
+
+
+                        <span class="">17        }</span>
+
+
+                        <span class="">18    </span>
+
+
+                        <span class="">19        public function __call($name, $arguments)</span>
+
+
+                        <span class="">20        {</span>
+
+
+                        <span class="error-line">21            return static::myStaticMethod($this);</span>
+
+
+                        <span class="">22        }</span>
+
+
+                        <span class="">23    </span>
+
+
+                        <span class="">24        public static function __callStatic($name, $arguments)</span>
+
+
+                        <span class="">25        {</span>
+
+
+                        <span class="">26            return new static();</span>
+
+
+                        <span class="">27        }</span>
+
+
+                        <span class="">28    </span>
+                    </div>
+                </div>                            <div class="tab-pane fade " id="colorized-key-step-1">
+                <div class="panel-group">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <a
+                                    data-toggle="collapse"
+                                    data-target="#parameters-step-1-0"
+                                    class="var-header "
+                            >
+                                unknown0
+                            </a>
+                        </div>
+                        <div
+                                id="parameters-step-1-0"
+                                class="panel-collapse collapse in"
+                        >
+                            <div class="panel-body">
+                                                    <pre class="max-height">object(TestClass) {}
+</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>                    </div>
+        </div>
+    </div></div>                            <div class="panel panel-default">
+    <div class="panel-heading">
+
+
+        (...)/bin/scripts/testStackTrace.php:16
+
+
+        <strong>TestClass-&gt;__call()</strong>
+    </div>
+
+
+    <div class="panel-body">
+        <div class="padding-menu">
+            <ul class="nav nav-tabs" data-tabs="tabs-step-2">
+                <li class="active">
+                    <a href="#source-step-2" data-toggle="tab">Source</a>
+                </li>
+                <li class="">
+                    <a href="#colorized-key-step-2" data-toggle="tab">Arguments</a>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <div class="tab-content">
+                <div class="tab-pane fade active in" id="source-step-2">
+                    <div class="code-box max-height ">
+
+
+                        <span class=""> 9     * @method callDynamic($a, $b, $c)</span>
+
+
+                        <span class="">10     * @method static TestClass create(array $params)</span>
+
+
+                        <span class="">11     */</span>
+
+
+                        <span class="">12    class TestClass</span>
+
+
+                        <span class="">13    {</span>
+
+
+                        <span class="">14        public function __construct()</span>
+
+
+                        <span class="">15        {</span>
+
+
+                        <span class="error-line">16            $this-&gt;callDynamic(1, 2, 3);</span>
+
+
+                        <span class="">17        }</span>
+
+
+                        <span class="">18    </span>
+
+
+                        <span class="">19        public function __call($name, $arguments)</span>
+
+
+                        <span class="">20        {</span>
+
+
+                        <span class="">21            return static::myStaticMethod($this);</span>
+
+
+                        <span class="">22        }</span>
+
+
+                        <span class="">23    </span>
+                    </div>
+                </div>                            <div class="tab-pane fade " id="colorized-key-step-2">
+                <div class="panel-group">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+
+
+                            <a
+                                    data-toggle="collapse"
+                                    data-target="#parameters-step-2-0"
+                                    class="var-header "
+                            >
+                                $name
+                            </a>
+                        </div>
+                        <div
+                                id="parameters-step-2-0"
+                                class="panel-collapse collapse in"
+                        >
+                            <div class="panel-body">
+                                                    <pre class="max-height">string(11) &quot;callDynamic&quot;
+</pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+
+
+                            <a
+                                    data-toggle="collapse"
+                                    data-target="#parameters-step-2-1"
+                                    class="var-header "
+                            >
+                                $arguments
+                            </a>
+                        </div>
+                        <div
+                                id="parameters-step-2-1"
+                                class="panel-collapse collapse in"
+                        >
+                            <div class="panel-body">
+                                                    <pre class="max-height">array(3) {
+  [0] =&gt; 
+  int(1)
+  [1] =&gt; 
+  int(2)
+  [2] =&gt; 
+  int(3)
+}
+</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>                    </div>
+        </div>
+    </div></div>                            <div class="panel panel-default">
+    <div class="panel-heading">
+
+
+        (...)/bin/scripts/testStackTrace.php:26
+
+
+        <strong>TestClass-&gt;__construct()</strong>
+    </div>
+
+
+    <div class="panel-body">
+        <div>
+            <div class="tab-content">
+                <div class="tab-pane fade active in" id="source-step-3">
+                    <div class="code-box max-height rounded">
+
+
+                        <span class="">19        public function __call($name, $arguments)</span>
+
+
+                        <span class="">20        {</span>
+
+
+                        <span class="">21            return static::myStaticMethod($this);</span>
+
+
+                        <span class="">22        }</span>
+
+
+                        <span class="">23    </span>
+
+
+                        <span class="">24        public static function __callStatic($name, $arguments)</span>
+
+
+                        <span class="">25        {</span>
+
+
+                        <span class="error-line">26            return new static();</span>
+
+
+                        <span class="">27        }</span>
+
+
+                        <span class="">28    </span>
+
+
+                        <span class="">29        public static function myStaticMethod()</span>
+
+
+                        <span class="">30        {</span>
+
+
+                        <span class="">31            $clone = new \Awesomite\ErrorDumper\Cloners\ClonedException(new TmpException(&#039;My test exception&#039;));</span>
+
+
+                        <span class="">32            $clone-&gt;getStackTrace()-&gt;setVarDumper(new \Awesomite\StackTrace\VarDumpers\LightVarDumper());</span>
+
+
+                        <span class="">33    </span>
+                    </div>
+                </div>                    </div>
+        </div>
+    </div></div>                            <div class="panel panel-default">
+    <div class="panel-heading">
+
+
+        (...)/bin/scripts/testStackTrace.php:47
+
+
+        <strong>TestClass::__callStatic()</strong>
+    </div>
+
+
+    <div class="panel-body">
+        <div class="padding-menu">
+            <ul class="nav nav-tabs" data-tabs="tabs-step-4">
+                <li class="active">
+                    <a href="#source-step-4" data-toggle="tab">Source</a>
+                </li>
+                <li class="">
+                    <a href="#colorized-key-step-4" data-toggle="tab">Arguments</a>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <div class="tab-content">
+                <div class="tab-pane fade active in" id="source-step-4">
+                    <div class="code-box max-height ">
+
+
+                        <span class="">37                exit;</span>
+
+
+                        <span class="">38            }</span>
+
+
+                        <span class="">39    </span>
+
+
+                        <span class="">40            $view = new \Awesomite\ErrorDumper\Views\ViewHtml();</span>
+
+
+                        <span class="">41            $view-&gt;display($clone);</span>
+
+
+                        <span class="">42        }</span>
+
+
+                        <span class="">43    }</span>
+
+
+                        <span class="">44    </span>
+
+
+                        <span class="">45    </span>
+
+
+                        <span class="">46    ob_start();</span>
+
+
+                        <span class="error-line">47    TestClass::create(5);</span>
+
+
+                        <span class="">48    $result = ob_get_contents();</span>
+
+
+                        <span class="">49    ob_end_clean();</span>
+
+
+                        <span class="">50    </span>
+
+
+                        <span class="">51    return $result;</span>
+                    </div>
+                </div>                            <div class="tab-pane fade " id="colorized-key-step-4">
+                <div class="panel-group">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+
+
+                            <a
+                                    data-toggle="collapse"
+                                    data-target="#parameters-step-4-0"
+                                    class="var-header "
+                            >
+                                $name
+                            </a>
+                        </div>
+                        <div
+                                id="parameters-step-4-0"
+                                class="panel-collapse collapse in"
+                        >
+                            <div class="panel-body">
+                                                    <pre class="max-height">string(6) &quot;create&quot;
+</pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+
+
+                            <a
+                                    data-toggle="collapse"
+                                    data-target="#parameters-step-4-1"
+                                    class="var-header "
+                            >
+                                $arguments
+                            </a>
+                        </div>
+                        <div
+                                id="parameters-step-4-1"
+                                class="panel-collapse collapse in"
+                        >
+                            <div class="panel-body">
+                                                    <pre class="max-height">array(1) {
+  [0] =&gt; 
+  int(5)
+}
+</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>                    </div>
+        </div>
+    </div></div>                            <div class="panel panel-default">
+    <div class="panel-heading">
+
+
+        (...)/bin/errordumper_webserver_root/index.php:24
+
+
+        <strong>require()</strong>
+    </div>
+
+
+    <div class="panel-body">
+        <div class="padding-menu">
+            <ul class="nav nav-tabs" data-tabs="tabs-step-5">
+                <li class="active">
+                    <a href="#source-step-5" data-toggle="tab">Source</a>
+                </li>
+                <li class="">
+                    <a href="#colorized-key-step-5" data-toggle="tab">Arguments</a>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <div class="tab-content">
+                <div class="tab-pane fade active in" id="source-step-5">
+                    <div class="code-box max-height ">
+
+
+                        <span class="">17    ));</span>
+
+
+                        <span class="">18    $app-&gt;register(new Silex\Provider\UrlGeneratorServiceProvider());</span>
+
+
+                        <span class="">19    $app[&#039;debug&#039;] = true;</span>
+
+
+                        <span class="">20    </span>
+
+
+                        <span class="">21    $app</span>
+
+
+                        <span class="">22        -&gt;get(&#039;/{page}&#039;, function ($page) use ($app, $pages) {</span>
+
+
+                        <span class="">23            if (in_array($page, array_keys($pages))) {</span>
+
+
+                        <span class="error-line">24                return require implode(DIRECTORY_SEPARATOR, array(__DIR__, &#039;..&#039;, &#039;scripts&#039;, $page . &#039;.php&#039;));</span>
+
+
+                        <span class="">25            }</span>
+
+
+                        <span class="">26    </span>
+
+
+                        <span class="">27            return $app[&#039;twig&#039;]-&gt;render(&#039;index.twig&#039;, array(</span>
+
+
+                        <span class="">28                &#039;pages&#039; =&gt; $pages</span>
+
+
+                        <span class="">29            ));</span>
+
+
+                        <span class="">30        })</span>
+
+
+                        <span class="">31        -&gt;bind(&#039;homepage&#039;)</span>
+                    </div>
+                </div>                            <div class="tab-pane fade " id="colorized-key-step-5">
+                <div class="panel-group">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <a
+                                    data-toggle="collapse"
+                                    data-target="#parameters-step-5-0"
+                                    class="var-header "
+                            >
+                                unknown0
+                            </a>
+                        </div>
+                        <div
+                                id="parameters-step-5-0"
+                                class="panel-collapse collapse in"
+                        >
+                            <div class="panel-body">
+                                                    <pre class="max-height">string(80) &quot;(..)/bin/scripts/testStackTrace.php&quot;
+</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>                    </div>
+        </div>
+    </div></div>                            <div class="panel panel-default">
+    <div class="panel-heading">
+
+        <strong>{closure}()</strong>
+    </div>
+
+
+    <div class="panel-body">
+        <div class="padding-menu">
+            <ul class="nav nav-tabs" data-tabs="tabs-step-6">
+                <li class="">
+                    <a href="#source-step-6" data-toggle="tab">Source</a>
+                </li>
+                <li class="active">
+                    <a href="#colorized-key-step-6" data-toggle="tab">Arguments</a>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <div class="tab-content">
+                <div class="tab-pane fade " id="source-step-6">
+                    <p class="code-box max-height">Source code does not exist for this step.</p>
+                </div>                            <div class="tab-pane fade active in" id="colorized-key-step-6">
+                <div class="panel-group">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <a
+                                    data-toggle="collapse"
+                                    data-target="#parameters-step-6-0"
+                                    class="var-header "
+                            >
+                                unknown0
+                            </a>
+                        </div>
+                        <div
+                                id="parameters-step-6-0"
+                                class="panel-collapse collapse in"
+                        >
+                            <div class="panel-body">
+                                                    <pre class="max-height">string(14) &quot;testStackTrace&quot;
+</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>                    </div>
+        </div>
+    </div></div>                            <div class="panel panel-default">
+    <div class="panel-heading">
+
+
+        (...)/symfony/http-kernel/HttpKernel.php:144
+
+
+        <strong>call_user_func_array()</strong>
+    </div>
+
+
+    <div class="panel-body">
+        <div class="padding-menu">
+            <ul class="nav nav-tabs" data-tabs="tabs-step-7">
+                <li class="active">
+                    <a href="#source-step-7" data-toggle="tab">Source</a>
+                </li>
+                <li class="">
+                    <a href="#colorized-key-step-7" data-toggle="tab">Arguments</a>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <div class="tab-content">
+                <div class="tab-pane fade active in" id="source-step-7">
+                    <div class="code-box max-height ">
+
+
+                        <span class="">137            $this-&gt;dispatcher-&gt;dispatch(KernelEvents::CONTROLLER, $event);</span>
+
+
+                        <span class="">138            $controller = $event-&gt;getController();</span>
+
+
+                        <span class="">139    </span>
+
+
+                        <span class="">140            // controller arguments</span>
+
+
+                        <span class="">141            $arguments = $this-&gt;resolver-&gt;getArguments($request, $controller);</span>
+
+
+                        <span class="">142    </span>
+
+
+                        <span class="">143            // call controller</span>
+
+
+                        <span class="error-line">144            $response = call_user_func_array($controller, $arguments);</span>
+
+
+                        <span class="">145    </span>
+
+
+                        <span class="">146            // view</span>
+
+
+                        <span class="">147            if (!$response instanceof Response) {</span>
+
+
+                        <span class="">148                $event = new GetResponseForControllerResultEvent($this, $request, $type, $response);</span>
+
+
+                        <span class="">149                $this-&gt;dispatcher-&gt;dispatch(KernelEvents::VIEW, $event);</span>
+
+
+                        <span class="">150    </span>
+
+
+                        <span class="">151                if ($event-&gt;hasResponse()) {</span>
+                    </div>
+                </div>                            <div class="tab-pane fade " id="colorized-key-step-7">
+                <div class="panel-group">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+
+
+                            <a
+                                    data-toggle="collapse"
+                                    data-target="#parameters-step-7-0"
+                                    class="var-header "
+                            >
+                                $function_name
+                            </a>
+                        </div>
+                        <div
+                                id="parameters-step-7-0"
+                                class="panel-collapse collapse in"
+                        >
+                            <div class="panel-body">
+                                                    <pre class="max-height">object(Closure) {}
+</pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+
+
+                            <a
+                                    data-toggle="collapse"
+                                    data-target="#parameters-step-7-1"
+                                    class="var-header "
+                            >
+                                $parameters
+                            </a>
+                        </div>
+                        <div
+                                id="parameters-step-7-1"
+                                class="panel-collapse collapse in"
+                        >
+                            <div class="panel-body">
+                                                    <pre class="max-height">array(1) {
+  [0] =&gt; 
+  string(14) &quot;testStackTrace&quot;
+}
+</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>                    </div>
+        </div>
+    </div></div>                            <div class="panel panel-default">
+    <div class="panel-heading">
+
+
+        (...)/symfony/http-kernel/HttpKernel.php:64
+
+
+        <strong>Symfony\Component\HttpKernel\HttpKernel-&gt;handleRaw()</strong>
+    </div>
+
+
+    <div class="panel-body">
+        <div class="padding-menu">
+            <ul class="nav nav-tabs" data-tabs="tabs-step-8">
+                <li class="active">
+                    <a href="#source-step-8" data-toggle="tab">Source</a>
+                </li>
+                <li class="">
+                    <a href="#colorized-key-step-8" data-toggle="tab">Arguments</a>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <div class="tab-content">
+                <div class="tab-pane fade active in" id="source-step-8">
+                    <div class="code-box max-height ">
+
+
+                        <span class="">57         * {@inheritdoc}</span>
+
+
+                        <span class="">58         */</span>
+
+
+                        <span class="">59        public function handle(Request $request, $type = HttpKernelInterface::MASTER_REQUEST, $catch = true)</span>
+
+
+                        <span class="">60        {</span>
+
+
+                        <span class="">61            $request-&gt;headers-&gt;set(&#039;X-Php-Ob-Level&#039;, ob_get_level());</span>
+
+
+                        <span class="">62    </span>
+
+
+                        <span class="">63            try {</span>
+
+
+                        <span class="error-line">64                return $this-&gt;handleRaw($request, $type);</span>
+
+
+                        <span class="">65            } catch (\Exception $e) {</span>
+
+
+                        <span class="">66                if ($e instanceof ConflictingHeadersException) {</span>
+
+
+                        <span class="">67                    $e = new BadRequestHttpException(&#039;The request headers contain conflicting information regarding the origin of this request.&#039;, $e);</span>
+
+
+                        <span class="">68                }</span>
+
+
+                        <span class="">69                if (false === $catch) {</span>
+
+
+                        <span class="">70                    $this-&gt;finishRequest($request, $type);</span>
+
+
+                        <span class="">71    </span>
+                    </div>
+                </div>                            <div class="tab-pane fade " id="colorized-key-step-8">
+                <div class="panel-group">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+
+
+                            <a
+                                    data-toggle="collapse"
+                                    data-target="#parameters-step-8-0"
+                                    class="var-header "
+                            >
+                                Symfony\Component\HttpFoundation\Request: $request
+                            </a>
+                        </div>
+                        <div
+                                id="parameters-step-8-0"
+                                class="panel-collapse collapse in"
+                        >
+                            <div class="panel-body">
+                                                    <pre class="max-height">object(Symfony\Component\HttpFoundation\Request) {}
+</pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+
+
+                            <a
+                                    data-toggle="collapse"
+                                    data-target="#parameters-step-8-1"
+                                    class="var-header "
+                            >
+                                $type
+                                = <strong>self::MASTER_REQUEST</strong>
+                            </a>
+                        </div>
+                        <div
+                                id="parameters-step-8-1"
+                                class="panel-collapse collapse in"
+                        >
+                            <div class="panel-body">
+                                                    <pre class="max-height">int(1)
+</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>                    </div>
+        </div>
+    </div></div>                            <div class="panel panel-default">
+    <div class="panel-heading">
+
+
+        (...)/src/Silex/Application.php:586
+
+
+        <strong>Symfony\Component\HttpKernel\HttpKernel-&gt;handle()</strong>
+    </div>
+
+
+    <div class="panel-body">
+        <div class="padding-menu">
+            <ul class="nav nav-tabs" data-tabs="tabs-step-9">
+                <li class="active">
+                    <a href="#source-step-9" data-toggle="tab">Source</a>
+                </li>
+                <li class="">
+                    <a href="#colorized-key-step-9" data-toggle="tab">Arguments</a>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <div class="tab-content">
+                <div class="tab-pane fade active in" id="source-step-9">
+                    <div class="code-box max-height ">
+
+
+                        <span class="">579    </span>
+
+
+                        <span class="">580            $current = HttpKernelInterface::SUB_REQUEST === $type ? $this[&#039;request&#039;] : $this[&#039;request_error&#039;];</span>
+
+
+                        <span class="">581    </span>
+
+
+                        <span class="">582            $this[&#039;request&#039;] = $request;</span>
+
+
+                        <span class="">583    </span>
+
+
+                        <span class="">584            $this-&gt;flush();</span>
+
+
+                        <span class="">585    </span>
+
+
+                        <span class="error-line">586            $response = $this[&#039;kernel&#039;]-&gt;handle($request, $type, $catch);</span>
+
+
+                        <span class="">587    </span>
+
+
+                        <span class="">588            $this[&#039;request&#039;] = $current;</span>
+
+
+                        <span class="">589    </span>
+
+
+                        <span class="">590            return $response;</span>
+
+
+                        <span class="">591        }</span>
+
+
+                        <span class="">592    </span>
+
+
+                        <span class="">593        /**</span>
+                    </div>
+                </div>                            <div class="tab-pane fade " id="colorized-key-step-9">
+                <div class="panel-group">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+
+
+                            <a
+                                    data-toggle="collapse"
+                                    data-target="#parameters-step-9-0"
+                                    class="var-header "
+                            >
+                                Symfony\Component\HttpFoundation\Request: $request
+                            </a>
+                        </div>
+                        <div
+                                id="parameters-step-9-0"
+                                class="panel-collapse collapse in"
+                        >
+                            <div class="panel-body">
+                                                    <pre class="max-height">object(Symfony\Component\HttpFoundation\Request) {}
+</pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+
+
+                            <a
+                                    data-toggle="collapse"
+                                    data-target="#parameters-step-9-1"
+                                    class="var-header "
+                            >
+                                $type
+                                = <strong>Symfony\Component\HttpKernel\HttpKernelInterface::MASTER_REQUEST</strong>
+                            </a>
+                        </div>
+                        <div
+                                id="parameters-step-9-1"
+                                class="panel-collapse collapse in"
+                        >
+                            <div class="panel-body">
+                                                    <pre class="max-height">int(1)
+</pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+
+
+                            <a
+                                    data-toggle="collapse"
+                                    data-target="#parameters-step-9-2"
+                                    class="var-header "
+                            >
+                                $catch
+                                = <strong>true</strong>
+                            </a>
+                        </div>
+                        <div
+                                id="parameters-step-9-2"
+                                class="panel-collapse collapse in"
+                        >
+                            <div class="panel-body">
+                                                    <pre class="max-height">bool(true)
+</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>                    </div>
+        </div>
+    </div></div>                            <div class="panel panel-default">
+    <div class="panel-heading">
+
+
+        (...)/src/Silex/Application.php:563
+
+
+        <strong>Silex\Application-&gt;handle()</strong>
+    </div>
+
+
+    <div class="panel-body">
+        <div class="padding-menu">
+            <ul class="nav nav-tabs" data-tabs="tabs-step-10">
+                <li class="active">
+                    <a href="#source-step-10" data-toggle="tab">Source</a>
+                </li>
+                <li class="">
+                    <a href="#colorized-key-step-10" data-toggle="tab">Arguments</a>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <div class="tab-content">
+                <div class="tab-pane fade active in" id="source-step-10">
+                    <div class="code-box max-height ">
+
+
+                        <span class="">556         */</span>
+
+
+                        <span class="">557        public function run(Request $request = null)</span>
+
+
+                        <span class="">558        {</span>
+
+
+                        <span class="">559            if (null === $request) {</span>
+
+
+                        <span class="">560                $request = Request::createFromGlobals();</span>
+
+
+                        <span class="">561            }</span>
+
+
+                        <span class="">562    </span>
+
+
+                        <span class="error-line">563            $response = $this-&gt;handle($request);</span>
+
+
+                        <span class="">564            $response-&gt;send();</span>
+
+
+                        <span class="">565            $this-&gt;terminate($request, $response);</span>
+
+
+                        <span class="">566        }</span>
+
+
+                        <span class="">567    </span>
+
+
+                        <span class="">568        /**</span>
+
+
+                        <span class="">569         * {@inheritdoc}</span>
+
+
+                        <span class="">570         *</span>
+                    </div>
+                </div>                            <div class="tab-pane fade " id="colorized-key-step-10">
+                <div class="panel-group">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+
+
+                            <a
+                                    data-toggle="collapse"
+                                    data-target="#parameters-step-10-0"
+                                    class="var-header "
+                            >
+                                Symfony\Component\HttpFoundation\Request: $request
+                            </a>
+                        </div>
+                        <div
+                                id="parameters-step-10-0"
+                                class="panel-collapse collapse in"
+                        >
+                            <div class="panel-body">
+                                                    <pre class="max-height">object(Symfony\Component\HttpFoundation\Request) {}
+</pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+
+
+                            <a
+                                    data-toggle="collapse"
+                                    data-target="#parameters-step-10-1"
+                                    class="var-header "
+                            >
+                                $type
+                                = <strong>Symfony\Component\HttpKernel\HttpKernelInterface::MASTER_REQUEST</strong>
+                            </a>
+                        </div>
+                        <div
+                                id="parameters-step-10-1"
+                                class="panel-collapse collapse in"
+                        >
+                            <div class="panel-body">
+                                <pre>undefined</pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+
+
+                            <a
+                                    data-toggle="collapse"
+                                    data-target="#parameters-step-10-2"
+                                    class="var-header "
+                            >
+                                $catch
+                                = <strong>true</strong>
+                            </a>
+                        </div>
+                        <div
+                                id="parameters-step-10-2"
+                                class="panel-collapse collapse in"
+                        >
+                            <div class="panel-body">
+                                <pre>undefined</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>                    </div>
+        </div>
+    </div></div>                            <div class="panel panel-default">
+    <div class="panel-heading">
+
+
+        (...)/bin/errordumper_webserver_root/index.php:35
+
+
+        <strong>Silex\Application-&gt;run()</strong>
+    </div>
+
+
+    <div class="panel-body">
+        <div class="padding-menu">
+            <ul class="nav nav-tabs" data-tabs="tabs-step-11">
+                <li class="active">
+                    <a href="#source-step-11" data-toggle="tab">Source</a>
+                </li>
+                <li class="">
+                    <a href="#colorized-key-step-11" data-toggle="tab">Arguments</a>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <div class="tab-content">
+                <div class="tab-pane fade active in" id="source-step-11">
+                    <div class="code-box max-height ">
+
+
+                        <span class="">21    $app</span>
+
+
+                        <span class="">22        -&gt;get(&#039;/{page}&#039;, function ($page) use ($app, $pages) {</span>
+
+
+                        <span class="">23            if (in_array($page, array_keys($pages))) {</span>
+
+
+                        <span class="">24                return require implode(DIRECTORY_SEPARATOR, array(__DIR__, &#039;..&#039;, &#039;scripts&#039;, $page . &#039;.php&#039;));</span>
+
+
+                        <span class="">25            }</span>
+
+
+                        <span class="">26    </span>
+
+
+                        <span class="">27            return $app[&#039;twig&#039;]-&gt;render(&#039;index.twig&#039;, array(</span>
+
+
+                        <span class="">28                &#039;pages&#039; =&gt; $pages</span>
+
+
+                        <span class="">29            ));</span>
+
+
+                        <span class="">30        })</span>
+
+
+                        <span class="">31        -&gt;bind(&#039;homepage&#039;)</span>
+
+
+                        <span class="">32        -&gt;value(&#039;page&#039;, &#039;index&#039;)</span>
+
+
+                        <span class="">33    ;</span>
+
+
+                        <span class="">34    </span>
+
+
+                        <span class="error-line">35    $app-&gt;run();</span>
+                    </div>
+                </div>                            <div class="tab-pane fade " id="colorized-key-step-11">
+                <div class="panel-group">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+
+
+                            <a
+                                    data-toggle="collapse"
+                                    data-target="#parameters-step-11-0"
+                                    class="var-header "
+                            >
+                                Symfony\Component\HttpFoundation\Request: $request
+                                = <strong>NULL</strong>
+                            </a>
+                        </div>
+                        <div
+                                id="parameters-step-11-0"
+                                class="panel-collapse collapse in"
+                        >
+                            <div class="panel-body">
+                                <pre>undefined</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>                    </div>
+        </div>
+    </div></div>
+    <footer>
+        <p class="pull-right small">
+            Generated by <a href="https://github.com/awesomite/error-dumper" target="_blank">ErrorDumper</a>
+            &bull; PHP 7.0.10
+            &bull; 4.84 MB
+        </p>
+    </footer>
+</div>
+
+<script type="text/javascript" src="&#x2F;&#x2F;code.jquery.com&#x2F;jquery-2.1.4.min.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="&#x2F;&#x2F;maxcdn.bootstrapcdn.com&#x2F;bootstrap&#x2F;3.3.5&#x2F;js&#x2F;bootstrap.min.js" crossorigin="anonymous"></script>
+
+<!-- @ErrorDumper -->
+</body>
+</html>
