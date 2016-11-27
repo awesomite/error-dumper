@@ -32,7 +32,7 @@ class TestClass
         $clone->getStackTrace()->setVarDumper(new \Awesomite\StackTrace\VarDumpers\LightVarDumper());
 
         if (php_sapi_name() === 'cli') {
-            $view = new \Awesomite\ErrorDumper\Views\ViewCli();
+            $view = new \Awesomite\ErrorDumper\Views\ViewCli(7, 3);
             $view->display($clone);
             exit;
         }

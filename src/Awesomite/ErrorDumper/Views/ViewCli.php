@@ -17,10 +17,16 @@ class ViewCli implements ViewInterface
 
     private $output;
 
+    /**
+     * ViewCli constructor.
+     * @param int $lineLimit
+     * @param int $stepLimit
+     * @param OutputInterface|null $output
+     */
     public function __construct($lineLimit = 7, $stepLimit = 0, OutputInterface $output = null)
     {
-        $this->lineLimit = $lineLimit;
-        $this->stepLimit = $stepLimit;
+        $this->lineLimit = (int) $lineLimit;
+        $this->stepLimit = (int) $stepLimit;
         if ($output) {
             $this->setFormaters($output);
             $this->output = $output;
@@ -41,9 +47,14 @@ class ViewCli implements ViewInterface
 
         $output->writeln((string) $exception->getStackTrace());
 
+        $stepNo = 0;
         foreach ($exception->getStackTrace() as $step) {
             $output->writeln('');
             $this->renderStep($step, $output, $formatter);
+            $stepNo++;
+            if ($stepNo === $this->stepLimit) {
+                break;
+            }
         }
     }
 

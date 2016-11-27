@@ -19,7 +19,7 @@ class ViewCliTest extends \PHPUnit_Framework_TestCase
     public function testDisplay(ClonedExceptionInterface $clonedException)
     {
         $output = new StreamOutput(tmpfile());
-        $view = new ViewCli(7, 0, $output);
+        $view = new ViewCli(7, 1, $output);
         $view->display($clonedException);
         $stream = $output->getStream();
         fseek($stream, 0);
@@ -34,7 +34,7 @@ class ViewCliTest extends \PHPUnit_Framework_TestCase
     public function providerDisplay()
     {
         return array(
-            array(new ClonedException(new \Exception())),
+            array(new ClonedException(new \LogicException())),
         );
     }
 }
