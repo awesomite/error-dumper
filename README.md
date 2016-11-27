@@ -4,6 +4,8 @@
 [![Build Status](https://travis-ci.org/awesomite/error-dumper.svg?branch=master)](https://travis-ci.org/awesomite/error-dumper)
 
 Debugger integrated with PhpStorm.
+`ErrorDumper` allows you to catch all kinds of errors and exceptions in PHP.
+You will be able to serialize, restore and display them later in readable form.
 [@See](https://awesomite.github.io/error-dumper/examples/exception.html) example.
 
 ## Table of contents
@@ -16,8 +18,6 @@ Debugger integrated with PhpStorm.
   * [Integration with PhpStorm](#integration-with-phpstorm)
 * [Versioning](#versioning)
 * [Examples](#examples)
-
-`ErrorDumper` allows you to catch all kinds of uncaught errors in PHP, serialize and restore them later.
 
 ## Installation
 
