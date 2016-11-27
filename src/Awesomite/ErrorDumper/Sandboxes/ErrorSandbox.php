@@ -33,8 +33,14 @@ class ErrorSandbox implements ErrorSandboxInterface
         try {
             set_error_handler($errorCallback, $this->errorTypes);
             call_user_func($callable);
-        } finally {
+        } catch (\Throwable $exception) {
             restore_error_handler();
+            throw $exception;
+        } catch (\Exception $exception) {
+            restore_error_handler();
+            throw $exception;
         }
+
+        restore_error_handler();
     }
 }
