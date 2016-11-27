@@ -11,34 +11,30 @@ class ErrorSandbox implements ErrorSandboxInterface
         $this->errorTypes = is_null($errorTypes) ? E_ALL | E_STRICT : $errorTypes;
     }
 
-    public function executeSafely($callback)
+    public function executeSafely($callable)
     {
-        $this->metaExecute($callback);
+        $this->metaExecute($callable, function () {});
     }
 
-    public function execute($callback)
+    public function execute($callable)
     {
-        if ($exception = $this->metaExecute($callback)) {
-            throw $exception;
-        }
-    }
-
-    private function metaExecute($callback)
-    {
-        $exception = null;
-        $errorCallback = function ($number, $str, $file, $line) use (&$exception) {
+        $this->metaExecute($callable, function ($number, $str, $file, $line) {
             $exception = new SandboxException();
             $exception
                 ->setCodeAndMessage($number, $str)
                 ->setFile($file)
                 ->setLine($line);
-        };
-        $previous = set_error_handler($errorCallback, $this->errorTypes);
-        call_user_func($callback);
-        if (!is_null($previous)) {
+            throw $exception;
+        });
+    }
+
+    private function metaExecute($callable, $errorCallback)
+    {
+        try {
+            set_error_handler($errorCallback, $this->errorTypes);
+            call_user_func($callable);
+        } finally {
             restore_error_handler();
         }
-
-        return $exception;
     }
 }
