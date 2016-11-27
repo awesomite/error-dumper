@@ -15,11 +15,12 @@ class ViewCliTest extends \PHPUnit_Framework_TestCase
      * @dataProvider providerDisplay
      *
      * @param ClonedExceptionInterface $clonedException
+     * @param int $stepLimit
      */
-    public function testDisplay(ClonedExceptionInterface $clonedException)
+    public function testDisplay(ClonedExceptionInterface $clonedException, $stepLimit)
     {
         $output = new StreamOutput(tmpfile());
-        $view = new ViewCli(7, 1, $output);
+        $view = new ViewCli(7, $stepLimit, $output);
         $view->display($clonedException);
         $stream = $output->getStream();
         fseek($stream, 0);
@@ -34,7 +35,8 @@ class ViewCliTest extends \PHPUnit_Framework_TestCase
     public function providerDisplay()
     {
         return array(
-            array(new ClonedException(new \LogicException())),
+            array(new ClonedException(new \LogicException()), 1),
+            array(new ClonedException(new \InvalidArgumentException()), 0),
         );
     }
 }
