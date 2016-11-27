@@ -9,10 +9,13 @@ class ErrorSandboxTest extends \PHPUnit_Framework_TestCase
 {
     public function testExecuteSafely()
     {
+        $executed = false;
         $sandbox = new ErrorSandbox();
-        $sandbox->executeSafely(function () {
+        $sandbox->executeSafely(function () use (&$executed) {
             trigger_error('Test');
+            $executed = true;
         });
+        $this->assertTrue($executed);
     }
 
     /**
@@ -24,14 +27,37 @@ class ErrorSandboxTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Awesomite\ErrorDumper\Sandboxes\SandboxException
+     * @dataProvider providerExecute
+     *
+     * @param ErrorSandbox $sandbox
+     * @param int $errorType
+     * @param bool $expectedExecuted
+     * @param bool $expectedThrown
      */
-    public function testExecute()
+    public function testExecute(ErrorSandbox $sandbox, $errorType, $expectedExecuted, $expectedThrown)
     {
-        $sandbox = new ErrorSandbox();
+        $executed = false;
+        $thrown = false;
+
         $sandbox->execute(function () {});
-        $sandbox->execute(function () {
-            trigger_error('Test');
-        });
+        try {
+            $sandbox->execute(function () use (&$executed, $errorType) {
+                @trigger_error('Test', $errorType);
+                $executed = true;
+            });
+        } catch (SandboxException $exception) {
+            $thrown = true;
+        }
+
+        $this->assertSame($expectedExecuted, $executed);
+        $this->assertSame($expectedThrown, $thrown);
+    }
+
+    public function providerExecute()
+    {
+        return array(
+            array(new ErrorSandbox(), E_USER_DEPRECATED, false, true),
+            array(new ErrorSandbox(E_ALL ^ E_USER_WARNING), E_USER_WARNING, true, false),
+        );
     }
 }
