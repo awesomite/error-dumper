@@ -1,5 +1,8 @@
 # ErrorDumper
 
+[![Coverage Status](https://coveralls.io/repos/github/awesomite/error-dumper/badge.svg?branch=master)](https://coveralls.io/github/awesomite/error-dumper?branch=master)
+[![Build Status](https://travis-ci.org/awesomite/error-dumper.svg?branch=master)](https://travis-ci.org/awesomite/error-dumper)
+
 Debugger integrated with PhpStorm.
 [@See](https://awesomite.github.io/error-dumper/examples/exception.html) example.
 
@@ -83,7 +86,7 @@ $sandbox->executeSafely(function () {
 
 PHP supports one error control operator: the at sign @ 
 ([@see](http://php.net/manual/en/language.operators.errorcontrol.php)).
-Try execute (without custom error handler) the following samples of code
+Try execute (without custom error handler) the following samples of code:
 
 ```php
 trigger_error('Test error');
@@ -115,7 +118,7 @@ which will return 0 when the call that triggered the error was preceded by an @.
 
 It means that you will probably need sandbox with disabled error handling.
 Error dumper has built-in sandbox mechanism.
-The following example shows how to use sandbox
+The following example shows how to use sandbox:
 
 ```php
 use Awesomite\ErrorDumper\DevErrorDumper;
