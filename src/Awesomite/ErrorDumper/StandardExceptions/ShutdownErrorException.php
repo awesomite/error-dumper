@@ -5,4 +5,4 @@ namespace Awesomite\ErrorDumper\StandardExceptions;
 /**
  * @internal
  */
-class ShutdownErrorException extends FatalErrorException {}
+class ShutdownErrorException extends ErrorException {}

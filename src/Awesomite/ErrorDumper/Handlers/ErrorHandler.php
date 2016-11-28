@@ -40,13 +40,8 @@ class ErrorHandler implements ErrorHandlerInterface
     public function registerOnError()
     {
         $self = $this;
-        set_error_handler(function ($number, $str, $file, $line) use ($self) {
-            $exception = new FatalErrorException();
-            $exception
-                ->setFile($file)
-                ->setCodeAndMessage($number, $str)
-                ->setLine($line);
-            $self->onError($exception);
+        set_error_handler(function ($number, $message, $file, $line) use ($self) {
+            $self->onError(new FatalErrorException($message, $number, $file, $line));
         }, $this->mode);
         $this->onErrorRegistered = true;
 
@@ -78,17 +73,13 @@ class ErrorHandler implements ErrorHandlerInterface
         $self = $this;
         $mode = $this->mode;
         register_shutdown_function(function () use ($self, $mode) {
-            if ($error = error_get_last()) {
-                if (!($error['type'] & $mode)) {
-                    return;
-                }
-                $exception = new ShutdownErrorException();
-                $exception
-                    ->setFile($error['file'])
-                    ->setCodeAndMessage($error['type'], $error['message'])
-                    ->setLine($error['line']);
-                $self->onError($exception);
+            $error = error_get_last();
+            if (!$error || !($error['type'] & $mode)) {
+                return;
             }
+            $self->onError(
+                new ShutdownErrorException($error['message'], $error['type'], $error['file'], $error['line'])
+            );
         });
         $this->onShutdownRegistered = true;
 

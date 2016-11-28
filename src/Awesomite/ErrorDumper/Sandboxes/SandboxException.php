@@ -2,6 +2,6 @@
 
 namespace Awesomite\ErrorDumper\Sandboxes;
 
-use Awesomite\ErrorDumper\StandardExceptions\FatalErrorException;
+use Awesomite\ErrorDumper\StandardExceptions\ErrorException;
 
-class SandboxException extends FatalErrorException {}
+class SandboxException extends ErrorException {}

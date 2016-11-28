@@ -18,13 +18,8 @@ class ErrorSandbox implements ErrorSandboxInterface
 
     public function execute($callable)
     {
-        $this->metaExecute($callable, function ($number, $str, $file, $line) {
-            $exception = new SandboxException();
-            $exception
-                ->setCodeAndMessage($number, $str)
-                ->setFile($file)
-                ->setLine($line);
-            throw $exception;
+        $this->metaExecute($callable, function ($number, $message, $file, $line) {
+            throw new SandboxException($message, $number, $file, $line);
         });
     }
 
