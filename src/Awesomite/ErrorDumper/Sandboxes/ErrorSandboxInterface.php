@@ -6,6 +6,7 @@ interface ErrorSandboxInterface
 {
     /**
      * @param callable $callable
+     * @return mixed Returns the return value of the callback
      */
     public function executeSafely($callable);
 
@@ -13,6 +14,7 @@ interface ErrorSandboxInterface
      * Converts error into exception in case of occurrence
      *
      * @param callable $callable
+     * @return mixed Returns the return value of the callback
      *
      * @throws SandboxException
      */

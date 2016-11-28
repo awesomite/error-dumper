@@ -13,12 +13,12 @@ class ErrorSandbox implements ErrorSandboxInterface
 
     public function executeSafely($callable)
     {
-        $this->metaExecute($callable, function () {});
+        return $this->metaExecute($callable, function () {});
     }
 
     public function execute($callable)
     {
-        $this->metaExecute($callable, function ($number, $message, $file, $line) {
+        return $this->metaExecute($callable, function ($number, $message, $file, $line) {
             throw new SandboxException($message, $number, $file, $line);
         });
     }
@@ -27,7 +27,9 @@ class ErrorSandbox implements ErrorSandboxInterface
     {
         try {
             set_error_handler($errorCallback, $this->errorTypes);
-            call_user_func($callable);
+            $result = call_user_func($callable);
+            restore_error_handler();
+            return $result;
         } catch (\Throwable $exception) {
             restore_error_handler();
             throw $exception;
@@ -35,7 +37,5 @@ class ErrorSandbox implements ErrorSandboxInterface
             restore_error_handler();
             throw $exception;
         }
-
-        restore_error_handler();
     }
 }

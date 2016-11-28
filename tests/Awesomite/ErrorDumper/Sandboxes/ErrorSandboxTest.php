@@ -11,11 +11,14 @@ class ErrorSandboxTest extends \PHPUnit_Framework_TestCase
     {
         $executed = false;
         $sandbox = new ErrorSandbox();
-        $sandbox->executeSafely(function () use (&$executed) {
+        $expectedResult = 123;
+        $result = $sandbox->executeSafely(function () use (&$executed, $expectedResult) {
             trigger_error('Test');
             $executed = true;
+            return $expectedResult;
         });
         $this->assertTrue($executed);
+        $this->assertSame($expectedResult, $result);
     }
 
     /**
@@ -41,10 +44,14 @@ class ErrorSandboxTest extends \PHPUnit_Framework_TestCase
 
         $sandbox->execute(function () {});
         try {
-            $sandbox->execute(function () use (&$executed, $errorType) {
+            $expectedResult = 125;
+            $result = $sandbox->execute(function () use (&$executed, $errorType, $expectedResult) {
                 @trigger_error('Test', $errorType);
                 $executed = true;
+
+                return $expectedResult;
             });
+            $this->assertSame($expectedResult, $result);
         } catch (SandboxException $exception) {
             $thrown = true;
         }
