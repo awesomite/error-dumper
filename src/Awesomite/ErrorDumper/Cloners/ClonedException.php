@@ -28,8 +28,9 @@ class ClonedException implements ClonedExceptionInterface
      * @param \Exception|\Throwable $exception
      * @param int $stepLimit
      * @param bool $ignoreArgs
+     * @param bool $withPrevious
      */
-    public function __construct($exception, $stepLimit = 0, $ignoreArgs = false)
+    public function __construct($exception, $stepLimit = 0, $ignoreArgs = false, $withPrevious = true)
     {
         $this->code = $exception->getCode();
         $this->file = $exception->getFile();
@@ -38,7 +39,7 @@ class ClonedException implements ClonedExceptionInterface
         $stackTraceFactory = new StackTraceFactory();
         $this->stackTrace = $stackTraceFactory->createByThrowable($exception, $stepLimit, $ignoreArgs);
         $this->originalClass = get_class($exception);
-        if ($exception->getPrevious()) {
+        if ($withPrevious && $exception->getPrevious()) {
             $this->previousException = new static($exception->getPrevious());
         }
     }

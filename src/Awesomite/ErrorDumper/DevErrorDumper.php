@@ -21,7 +21,7 @@ class DevErrorDumper extends AbstractErrorDumper
         $self = $this;
         $this->errorHandler = new ErrorHandler(function ($exception) use ($self, $editor) {
             /** @var \Throwable|\Exception $exception */;
-            $clone = new ClonedException($exception);
+            $clone = new ClonedException($exception, 0, false, false);
             switch (php_sapi_name()) {
                 case 'cli':
                     $self->displayCli($clone);

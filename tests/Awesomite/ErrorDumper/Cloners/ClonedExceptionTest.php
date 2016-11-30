@@ -58,16 +58,31 @@ class ClonedExceptionTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($message, $unserialized->getMessage());
     }
 
-    public function testConstructorWithPrevious()
+    /**
+     * @dataProvider providerConstructorWithPrevious
+     *
+     * @param bool $clonePrevious
+     */
+    public function testConstructorWithPrevious($clonePrevious)
     {
         $exception = null;
         try {
             $this->throwExceptionWithPrevious();
         } catch (\Exception $exception) {};
-        $cloned = new ClonedException($exception);
-        $this->assertTrue($cloned->hasPrevious());
-        $interface = 'Awesomite\ErrorDumper\Cloners\ClonedExceptionInterface';
-        $this->assertInstanceOf($interface, $cloned->getPrevious());
+        $cloned = new ClonedException($exception, 0, false, $clonePrevious);
+        $this->assertSame($clonePrevious, $cloned->hasPrevious());
+        if ($clonePrevious) {
+            $interface = 'Awesomite\ErrorDumper\Cloners\ClonedExceptionInterface';
+            $this->assertInstanceOf($interface, $cloned->getPrevious());
+        }
+    }
+
+    public function providerConstructorWithPrevious()
+    {
+        return array(
+            array(true),
+            array(false),
+        );
     }
 
     /**
