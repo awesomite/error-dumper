@@ -3,7 +3,6 @@
 namespace Awesomite\ErrorDumper\Views;
 
 use Awesomite\ErrorDumper\Cloners\ClonedExceptionInterface;
-use Awesomite\StackTrace\StackTraceInterface;
 
 interface ViewInterface
 {

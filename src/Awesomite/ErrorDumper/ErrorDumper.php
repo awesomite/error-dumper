@@ -3,7 +3,6 @@
 namespace Awesomite\ErrorDumper;
 
 use Awesomite\ErrorDumper\Handlers\ErrorHandler;
-use Awesomite\ErrorDumper\Handlers\ErrorHandlerInterface;
 
 class ErrorDumper extends AbstractErrorDumper
 {
