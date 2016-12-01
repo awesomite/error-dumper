@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.0
+
+* Updated `awesomite/stack-trace` (added support for objects in `LightVarDumper`)
+
 ## 0.4.0
 
 * Added optional parameter `$withPrevious` in `ClonedException::__construct()`
