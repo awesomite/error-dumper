@@ -1,5 +1,7 @@
 <?php
 
+date_default_timezone_set('Europe/Warsaw');
+
 list($root) = explode(DIRECTORY_SEPARATOR . 'bin' . DIRECTORY_SEPARATOR, __DIR__);
 require_once $root . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 
