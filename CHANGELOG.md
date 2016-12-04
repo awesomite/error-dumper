@@ -2,7 +2,7 @@
 
 ## 0.5.0
 
-* Updated `awesomite/stack-trace` (added support for objects in `LightVarDumper`)
+* Updated `awesomite/stack-trace` to version `0.3.0` (improvements in `LightVarDumper`)
 
 ## 0.4.0
 
