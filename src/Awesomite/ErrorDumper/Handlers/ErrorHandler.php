@@ -66,7 +66,7 @@ class ErrorHandler implements ErrorHandlerInterface
 
     public function registerOnError()
     {
-        set_error_handler(array($this, static::HANDLER_ERROR));
+        set_error_handler(array($this, static::HANDLER_ERROR), $this->mode);
 
         return $this;
     }
