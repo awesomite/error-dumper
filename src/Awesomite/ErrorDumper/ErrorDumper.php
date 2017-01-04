@@ -26,14 +26,6 @@ class ErrorDumper
     public function createDevHandler($mode = null, $policy = null, EditorInterface $editor = null)
     {
         $handler = new ErrorHandler($mode, $policy);
-        /** @var ValidatorClosure $validator */
-        $validator = new ValidatorClosure(function ($exception) use (&$validator) {
-            /** @var \Exception|\Throwable $exception */
-            if ($exception instanceof FatalErrorException && !(error_reporting() & $exception->getCode())) {
-                $validator->stopPropagation();
-            }
-        });
-        $handler->pushValidator($validator);
         $handler->pushListener(new ListenerDevView($this->createDefaultView($editor)));
 
         return $handler;
