@@ -6,8 +6,6 @@ use Awesomite\ErrorDumper\Editors\EditorInterface;
 use Awesomite\ErrorDumper\Handlers\ErrorHandler;
 use Awesomite\ErrorDumper\Handlers\ErrorHandlerInterface;
 use Awesomite\ErrorDumper\Listeners\ListenerDevView;
-use Awesomite\ErrorDumper\Listeners\ValidatorClosure;
-use Awesomite\ErrorDumper\StandardExceptions\FatalErrorException;
 use Awesomite\ErrorDumper\Views\ViewCli;
 use Awesomite\ErrorDumper\Views\ViewHtml;
 use Awesomite\ErrorDumper\Views\ViewInterface;
