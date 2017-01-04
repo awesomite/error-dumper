@@ -6,11 +6,12 @@ use Awesomite\ErrorDumper\Cloners\ClonedException;
 use Awesomite\ErrorDumper\Cloners\ClonedExceptionInterface;
 use Awesomite\ErrorDumper\Editors\EditorInterface;
 use Awesomite\ErrorDumper\Editors\Phpstorm;
+use Awesomite\ErrorDumper\TestBase;
 
 /**
  * @internal
  */
-class ViewHtmlTest extends \PHPUnit_Framework_TestCase
+class ViewHtmlTest extends TestBase
 {
     /**
      * @dataProvider providerDisplay

@@ -2,10 +2,12 @@
 
 namespace Awesomite\ErrorDumper\Editors;
 
+use Awesomite\ErrorDumper\TestBase;
+
 /**
  * @internal
  */
-class PhpstormTest extends \PHPUnit_Framework_TestCase
+class PhpstormTest extends TestBase
 {
     /**
      * @dataProvider providerGetLinkToFile

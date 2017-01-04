@@ -2,48 +2,71 @@
 
 namespace Awesomite\ErrorDumper\Handlers;
 
+use Awesomite\ErrorDumper\Listeners\ListenerInterface;
+use Awesomite\ErrorDumper\Listeners\StopPropagationException;
+use Awesomite\ErrorDumper\Listeners\ValidatorInterface;
 use Awesomite\ErrorDumper\Sandboxes\ErrorSandbox;
 use Awesomite\ErrorDumper\StandardExceptions\FatalErrorException;
 use Awesomite\ErrorDumper\StandardExceptions\ShutdownErrorException;
 
-/**
- * @internal
- */
 class ErrorHandler implements ErrorHandlerInterface
 {
+    const HANDLER_ERROR = 'handleError';
+    const HANDLER_EXCEPTION = 'handleException';
+    const HANDLER_SHUTDOWN = 'handleShutdown';
+
+    const POLICY_ERROR_REPORTING = 1;
+    const POLICY_ALL = 2;
+
+    // Constant can be an array in PHP >=5.6
+    private static $fatalErrors = array(
+        E_ERROR,
+        E_PARSE,
+        E_CORE_ERROR,
+        E_CORE_WARNING,
+        E_COMPILE_ERROR,
+        E_COMPILE_WARNING,
+    );
+
     private $mode;
 
-    private $event;
+    private $policy;
 
     private $sandbox = null;
 
-    private $onErrorRegistered = false;
+    /**
+     * @var ListenerInterface[]
+     */
+    private $listeners = array();
 
-    private $onShutdownRegistered = false;
+    /**
+     * @var ValidatorInterface[]
+     */
+    private $validators = array();
 
     /**
      * ErrorErrorHandler constructor.
-     * @param callable $event
      * @param int $mode Default E_ALL | E_STRICT
+     * @param int $policy Default ErrorHandler::POLICY_ERROR_REPORTING
      *
      * @see http://php.net/manual/en/errorfunc.constants.php
      */
-    public function __construct($event, $mode = null)
+    public function __construct($mode = null, $policy = null)
     {
-        if (!is_callable($event)) {
-            throw new \InvalidArgumentException('Argument $event has to be callable!');
+        if (!is_int($mode) && !is_null($mode)) {
+            throw new \InvalidArgumentException('Argument $mode has to be integer or null!');
         }
-        $this->event = $event;
+        if (!in_array($policy, array(static::POLICY_ERROR_REPORTING, static::POLICY_ALL, null), true)) {
+            throw new \InvalidArgumentException('Invalid value of $policy!');
+        }
+
         $this->mode = is_null($mode) ? E_ALL | E_STRICT : $mode;
+        $this->policy = is_null($policy) ? static::POLICY_ERROR_REPORTING : $policy;
     }
 
     public function registerOnError()
     {
-        $self = $this;
-        set_error_handler(function ($number, $message, $file, $line) use ($self) {
-            $self->onError(new FatalErrorException($message, $number, $file, $line));
-        }, $this->mode);
-        $this->onErrorRegistered = true;
+        set_error_handler(array($this, static::HANDLER_ERROR));
 
         return $this;
     }
@@ -55,10 +78,7 @@ class ErrorHandler implements ErrorHandlerInterface
      */
     public function registerOnException()
     {
-        $self = $this;
-        set_exception_handler(function ($exception) use ($self) {
-            $self->onError($exception);
-        });
+        set_exception_handler(array($this, static::HANDLER_EXCEPTION));
 
         return $this;
     }
@@ -70,41 +90,95 @@ class ErrorHandler implements ErrorHandlerInterface
      */
     public function registerOnShutdown()
     {
-        $self = $this;
-        $mode = $this->mode;
-        register_shutdown_function(function () use ($self, $mode) {
-            $error = error_get_last();
-            if (!$error || !($error['type'] & $mode)) {
-                return;
-            }
-            $self->onError(
-                new ShutdownErrorException($error['message'], $error['type'], $error['file'], $error['line'])
-            );
-        });
-        $this->onShutdownRegistered = true;
+        register_shutdown_function(array($this, static::HANDLER_SHUTDOWN));
 
         return $this;
-    }
-
-    /**
-     * @internal Method has to be public, because of PHP 5.3
-     *
-     * @param \Exception|\Throwable $exception
-     */
-    public function onError($exception)
-    {
-        call_user_func($this->event, $exception);
     }
 
     public function getErrorSandbox()
     {
         if (is_null($this->sandbox)) {
-            if (!$this->onErrorRegistered && !$this->onShutdownRegistered) {
-                throw new \LogicException('Register onError or onShutdown before calling this method!');
-            }
             $this->sandbox = new ErrorSandbox($this->mode);
         }
 
         return $this->sandbox;
+    }
+
+    public function handleError($code, $message, $file, $line)
+    {
+        if (
+            ($this->mode & $code)
+            && ((error_reporting() & $code) || ($this->mode === static::POLICY_ALL))
+        ) {
+            $this->onError(new FatalErrorException($message, $code, $file, $line));
+        }
+    }
+
+    /**
+     * @param \Exception|\Throwable $exception
+     */
+    public function handleException($exception)
+    {
+        $this->onError($exception);
+    }
+
+    public function handleShutdown()
+    {
+        $error = error_get_last();
+        if (!$error || !($error['type'] & $this->mode)) {
+            return;
+        }
+        if ($this->policy === static::POLICY_ALL || $this->isFatalError($error['type'])) {
+            $this->onError(
+                new ShutdownErrorException($error['message'], $error['type'], $error['file'], $error['line'])
+            );
+        }
+    }
+
+    public function pushListener(ListenerInterface $listener)
+    {
+        $this->listeners[] = $listener;
+
+        return $this;
+    }
+
+    public function pushValidator(ValidatorInterface $validator)
+    {
+        $this->validators[] = $validator;
+
+        return $this;
+    }
+
+    /**
+     * @param \Exception|\Throwable $exception
+     */
+    private function onError($exception)
+    {
+        foreach ($this->validators as $validator) {
+            try {
+                $validator->onBeforeException($exception);
+            } catch (StopPropagationException $exception) {
+                return;
+            }
+        }
+
+        foreach ($this->listeners as $event) {
+            $event->onException($exception);
+        }
+    }
+
+    /**
+     * @param int $code
+     * @return bool
+     */
+    private function isFatalError($code)
+    {
+        foreach (self::$fatalErrors as $fatalCode) {
+            if ($code & $fatalCode) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

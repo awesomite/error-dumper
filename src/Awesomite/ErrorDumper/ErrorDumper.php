@@ -2,19 +2,60 @@
 
 namespace Awesomite\ErrorDumper;
 
+use Awesomite\ErrorDumper\Editors\EditorInterface;
 use Awesomite\ErrorDumper\Handlers\ErrorHandler;
+use Awesomite\ErrorDumper\Handlers\ErrorHandlerInterface;
+use Awesomite\ErrorDumper\Listeners\ListenerDevView;
+use Awesomite\ErrorDumper\Listeners\ValidatorClosure;
+use Awesomite\ErrorDumper\StandardExceptions\FatalErrorException;
+use Awesomite\ErrorDumper\Views\ViewCli;
+use Awesomite\ErrorDumper\Views\ViewHtml;
+use Awesomite\ErrorDumper\Views\ViewInterface;
 
-class ErrorDumper extends AbstractErrorDumper
+class ErrorDumper
 {
     /**
-     * @codeCoverageIgnore
-     *
-     * ErrorDumper constructor.
      * @param int $mode Default E_ALL | E_STRICT
-     * @param callable $event
+     * @param int $policy Default ErrorHandler::POLICY_ERROR_REPORTING
+     * @param EditorInterface|null $editor
+     * @return ErrorHandlerInterface
+     *
+     * @see ErrorHandler::POLICY_ERROR_REPORTING
+     * @see ErrorHandler::__construct
      */
-    public function __construct($event, $mode = null)
+    public function createDevHandler($mode = null, $policy = null, EditorInterface $editor = null)
     {
-        $this->errorHandler = new ErrorHandler($event, $mode);
+        $handler = new ErrorHandler($mode, $policy);
+        /** @var ValidatorClosure $validator */
+        $validator = new ValidatorClosure(function ($exception) use (&$validator) {
+            /** @var \Exception|\Throwable $exception */
+            if ($exception instanceof FatalErrorException && !(error_reporting() & $exception->getCode())) {
+                $validator->stopPropagation();
+            }
+        });
+        $handler->pushValidator($validator);
+        $handler->pushListener(new ListenerDevView($this->createDefaultView($editor)));
+
+        return $handler;
+    }
+
+    /**
+     * @param EditorInterface|null $editor
+     * @return ViewInterface
+     */
+    private function createDefaultView(EditorInterface $editor = null)
+    {
+        if (php_sapi_name() === 'cli') {
+            return new ViewCli();
+        }
+
+        // @codeCoverageIgnoreStart
+        $view = new ViewHtml();
+        if ($editor) {
+            $view->setEditor($editor);
+        }
+
+        return $view;
+        // @codeCoverageIgnoreEnd
     }
 }

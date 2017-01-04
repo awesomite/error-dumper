@@ -4,12 +4,13 @@ namespace Awesomite\ErrorDumper\Views;
 
 use Awesomite\ErrorDumper\Cloners\ClonedException;
 use Awesomite\ErrorDumper\Cloners\ClonedExceptionInterface;
+use Awesomite\ErrorDumper\TestBase;
 use Symfony\Component\Console\Output\StreamOutput;
 
 /**
  * @internal
  */
-class ViewCliTest extends \PHPUnit_Framework_TestCase
+class ViewCliTest extends TestBase
 {
     /**
      * @dataProvider providerDisplay

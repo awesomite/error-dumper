@@ -1,9 +1,9 @@
 <?php
 
-use Awesomite\ErrorDumper\DevErrorDumper;
+use Awesomite\ErrorDumper\ErrorDumper;
 
-$errorDumper = new DevErrorDumper(E_ALL ^ E_USER_DEPRECATED);
-$errorHandler = $errorDumper->getErrorHandler();
+$errorDumper = new ErrorDumper();
+$errorHandler = $errorDumper->createDevHandler(E_ALL ^ E_USER_DEPRECATED);
 $errorHandler
     ->registerOnError()
     ->registerOnException()

@@ -2,10 +2,12 @@
 
 namespace Awesomite\ErrorDumper\StandardExceptions;
 
+use Awesomite\ErrorDumper\TestBase;
+
 /**
  * @internal
  */
-class ErrorExceptionTest extends \PHPUnit_Framework_TestCase
+class ErrorExceptionTest extends TestBase
 {
     /**
      * @dataProvider providerConstructor

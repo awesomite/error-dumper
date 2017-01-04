@@ -2,6 +2,8 @@
 
 namespace Awesomite\ErrorDumper\Handlers;
 
+use Awesomite\ErrorDumper\Listeners\ListenerInterface;
+use Awesomite\ErrorDumper\Listeners\ValidatorInterface;
 use Awesomite\ErrorDumper\Sandboxes\ErrorSandboxInterface;
 
 interface ErrorHandlerInterface
@@ -22,7 +24,36 @@ interface ErrorHandlerInterface
     public function registerOnException();
 
     /**
+     * @param ListenerInterface $listener
+     * @return ErrorHandlerInterface
+     */
+    public function pushListener(ListenerInterface $listener);
+
+    /**
+     * @param ValidatorInterface $validator
+     * @return ErrorHandlerInterface
+     */
+    public function pushValidator(ValidatorInterface $validator);
+
+    /**
      * @return ErrorSandboxInterface
      */
     public function getErrorSandbox();
+
+    /**
+     * @param int $code
+     * @param string $message
+     * @param string $file
+     * @param int $line
+     * @return void
+     */
+    public function handleError($code, $message, $file, $line);
+
+    /**
+     * @param \Throwable|\Exception $exception
+     * @return void
+     */
+    public function handleException($exception);
+
+    public function handleShutdown();
 }

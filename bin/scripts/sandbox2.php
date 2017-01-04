@@ -1,11 +1,11 @@
 <?php
 
-use Awesomite\ErrorDumper\DevErrorDumper;
+use Awesomite\ErrorDumper\ErrorDumper;
 use Awesomite\ErrorDumper\Sandboxes\SandboxException;
 use Symfony\Component\HttpFoundation\Response;
 
-$errorDumper = new DevErrorDumper();
-$errorHandler = $errorDumper->getErrorHandler();
+$errorDumper = new ErrorDumper();
+$errorHandler = $errorDumper->createDevHandler();
 $errorHandler
     ->registerOnError()
     ->registerOnException()

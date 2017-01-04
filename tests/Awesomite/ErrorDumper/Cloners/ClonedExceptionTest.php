@@ -2,10 +2,12 @@
 
 namespace Awesomite\ErrorDumper\Cloners;
 
+use Awesomite\ErrorDumper\TestBase;
+
 /**
  * @internal
  */
-class ClonedExceptionTest extends \PHPUnit_Framework_TestCase
+class ClonedExceptionTest extends TestBase
 {
     /**
      * @dataProvider providerAll

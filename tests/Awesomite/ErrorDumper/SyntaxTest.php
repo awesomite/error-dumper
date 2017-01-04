@@ -5,7 +5,7 @@ namespace Awesomite\ErrorDumper;
 /**
  * @internal
  */
-class SyntaxTest extends \PHPUnit_Framework_TestCase
+class SyntaxTest extends TestBase
 {
     public function testSyntax()
     {

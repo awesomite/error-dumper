@@ -2,10 +2,12 @@
 
 namespace Awesomite\ErrorDumper\Sandboxes;
 
+use Awesomite\ErrorDumper\TestBase;
+
 /**
  * @internal
  */
-class ErrorSandboxTest extends \PHPUnit_Framework_TestCase
+class ErrorSandboxTest extends TestBase
 {
     public function testExecuteSafely()
     {

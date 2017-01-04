@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.6.0
+
+Version `0.6.0` is **incompatible** with `0.5.0`.
+
+Backward compatible changes:
+* Added constants `HANDLER_*` in `\Awesomite\ErrorDumper\Handlers\ErrorHandler` class
+* Added methods `handleError`, `handleException`, `handleShutdown`, `pushListener` and `pushValidator`
+to `\Awesomite\ErrorDumper\Handlers\ErrorHandlerInterface` and `\Awesomite\ErrorDumper\Handlers\ErrorHandler`
+
+Backward incompatible changes:
+* Constructor of `\Awesomite\ErrorDumper\Handlers\ErrorHandler` has been changed
+* The following classes have been removed:
+  * `\Awesomite\ErrorDumper\ErrorDumperInterface`
+  * `\Awesomite\ErrorDumper\DevErrorDumper`
+  * `\Awesomite\ErrorDumper\AbstractErrorDumper`
+* Class `\Awesomite\ErrorDumper\ErrorDumper` is fully rewritten, contains only one method - `createDevHandler`
+* Changed constructor of `\Awesomite\ErrorDumper\Handlers\ErrorHandler` - argument `$event` has been removed,
+argument `$policy` has been added.
+Default `$policy` is `ErrorHandler::POLICY_ERROR_REPORTING`.
+`ErrorHandler::POLICY_ALL` is equivalent to behaviour as in previous version.
+
 ## 0.5.0
 
 * Updated `awesomite/stack-trace` to version `0.3.2` (improvements in `LightVarDumper`)

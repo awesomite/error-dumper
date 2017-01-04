@@ -1,10 +1,9 @@
 <?php
 
-use Awesomite\ErrorDumper\DevErrorDumper;
+use Awesomite\ErrorDumper\ErrorDumper;
 
-$errorDumper = new DevErrorDumper();
-$errorHandler = $errorDumper->getErrorHandler();
-$errorHandler
+$errorDumper = new ErrorDumper();
+$errorHandler = $errorDumper->createDevHandler()
     ->registerOnError()
     ->registerOnException()
     ->registerOnShutdown();
