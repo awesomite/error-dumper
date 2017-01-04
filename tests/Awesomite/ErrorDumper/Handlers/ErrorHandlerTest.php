@@ -17,13 +17,11 @@ class ErrorHandlerTest extends TestBase
      * @dataProvider providerInvalidConstructor
      *
      * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Argument $mode has to be integer or null!
-     *
-     * @param $mode
      */
-    public function testInvalidConstructor($mode)
+    public function testInvalidConstructorMode($mode)
     {
-        new ErrorHandler($mode);
+        $reflection = new \ReflectionClass('Awesomite\\ErrorDumper\\Handlers\\ErrorHandler');
+        $reflection->newInstanceArgs(func_get_args());
     }
 
     public function providerInvalidConstructor()
@@ -32,6 +30,7 @@ class ErrorHandlerTest extends TestBase
             array(function () {}),
             array('0'),
             array(false),
+            array(E_ALL, false),
         );
     }
 
