@@ -168,6 +168,8 @@ class ErrorHandler implements ErrorHandlerInterface
     }
 
     /**
+     * @codeCoverageIgnore
+     *
      * @param int $code
      * @return bool
      */
