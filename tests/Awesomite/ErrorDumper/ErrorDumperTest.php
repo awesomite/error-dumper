@@ -9,8 +9,8 @@ class ErrorDumperTest extends TestBase
 {
     public function testCreateDevHandler()
     {
-        $previousExceptionHandler = $this->getExceptionHandler();
-        $previousErrorHandler = $this->getErrorHandler();
+        $prevExceptionHandler = $this->getExceptionHandler();
+        $prevErrorHandler = $this->getErrorHandler();
 
         $errorDumper = new ErrorDumper();
         $this->assertInstanceOf(
@@ -18,11 +18,11 @@ class ErrorDumperTest extends TestBase
             $errorDumper->createDevHandler()
         );
 
-        $currentExceptionHandler = $this->getExceptionHandler();
-        $currentErrorHandler = $this->getErrorHandler();
+        $currExceptionHandler = $this->getExceptionHandler();
+        $currErrorHandler = $this->getErrorHandler();
 
-        $this->assertSame($previousExceptionHandler, $currentExceptionHandler, 'Exception handler is changed!');
-        $this->assertSame($previousErrorHandler, $currentErrorHandler, 'Error handler is changed!');
+        $this->assertSame($prevExceptionHandler, $currExceptionHandler, 'Exception handler is changed!');
+        $this->assertSame($prevErrorHandler, $currErrorHandler, 'Error handler is changed!');
     }
 
     /**
