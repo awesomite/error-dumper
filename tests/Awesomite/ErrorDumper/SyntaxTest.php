@@ -7,9 +7,9 @@ namespace Awesomite\ErrorDumper;
  */
 class SyntaxTest extends TestBase
 {
-    public function testSyntax()
+    public function testPhpSyntax()
     {
-        $path = realpath(implode(DIRECTORY_SEPARATOR, array(__DIR__, '..', '..', '..', 'src')));
+        $path = $this->preparePathToDir('src');
         $this->assertInternalType('string', $path);
 
         $counter = 0;
@@ -22,7 +22,7 @@ class SyntaxTest extends TestBase
 
     public function testTwigSyntax()
     {
-        $path = realpath(implode(DIRECTORY_SEPARATOR, array(__DIR__, '..', '..', '..', 'templates')));
+        $path = $this->preparePathToDir('templates');
         $this->assertInternalType('string', $path);
 
         $loader = new \Twig_Loader_Filesystem($path);
@@ -45,6 +45,15 @@ class SyntaxTest extends TestBase
             }
         }
         $this->assertGreaterThan(0, $counter);
+    }
+
+    /**
+     * @param string $dir
+     * @return string|bool
+     */
+    private function preparePathToDir($dir)
+    {
+        return realpath(implode(DIRECTORY_SEPARATOR, array(__DIR__, '..', '..', '..', $dir)));
     }
 
     private function getRecursiveFileIterator($path, $pattern)
