@@ -18,7 +18,7 @@ class ErrorHandlerTest extends TestBase
      *
      * @expectedException \InvalidArgumentException
      */
-    public function testInvalidConstructorMode($mode)
+    public function testInvalidConstructor($mode)
     {
         $reflection = new \ReflectionClass('Awesomite\\ErrorDumper\\Handlers\\ErrorHandler');
         $reflection->newInstanceArgs(func_get_args());
