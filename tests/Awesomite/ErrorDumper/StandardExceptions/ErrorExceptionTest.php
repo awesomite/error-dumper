@@ -47,6 +47,6 @@ class ErrorExceptionTest extends TestBase
      */
     private function createErrorException($message, $code, $file, $line)
     {
-        return new FatalErrorException($message, $code, $file, $line);
+        return new ErrorException($message, $code, $file, $line);
     }
 }

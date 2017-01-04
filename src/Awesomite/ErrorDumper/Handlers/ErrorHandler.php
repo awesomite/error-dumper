@@ -6,7 +6,7 @@ use Awesomite\ErrorDumper\Listeners\ListenerInterface;
 use Awesomite\ErrorDumper\Listeners\StopPropagationException;
 use Awesomite\ErrorDumper\Listeners\ValidatorInterface;
 use Awesomite\ErrorDumper\Sandboxes\ErrorSandbox;
-use Awesomite\ErrorDumper\StandardExceptions\FatalErrorException;
+use Awesomite\ErrorDumper\StandardExceptions\ErrorException;
 use Awesomite\ErrorDumper\StandardExceptions\ShutdownErrorException;
 
 class ErrorHandler implements ErrorHandlerInterface
@@ -110,7 +110,7 @@ class ErrorHandler implements ErrorHandlerInterface
             ($this->mode & $code)
             && ((error_reporting() & $code) || ($this->mode === static::POLICY_ALL))
         ) {
-            $this->onError(new FatalErrorException($message, $code, $file, $line));
+            $this->onError(new ErrorException($message, $code, $file, $line));
         }
     }
 

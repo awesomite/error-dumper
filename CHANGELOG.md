@@ -20,6 +20,8 @@ Backward incompatible changes:
 argument `$policy` has been added.
 Default `$policy` is `ErrorHandler::POLICY_ERROR_REPORTING`.
 `ErrorHandler::POLICY_ALL` is equivalent to behaviour as in previous version.
+* Class `Awesomite\ErrorDumper\StandardExceptions\FatalErrorException` has been removed.
+`ErrorHandler::handleError` creates `ErrorException` instead of `FatalErrorException`.
 
 ## 0.5.0
 

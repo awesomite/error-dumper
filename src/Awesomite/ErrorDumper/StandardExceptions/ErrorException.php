@@ -5,10 +5,10 @@ namespace Awesomite\ErrorDumper\StandardExceptions;
 /**
  * @internal
  */
-abstract class ErrorException extends \Exception
+class ErrorException extends \Exception
 {
     /**
-     * FatalErrorException constructor.
+     * ErrorException constructor.
      * @param string $message
      * @param int $code
      * @param string $file
