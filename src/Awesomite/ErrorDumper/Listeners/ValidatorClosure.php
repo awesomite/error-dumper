@@ -7,7 +7,7 @@ class ValidatorClosure implements ValidatorInterface
     private $callable;
 
     /**
-     * ValidatorCallable constructor.
+     * ValidatorClosure constructor.
      * @param callable $callable
      */
     public function __construct($callable)

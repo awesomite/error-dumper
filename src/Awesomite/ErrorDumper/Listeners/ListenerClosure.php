@@ -7,7 +7,7 @@ class ListenerClosure implements ListenerInterface
     private $callable;
 
     /**
-     * ListenerCallable constructor.
+     * ListenerClosure constructor.
      * @param callable $callable
      */
     public function __construct($callable)
