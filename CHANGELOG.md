@@ -24,9 +24,13 @@ Default `$policy` is `ErrorHandler::POLICY_ERROR_REPORTING`.
 `ErrorHandler::handleError` creates `ErrorException` instead of `FatalErrorException`.
 * Updated `awesomite/stack-trace` to `^0.5.0`
 
+## 0.5.1
+
+* Updated `awesomite/stack-trace` to version `^0.4.0`
+
 ## 0.5.0
 
-* Updated `awesomite/stack-trace` to version `0.3.2` (improvements in `LightVarDumper`)
+* Updated `awesomite/stack-trace` to version `^0.3.2` (improvements in `LightVarDumper`)
 
 ## 0.4.0
 
