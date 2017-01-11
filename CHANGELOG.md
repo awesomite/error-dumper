@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.0
+
+* `\Awesomite\ErrorDumper\Views\ViewHtml` sends proper http headers
+
 ## 0.6.1
 
 * Fixed bug in `\Awesomite\ErrorDumper\Handlers\ErrorHandler::handleError` - POLICY_ALL didn't work properly

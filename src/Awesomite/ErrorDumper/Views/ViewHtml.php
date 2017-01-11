@@ -9,6 +9,12 @@ class ViewHtml implements ViewInterface
 {
     const TAG_HTML = '<!-- @ErrorDumper -->';
     const TAG_UNDER_TITLE = '<!-- @ErrorDumper under title -->';
+    
+    private static $headers = array(
+        'Content-Type: text/html; charset=UTF-8',
+        'HTTP/1.1 503 Service Temporarily Unavailable',
+        'Status: 503 Service Temporarily Unavailable',
+    );
 
     /**
      * @var EditorInterface|null
@@ -19,6 +25,11 @@ class ViewHtml implements ViewInterface
 
     public function display(ClonedExceptionInterface $exception)
     {
+        if (!headers_sent() && php_sapi_name() !== 'cli') {
+            foreach (self::$headers as $header) {
+                header($header);
+            }
+        }
         $this->createTwig()->display('exception.twig', array(
             'exception' => $exception,
             'tags' => $this->getTags(),
