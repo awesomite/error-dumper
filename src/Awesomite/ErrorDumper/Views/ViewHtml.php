@@ -25,11 +25,14 @@ class ViewHtml implements ViewInterface
 
     public function display(ClonedExceptionInterface $exception)
     {
+        // @codeCoverageIgnoreStart
         if (!headers_sent() && php_sapi_name() !== 'cli') {
             foreach (self::$headers as $header) {
                 header($header);
             }
         }
+        // @codeCoverageIgnoreEnd
+        
         $this->createTwig()->display('exception.twig', array(
             'exception' => $exception,
             'tags' => $this->getTags(),
