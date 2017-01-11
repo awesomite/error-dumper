@@ -3,6 +3,7 @@
 ## 0.7.0
 
 * `\Awesomite\ErrorDumper\Views\ViewHtml` sends proper http headers
+* `\Awesomite\ErrorDumper\Handlers\ErrorHandler` terminates application in default settings when is triggered
 
 ## 0.6.1
 

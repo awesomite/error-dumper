@@ -24,6 +24,12 @@ interface ErrorHandlerInterface
     public function registerOnException();
 
     /**
+     * @param bool $condition
+     * @return ErrorHandlerInterface
+     */
+    public function exitAfterTrigger($condition);
+
+    /**
      * @param ListenerInterface $listener
      * @return ErrorHandlerInterface
      */

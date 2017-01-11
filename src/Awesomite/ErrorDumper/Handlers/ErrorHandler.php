@@ -33,6 +33,8 @@ class ErrorHandler implements ErrorHandlerInterface
     private $policy;
 
     private $sandbox = null;
+    
+    private $exitAfterTrigger = true;
 
     /**
      * @var ListenerInterface[]
@@ -91,6 +93,19 @@ class ErrorHandler implements ErrorHandlerInterface
     public function registerOnShutdown()
     {
         register_shutdown_function(array($this, static::HANDLER_SHUTDOWN));
+
+        return $this;
+    }
+
+    /**
+     * @codeCoverageIgnore
+     *
+     * @param bool $condition
+     * @return $this
+     */
+    public function exitAfterTrigger($condition)
+    {
+        $this->exitAfterTrigger = (bool) $condition;
 
         return $this;
     }
@@ -165,6 +180,12 @@ class ErrorHandler implements ErrorHandlerInterface
         foreach ($this->listeners as $event) {
             $event->onException($exception);
         }
+
+        // @codeCoverageIgnoreStart
+        if ($this->exitAfterTrigger) {
+            exit(1);
+        }
+        // @codeCoverageIgnoreEnd
     }
 
     /**

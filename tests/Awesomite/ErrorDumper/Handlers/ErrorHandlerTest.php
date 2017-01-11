@@ -129,6 +129,14 @@ class ErrorHandlerTest extends TestBase
         $this->assertSame(1, $beeper->countBeeps());
     }
 
+    public function testExitAfterTrigger()
+    {
+        $errorHandler = new ErrorHandler();
+        foreach (array(false, true) as $condition) {
+            $this->assertSame($errorHandler, $errorHandler->exitAfterTrigger($condition));
+        }
+    }
+
     /**
      * @param Beeper $beeper
      * @param null|int $mode
@@ -141,6 +149,7 @@ class ErrorHandlerTest extends TestBase
         $result->pushListener(new ListenerClosure(function () use ($beeper) {
             $beeper->beep();
         }));
+        $result->exitAfterTrigger(false);
 
         return $result;
     }
