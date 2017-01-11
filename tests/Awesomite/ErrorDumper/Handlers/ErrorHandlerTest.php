@@ -94,6 +94,16 @@ class ErrorHandlerTest extends TestBase
         $this->assertSame(0, $beeper->countBeeps());
         $errorHandler->handleError(E_ERROR, 'Test', __FILE__, __LINE__);
         $this->assertSame(1, $beeper->countBeeps());
+
+        $beeper->reset();
+        $secondErrorHandler = $this->createTestErrorHandler($beeper, null, ErrorHandler::POLICY_ALL);
+        $secondErrorHandler->handleError(E_NOTICE, 'E_NOTICE', __FILE__, __LINE__);
+        $this->assertSame(1, $beeper->countBeeps());
+
+        $beeper->reset();
+        $thirdErrorHandler = $this->createTestErrorHandler($beeper, E_ALL ^ E_NOTICE, ErrorHandler::POLICY_ALL);
+        $thirdErrorHandler->handleError(E_NOTICE, 'E_NOTICE', __FILE__, __LINE__);
+        $this->assertSame(0, $beeper->countBeeps());
     }
 
     public function testSkippedError()

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.6.1
+
+* Fixed bug in `\Awesomite\ErrorDumper\Handlers\ErrorHandler::handleError` - POLICY_ALL didn't work properly
+
 ## 0.6.0
 
 Version `0.6.0` is **incompatible** with `0.5.0`.

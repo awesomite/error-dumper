@@ -108,7 +108,7 @@ class ErrorHandler implements ErrorHandlerInterface
     {
         if (
             ($this->mode & $code)
-            && ((error_reporting() & $code) || ($this->mode === static::POLICY_ALL))
+            && ((error_reporting() & $code) || ($this->policy === static::POLICY_ALL))
         ) {
             $this->onError(new ErrorException($message, $code, $file, $line));
         }
