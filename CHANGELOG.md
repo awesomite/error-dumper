@@ -3,6 +3,7 @@
 ## 0.6.1
 
 * Fixed bug in `\Awesomite\ErrorDumper\Handlers\ErrorHandler::handleError` - POLICY_ALL didn't work properly
+* Updated `awesomite/stack-trace` to `^0.5.1`
 
 ## 0.6.0
 
