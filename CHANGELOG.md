@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.8.0
+
+* Added methods `enableCaching` and `disableCaching` to `\Awesomite\ErrorDumper\Views\ViewHtml`.
+Caching is disabled as default.
+* Improved recognizing root path of templates - it didn't work when `vendor` was located in `src` directory.
+* Strikethrough on deprecated functions.
+
 ## 0.7.0
 
 * `\Awesomite\ErrorDumper\Views\ViewHtml` sends proper http headers

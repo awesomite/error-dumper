@@ -16,6 +16,9 @@ class TestClass
         $this->callDynamic(1, 2, 3);
     }
 
+    /**
+     * @deprecated
+     */
     public function __call($name, $arguments)
     {
         return static::myStaticMethod($this);

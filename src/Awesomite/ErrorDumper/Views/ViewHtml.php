@@ -23,6 +23,23 @@ class ViewHtml implements ViewInterface
 
     private $contentUnderTitle;
 
+    private $cacheDirectory;
+
+    /**
+     * @param string
+     *
+     * @see sys_get_temp_dir()
+     */
+    public function enableCaching($path)
+    {
+        $this->cacheDirectory = $path;
+    }
+    
+    public function disableCaching()
+    {
+        $this->cacheDirectory = null;
+    }
+
     public function display(ClonedExceptionInterface $exception)
     {
         // @codeCoverageIgnoreStart
@@ -58,7 +75,11 @@ class ViewHtml implements ViewInterface
 
     private function createTwig()
     {
-        $twig = new \Twig_Environment($this->createTwigLoader());
+        $twigOptions = array();
+        if (!is_null($this->cacheDirectory)) {
+            $twigOptions['cache'] = $this->cacheDirectory;
+        }
+        $twig = new \Twig_Environment($this->createTwigLoader(), $twigOptions);
         $twig->addFilter(
             new \Twig_SimpleFilter('strpad', function($input, $padLength, $padString = ' ', $padType = STR_PAD_LEFT) {
                 return str_pad($input, $padLength, $padString, $padType);
@@ -75,7 +96,10 @@ class ViewHtml implements ViewInterface
 
     private function createTwigLoader()
     {
-        list($root) = explode(DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR, __DIR__);
+        $delimiter = DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR;
+        $parts = explode($delimiter, __DIR__);
+        array_pop($parts);
+        $root = implode($delimiter, $parts);
 
         return new \Twig_Loader_Filesystem($root . DIRECTORY_SEPARATOR . 'templates');
     }
