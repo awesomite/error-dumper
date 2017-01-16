@@ -66,6 +66,9 @@ class ViewHtmlTest extends TestBase
         );
     }
 
+    /**
+     * @runInSeparateProcess
+     */
     public function testCache()
     {
         $cachePath = $this->getCachePath();
