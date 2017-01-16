@@ -7,6 +7,9 @@ namespace Awesomite\ErrorDumper;
  */
 class SyntaxTest extends TestBase
 {
+    /**
+     * @runInSeparateProcess
+     */
     public function testPhpSyntax()
     {
         $path = $this->preparePathToDir('src');
@@ -20,6 +23,9 @@ class SyntaxTest extends TestBase
         $this->assertGreaterThan(0, $counter);
     }
 
+    /**
+     * @runInSeparateProcess
+     */
     public function testTwigSyntax()
     {
         $path = $this->preparePathToDir('templates');
