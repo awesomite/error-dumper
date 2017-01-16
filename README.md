@@ -20,6 +20,7 @@ You will be able to serialize, restore and display them later in readable form.
   * [Skipping chosen exceptions](#skipping-chosen-exceptions)
 * [Versioning](#versioning)
 * [Examples](#examples)
+* [Content Security Policy](#content-security-policy)
 
 ## Installation
 
@@ -276,3 +277,9 @@ bin/webserver.sh
 
 Execute above commands and open in your browser url `http://localhost:8001`.
 To run example in terminal, execute `bin/test.php`.
+
+## Content Security Policy
+
+This library uses *.js files hosted on `maxcdn.bootstrapcdn.com` and `code.jquery.com`
+(`@see \Awesomite\ErrorDumper\Views\ViewHtml::getResources`).
+Add those domains to your `Content-Security-Policy` header during display errors.
