@@ -6,6 +6,7 @@
 Caching is disabled as default.
 * Improved recognizing root path of templates - it didn't work when `vendor` was located in `src` directory.
 * Strikethrough on deprecated functions.
+* Updated `awesomite/stack-trace` to `^0.6.0`
 
 ## 0.7.0
 
