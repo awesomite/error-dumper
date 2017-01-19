@@ -54,7 +54,7 @@ class ClonedExceptionTest extends TestBase
     public function testSerialize()
     {
         $message = 'Test message ' . mt_rand(1, 10000);
-        $clonedException = new ClonedException(new \Exception($message));
+        $clonedException = new ClonedException(new \Exception($message), 5);
         /** @var ClonedException $unserialized */
         $unserialized = unserialize(serialize($clonedException));
         $this->assertSame($message, $unserialized->getMessage());

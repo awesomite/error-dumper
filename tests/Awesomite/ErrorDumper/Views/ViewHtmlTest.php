@@ -7,6 +7,7 @@ use Awesomite\ErrorDumper\Cloners\ClonedExceptionInterface;
 use Awesomite\ErrorDumper\Editors\EditorInterface;
 use Awesomite\ErrorDumper\Editors\Phpstorm;
 use Awesomite\ErrorDumper\TestBase;
+use Awesomite\VarDumper\LightVarDumper;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 
@@ -15,6 +16,21 @@ use Symfony\Component\Finder\Finder;
  */
 class ViewHtmlTest extends TestBase
 {
+    public static function setUpBeforeClass()
+    {
+        parent::setUpBeforeClass();
+        self::warmUp();
+    }
+
+    private static function warmUp()
+    {
+        $view = new ViewHtml();
+        $exception = new \Exception();
+        ob_start();
+        $view->display(new ClonedException($exception, 1));
+        ob_end_clean();
+    }
+
     /**
      * @dataProvider providerDisplay
      *
@@ -36,9 +52,18 @@ class ViewHtmlTest extends TestBase
 
     public function providerDisplay()
     {
+        $varDumper = new LightVarDumper();
+        $varDumper
+            ->setMaxChildren(5)
+            ->setMaxDepth(3)
+            ->setMaxStringLength(50);
+
+        $exception = new ClonedException(new \Exception(), 3);
+        $exception->getStackTrace()->setVarDumper($varDumper);
+
         return array(
-            array(new ClonedException(new \Exception()), null),
-            array(new ClonedException(new \Exception()), new Phpstorm()),
+            array($exception, null),
+            array($exception, new Phpstorm()),
         );
     }
 
@@ -52,7 +77,7 @@ class ViewHtmlTest extends TestBase
         $view = new ViewHtml();
         $view->setContentUnderTitle($content);
         ob_start();
-        $view->display(new ClonedException(new \Exception()));
+        $view->display(new ClonedException(new \Exception(), 1));
         $output = ob_get_contents();
         ob_end_clean();
         $this->assertContains($content, $output);
