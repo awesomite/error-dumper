@@ -15,6 +15,10 @@ class UnsafeFunctionsTest extends TestBase
         'eval',
         'create_function',
         'preg_replace', // /e
+        'override_function',
+        'rename_function',
+        'var_dump',
+        'print_r',
     );
 
     private static $exclusions = array(
