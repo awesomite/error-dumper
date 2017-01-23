@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.8.1
+## 0.9.0
 
 * Added method `Awesomite\ErrorDumper\Handlers\ErrorHandlerInterface::register`
 
