@@ -67,8 +67,10 @@ class UnsafeFunctionsTest extends TestBase
 
     public function providerFiles()
     {
-        list($root) = explode(DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR, __DIR__);
-        $path = $root . DIRECTORY_SEPARATOR . 'src';
+        $exploded = explode(DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR, __DIR__);
+        array_pop($exploded);
+        $exploded[] = 'src';
+        $path = implode(DIRECTORY_SEPARATOR, $exploded);
         $pattern = '/^.+\.php$/';
 
         $directory = new \RecursiveDirectoryIterator($path);
