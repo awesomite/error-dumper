@@ -18,6 +18,11 @@ class ErrorHandler implements ErrorHandlerInterface
     const POLICY_ERROR_REPORTING = 1;
     const POLICY_ALL = 2;
 
+    const TYPE_ERROR = 1; // 0b0001
+    const TYPE_EXCEPTION = 2; // 0b0010
+    const TYPE_FATAL_ERROR = 4; // 0b0100
+    const TYPE_ALL = 7; // 0b0111
+
     // Constant can be an array in PHP >=5.6
     private static $fatalErrors = array(
         E_ERROR,
@@ -64,6 +69,25 @@ class ErrorHandler implements ErrorHandlerInterface
 
         $this->mode = is_null($mode) ? E_ALL | E_STRICT : $mode;
         $this->policy = is_null($policy) ? static::POLICY_ERROR_REPORTING : $policy;
+    }
+
+    public function register($types = ErrorHandler::TYPE_ALL)
+    {
+        if ($types & static::TYPE_ERROR) {
+            $this->registerOnError();
+        }
+
+        // @codeCoverageIgnoreStart
+        if ($types & static::TYPE_EXCEPTION) {
+            $this->registerOnException();
+        }
+
+        if ($types & static::TYPE_FATAL_ERROR) {
+            $this->registerOnShutdown();
+        }
+        // @codeCoverageIgnoreEnd
+
+        return $this;
     }
 
     public function registerOnError()

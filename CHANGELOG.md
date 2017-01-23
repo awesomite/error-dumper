@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.8.1
+
+* Added method `Awesomite\ErrorDumper\Handlers\ErrorHandlerInterface::register`
+
 ## 0.8.0
 
 * Added methods `enableCaching` and `disableCaching` to `\Awesomite\ErrorDumper\Views\ViewHtml`.

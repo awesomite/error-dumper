@@ -22,7 +22,7 @@ class UnsafeFunctionsTest extends TestBase
     );
 
     private static $exclusions = array(
-        'Awesomite/ErrorDumper/Handlers/ErrorHandler.php:186' => array('exit'),
+        'Awesomite/ErrorDumper/Handlers/ErrorHandler.php:210' => array('exit'),
         'Awesomite/ErrorDumper/Editors/Phpstorm.php:31' => array('preg_replace'),
     );
 

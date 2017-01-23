@@ -38,7 +38,7 @@ class ErrorHandlerTest extends TestBase
     {
         $beeper = new Beeper();
         $handler = $this->createTestErrorHandler($beeper);
-        $handler->registerOnError();
+        $this->assertSame($handler, $handler->registerOnError());
 
         $this->assertSame(0, $beeper->countBeeps());
         trigger_error('Test');
@@ -57,7 +57,7 @@ class ErrorHandlerTest extends TestBase
     {
         $beeper = new Beeper();
         $errorHandler = $this->createTestErrorHandler($beeper);
-        $errorHandler->registerOnError();
+        $this->assertSame($errorHandler, $errorHandler->registerOnError());
 
         $this->assertSame(0, $beeper->countBeeps());
         trigger_error('Test');
@@ -137,14 +137,28 @@ class ErrorHandlerTest extends TestBase
         }
     }
 
+    public function testRegister()
+    {
+        $beeper = new Beeper();
+        $handler = $this->createTestErrorHandler($beeper);
+        $handler->register(ErrorHandler::TYPE_ERROR);
+        $this->assertSame(0, $beeper->countBeeps());
+        trigger_error('Test');
+        $this->assertSame(1, $beeper->countBeeps());
+        restore_error_handler();
+    }
+
     /**
      * @param Beeper $beeper
      * @param null|int $mode
      * @param int $policy
      * @return ErrorHandler
      */
-    private function createTestErrorHandler(Beeper $beeper, $mode = null, $policy = ErrorHandler::POLICY_ERROR_REPORTING)
-    {
+    private function createTestErrorHandler(
+        Beeper $beeper,
+        $mode = null, 
+        $policy = ErrorHandler::POLICY_ERROR_REPORTING
+    ) {
         $result = new ErrorHandler($mode, $policy);
         $result->pushListener(new ListenerClosure(function () use ($beeper) {
             $beeper->beep();

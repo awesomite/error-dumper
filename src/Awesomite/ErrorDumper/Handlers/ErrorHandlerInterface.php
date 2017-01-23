@@ -9,6 +9,12 @@ use Awesomite\ErrorDumper\Sandboxes\ErrorSandboxInterface;
 interface ErrorHandlerInterface
 {
     /**
+     * @param int $types
+     * @return ErrorHandlerInterface
+     */
+    public function register($types = ErrorHandler::TYPE_ALL);
+    
+    /**
      * @return ErrorHandlerInterface
      */
     public function registerOnError();
