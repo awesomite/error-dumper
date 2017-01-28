@@ -24,7 +24,7 @@
     </logging>
 
     <listeners>
-        <listener class="\Awesomite\ErrorDumper\TestListener" file="tests/Awesomite/ErrorDumper/TestListener.php">
+        <listener class="Awesomite\ErrorDumper\TestListener">
         </listener>
     </listeners>
 </phpunit>
