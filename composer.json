@@ -24,12 +24,12 @@
     ],
     "autoload": {
         "psr-4": {
-            "": "src/"
+            "Awesomite\\ErrorDumper\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "": "tests/"
+            "Awesomite\\ErrorDumper\\": "tests/"
         }
     }
 }

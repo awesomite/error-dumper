@@ -59,7 +59,11 @@ class SyntaxTest extends TestBase
      */
     private function preparePathToDir($dir)
     {
-        return realpath(implode(DIRECTORY_SEPARATOR, array(__DIR__, '..', '..', '..', $dir)));
+        $delimiter = DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR;
+        $exploded = explode($delimiter, __FILE__);
+        array_pop($exploded);
+
+        return realpath(implode($delimiter, $exploded) . DIRECTORY_SEPARATOR . $dir);
     }
 
     private function getRecursiveFileIterator($path, $pattern)

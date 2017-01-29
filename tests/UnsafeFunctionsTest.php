@@ -22,15 +22,16 @@ class UnsafeFunctionsTest extends TestBase
     );
 
     private static $exclusions = array(
-        'Awesomite/ErrorDumper/Handlers/ErrorHandler.php:210' => array('exit'),
-        'Awesomite/ErrorDumper/Editors/Phpstorm.php:31' => array('preg_replace'),
+        'Handlers/ErrorHandler.php:210' => array('exit'),
+        'Editors/Phpstorm.php:31' => array('preg_replace'),
     );
 
     /**
      * @dataProvider providerFiles
      */
-    public function testPhp($filePath)
+    public function testPhp(\SplFileInfo $file)
     {
+        $filePath = $file->getRealPath();
         foreach (token_get_all(file_get_contents($filePath)) as $tokenArr) {
             if (!is_array($tokenArr)) {
                 if ($tokenArr === '`') {
@@ -69,13 +70,26 @@ class UnsafeFunctionsTest extends TestBase
     {
         $exploded = explode(DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR, __DIR__);
         array_pop($exploded);
-        $exploded[] = 'src';
-        $path = implode(DIRECTORY_SEPARATOR, $exploded);
+        $path = implode('tests', $exploded) . 'src';
         $pattern = '/^.+\.php$/';
 
         $directory = new \RecursiveDirectoryIterator($path);
         $iterator = new \RecursiveIteratorIterator($directory);
 
-        return new \RegexIterator($iterator, $pattern, \RecursiveRegexIterator::GET_MATCH);
+        $callback = function (\SplFileInfo $file) use ($pattern) {
+            if ($file->isDir()) {
+                return false;
+            }
+
+            return (bool) preg_match($pattern, $file->getRealPath());
+        };
+
+        $result = array();
+        $filterIterator = new \CallbackFilterIterator($iterator, $callback);
+        foreach ($filterIterator as $file) {
+            $result[] = array($file);
+        }
+
+        return $result;
     }
 }
