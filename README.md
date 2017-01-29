@@ -42,6 +42,10 @@ $errorDumper->createDevHandler()
     ->registerOnError() // errors @see http://php.net/manual/en/function.trigger-error.php
     ->registerOnException() // uncaught exceptions
     ->registerOnShutdown(); // @see http://php.net/manual/en/function.error-get-last.php
+
+// or
+
+$errorDumper->createDevHandler()->register();
 ```
 
 ### Production environment
