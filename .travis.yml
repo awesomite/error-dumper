@@ -1,9 +1,7 @@
 language: php
 
 install:
-  - bin/install-composer.php
-  - php -r "unlink('composer-setup.php');"
-  - travis_wait php composer.phar install --no-interaction
+  - travis_wait composer install --no-interaction
   - mkdir -p build/logs
 
 php:
