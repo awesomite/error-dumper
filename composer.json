@@ -11,7 +11,7 @@
         "phpunit/phpunit": "^4.8.27",
         "silex/silex": "^1.3.5",
         "symfony/twig-bridge": "^2.0.4",
-        "satooshi/php-coveralls": "^1.0.1|^2.0.x-dev",
+        "satooshi/php-coveralls": "^1.0.1|^2.0.0",
         "symfony/filesystem": "^2.8.16",
         "symfony/finder": "^2.8.16",
         "awesomite/var-dumper": "^0.2.0"
