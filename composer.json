@@ -1,8 +1,9 @@
 {
     "name": "awesomite/error-dumper",
+    "minimum-stability": "dev",
     "require": {
         "php": "^5.3|^7.0",
-        "awesomite/stack-trace": "^0.6.0",
+        "awesomite/stack-trace": "^0.7.0",
         "symfony/console": "^2.7|^3.0",
         "twig/twig": "^1.12.0"
     },
@@ -30,6 +31,11 @@
     "autoload-dev": {
         "psr-4": {
             "Awesomite\\ErrorDumper\\": "tests/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.10-dev"
         }
     }
 }
