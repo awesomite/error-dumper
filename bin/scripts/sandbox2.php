@@ -6,12 +6,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 $errorDumper = new ErrorDumper();
 $errorHandler = $errorDumper->createDevHandler();
-$errorHandler
-    ->registerOnError()
-    ->registerOnException()
-    ->registerOnShutdown();
-
-$sandbox = $errorHandler->getErrorSandbox();
+$errorHandler->register();
 
 try {
     $sandbox = $errorHandler->getErrorSandbox();

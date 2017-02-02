@@ -4,10 +4,7 @@ use Awesomite\ErrorDumper\ErrorDumper;
 
 $errorDumper = new ErrorDumper();
 $errorHandler = $errorDumper->createDevHandler();
-$errorHandler
-    ->registerOnError()
-    ->registerOnException()
-    ->registerOnShutdown();
+$errorHandler->register();
 
 $sandbox = $errorHandler->getErrorSandbox();
 

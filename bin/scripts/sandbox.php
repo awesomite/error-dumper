@@ -3,12 +3,7 @@
 use Awesomite\ErrorDumper\ErrorDumper;
 
 $errorDumper = new ErrorDumper();
-$errorHandler = $errorDumper->createDevHandler()
-    ->registerOnError()
-    ->registerOnException()
-    ->registerOnShutdown();
-
-$sandbox = $errorHandler->getErrorSandbox();
+$errorHandler = $errorDumper->createDevHandler()->register();
 
 $sandbox = $errorHandler->getErrorSandbox();
 $sandbox->executeSafely(function () {
