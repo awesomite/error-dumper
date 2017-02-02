@@ -5,6 +5,10 @@
 * `Awesomite\ErrorDumper\Listeners\ValidatorInterface::stopPropagation` is removed
 * `Awesomite\ErrorDumper\Listeners\ValidatorClosure::stopPropagation` has been static
 
+## 0.10.1
+
+* Updated `awesomite/var-dumper` to `^0.3.0`
+
 ## 0.10.0
 
 * Class `Awesomite\ErrorDumper\TestListener` has been internal
