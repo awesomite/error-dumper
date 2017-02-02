@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.10.1
+
+* Updated `awesomite/var-dumper` to `^0.3.0`
+
 ## 0.10.0
 
 * Class `Awesomite\ErrorDumper\TestListener` has been internal

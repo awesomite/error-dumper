@@ -14,7 +14,7 @@
         "satooshi/php-coveralls": "^1.0.1",
         "symfony/filesystem": "^2.8.16",
         "symfony/finder": "^2.8.16",
-        "awesomite/var-dumper": "^0.2.0"
+        "awesomite/var-dumper": "^0.3.0"
     },
     "license": "MIT",
     "authors": [
