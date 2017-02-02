@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.10.0
+
+* Class `Awesomite\ErrorDumper\TestListener` has been internal
+
 ## 0.9.0
 
 * Added method `Awesomite\ErrorDumper\Handlers\ErrorHandlerInterface::register`
