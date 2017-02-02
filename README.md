@@ -257,10 +257,9 @@ use Awesomite\ErrorDumper\Handlers\ErrorHandler;
 use Awesomite\ErrorDumper\Listeners\ValidatorClosure;
 
 $handler = new ErrorHandler();
-$validator = new ValidatorClosure(function ($exception) use (&$validator) {
-    /** @var ValidatorClosure $validator */
+$validator = new ValidatorClosure(function ($exception) {
     if ($exception instanceof \RuntimeException) {
-        $validator->stopPropagation();
+        ValidatorClosure::stopPropagation();
     }
 });
 $handler->pushValidator($validator);

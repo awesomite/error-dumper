@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.11.0
+
+* `Awesomite\ErrorDumper\Listeners\ValidatorInterface::stopPropagation` is removed
+* `Awesomite\ErrorDumper\Listeners\ValidatorClosure::stopPropagation` has been static
+
+## 0.10.0
+
+* Class `Awesomite\ErrorDumper\TestListener` has been internal
+
 ## 0.9.0
 
 * Added method `Awesomite\ErrorDumper\Handlers\ErrorHandlerInterface::register`

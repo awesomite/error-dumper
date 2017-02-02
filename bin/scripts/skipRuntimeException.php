@@ -3,13 +3,11 @@
 use Awesomite\ErrorDumper\ErrorDumper;
 use Awesomite\ErrorDumper\Listeners\ValidatorClosure;
 
-$validator = new ValidatorClosure(function ($exception) use (&$validator) {
+$validator = new ValidatorClosure(function ($exception) {
     /** @var \Exception|\Throwable $exception */
-    /** @var ValidatorClosure $validator */
-
     if ($exception instanceof \RuntimeException) {
         echo '<strong>Exception will be not caught</strong>';
-        $validator->stopPropagation();
+        ValidatorClosure::stopPropagation();
     }
 });
 

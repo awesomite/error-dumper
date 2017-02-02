@@ -27,8 +27,7 @@ class ValidatorClosureTest extends TestBase
      */
     public function testStopPropagation()
     {
-        $validator = new ValidatorClosure(function () {});
-        $validator->stopPropagation();
+        ValidatorClosure::stopPropagation();
     }
 
     /**

@@ -63,9 +63,8 @@ class ErrorHandlerTest extends TestBase
         trigger_error('Test');
         $this->assertSame(1, $beeper->countBeeps());
 
-        /** @var ValidatorClosure $validator */
-        $validator = new ValidatorClosure(function () use (&$validator) {
-            $validator->stopPropagation();
+        $validator = new ValidatorClosure(function () {
+            ValidatorClosure::stopPropagation();
         });
         $errorHandler->pushValidator($validator);
 

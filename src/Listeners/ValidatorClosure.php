@@ -6,6 +6,11 @@ class ValidatorClosure implements ValidatorInterface
 {
     private $callable;
 
+    public static function stopPropagation()
+    {
+        throw new StopPropagationException();
+    }
+
     /**
      * ValidatorClosure constructor.
      * @param callable $callable
@@ -22,10 +27,5 @@ class ValidatorClosure implements ValidatorInterface
     public function onBeforeException($exception)
     {
         call_user_func($this->callable, $exception);
-    }
-
-    public function stopPropagation()
-    {
-        throw new StopPropagationException();
     }
 }

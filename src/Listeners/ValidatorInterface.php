@@ -7,11 +7,7 @@ interface ValidatorInterface
     /**
      * @param \Exception|\Throwable $exception
      * @return void
-     */
-    public function onBeforeException($exception);
-
-    /**
      * @throws StopPropagationException
      */
-    public function stopPropagation();
+    public function onBeforeException($exception);
 }
