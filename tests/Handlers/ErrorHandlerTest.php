@@ -147,6 +147,14 @@ class ErrorHandlerTest extends TestBase
         restore_error_handler();
     }
 
+    protected function setUp()
+    {
+        parent::setUp();
+        if (function_exists('error_clear_last')) {
+            error_clear_last();
+        }
+    }
+
     /**
      * @param Beeper $beeper
      * @param null|int $mode
