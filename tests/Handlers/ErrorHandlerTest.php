@@ -151,7 +151,9 @@ class ErrorHandlerTest extends TestBase
     {
         parent::setUp();
         if (function_exists('error_clear_last')) {
-            error_clear_last();
+            while (error_get_last()) {
+                error_clear_last();
+            }
         }
     }
 
