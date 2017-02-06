@@ -3,7 +3,7 @@
     "minimum-stability": "dev",
     "require": {
         "php": "^5.3|^7.0",
-        "awesomite/stack-trace": "^0.7.0",
+        "awesomite/stack-trace": "^0.8.0",
         "symfony/console": "^2.7|^3.0",
         "twig/twig": "^1.12.0"
     },
