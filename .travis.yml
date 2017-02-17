@@ -1,7 +1,6 @@
 language: php
 
 install:
-  - travis_wait composer install --no-interaction
   - mkdir -p build/logs
 
 php:
@@ -15,7 +14,8 @@ php:
   - nightly
 
 script:
-  - vendor/bin/phpunit
+  - travis_wait composer update --prefer-lowest --no-interaction && vendor/bin/phpunit
+  - travis_wait composer update --no-interaction && vendor/bin/phpunit
 
 after_script:
   - travis_retry bin/coveralls.sh

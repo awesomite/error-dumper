@@ -1,14 +1,15 @@
 {
     "name": "awesomite/error-dumper",
     "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
         "php": "^5.3|^7.0",
         "awesomite/stack-trace": "^0.8.0",
         "symfony/console": "^2.7|^3.0",
-        "twig/twig": "^1.12.0"
+        "twig/twig": "^1.12.0-stable"
     },
     "require-dev": {
-        "phpunit/phpunit": "^4.8.27",
+        "phpunit/phpunit": "^4.8.35",
         "silex/silex": "^1.3.5",
         "symfony/twig-bridge": "^2.0.4",
         "satooshi/php-coveralls": "^1.0.1|^2.0.0",
