@@ -30,12 +30,7 @@ class SyntaxTest extends TestBase
     {
         $path = $this->preparePathToDir('templates');
         $this->assertInternalType('string', $path);
-
-        $loader = new \Twig_Loader_Filesystem($path);
-        $twig = new \Twig_Environment($loader);
-        $twig->addFilter(new \Twig_SimpleFilter('strpad', function () {}));
-        $twig->addFunction(new \Twig_SimpleFunction('memoryUsage', function () {}));
-        $twig->addFunction(new \Twig_SimpleFunction('exportDeclaredValue', function () {}));
+        $twig = $this->createTwig($path, array('strpad'), array('memoryUsage', 'exportDeclaredValue'));
 
         $counter = 0;
         foreach ($this->getRecursiveFileIterator($path, '/^.+\.twig$/') as $file) {
@@ -43,7 +38,7 @@ class SyntaxTest extends TestBase
 
             $counter++;
             try {
-                $twig->parse($twig->tokenize(file_get_contents($fileName)));
+                $twig->parse($twig->tokenize($this->getTwigSource($fileName)));
             } catch (\Twig_Error_Syntax $exception) {
                 throw new \RuntimeException(
                     $exception->getMessage() . " in file {$fileName}:{$exception->getTemplateLine()}"
@@ -51,6 +46,42 @@ class SyntaxTest extends TestBase
             }
         }
         $this->assertGreaterThan(0, $counter);
+    }
+
+    /**
+     * @param $path
+     * @return \Twig_Environment
+     */
+    private function createTwig($path, array $filters, array $functions)
+    {
+        $loader = new \Twig_Loader_Filesystem($path);
+        $twig = new \Twig_Environment($loader);
+
+        foreach ($filters as $filter) {
+            $twig->addFilter(new \Twig_SimpleFilter($filter, function () {}));
+        }
+
+        foreach ($functions as $function) {
+            $twig->addFunction(new \Twig_SimpleFunction($function, function () {}));
+        }
+
+        return $twig;
+    }
+
+    private function getTwigSource($filename)
+    {
+        $contents = file_get_contents($filename);
+
+        $environmentReflection = new \ReflectionClass('Twig_Environment');
+        $method = $environmentReflection->getMethod('tokenize');
+        list($firstParameter) = $method->getParameters();
+        /** @var \ReflectionParameter $firstParameter */
+
+        if ($firstParameter->getClass()) {
+            return new \Twig_Source($contents, $filename);
+        }
+
+        return $contents;
     }
 
     /**
