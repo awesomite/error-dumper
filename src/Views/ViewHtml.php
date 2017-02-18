@@ -25,7 +25,7 @@ class ViewHtml implements ViewInterface
 
     private $cacheDirectory;
 
-    private $appendToBody = [];
+    private $appendToBody = array();
 
     /**
      * @param string
