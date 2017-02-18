@@ -72,8 +72,8 @@ class SyntaxTest extends TestBase
     {
         $contents = file_get_contents($filename);
 
-        $environmentReflection = new \ReflectionClass('Twig_Environment');
-        $method = $environmentReflection->getMethod('tokenize');
+        $envReflection = new \ReflectionClass('Twig_Environment');
+        $method = $envReflection->getMethod('tokenize');
         list($firstParameter) = $method->getParameters();
         /** @var \ReflectionParameter $firstParameter */
 
