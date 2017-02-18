@@ -2,6 +2,9 @@
 
 namespace Awesomite\ErrorDumper;
 
+use Awesomite\ErrorDumper\Views\Twig\TwigFilter;
+use Awesomite\ErrorDumper\Views\Twig\TwigFunction;
+
 /**
  * @internal
  */
@@ -58,11 +61,11 @@ class SyntaxTest extends TestBase
         $twig = new \Twig_Environment($loader);
 
         foreach ($filters as $filter) {
-            $twig->addFilter(new \Twig_SimpleFilter($filter, function () {}));
+            $twig->addFilter(new TwigFilter($filter, function () {}));
         }
 
         foreach ($functions as $function) {
-            $twig->addFunction(new \Twig_SimpleFunction($function, function () {}));
+            $twig->addFunction(new TwigFunction($function, function () {}));
         }
 
         return $twig;
