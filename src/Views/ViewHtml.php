@@ -25,6 +25,8 @@ class ViewHtml implements ViewInterface
 
     private $cacheDirectory;
 
+    private $appendToBody = [];
+
     /**
      * @param string
      *
@@ -57,6 +59,7 @@ class ViewHtml implements ViewInterface
             'editor' => $this->editor,
             'hasEditor' => !is_null($this->editor),
             'contentUnderTitle' => $this->contentUnderTitle,
+            'appendToBody' => $this->appendToBody,
         ));
     }
 
@@ -71,6 +74,14 @@ class ViewHtml implements ViewInterface
     public function setEditor(EditorInterface $editor)
     {
         $this->editor = $editor;
+    }
+
+    /**
+     * @param string $string
+     */
+    public function appendToBody($string)
+    {
+        $this->appendToBody[] = $string;
     }
 
     private function createTwig()
@@ -91,6 +102,7 @@ class ViewHtml implements ViewInterface
         $twig->addFunction(new \Twig_SimpleFunction('exportDeclaredValue', function ($param) {
             return var_export($param, true);
         }));
+
         return $twig;
     }
 

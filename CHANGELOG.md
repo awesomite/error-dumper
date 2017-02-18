@@ -3,6 +3,7 @@
 ## 0.12.0 (????-??-??)
 
 * Parent of `Awesomite\ErrorDumper\StandardExceptions\ErrorException` has been changed to `ErrorException`
+* Added method `Awesomite\ErrorDumper\Views\ViewHtml::appendToBody`
 
 ## 0.11.1 (2017-02-03)
 

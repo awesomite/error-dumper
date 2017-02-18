@@ -42,5 +42,9 @@
 {% endautoescape %}
 
 {{ tags.html|raw }}
+
+{% for part in appendToBody %}
+    {{ part|raw }}
+{% endfor %}
 </body>
 </html>

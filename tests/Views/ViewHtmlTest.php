@@ -130,4 +130,49 @@ class ViewHtmlTest extends TestBase
 
         return realpath(implode(DIRECTORY_SEPARATOR, $exploded));
     }
+
+    /**
+     * @dataProvider providerAppendToBody
+     *
+     * @param $toAppend
+     * @param string $expected
+     */
+    public function testAppendToBody($toAppend, $expected)
+    {
+        $view = new ViewHtml();
+        $view->appendToBody($toAppend);
+
+        ob_start();
+        $view->display(new ClonedException(new \Exception(), 1, true));
+        $contents = ob_get_contents();
+        ob_end_clean();
+        $this->assertContains($expected, $contents);
+    }
+
+    public function providerAppendToBody()
+    {
+        $rand = mt_rand();
+        $scriptTag =<<<SCRIPT
+<script type="text/javascript">
+    console.log(new Date());
+    // rand value {$rand}
+</script>
+SCRIPT;
+        $stringable = new Stringable(function () use ($scriptTag) {
+            return $scriptTag;
+        });
+
+        $secondScriptTag = <<<SCRIPT
+<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"></script>
+SCRIPT;
+        $secondStringable = new Stringable(function () use ($secondScriptTag) {
+            return $secondScriptTag;
+        });
+
+        return array(
+            array($scriptTag, $scriptTag),
+            array($stringable, $scriptTag),
+            array($secondStringable, $secondScriptTag),
+        );
+    }
 }
