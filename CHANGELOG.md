@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.11.1
+
+* Fixed tests for PHP `7.2.0-dev`: `PHP Deprecated:  The each() function is deprecated.`
+
 ## 0.11.0
 
 * `Awesomite\ErrorDumper\Listeners\ValidatorInterface::stopPropagation` is removed
