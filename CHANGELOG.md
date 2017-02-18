@@ -1,14 +1,14 @@
 # Changelog
 
-## 0.12.0
+## 0.12.0 (????-??-??)
 
 * Parent of `Awesomite\ErrorDumper\StandardExceptions\ErrorException` has been changed to `ErrorException`
 
-## 0.11.1
+## 0.11.1 (2017-02-03)
 
 * Fixed tests for PHP `7.2.0-dev`: `PHP Deprecated:  The each() function is deprecated.`
 
-## 0.11.0
+## 0.11.0 (2017-02-02)
 
 * `Awesomite\ErrorDumper\Listeners\ValidatorInterface::stopPropagation` is removed
 * `Awesomite\ErrorDumper\Listeners\ValidatorClosure::stopPropagation` has been static
@@ -17,15 +17,15 @@
 
 * Updated `awesomite/var-dumper` to `^0.3.0`
 
-## 0.10.0
+## 0.10.0 (2017-01-31)
 
 * Class `Awesomite\ErrorDumper\TestListener` has been internal
 
-## 0.9.0
+## 0.9.0 (2017-01-23)
 
 * Added method `Awesomite\ErrorDumper\Handlers\ErrorHandlerInterface::register`
 
-## 0.8.0
+## 0.8.0 (2017-01-16)
 
 * Added methods `enableCaching` and `disableCaching` to `\Awesomite\ErrorDumper\Views\ViewHtml`.
 Caching is disabled as default.
@@ -33,17 +33,17 @@ Caching is disabled as default.
 * Strikethrough on deprecated functions.
 * Updated `awesomite/stack-trace` to `^0.6.0`
 
-## 0.7.0
+## 0.7.0 (2017-01-11)
 
 * `\Awesomite\ErrorDumper\Views\ViewHtml` sends proper http headers
 * `\Awesomite\ErrorDumper\Handlers\ErrorHandler` terminates application in default settings when is triggered
 
-## 0.6.1
+## 0.6.1 (2017-01-11)
 
 * Fixed bug in `\Awesomite\ErrorDumper\Handlers\ErrorHandler::handleError` - POLICY_ALL didn't work properly
 * Updated `awesomite/stack-trace` to `^0.5.1`
 
-## 0.6.0
+## 0.6.0 (2017-01-10)
 
 Version `0.6.0` is **incompatible** with `0.5.0`.
 
@@ -67,29 +67,29 @@ Default `$policy` is `ErrorHandler::POLICY_ERROR_REPORTING`.
 `ErrorHandler::handleError` creates `ErrorException` instead of `FatalErrorException`.
 * Updated `awesomite/stack-trace` to `^0.5.0`
 
-## 0.5.1
+## 0.5.1 (2016-12-12)
 
 * Updated `awesomite/stack-trace` to version `^0.4.0`
 
-## 0.5.0
+## 0.5.0 (2016-12-05)
 
 * Updated `awesomite/stack-trace` to version `^0.3.2` (improvements in `LightVarDumper`)
 
-## 0.4.0
+## 0.4.0 (2016-11-30)
 
 * Added optional parameter `$withPrevious` in `ClonedException::__construct()`
 
-## 0.3.0
+## 0.3.0 (2016-11-28)
 
 * Methods `execute` and `executeSafely` in `ErrorSandboxInterface` will return value of result of passed callback
 * Backward incompatible changes for `ShutdownErrorException`, `FatalErrorException` and `SandboxException`
 (setters have been removed, constructor and parent class have been changed)
 
-## 0.2.0
+## 0.2.0 (2016-11-27)
 
 * Limit for number of displayed steps in CLI
 * Fixed bug in `ErrorSandbox` - exception should be thrown immediately after error
 
-## 0.1.0
+## 0.1.0 (2016-11-23)
 
 * Initial public release
