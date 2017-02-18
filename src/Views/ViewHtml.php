@@ -4,8 +4,6 @@ namespace Awesomite\ErrorDumper\Views;
 
 use Awesomite\ErrorDumper\Cloners\ClonedExceptionInterface;
 use Awesomite\ErrorDumper\Editors\EditorInterface;
-use Awesomite\ErrorDumper\Views\Twig\TwigFilter;
-use Awesomite\ErrorDumper\Views\Twig\TwigFunction;
 
 class ViewHtml implements ViewInterface
 {
@@ -94,14 +92,14 @@ class ViewHtml implements ViewInterface
         }
         $twig = new \Twig_Environment($this->createTwigLoader(), $twigOptions);
         $twig->addFilter(
-            new TwigFilter('strpad', function($input, $padLength, $padString = ' ', $padType = STR_PAD_LEFT) {
+            new \Twig_SimpleFilter('strpad', function($input, $padLength, $padString = ' ', $padType = STR_PAD_LEFT) {
                 return str_pad($input, $padLength, $padString, $padType);
             })
         );
-        $twig->addFunction(new TwigFunction('memoryUsage', function () {
+        $twig->addFunction(new \Twig_SimpleFunction('memoryUsage', function () {
             return number_format(memory_get_peak_usage()/1024/1024, 2) . ' MB';
         }));
-        $twig->addFunction(new TwigFunction('exportDeclaredValue', function ($param) {
+        $twig->addFunction(new \Twig_SimpleFunction('exportDeclaredValue', function ($param) {
             return var_export($param, true);
         }));
 
