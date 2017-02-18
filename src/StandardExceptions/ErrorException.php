@@ -5,7 +5,7 @@ namespace Awesomite\ErrorDumper\StandardExceptions;
 /**
  * @internal
  */
-class ErrorException extends \Exception
+class ErrorException extends \ErrorException
 {
     /**
      * ErrorException constructor.
@@ -13,14 +13,19 @@ class ErrorException extends \Exception
      * @param int $code
      * @param string $file
      * @param int $line
+     * @param \Exception|null $previous
      */
-    public function __construct($message, $code, $file, $line)
+    public function __construct($message, $code, $file, $line, $previous = null)
     {
         $humanCode = $this->errorNameToCode($code);
-        $this->message = !is_null($humanCode) ? $humanCode . ' ' . $message : $message;
-        $this->code = $code;
-        $this->file = $file;
-        $this->line = $line;
+        parent::__construct(
+            (!is_null($humanCode) ? $humanCode . ' ' : '') . $message,
+            $code,
+            $code,
+            $file,
+            $line,
+            $previous
+        );
     }
 
     /**

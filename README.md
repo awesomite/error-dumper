@@ -219,7 +219,7 @@ try {
 } catch (SandboxException $exception) {
     header('Content-Type: text/plain');
     echo 'Error message: ' . $exception->getMessage() . "\n";
-    echo 'Error code: ' . $exception->getCode() . "\n";
+    echo 'Severity: ' . $exception->getSeverity() . "\n";
     echo 'Location in code: ' . $exception->getFile() . ':' . $exception->getLine();
     exit;
 }

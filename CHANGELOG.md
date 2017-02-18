@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.12.0
+
+* Parent of `Awesomite\ErrorDumper\StandardExceptions\ErrorException` has been changed to `ErrorException`
+
 ## 0.11.1
 
 * Fixed tests for PHP `7.2.0-dev`: `PHP Deprecated:  The each() function is deprecated.`

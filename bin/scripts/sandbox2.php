@@ -17,7 +17,7 @@ try {
     return 'OK';
 } catch (SandboxException $exception) {
     $body = 'Error message: ' . $exception->getMessage() . "\n";
-    $body .= 'Error code: ' . $exception->getCode() . "\n";
+    $body .= 'Severity: ' . $exception->getSeverity() . "\n";
     $body .= 'Location in code: ' . $exception->getFile() . ':' . $exception->getLine();
 
     $response = new Response();
