@@ -1,5 +1,6 @@
 {
     "name": "awesomite/error-dumper",
+    "description": "Pretty preview of errors and exceptions",
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
