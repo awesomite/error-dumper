@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.12.1 (2017-03-15)
+
+* Fixed bug in `Awesomite\ErrorDumper\Editors\Phpstorm::registerPathMapping` - method should return `$this` instead of `void`.
+
 ## 0.12.0 (2017-03-14)
 
 * Parent of `Awesomite\ErrorDumper\StandardExceptions\ErrorException` has been changed to `ErrorException`
