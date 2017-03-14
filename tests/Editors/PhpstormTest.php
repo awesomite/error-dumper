@@ -41,7 +41,8 @@ class PhpstormTest extends TestBase
     public function testRegisterPathMapping($mapFrom, $mapTo, $file, $line, $expectedFile)
     {
         $phpstorm = new Phpstorm();
-        $phpstorm->registerPathMapping($mapFrom, $mapTo);
+        $phpstorm2 = $phpstorm->registerPathMapping($mapFrom, $mapTo);
+        $this->assertSame($phpstorm, $phpstorm2);
         $link = $phpstorm->getLinkToFile($file, $line);
         list(, $stringParams) = explode('?', $link, 2);
         parse_str($stringParams, $data);

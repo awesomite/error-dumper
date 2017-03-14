@@ -21,6 +21,8 @@ class Phpstorm implements EditorInterface
     public function registerPathMapping($serverPath, $projectPath)
     {
         $this->mapping[$serverPath] = $projectPath;
+
+        return $this;
     }
 
     private function convertPath($path)

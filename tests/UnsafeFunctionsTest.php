@@ -25,7 +25,7 @@ class UnsafeFunctionsTest extends TestBase
 
     private static $exclusions = array(
         'Handlers/ErrorHandler.php:210' => array('exit'),
-        'Editors/Phpstorm.php:31' => array('preg_replace'),
+        'Editors/Phpstorm.php:33' => array('preg_replace'),
     );
 
     /**
