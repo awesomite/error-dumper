@@ -23,6 +23,7 @@ You will be able to serialize, restore and display them later in readable form.
 * [Versioning](#versioning)
 * [Examples](#examples)
 * [Content Security Policy](#content-security-policy)
+* [Symfony integration](#symfony-integration)
 
 ## Installation
 
@@ -288,3 +289,7 @@ To run example in terminal, execute `bin/test.php`.
 This library uses *.js files hosted on `maxcdn.bootstrapcdn.com` and `code.jquery.com`
 (`@see \Awesomite\ErrorDumper\Views\ViewHtml::getResources`).
 Add those domains to your `Content-Security-Policy` header during display errors.
+
+## Symfony integration
+
+[Error Dumper Bundle](https://github.com/awesomite/error-dumper-bundle).
