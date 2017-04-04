@@ -2,6 +2,7 @@ language: php
 
 install:
   - mkdir -p build/logs
+  - rm -rf .git
 
 php:
   - 5.3
