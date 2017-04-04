@@ -75,9 +75,7 @@ $callback = function ($exception) {
 $handler = new ErrorHandler();
 $handler
     ->pushListener(new ListenerClosure($callback))
-    ->registerOnError()
-    ->registerOnException()
-    ->registerOnShutdown();
+    ->register();
 ```
 
 #### Display error in errorlog
@@ -188,10 +186,7 @@ use Awesomite\ErrorDumper\ErrorDumper;
 
 $errorDumper = new ErrorDumper();
 $errorHandler = $errorDumper->createDevHandler(null, ErrorHandler::POLICY_ALL);
-$errorHandler
-    ->registerOnError()
-    ->registerOnException()
-    ->registerOnShutdown();
+$errorHandler->register();
 
 $sandbox = $errorHandler->getErrorSandbox();
 $sandbox->executeSafely(function () {
@@ -209,10 +204,7 @@ use Awesomite\ErrorDumper\Sandboxes\SandboxException;
 
 $errorDumper = new ErrorDumper();
 $errorHandler = $errorDumper->createDevHandler();
-$errorHandler
-    ->registerOnError()
-    ->registerOnException()
-    ->registerOnShutdown();
+$errorHandler->register();
 
 try {
     $sandbox = $errorHandler->getErrorSandbox();
