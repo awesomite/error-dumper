@@ -41,7 +41,7 @@ class ViewHtmlTest extends TestBase
     {
         $view = new ViewHtml();
         if ($editor) {
-            $view->setEditor($editor);
+            $this->assertSame($view, $view->setEditor($editor));
         }
         ob_start();
         $view->display($clonedException);
@@ -75,7 +75,7 @@ class ViewHtmlTest extends TestBase
     public function testContentUnderTitle($content)
     {
         $view = new ViewHtml();
-        $view->setContentUnderTitle($content);
+        $this->assertSame($view, $view->setContentUnderTitle($content));
         ob_start();
         $view->display(new ClonedException(new \Exception(), 1));
         $output = ob_get_contents();
@@ -108,14 +108,14 @@ class ViewHtmlTest extends TestBase
         $this->assertSame(0, count($finder));
 
         $view = new ViewHtml();
-        $view->enableCaching($cachePath);
+        $this->assertSame($view, $view->enableCaching($cachePath));
         ob_start();
         $view->display(new ClonedException(new \Exception()));
         ob_end_clean();
         $this->assertGreaterThan(0, count($finder));
         $filesystem->remove($finder);
 
-        $view->disableCaching();
+        $this->assertSame($view, $view->disableCaching());
         ob_start();
         $view->display(new ClonedException(new \Exception()));
         ob_end_clean();
@@ -140,7 +140,7 @@ class ViewHtmlTest extends TestBase
     public function testAppendToBody($toAppend, $expected)
     {
         $view = new ViewHtml();
-        $view->appendToBody($toAppend);
+        $this->assertSame($view, $view->appendToBody($toAppend));
 
         ob_start();
         $view->display(new ClonedException(new \Exception(), 1, true));
@@ -174,5 +174,12 @@ SCRIPT;
             array($stringable, $scriptTag),
             array($secondStringable, $secondScriptTag),
         );
+    }
+
+    public function testEnableDisableHeaders()
+    {
+        $view = new ViewHtml();
+        $this->assertSame($view, $view->disableHeaders());
+        $this->assertSame($view, $view->enableHeaders());
     }
 }

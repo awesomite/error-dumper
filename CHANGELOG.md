@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.13.0 (2017-04-11)
+
+* Added functions:
+  * `Awesomite\ErrorDumper\Views\ViewHtml::disableHeaders`
+  * `Awesomite\ErrorDumper\Views\ViewHtml::enableHeaders`
+* Added possibility to use chain syntax in `Awesomite\ErrorDumper\Views\ViewHtml`
+
 ## 0.12.1 (2017-03-15)
 
 * Fixed bug in `Awesomite\ErrorDumper\Editors\Phpstorm::registerPathMapping` - method should return `$this` instead of `void`.

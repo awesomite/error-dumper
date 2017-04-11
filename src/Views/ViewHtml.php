@@ -27,25 +27,32 @@ class ViewHtml implements ViewInterface
 
     private $appendToBody = array();
 
+    private $headersEnabled = true;
+
     /**
      * @param string
+     * @return $this
      *
      * @see sys_get_temp_dir()
      */
     public function enableCaching($path)
     {
         $this->cacheDirectory = $path;
+
+        return $this;
     }
     
     public function disableCaching()
     {
         $this->cacheDirectory = null;
+
+        return $this;
     }
 
     public function display(ClonedExceptionInterface $exception)
     {
         // @codeCoverageIgnoreStart
-        if (!headers_sent() && php_sapi_name() !== 'cli') {
+        if ($this->headersEnabled && !headers_sent() && php_sapi_name() !== 'cli') {
             foreach (self::$headers as $header) {
                 header($header);
             }
@@ -65,23 +72,56 @@ class ViewHtml implements ViewInterface
 
     /**
      * @param string $string
+     * @return $this
      */
     public function setContentUnderTitle($string)
     {
         $this->contentUnderTitle = $string;
+
+        return $this;
     }
 
     public function setEditor(EditorInterface $editor)
     {
         $this->editor = $editor;
+
+        return $this;
     }
 
     /**
      * @param string $string
+     * @return $this;
      */
     public function appendToBody($string)
     {
         $this->appendToBody[] = $string;
+
+        return $this;
+    }
+
+    /**
+     * Do not send error headers during view is rendered.
+     * By default this option is enabled.
+     *
+     * @return $this
+     */
+    public function disableHeaders()
+    {
+        $this->headersEnabled = false;
+
+        return $this;
+    }
+
+    /**
+     * @see ViewHtml::disableHeaders()
+     *
+     * @return $this;
+     */
+    public function enableHeaders()
+    {
+        $this->headersEnabled = true;
+
+        return $this;
     }
 
     private function createTwig()

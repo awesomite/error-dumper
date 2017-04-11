@@ -2,7 +2,7 @@ language: php
 
 install:
   - mkdir -p build/logs
-  - rm -rf .git
+  - mv .git ~.git
 
 php:
   - 5.3
@@ -19,4 +19,5 @@ script:
   - travis_wait composer update --no-interaction && vendor/bin/phpunit
 
 after_script:
+  - mv ~.git .git
   - travis_retry bin/coveralls.sh

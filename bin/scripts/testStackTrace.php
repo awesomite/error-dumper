@@ -41,8 +41,9 @@ class TestClass
         }
 
         $view = new \Awesomite\ErrorDumper\Views\ViewHtml();
-        $view->setEditor(new \Awesomite\ErrorDumper\Editors\Phpstorm());
-        $view->display($clone);
+        $view
+            ->setEditor(new \Awesomite\ErrorDumper\Editors\Phpstorm())
+            ->display($clone);
     }
 }
 
