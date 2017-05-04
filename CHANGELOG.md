@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.13.1 (2017-05-05)
+
+* Updated dependencies:
+  * `awesomite/stack-trace` to `^0.9.0`
+  * `awesomite/var-dumper` to `^0.6.1`
+
 ## 0.13.0 (2017-04-11)
 
 * Added functions:
