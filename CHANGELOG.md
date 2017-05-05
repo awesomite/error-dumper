@@ -3,6 +3,7 @@
 ## 0.13.2 (2017-05-05)
 
 * Added `integrity` attribute for `link` and `script` tags
+* Added `.gitattributes` file
 
 ## 0.13.1 (2017-05-05)
 
