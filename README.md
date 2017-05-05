@@ -59,12 +59,12 @@ $errorDumper->createDevHandler()->register();
 <?php
 
 use Awesomite\ErrorDumper\Handlers\ErrorHandler;
-use Awesomite\ErrorDumper\Cloners\ClonedException;
+use Awesomite\ErrorDumper\Serializable\SerializableException;
 use Awesomite\ErrorDumper\Listeners\ListenerClosure;
 
 $callback = function ($exception) {
     /** @var \Exception|\Throwable $exception */
-    $clone = new ClonedException($exception);
+    $clone = new SerializableException($exception);
     $serialized = serialize($clone);
     // TODO store serialized exception
     // use $clone->getStackTrace()->getId() to count number of occurrences similar errors
@@ -228,14 +228,14 @@ try {
 
 use Awesomite\ErrorDumper\Views\ViewHtml;
 use Awesomite\ErrorDumper\Editors\Phpstorm;
-use Awesomite\ErrorDumper\Cloners\ClonedException;
+use Awesomite\ErrorDumper\Serializable\SerializableException;
 
 $view = new ViewHtml();
 $phpstorm = new Phpstorm();
 $view->setEditor($phpstorm);
 
 /** @var \Exception|\Throwable $exception */
-$view->display(new ClonedException($exception));
+$view->display(new SerializableException($exception));
 ```
 
 `ViewHtml` has method `setEditor`. It allows you to achieve the following effect:

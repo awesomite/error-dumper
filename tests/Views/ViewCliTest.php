@@ -2,8 +2,8 @@
 
 namespace Awesomite\ErrorDumper\Views;
 
-use Awesomite\ErrorDumper\Cloners\ClonedException;
-use Awesomite\ErrorDumper\Cloners\ClonedExceptionInterface;
+use Awesomite\ErrorDumper\Serializable\SerializableException;
+use Awesomite\ErrorDumper\Serializable\SerializableExceptionInterface;
 use Awesomite\ErrorDumper\TestBase;
 use Symfony\Component\Console\Output\StreamOutput;
 
@@ -15,10 +15,10 @@ class ViewCliTest extends TestBase
     /**
      * @dataProvider providerDisplay
      *
-     * @param ClonedExceptionInterface $clonedException
+     * @param SerializableExceptionInterface $clonedException
      * @param int $stepLimit
      */
-    public function testDisplay(ClonedExceptionInterface $clonedException, $stepLimit)
+    public function testDisplay(SerializableExceptionInterface $clonedException, $stepLimit)
     {
         $output = new StreamOutput(tmpfile());
         $view = new ViewCli(7, $stepLimit, $output);
@@ -36,8 +36,8 @@ class ViewCliTest extends TestBase
     public function providerDisplay()
     {
         return array(
-            array(new ClonedException(new \LogicException()), 1),
-            array(new ClonedException(new \InvalidArgumentException()), 0),
+            array(new SerializableException(new \LogicException()), 1),
+            array(new SerializableException(new \InvalidArgumentException()), 0),
         );
     }
 }

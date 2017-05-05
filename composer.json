@@ -36,10 +36,5 @@
         "psr-4": {
             "Awesomite\\ErrorDumper\\": "tests/"
         }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "0.13-dev"
-        }
     }
 }
