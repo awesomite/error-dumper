@@ -183,6 +183,7 @@ If you have `error_reporting(0)` you can need sandbox for errors:
 <?php
 
 use Awesomite\ErrorDumper\ErrorDumper;
+use Awesomite\ErrorDumper\Handlers\ErrorHandler;
 
 $errorDumper = new ErrorDumper();
 $errorHandler = $errorDumper->createDevHandler(null, ErrorHandler::POLICY_ALL);
