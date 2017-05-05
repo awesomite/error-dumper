@@ -1,5 +1,14 @@
 # Changelog
 
+## ???
+
+* Renamed:
+  * `Awesomite\ErrorDumper\Cloners\ClonedException` to `Awesomite\ErrorDumper\Serializable\SerializableException`
+  * `Awesomite\ErrorDumper\Cloners\ClonedExceptionInterface` to `Awesomite\ErrorDumper\Serializable\SerializableExceptionInterface`
+* Added for backward compatibility:
+  * `Awesomite\ErrorDumper\Cloners\ClonedException`
+  * `Awesomite\ErrorDumper\Cloners\ClonedExceptionInterface`
+
 ## 0.13.2 (2017-05-05)
 
 * Added `integrity` attribute for `link` and `script` tags

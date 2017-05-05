@@ -2,7 +2,7 @@
 
 namespace Awesomite\ErrorDumper\Views;
 
-use Awesomite\ErrorDumper\Cloners\ClonedExceptionInterface;
+use Awesomite\ErrorDumper\Serializable\SerializableExceptionInterface;
 use Awesomite\StackTrace\Steps\StepInterface;
 use Symfony\Component\Console\Formatter\OutputFormatter;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
@@ -33,7 +33,7 @@ class ViewCli implements ViewInterface
         }
     }
 
-    public function display(ClonedExceptionInterface $exception)
+    public function display(SerializableExceptionInterface $exception)
     {
         $output = $this->getOutput();
         $formatter = new OutputFormatter();

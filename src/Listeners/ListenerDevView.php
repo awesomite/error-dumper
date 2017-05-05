@@ -2,7 +2,7 @@
 
 namespace Awesomite\ErrorDumper\Listeners;
 
-use Awesomite\ErrorDumper\Cloners\ClonedException;
+use Awesomite\ErrorDumper\Serializable\SerializableException;
 use Awesomite\ErrorDumper\Views\ViewInterface;
 
 class ListenerDevView implements ListenerInterface
@@ -16,6 +16,6 @@ class ListenerDevView implements ListenerInterface
 
     public function onException($exception)
     {
-        $this->view->display(new ClonedException($exception));
+        $this->view->display(new SerializableException($exception));
     }
 }

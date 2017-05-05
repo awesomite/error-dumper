@@ -2,13 +2,13 @@
 
 namespace Awesomite\ErrorDumper\Views;
 
-use Awesomite\ErrorDumper\Cloners\ClonedExceptionInterface;
+use Awesomite\ErrorDumper\Serializable\SerializableExceptionInterface;
 
 interface ViewInterface
 {
     /**
-     * @param ClonedExceptionInterface $exception
+     * @param SerializableExceptionInterface $exception
      * @return mixed
      */
-    public function display(ClonedExceptionInterface $exception);
+    public function display(SerializableExceptionInterface $exception);
 }

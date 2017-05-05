@@ -2,7 +2,7 @@
 
 namespace Awesomite\ErrorDumper\Views;
 
-use Awesomite\ErrorDumper\Cloners\ClonedExceptionInterface;
+use Awesomite\ErrorDumper\Serializable\SerializableExceptionInterface;
 use Awesomite\ErrorDumper\Editors\EditorInterface;
 
 class ViewHtml implements ViewInterface
@@ -49,7 +49,7 @@ class ViewHtml implements ViewInterface
         return $this;
     }
 
-    public function display(ClonedExceptionInterface $exception)
+    public function display(SerializableExceptionInterface $exception)
     {
         // @codeCoverageIgnoreStart
         if ($this->headersEnabled && !headers_sent() && php_sapi_name() !== 'cli') {

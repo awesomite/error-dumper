@@ -1,22 +1,22 @@
 <?php
 
-namespace Awesomite\ErrorDumper\Cloners;
+namespace Awesomite\ErrorDumper\Serializable;
 
 use Awesomite\ErrorDumper\TestBase;
 
 /**
  * @internal
  */
-class ClonedExceptionTest extends TestBase
+class SerializableExceptionTest extends TestBase
 {
     /**
      * @dataProvider providerAll
      *
      * @param \Exception|\Throwable $exception
-     * @param ClonedException $clonedException
+     * @param SerializableException $clonedException
      * @param bool $hasPrevious
      */
-    public function testAll($exception, ClonedException $clonedException, $hasPrevious)
+    public function testAll($exception, SerializableException $clonedException, $hasPrevious)
     {
         $this->assertSame($exception->getCode(), $clonedException->getCode());
         $this->assertSame($exception->getFile(), $clonedException->getFile());
@@ -46,16 +46,16 @@ class ClonedExceptionTest extends TestBase
         } catch (\Exception $withPrevious) {}
 
         return array(
-            array($exception, new ClonedException($exception), false),
-            array($withPrevious, new ClonedException($withPrevious), true),
+            array($exception, new SerializableException($exception), false),
+            array($withPrevious, new SerializableException($withPrevious), true),
         );
     }
 
     public function testSerialize()
     {
         $message = 'Test message ' . mt_rand(1, 10000);
-        $clonedException = new ClonedException(new \Exception($message), 5);
-        /** @var ClonedException $unserialized */
+        $clonedException = new SerializableException(new \Exception($message), 5);
+        /** @var SerializableException $unserialized */
         $unserialized = unserialize(serialize($clonedException));
         $this->assertSame($message, $unserialized->getMessage());
     }
@@ -71,10 +71,10 @@ class ClonedExceptionTest extends TestBase
         try {
             $this->throwExceptionWithPrevious();
         } catch (\Exception $exception) {};
-        $cloned = new ClonedException($exception, 0, false, $clonePrevious);
+        $cloned = new SerializableException($exception, 0, false, $clonePrevious);
         $this->assertSame($clonePrevious, $cloned->hasPrevious());
         if ($clonePrevious) {
-            $interface = 'Awesomite\ErrorDumper\Cloners\ClonedExceptionInterface';
+            $interface = 'Awesomite\ErrorDumper\Serializable\SerializableExceptionInterface';
             $this->assertInstanceOf($interface, $cloned->getPrevious());
         }
     }
@@ -92,7 +92,7 @@ class ClonedExceptionTest extends TestBase
      */
     public function testConstructorWithoutPrevious()
     {
-        $cloned = new ClonedException(new \Exception());
+        $cloned = new SerializableException(new \Exception());
         $this->assertFalse($cloned->hasPrevious());
         $cloned->getPrevious();
     }

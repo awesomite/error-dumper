@@ -2,8 +2,8 @@
 
 namespace Awesomite\ErrorDumper\Views;
 
-use Awesomite\ErrorDumper\Cloners\ClonedException;
-use Awesomite\ErrorDumper\Cloners\ClonedExceptionInterface;
+use Awesomite\ErrorDumper\Serializable\SerializableException;
+use Awesomite\ErrorDumper\Serializable\SerializableExceptionInterface;
 use Awesomite\ErrorDumper\Editors\EditorInterface;
 use Awesomite\ErrorDumper\Editors\Phpstorm;
 use Awesomite\ErrorDumper\TestBase;
@@ -27,17 +27,17 @@ class ViewHtmlTest extends TestBase
         $view = new ViewHtml();
         $exception = new \Exception();
         ob_start();
-        $view->display(new ClonedException($exception, 1));
+        $view->display(new SerializableException($exception, 1));
         ob_end_clean();
     }
 
     /**
      * @dataProvider providerDisplay
      *
-     * @param ClonedExceptionInterface $clonedException
+     * @param SerializableExceptionInterface $clonedException
      * @param EditorInterface|null $editor
      */
-    public function testDisplay(ClonedExceptionInterface $clonedException, EditorInterface $editor = null)
+    public function testDisplay(SerializableExceptionInterface $clonedException, EditorInterface $editor = null)
     {
         $view = new ViewHtml();
         if ($editor) {
@@ -58,7 +58,7 @@ class ViewHtmlTest extends TestBase
             ->setMaxDepth(3)
             ->setMaxStringLength(50);
 
-        $exception = new ClonedException(new \Exception(), 3);
+        $exception = new SerializableException(new \Exception(), 3);
         $exception->getStackTrace()->setVarDumper($varDumper);
 
         return array(
@@ -77,7 +77,7 @@ class ViewHtmlTest extends TestBase
         $view = new ViewHtml();
         $this->assertSame($view, $view->setContentUnderTitle($content));
         ob_start();
-        $view->display(new ClonedException(new \Exception(), 1));
+        $view->display(new SerializableException(new \Exception(), 1));
         $output = ob_get_contents();
         ob_end_clean();
         $this->assertContains($content, $output);
@@ -110,14 +110,14 @@ class ViewHtmlTest extends TestBase
         $view = new ViewHtml();
         $this->assertSame($view, $view->enableCaching($cachePath));
         ob_start();
-        $view->display(new ClonedException(new \Exception()));
+        $view->display(new SerializableException(new \Exception()));
         ob_end_clean();
         $this->assertGreaterThan(0, count($finder));
         $filesystem->remove($finder);
 
         $this->assertSame($view, $view->disableCaching());
         ob_start();
-        $view->display(new ClonedException(new \Exception()));
+        $view->display(new SerializableException(new \Exception()));
         ob_end_clean();
         $this->assertSame(0, count($finder));
     }
@@ -143,7 +143,7 @@ class ViewHtmlTest extends TestBase
         $this->assertSame($view, $view->appendToBody($toAppend));
 
         ob_start();
-        $view->display(new ClonedException(new \Exception(), 1, true));
+        $view->display(new SerializableException(new \Exception(), 1, true));
         $contents = ob_get_contents();
         ob_end_clean();
         $this->assertContains($expected, $contents);

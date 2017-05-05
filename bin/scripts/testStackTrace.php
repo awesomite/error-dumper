@@ -31,7 +31,7 @@ class TestClass
 
     public static function myStaticMethod()
     {
-        $clone = new \Awesomite\ErrorDumper\Cloners\ClonedException(new TmpException('My test exception'));
+        $clone = new \Awesomite\ErrorDumper\Serializable\SerializableException(new TmpException('My test exception'));
         $clone->getStackTrace()->setVarDumper(new \Awesomite\VarDumper\LightVarDumper());
 
         if (php_sapi_name() === 'cli') {
