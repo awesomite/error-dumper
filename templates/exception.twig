@@ -37,8 +37,18 @@
 </div>
 
 {% autoescape 'html_attr' %}
-    <script type="text/javascript" src="{{ resources.jqueryJs }}" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="{{ resources.bootstrapJs }}" crossorigin="anonymous"></script>
+    <script
+            type="text/javascript"
+            src="{{ resources.jqueryJs.link }}"
+            integrity="{{ resources.jqueryJs.integrity }}"
+            crossorigin="anonymous"
+    ></script>
+    <script
+            type="text/javascript"
+            src="{{ resources.bootstrapJs.link }}"
+            integrity="{{ resources.bootstrapJs.integrity }}"
+            crossorigin="anonymous"
+    ></script>
 {% endautoescape %}
 
 {{ tags.html|raw }}

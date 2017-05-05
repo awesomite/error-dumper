@@ -167,9 +167,18 @@ class ViewHtml implements ViewInterface
     private function getResources()
     {
         return array(
-            'bootstrapCss' => '//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
-            'bootstrapJs' => '//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js',
-            'jqueryJs' => '//code.jquery.com/jquery-2.1.4.min.js',
+            'bootstrapCss' => array(
+                'link' => '//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
+                'integrity' => 'sha384-pdapHxIh7EYuwy6K7iE41uXVxGCXY0sAjBzaElYGJUrzwodck3Lx6IE2lA0rFREo',
+            ),
+            'bootstrapJs' => array(
+                'link' => '//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js',
+                'integrity' => 'sha384-pPttEvTHTuUJ9L2kCoMnNqCRcaMPMVMsWVO+RLaaaYDmfSP5//dP6eKRusbPcqhZ',
+            ),
+            'jqueryJs' => array(
+                'link' => '//code.jquery.com/jquery-2.1.4.min.js',
+                'integrity' => 'sha384-R4/ztc4ZlRqWjqIuvf6RX5yb/v90qNGx6fS48N0tRxiGkqveZETq72KgDVJCp2TC',
+            ),
         );
     }
 }
