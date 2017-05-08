@@ -21,10 +21,10 @@ class ErrorDumper
      * @see ErrorHandler::POLICY_ERROR_REPORTING
      * @see ErrorHandler::__construct
      */
-    public function createDevHandler($mode = null, $policy = null, EditorInterface $editor = null)
+    public static function createDevHandler($mode = null, $policy = null, EditorInterface $editor = null)
     {
         $handler = new ErrorHandler($mode, $policy);
-        $handler->pushListener(new ListenerDevView($this->createDefaultView($editor)));
+        $handler->pushListener(new ListenerDevView(self::createDefaultView($editor)));
 
         return $handler;
     }
@@ -33,7 +33,7 @@ class ErrorDumper
      * @param EditorInterface|null $editor
      * @return ViewInterface
      */
-    private function createDefaultView(EditorInterface $editor = null)
+    private static function createDefaultView(EditorInterface $editor = null)
     {
         if (php_sapi_name() === 'cli') {
             return new ViewCli();

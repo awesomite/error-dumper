@@ -12,10 +12,9 @@ class ErrorDumperTest extends TestBase
         $prevExceptionHandler = $this->getExceptionHandler();
         $prevErrorHandler = $this->getErrorHandler();
 
-        $errorDumper = new ErrorDumper();
         $this->assertInstanceOf(
             '\Awesomite\ErrorDumper\Handlers\ErrorHandlerInterface',
-            $errorDumper->createDevHandler()
+            ErrorDumper::createDevHandler()
         );
 
         $currExceptionHandler = $this->getExceptionHandler();

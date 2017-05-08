@@ -4,8 +4,7 @@ use Awesomite\ErrorDumper\ErrorDumper;
 use Awesomite\ErrorDumper\Sandboxes\SandboxException;
 use Symfony\Component\HttpFoundation\Response;
 
-$errorDumper = new ErrorDumper();
-$errorHandler = $errorDumper->createDevHandler();
+$errorHandler = ErrorDumper::createDevHandler();
 $errorHandler->register();
 
 try {

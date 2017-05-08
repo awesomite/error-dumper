@@ -40,15 +40,14 @@ composer require awesomite/error-dumper
 
 use Awesomite\ErrorDumper\ErrorDumper;
 
-$errorDumper = new ErrorDumper();
-$errorDumper->createDevHandler()
+ErrorDumper::createDevHandler()
     ->registerOnError() // errors @see http://php.net/manual/en/function.trigger-error.php
     ->registerOnException() // uncaught exceptions
     ->registerOnShutdown(); // @see http://php.net/manual/en/function.error-get-last.php
 
 // or
 
-$errorDumper->createDevHandler()->register();
+ErrorDumper::createDevHandler()->register();
 ```
 
 ### Production environment
@@ -185,8 +184,7 @@ If you have `error_reporting(0)` you can need sandbox for errors:
 use Awesomite\ErrorDumper\ErrorDumper;
 use Awesomite\ErrorDumper\Handlers\ErrorHandler;
 
-$errorDumper = new ErrorDumper();
-$errorHandler = $errorDumper->createDevHandler(null, ErrorHandler::POLICY_ALL);
+$errorHandler = ErrorDumper::createDevHandler(null, ErrorHandler::POLICY_ALL);
 $errorHandler->register();
 
 $sandbox = $errorHandler->getErrorSandbox();
@@ -203,8 +201,7 @@ Instead of `executeSafely` you can use `execute`, which will throw exception in 
 use Awesomite\ErrorDumper\ErrorDumper;
 use Awesomite\ErrorDumper\Sandboxes\SandboxException;
 
-$errorDumper = new ErrorDumper();
-$errorHandler = $errorDumper->createDevHandler();
+$errorHandler = ErrorDumper::createDevHandler();
 $errorHandler->register();
 
 try {

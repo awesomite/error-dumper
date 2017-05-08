@@ -11,8 +11,7 @@ $validator = new ValidatorClosure(function ($exception) {
     }
 });
 
-$dumper = new ErrorDumper();
-$handler = $dumper->createDevHandler()
+ErrorDumper::createDevHandler()
     ->pushValidator($validator)
     ->register();
 
