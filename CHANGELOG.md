@@ -8,6 +8,7 @@
 * Added for backward compatibility:
   * `Awesomite\ErrorDumper\Cloners\ClonedException`
   * `Awesomite\ErrorDumper\Cloners\ClonedExceptionInterface`
+* Function `Awesomite\ErrorDumper\ErrorDumper::createDevHandler` became static
 
 ## 0.13.2 (2017-05-05)
 

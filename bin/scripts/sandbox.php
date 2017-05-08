@@ -2,8 +2,7 @@
 
 use Awesomite\ErrorDumper\ErrorDumper;
 
-$errorDumper = new ErrorDumper();
-$errorHandler = $errorDumper->createDevHandler()->register();
+$errorHandler = ErrorDumper::createDevHandler()->register();
 
 $sandbox = $errorHandler->getErrorSandbox();
 $sandbox->executeSafely(function () {
