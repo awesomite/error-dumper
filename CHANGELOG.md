@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.13.3 (2017-06-06)
+
+* Updated verion of ``=awesomite/stack-trace` to `^0.9.0 || ^0.10.0`
+
 ## 0.13.2 (2017-05-05)
 
 * Added `integrity` attribute for `link` and `script` tags
