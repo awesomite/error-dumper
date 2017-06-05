@@ -3,9 +3,11 @@ language: php
 install:
   - mkdir -p build/logs
   - mv .git ~.git
+  
+sudo: false
+dist: trusty
 
 php:
-  - 5.3
   - 5.4
   - 5.5
   - 5.6
@@ -13,6 +15,11 @@ php:
   - 7.1
   - hhvm
   - nightly
+  
+matrix:
+  include:
+    - php: 5.3
+      dist: precise
 
 script:
   - travis_wait composer update --prefer-lowest --no-interaction && php -d error_reporting=$(php -r "var_export(E_ALL & ~E_DEPRECATED);") vendor/bin/phpunit
