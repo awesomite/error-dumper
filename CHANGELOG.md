@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.13.4 (2017-06-06)
+ * Updated version of `awesomite/var-dumper` to`^0.6.2 || ^0.7.0`
+
 ## 0.13.3 (2017-06-06)
 
 * Updated version of `awesomite/stack-trace` to `^0.9.0 || ^0.10.0`
