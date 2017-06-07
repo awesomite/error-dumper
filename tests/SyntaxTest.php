@@ -7,9 +7,6 @@ namespace Awesomite\ErrorDumper;
  */
 class SyntaxTest extends TestBase
 {
-    /**
-     * @runInSeparateProcess
-     */
     public function testPhpSyntax()
     {
         $path = $this->preparePathToDir('src');
