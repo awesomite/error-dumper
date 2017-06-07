@@ -15,11 +15,19 @@ class TestListener implements \PHPUnit_Framework_TestListener
 {
     private $offset = .1;
 
-    private $output;
+    private static $messages = [];
 
-    public function __construct()
+    public static function addMessage($message)
     {
-        $this->output = new ConsoleOutput();
+        self::$messages[] = $message;
+    }
+
+    public function __destruct()
+    {
+        $output = new ConsoleOutput();
+        foreach (self::$messages as $message) {
+            $output->writeln($message);
+        }
     }
 
     public function startTest(PHPUnit_Framework_Test $test)
@@ -36,12 +44,12 @@ class TestListener implements \PHPUnit_Framework_TestListener
             ? get_class($test) . '::' . $test->getName()
             : get_class($test);
 
-        $output = new ConsoleOutput();
         $message = sprintf("\n<error>Test '%s' ended and took %0.2f seconds.</error>",
             $name,
             $time
         );
-        $output->writeln($message);
+
+        static::addMessage($message);
     }
 
     public function addError(PHPUnit_Framework_Test $test, Exception $e, $time)
