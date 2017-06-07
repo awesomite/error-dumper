@@ -7,6 +7,7 @@ use Awesomite\ErrorDumper\Listeners\ValidatorClosure;
 use Awesomite\ErrorDumper\Sandboxes\ErrorSandbox;
 use Awesomite\ErrorDumper\TestBase;
 use Awesomite\ErrorDumper\TestHelpers\Beeper;
+use Symfony\Component\Console\Output\ConsoleOutput;
 
 /**
  * @internal
@@ -121,6 +122,22 @@ class ErrorHandlerTest extends TestBase
         $errorHandler = $this->createTestErrorHandler($beeper, null, ErrorHandler::POLICY_ALL);
 
         $this->assertSame(0, $beeper->countBeeps());
+        // https://travis-ci.org/awesomite/error-dumper/jobs/240540829
+        if ($error = error_get_last()) {
+            $this->expectOutputString(null);
+            $output = new ConsoleOutput();
+            $output->writeln('');
+            $output->writeln(sptinf(
+                '<error>Existing error: %d %s, %s:%d</error>',
+                $error['type'],
+                $error['message'],
+                $error['file'],
+                $error['line']
+            ));
+            $output->writeln('');
+
+            return;
+        }
         $errorHandler->handleShutdown();
         $this->assertSame(0, $beeper->countBeeps());
         @trigger_error('Test');
