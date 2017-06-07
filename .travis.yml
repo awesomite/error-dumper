@@ -4,9 +4,12 @@ install:
   - mkdir -p build/logs
   - mv .git ~.git
   - cd dev-tools; composer update; cd ..
-  
+
 sudo: false
 dist: trusty
+
+dist: trusty
+sudo: false
 
 php:
   - 5.4
@@ -16,16 +19,56 @@ php:
   - 7.1
   - 7.2
   - hhvm
-  - nightly
-  
+  - hhvm-3.3
+  - hhvm-3.6
+  - hhvm-3.9
+  - hhvm-3.12
+  - hhvm-3.15
+  - hhvm-3.18
+  - hhvm-nightly
+
+env:
+  matrix:
+    - DEPENDENCIES="high"
+    - DEPENDENCIES="low"
+
 matrix:
   include:
     - php: 5.3
       dist: precise
+      env: DEPENDENCIES="high"
+
+    - php: 5.3
+      dist: precise
+      env: DEPENDENCIES="low"
+
+    - php: hhvm
+      env: DEPENDENCIES="hhvm_high"
+
+    - php: hhvm-3.12
+      env: DEPENDENCIES="hhvm_high"
+
+    - php: hhvm-3.15
+      env: DEPENDENCIES="hhvm_high"
+
+    - php: hhvm-3.18
+      env: DEPENDENCIES="hhvm_high"
+
+    - php: hhvm-nightly
+      env: DEPENDENCIES="hhvm_high"
+
+install:
+  - if [[ "$DEPENDENCIES" = 'high' ]]; then travis_retry composer update --no-interaction --prefer-stable; fi
+  - if [[ "$DEPENDENCIES" = 'hhvm_high' ]]; then bin/composer-set-config.php php $(php -d hhvm.php7.all=1 -r "echo PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION;") && travis_retry composer update --no-interaction --prefer-stable; fi
+  - if [[ "$DEPENDENCIES" = 'low' ]]; then travis_retry composer update --no-interaction --prefer-stable --prefer-lowest; fi
+
+before_script:
+  - if [[ "$DEPENDENCIES" = 'hhvm_high' ]]; then echo 'hhvm.php7.all=1' >> /etc/hhvm/php.ini; fi
+  - if [[ "$DEPENDENCIES" = 'low' ]]; then export PHP_ARGS=$(php -r "echo '-d error_reporting=', E_ALL ^ (E_DEPRECATED | E_USER_DEPRECATED);"); else export PHP_ARGS=''; fi
 
 script:
-  - travis_wait composer update --no-interaction --prefer-lowest && bin/fix-phpunit.php && php -d error_reporting=$(php -r "var_export(E_ALL & ~E_DEPRECATED);") vendor/bin/phpunit
-  - travis_wait composer update --no-interaction && bin/fix-phpunit.php && vendor/bin/phpunit
+  - travis_wait composer update --prefer-lowest --no-interaction && php -d error_reporting=$(php -r "var_export(E_ALL & ~E_DEPRECATED);") vendor/bin/phpunit
+  - travis_wait composer update --no-interaction && vendor/bin/phpunit
 
 after_script:
   - mv ~.git .git
