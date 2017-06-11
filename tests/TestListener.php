@@ -2,10 +2,6 @@
 
 namespace Awesomite\ErrorDumper;
 
-use Exception;
-use PHPUnit_Framework_AssertionFailedError;
-use PHPUnit_Framework_Test;
-use PHPUnit_Framework_TestSuite;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
 /**
@@ -15,7 +11,7 @@ class TestListener implements \PHPUnit_Framework_TestListener
 {
     private $offset = .1;
 
-    private static $messages = [];
+    private static $messages = array();
 
     public static function addMessage($message)
     {
@@ -30,11 +26,11 @@ class TestListener implements \PHPUnit_Framework_TestListener
         }
     }
 
-    public function startTest(PHPUnit_Framework_Test $test)
+    public function startTest(\PHPUnit_Framework_Test $test)
     {
     }
 
-    public function endTest(PHPUnit_Framework_Test $test, $time)
+    public function endTest(\PHPUnit_Framework_Test $test, $time)
     {
         if ($time < $this->offset) {
             return;
@@ -52,31 +48,31 @@ class TestListener implements \PHPUnit_Framework_TestListener
         static::addMessage($message);
     }
 
-    public function addError(PHPUnit_Framework_Test $test, Exception $e, $time)
+    public function addError(\PHPUnit_Framework_Test $test, \Exception $e, $time)
     {
     }
 
-    public function addFailure(PHPUnit_Framework_Test $test, PHPUnit_Framework_AssertionFailedError $e, $time)
+    public function addFailure(\PHPUnit_Framework_Test $test, \PHPUnit_Framework_AssertionFailedError $e, $time)
     {
     }
 
-    public function addIncompleteTest(PHPUnit_Framework_Test $test, Exception $e, $time)
+    public function addIncompleteTest(\PHPUnit_Framework_Test $test, \Exception $e, $time)
     {
     }
 
-    public function addRiskyTest(PHPUnit_Framework_Test $test, Exception $e, $time)
+    public function addRiskyTest(\PHPUnit_Framework_Test $test, \Exception $e, $time)
     {
     }
 
-    public function addSkippedTest(PHPUnit_Framework_Test $test, Exception $e, $time)
+    public function addSkippedTest(\PHPUnit_Framework_Test $test, \Exception $e, $time)
     {
     }
 
-    public function endTestSuite(PHPUnit_Framework_TestSuite $suite)
+    public function endTestSuite(\PHPUnit_Framework_TestSuite $suite)
     {
     }
 
-    public function startTestSuite(PHPUnit_Framework_TestSuite $suite)
+    public function startTestSuite(\PHPUnit_Framework_TestSuite $suite)
     {
     }
 }
