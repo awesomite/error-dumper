@@ -2,7 +2,7 @@
 
 namespace Awesomite\ErrorDumper\Listeners;
 
-class ValidatorClosure implements ValidatorInterface
+class PreExceptionCallable implements PreExceptionInterface
 {
     private $callable;
 
@@ -12,7 +12,6 @@ class ValidatorClosure implements ValidatorInterface
     }
 
     /**
-     * ValidatorClosure constructor.
      * @param callable $callable
      */
     public function __construct($callable)
@@ -24,7 +23,7 @@ class ValidatorClosure implements ValidatorInterface
         $this->callable = $callable;
     }
 
-    public function onBeforeException($exception)
+    public function preException($exception)
     {
         call_user_func($this->callable, $exception);
     }

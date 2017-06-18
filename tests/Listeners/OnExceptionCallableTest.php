@@ -8,12 +8,12 @@ use Awesomite\ErrorDumper\TestHelpers\Beeper;
 /**
  * @internal
  */
-class ListenerClosureTest extends TestBase
+class OnExceptionCallableTest extends TestBase
 {
     public function testTrigger()
     {
         $beeper = new Beeper();
-        $listener = new ListenerClosure(function () use ($beeper) {
+        $listener = new OnExceptionCallable(function () use ($beeper) {
             $beeper->beep();
         });
 
@@ -31,7 +31,7 @@ class ListenerClosureTest extends TestBase
      */
     public function testInvalidConstructor($notCallable)
     {
-        new ListenerClosure($notCallable);
+        new OnExceptionCallable($notCallable);
     }
 
     public function providerInvalidConstructor()

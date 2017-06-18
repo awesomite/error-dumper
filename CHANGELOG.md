@@ -1,13 +1,19 @@
 # Changelog
 
-## ???
+## 0.14.0 (???)
+
+Versions `0.14.*` are **incompatible** with `0.13.*`.
 
 * Renamed:
   * `Awesomite\ErrorDumper\Cloners\ClonedException` to `Awesomite\ErrorDumper\Serializable\SerializableException`
   * `Awesomite\ErrorDumper\Cloners\ClonedExceptionInterface` to `Awesomite\ErrorDumper\Serializable\SerializableExceptionInterface`
-* Added for backward compatibility:
-  * `Awesomite\ErrorDumper\Cloners\ClonedException`
-  * `Awesomite\ErrorDumper\Cloners\ClonedExceptionInterface`
+  * `Awesomite\ErrorDumper\Handlers\ErrorHandler::pushValidator` to `Awesomite\ErrorDumper\Handlers\ErrorHandler::pushPreListener`
+  * `Awesomite\ErrorDumper\Handlers\ErrorHandlerInterface::pushValidator` to `Awesomite\ErrorDumper\Handlers\ErrorHandlerInterface::pushPreListener`
+  * `Awesomite\ErrorDumper\Listeners\ListenerClosure` to `Awesomite\ErrorDumper\Listeners\OnExceptionCallable`
+  * `Awesomite\ErrorDumper\Listeners\ListenerDevView` to `Awesomite\ErrorDumper\Listeners\OnExceptionDevView`
+  * `Awesomite\ErrorDumper\Listeners\ListenerInterface` to `Awesomite\ErrorDumper\Listeners\OnExceptionInterface`
+  * `Awesomite\ErrorDumper\Listeners\ValidatorClosure` to `Awesomite\ErrorDumper\Listeners\PreExceptionCallable`
+  * `Awesomite\ErrorDumper\Listeners\ValidatorInterface` to `Awesomite\ErrorDumper\Listeners\PreExceptionInterface`
 * Function `Awesomite\ErrorDumper\ErrorDumper::createDevHandler` became static
 
 ## 0.13.7 (2018-09-21)

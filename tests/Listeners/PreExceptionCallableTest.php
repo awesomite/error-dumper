@@ -8,17 +8,17 @@ use Awesomite\ErrorDumper\TestHelpers\Beeper;
 /**
  * @internal
  */
-class ValidatorClosureTest extends TestBase
+class PreExceptionCallableTest extends TestBase
 {
     public function testTrigger()
     {
         $beeper = new Beeper();
-        $validator = new ValidatorClosure(function () use ($beeper) {
+        $validator = new PreExceptionCallable(function () use ($beeper) {
             $beeper->beep();
         });
 
         $this->assertSame(0, $beeper->countBeeps());
-        $validator->onBeforeException(new \Exception());
+        $validator->preException(new \Exception());
         $this->assertSame(1, $beeper->countBeeps());
     }
 
@@ -27,7 +27,7 @@ class ValidatorClosureTest extends TestBase
      */
     public function testStopPropagation()
     {
-        ValidatorClosure::stopPropagation();
+        PreExceptionCallable::stopPropagation();
     }
 
     /**
@@ -39,7 +39,7 @@ class ValidatorClosureTest extends TestBase
      */
     public function testInvalidConstructor($notCallable)
     {
-        new ValidatorClosure($notCallable);
+        new PreExceptionCallable($notCallable);
     }
 
     public function providerInvalidConstructor()

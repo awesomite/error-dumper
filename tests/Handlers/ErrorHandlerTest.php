@@ -2,8 +2,8 @@
 
 namespace Awesomite\ErrorDumper\Handlers;
 
-use Awesomite\ErrorDumper\Listeners\ListenerClosure;
-use Awesomite\ErrorDumper\Listeners\ValidatorClosure;
+use Awesomite\ErrorDumper\Listeners\OnExceptionCallable;
+use Awesomite\ErrorDumper\Listeners\PreExceptionCallable;
 use Awesomite\ErrorDumper\Sandboxes\ErrorSandbox;
 use Awesomite\ErrorDumper\TestBase;
 use Awesomite\ErrorDumper\TestHelpers\Beeper;
@@ -64,10 +64,10 @@ class ErrorHandlerTest extends TestBase
         trigger_error('Test');
         $this->assertSame(1, $beeper->countBeeps());
 
-        $validator = new ValidatorClosure(function () {
-            ValidatorClosure::stopPropagation();
+        $validator = new PreExceptionCallable(function () {
+            PreExceptionCallable::stopPropagation();
         });
-        $errorHandler->pushValidator($validator);
+        $errorHandler->pushPreListener($validator);
 
         $this->assertSame(1, $beeper->countBeeps());
         trigger_error('Test');
@@ -182,7 +182,7 @@ class ErrorHandlerTest extends TestBase
         $policy = ErrorHandler::POLICY_ERROR_REPORTING
     ) {
         $result = new ErrorHandler($mode, $policy);
-        $result->pushListener(new ListenerClosure(function () use ($beeper) {
+        $result->pushListener(new OnExceptionCallable(function () use ($beeper) {
             $beeper->beep();
         }));
         $result->exitAfterTrigger(false);

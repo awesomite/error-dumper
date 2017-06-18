@@ -5,4 +5,6 @@ namespace Awesomite\ErrorDumper\Listeners;
 /**
  * @internal
  */
-class StopPropagationException extends \Exception {}
+class StopPropagationException extends \Exception
+{
+}

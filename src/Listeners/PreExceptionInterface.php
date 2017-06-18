@@ -2,12 +2,12 @@
 
 namespace Awesomite\ErrorDumper\Listeners;
 
-interface ValidatorInterface
+interface PreExceptionInterface
 {
     /**
      * @param \Exception|\Throwable $exception
      * @return void
      * @throws StopPropagationException
      */
-    public function onBeforeException($exception);
+    public function preException($exception);
 }

@@ -59,7 +59,7 @@ ErrorDumper::createDevHandler()->register();
 
 use Awesomite\ErrorDumper\Handlers\ErrorHandler;
 use Awesomite\ErrorDumper\Serializable\SerializableException;
-use Awesomite\ErrorDumper\Listeners\ListenerClosure;
+use Awesomite\ErrorDumper\Listeners\OnExceptionCallable;
 
 $callback = function ($exception) {
     /** @var \Exception|\Throwable $exception */
@@ -68,12 +68,11 @@ $callback = function ($exception) {
     // TODO store serialized exception
     // use $clone->getStackTrace()->getId() to count number of occurrences similar errors
     echo '503';
-    exit(1);
 };
 
 $handler = new ErrorHandler();
 $handler
-    ->pushListener(new ListenerClosure($callback))
+    ->pushListener(new OnExceptionCallable($callback))
     ->register();
 ```
 
@@ -247,15 +246,15 @@ Click on line number and you will be redirected to PhpStorm directly from browse
 <?php
 
 use Awesomite\ErrorDumper\Handlers\ErrorHandler;
-use Awesomite\ErrorDumper\Listeners\ValidatorClosure;
+use Awesomite\ErrorDumper\Listeners\PreExceptionCallable;
 
 $handler = new ErrorHandler();
-$validator = new ValidatorClosure(function ($exception) {
+$preListener = new PreExceptionCallable(function ($exception) {
     if ($exception instanceof \RuntimeException) {
-        ValidatorClosure::stopPropagation();
+        PreExceptionCallable::stopPropagation();
     }
 });
-$handler->pushValidator($validator);
+$handler->pushPreListener($preListener);
 ```
 
 ## Versioning
@@ -282,4 +281,4 @@ Add those domains to your `Content-Security-Policy` header during display errors
 
 ## Symfony integration
 
-[Error Dumper Bundle](https://github.com/awesomite/error-dumper-bundle).
+[Error Dumper Bundle](https://github.com/awesomite/error-dumper-bundle)

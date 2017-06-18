@@ -9,9 +9,9 @@ use Symfony\Component\Console\Output\ConsoleOutput;
  */
 class TestListener implements \PHPUnit_Framework_TestListener
 {
-    private $offset = .1;
-
     private static $messages = array();
+
+    private $times = array();
 
     public static function addMessage($message)
     {
@@ -24,6 +24,40 @@ class TestListener implements \PHPUnit_Framework_TestListener
         foreach (self::$messages as $message) {
             $output->writeln($message);
         }
+
+        usort($this->times, function ($left, $right) {
+            return $left[0] == $right[0]
+                ? 0
+                : ($left[0] < $right[0] ? 1 : -1);
+        });
+
+
+        $wholeTime = 0;
+        array_walk($this->times, function ($element) use (&$wholeTime) {
+            $wholeTime += $element[0];
+        });
+
+        $cpTimes = array_slice($this->times, 0, 10);
+
+        $maxLength = 0;
+        array_walk($cpTimes, function ($element) use (&$maxLength) {
+            $len = mb_strlen($element[1]);
+            if ($len > $maxLength) {
+                $maxLength = $len;
+            }
+        });
+
+        $header = '<bg=yellow;fg=black>ms        %     ' . str_pad('name', $maxLength, ' ') . '</>';
+        $output->writeln($header);
+        foreach ($cpTimes as $timeData) {
+            list($time, $name) = $timeData;
+            $output->writeln(sprintf(
+                '<bg=yellow;fg=black>% 6.2f    % 2d    %s</>',
+                $time * 1000,
+                $time/$wholeTime*100,
+                str_pad($name, $maxLength, ' ')
+            ));
+        }
     }
 
     public function startTest(\PHPUnit_Framework_Test $test)
@@ -32,20 +66,11 @@ class TestListener implements \PHPUnit_Framework_TestListener
 
     public function endTest(\PHPUnit_Framework_Test $test, $time)
     {
-        if ($time < $this->offset) {
-            return;
-        }
-
         $name = $test instanceof \PHPUnit_Framework_TestCase
             ? get_class($test) . '::' . $test->getName()
             : get_class($test);
 
-        $message = sprintf("\n<error>Test '%s' ended and took %0.2f seconds.</error>",
-            $name,
-            $time
-        );
-
-        static::addMessage($message);
+        $this->times[] = array($time, $name);
     }
 
     public function addError(\PHPUnit_Framework_Test $test, \Exception $e, $time)
