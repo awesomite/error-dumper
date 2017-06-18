@@ -2,9 +2,9 @@
 
 namespace Awesomite\ErrorDumper\Handlers;
 
-use Awesomite\ErrorDumper\Listeners\ListenerInterface;
+use Awesomite\ErrorDumper\Listeners\OnExceptionInterface;
 use Awesomite\ErrorDumper\Listeners\StopPropagationException;
-use Awesomite\ErrorDumper\Listeners\ValidatorInterface;
+use Awesomite\ErrorDumper\Listeners\PreExceptionInterface;
 use Awesomite\ErrorDumper\Sandboxes\ErrorSandbox;
 use Awesomite\ErrorDumper\StandardExceptions\ErrorException;
 use Awesomite\ErrorDumper\StandardExceptions\ShutdownErrorException;
@@ -42,14 +42,14 @@ class ErrorHandler implements ErrorHandlerInterface
     private $exitAfterTrigger = true;
 
     /**
-     * @var ListenerInterface[]
+     * @var OnExceptionInterface[]
      */
     private $listeners = array();
 
     /**
-     * @var ValidatorInterface[]
+     * @var PreExceptionInterface[]
      */
-    private $validators = array();
+    private $preListeners = array();
 
     /**
      * ErrorErrorHandler constructor.
@@ -174,16 +174,16 @@ class ErrorHandler implements ErrorHandlerInterface
         }
     }
 
-    public function pushListener(ListenerInterface $listener)
+    public function pushListener(OnExceptionInterface $listener)
     {
         $this->listeners[] = $listener;
 
         return $this;
     }
 
-    public function pushValidator(ValidatorInterface $validator)
+    public function pushPreListener(PreExceptionInterface $preListener)
     {
-        $this->validators[] = $validator;
+        $this->preListeners[] = $preListener;
 
         return $this;
     }
@@ -193,9 +193,9 @@ class ErrorHandler implements ErrorHandlerInterface
      */
     private function onError($exception)
     {
-        foreach ($this->validators as $validator) {
+        foreach ($this->preListeners as $validator) {
             try {
-                $validator->onBeforeException($exception);
+                $validator->preException($exception);
             } catch (StopPropagationException $exception) {
                 return;
             }

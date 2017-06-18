@@ -9,12 +9,12 @@ use Awesomite\ErrorDumper\Views\ViewInterface;
 /**
  * @internal
  */
-class ListenerDevViewTest extends TestBase
+class OnExceptionDevViewTest extends TestBase
 {
     public function testTrigger()
     {
         $beeper = new Beeper();
-        $listener = new ListenerDevView($this->createView($beeper));
+        $listener = new OnExceptionDevView($this->createView($beeper));
         $this->assertSame(0, $beeper->countBeeps());
         $listener->onException(new \Exception());
         $this->assertSame(1, $beeper->countBeeps());

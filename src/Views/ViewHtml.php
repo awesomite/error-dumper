@@ -115,7 +115,7 @@ class ViewHtml implements ViewInterface
     /**
      * @see ViewHtml::disableHeaders()
      *
-     * @return $this;
+     * @return $this
      */
     public function enableHeaders()
     {

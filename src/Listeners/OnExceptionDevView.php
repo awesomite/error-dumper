@@ -5,7 +5,7 @@ namespace Awesomite\ErrorDumper\Listeners;
 use Awesomite\ErrorDumper\Serializable\SerializableException;
 use Awesomite\ErrorDumper\Views\ViewInterface;
 
-class ListenerDevView implements ListenerInterface
+class OnExceptionDevView implements OnExceptionInterface
 {
     private $view;
 

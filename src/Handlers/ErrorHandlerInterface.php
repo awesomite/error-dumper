@@ -2,8 +2,8 @@
 
 namespace Awesomite\ErrorDumper\Handlers;
 
-use Awesomite\ErrorDumper\Listeners\ListenerInterface;
-use Awesomite\ErrorDumper\Listeners\ValidatorInterface;
+use Awesomite\ErrorDumper\Listeners\OnExceptionInterface;
+use Awesomite\ErrorDumper\Listeners\PreExceptionInterface;
 use Awesomite\ErrorDumper\Sandboxes\ErrorSandboxInterface;
 
 interface ErrorHandlerInterface
@@ -36,16 +36,16 @@ interface ErrorHandlerInterface
     public function exitAfterTrigger($condition);
 
     /**
-     * @param ListenerInterface $listener
+     * @param OnExceptionInterface $listener
      * @return ErrorHandlerInterface
      */
-    public function pushListener(ListenerInterface $listener);
+    public function pushListener(OnExceptionInterface $listener);
 
     /**
-     * @param ValidatorInterface $validator
+     * @param PreExceptionInterface $preListener
      * @return ErrorHandlerInterface
      */
-    public function pushValidator(ValidatorInterface $validator);
+    public function pushPreListener(PreExceptionInterface $preListener);
 
     /**
      * @return ErrorSandboxInterface

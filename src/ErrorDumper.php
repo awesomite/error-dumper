@@ -5,7 +5,7 @@ namespace Awesomite\ErrorDumper;
 use Awesomite\ErrorDumper\Editors\EditorInterface;
 use Awesomite\ErrorDumper\Handlers\ErrorHandler;
 use Awesomite\ErrorDumper\Handlers\ErrorHandlerInterface;
-use Awesomite\ErrorDumper\Listeners\ListenerDevView;
+use Awesomite\ErrorDumper\Listeners\OnExceptionDevView;
 use Awesomite\ErrorDumper\Views\ViewCli;
 use Awesomite\ErrorDumper\Views\ViewHtml;
 use Awesomite\ErrorDumper\Views\ViewInterface;
@@ -24,7 +24,7 @@ class ErrorDumper
     public static function createDevHandler($mode = null, $policy = null, EditorInterface $editor = null)
     {
         $handler = new ErrorHandler($mode, $policy);
-        $handler->pushListener(new ListenerDevView(self::createDefaultView($editor)));
+        $handler->pushListener(new OnExceptionDevView(self::createDefaultView($editor)));
 
         return $handler;
     }

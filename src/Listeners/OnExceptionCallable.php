@@ -2,12 +2,11 @@
 
 namespace Awesomite\ErrorDumper\Listeners;
 
-class ListenerClosure implements ListenerInterface
+class OnExceptionCallable implements OnExceptionInterface
 {
     private $callable;
 
     /**
-     * ListenerClosure constructor.
      * @param callable $callable
      */
     public function __construct($callable)
