@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.13.5 (2017-08-30)
+## 0.13.5 (2017-08-31)
 
 * Updated `awesomite/var-dumper` to version `^0.6.3 || ^0.7.2 || ^0.8.0`
 
