@@ -22,7 +22,7 @@ matrix:
       dist: precise
 
 script:
-  - travis_wait composer update --prefer-lowest --no-interaction && php -d error_reporting=$(php -r "var_export(E_ALL & ~E_DEPRECATED);") vendor/bin/phpunit
+  - travis_wait composer update --no-interaction && php -d error_reporting=$(php -r "var_export(E_ALL & ~E_DEPRECATED);") vendor/bin/phpunit
   - travis_wait composer update --no-interaction && vendor/bin/phpunit
 
 after_script:
