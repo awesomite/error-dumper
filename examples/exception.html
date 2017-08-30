@@ -1,11 +1,16 @@
-
 <!doctype html>
 <html>
 <head>
     <meta charset="UTF-8" />
     <title>Error dumper</title>
     <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAVFFOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEAABEAAAABEAAAARAAAAEQAAABEAAAARAAAAEQAAABEAAAARAAABEAAAAAEQABEAAAAAABEAEQAAAAAAEQABEAAAAAEQAAARAAAAEQAAABEAAAARAAAAEQAAABEAAAARAAAAEQAAAAEQAAEQAAAAAAAAAAAAD//wAA888AAOfnAADn5wAA5+cAAOfnAADP8wAAn/kAAJ/5AADP8wAA5+cAAOfnAADn5wAA5+cAAPPPAAD//wAA" rel="icon" type="image/x-icon" />
-    <link rel="stylesheet" type="text/css" href="&#x2F;&#x2F;maxcdn.bootstrapcdn.com&#x2F;bootstrap&#x2F;3.3.5&#x2F;css&#x2F;bootstrap.min.css" crossorigin="anonymous" />
+    <link
+            rel="stylesheet"
+            type="text/css"
+            href="&#x2F;&#x2F;maxcdn.bootstrapcdn.com&#x2F;bootstrap&#x2F;3.3.5&#x2F;css&#x2F;bootstrap.min.css"
+            integrity="sha384-pdapHxIh7EYuwy6K7iE41uXVxGCXY0sAjBzaElYGJUrzwodck3Lx6IE2lA0rFREo"
+            crossorigin="anonymous"
+    />
     <style type="text/css">
         .error-line
         {
@@ -108,7 +113,7 @@
         <div class="panel-heading">
 
 
-            (...)/bin/scripts/testStackTrace.php:31
+            (...)/bin/scripts/testStackTrace.php:34
 
 
         </div>
@@ -120,35 +125,35 @@
                     <div class="tab-pane fade active in" id="source-step-0">
                         <div class="code-box max-height rounded">
 
-                            <span class="">24        public static function __callStatic($name, $arguments)</span>
+                            <span class="">27        public static function __callStatic($name, $arguments)</span>
 
-                            <span class="">25        {</span>
+                            <span class="">28        {</span>
 
-                            <span class="">26            return new static();</span>
+                            <span class="">29            return new static();</span>
 
-                            <span class="">27        }</span>
+                            <span class="">30        }</span>
 
-                            <span class="">28    </span>
+                            <span class="">31    </span>
 
-                            <span class="">29        public static function myStaticMethod()</span>
+                            <span class="">32        public static function myStaticMethod()</span>
 
-                            <span class="">30        {</span>
+                            <span class="">33        {</span>
 
-                            <span class="error-line">31            $clone = new \Awesomite\ErrorDumper\Cloners\ClonedException(new TmpException(&#039;My test exception&#039;));</span>
+                            <span class="error-line">34            $clone = new \Awesomite\ErrorDumper\Cloners\ClonedException(new TmpException(&#039;My test exception&#039;));</span>
 
-                            <span class="">32            $clone-&gt;getStackTrace()-&gt;setVarDumper(new \Awesomite\StackTrace\VarDumpers\LightVarDumper());</span>
+                            <span class="">35            $clone-&gt;getStackTrace()-&gt;setVarDumper(new \Awesomite\VarDumper\LightVarDumper());</span>
 
-                            <span class="">33    </span>
+                            <span class="">36    </span>
 
-                            <span class="">34            if (php_sapi_name() === &#039;cli&#039;) {</span>
+                            <span class="">37            if (php_sapi_name() === &#039;cli&#039;) {</span>
 
-                            <span class="">35                $view = new \Awesomite\ErrorDumper\Views\ViewCli(7, 3);</span>
+                            <span class="">38                $view = new \Awesomite\ErrorDumper\Views\ViewCli(7, 3);</span>
 
-                            <span class="">36                $view-&gt;display($clone);</span>
+                            <span class="">39                $view-&gt;display($clone);</span>
 
-                            <span class="">37                exit;</span>
+                            <span class="">40                exit;</span>
 
-                            <span class="">38            }</span>
+                            <span class="">41            }</span>
                         </div>
                     </div>                    </div>
             </div>
@@ -156,7 +161,7 @@
     <div class="panel-heading">
 
 
-        (...)/bin/scripts/testStackTrace.php:21
+        (...)/bin/scripts/testStackTrace.php:24
 
 
         <strong>TestClass::myStaticMethod()</strong>
@@ -179,35 +184,35 @@
                 <div class="tab-pane fade active in" id="source-step-1">
                     <div class="code-box max-height ">
 
-                        <span class="">14        public function __construct()</span>
-
-                        <span class="">15        {</span>
-
-                        <span class="">16            $this-&gt;callDynamic(1, 2, 3);</span>
-
                         <span class="">17        }</span>
 
                         <span class="">18    </span>
 
-                        <span class="">19        public function __call($name, $arguments)</span>
+                        <span class="">19        /**</span>
 
-                        <span class="">20        {</span>
+                        <span class="">20         * @deprecated</span>
 
-                        <span class="error-line">21            return static::myStaticMethod($this);</span>
+                        <span class="">21         */</span>
 
-                        <span class="">22        }</span>
+                        <span class="">22        public function __call($name, $arguments)</span>
 
-                        <span class="">23    </span>
+                        <span class="">23        {</span>
 
-                        <span class="">24        public static function __callStatic($name, $arguments)</span>
+                        <span class="error-line">24            return static::myStaticMethod($this);</span>
 
-                        <span class="">25        {</span>
+                        <span class="">25        }</span>
 
-                        <span class="">26            return new static();</span>
+                        <span class="">26    </span>
 
-                        <span class="">27        }</span>
+                        <span class="">27        public static function __callStatic($name, $arguments)</span>
 
-                        <span class="">28    </span>
+                        <span class="">28        {</span>
+
+                        <span class="">29            return new static();</span>
+
+                        <span class="">30        }</span>
+
+                        <span class="">31    </span>
                     </div>
                 </div>                            <div class="tab-pane fade " id="colorized-key-step-1">
                 <div class="panel-group">
@@ -226,8 +231,7 @@
                                 class="panel-collapse collapse in"
                         >
                             <div class="panel-body">
-                                                    <pre class="max-height">object(TestClass) (0) {
-}
+                                                    <pre class="max-height">object(TestClass) #1 (0) {}
 </pre>
                             </div>
                         </div>
@@ -242,8 +246,8 @@
         (...)/bin/scripts/testStackTrace.php:16
 
 
-        <strong>TestClass-&gt;__call()</strong>
-    </div>
+        <s>            <strong>TestClass-&gt;__call()</strong>
+        </s>            </div>
 
 
     <div class="panel-body">
@@ -282,15 +286,15 @@
 
                         <span class="">18    </span>
 
-                        <span class="">19        public function __call($name, $arguments)</span>
+                        <span class="">19        /**</span>
 
-                        <span class="">20        {</span>
+                        <span class="">20         * @deprecated</span>
 
-                        <span class="">21            return static::myStaticMethod($this);</span>
+                        <span class="">21         */</span>
 
-                        <span class="">22        }</span>
+                        <span class="">22        public function __call($name, $arguments)</span>
 
-                        <span class="">23    </span>
+                        <span class="">23        {</span>
                     </div>
                 </div>                            <div class="tab-pane fade " id="colorized-key-step-2">
                 <div class="panel-group">
@@ -311,7 +315,7 @@
                                 class="panel-collapse collapse in"
                         >
                             <div class="panel-body">
-                                                    <pre class="max-height">string(11) &#039;callDynamic&#039;
+                                                    <pre class="max-height">“callDynamic”
 </pre>
                             </div>
                         </div>
@@ -334,12 +338,9 @@
                         >
                             <div class="panel-body">
                                                     <pre class="max-height">array(3) {
-  [0] =&gt;
-  int(1)
-  [1] =&gt;
-  int(2)
-  [2] =&gt;
-  int(3)
+    [0] =&gt; 1
+    [1] =&gt; 2
+    [2] =&gt; 3
 }
 </pre>
                             </div>
@@ -352,117 +353,152 @@
     <div class="panel-heading">
 
 
-        (...)/bin/scripts/testStackTrace.php:16
+        (...)/bin/scripts/testStackTrace.php:29
 
 
-        <strong>TestClass-&gt;callDynamic()</strong>
+        <strong>TestClass-&gt;__construct()</strong>
+    </div>
+
+
+    <div class="panel-body">
+        <div>
+            <div class="tab-content">
+                <div class="tab-pane fade active in" id="source-step-3">
+                    <div class="code-box max-height rounded">
+
+                        <span class="">22        public function __call($name, $arguments)</span>
+
+                        <span class="">23        {</span>
+
+                        <span class="">24            return static::myStaticMethod($this);</span>
+
+                        <span class="">25        }</span>
+
+                        <span class="">26    </span>
+
+                        <span class="">27        public static function __callStatic($name, $arguments)</span>
+
+                        <span class="">28        {</span>
+
+                        <span class="error-line">29            return new static();</span>
+
+                        <span class="">30        }</span>
+
+                        <span class="">31    </span>
+
+                        <span class="">32        public static function myStaticMethod()</span>
+
+                        <span class="">33        {</span>
+
+                        <span class="">34            $clone = new \Awesomite\ErrorDumper\Cloners\ClonedException(new TmpException(&#039;My test exception&#039;));</span>
+
+                        <span class="">35            $clone-&gt;getStackTrace()-&gt;setVarDumper(new \Awesomite\VarDumper\LightVarDumper());</span>
+
+                        <span class="">36    </span>
+                    </div>
+                </div>                    </div>
+        </div>
+    </div></div>                            <div class="panel panel-default">
+    <div class="panel-heading">
+
+
+        (...)/bin/scripts/testStackTrace.php:50
+
+
+        <strong>TestClass::__callStatic()</strong>
     </div>
 
 
     <div class="panel-body">
         <div class="padding-menu">
-            <ul class="nav nav-tabs" data-tabs="tabs-step-3">
+            <ul class="nav nav-tabs" data-tabs="tabs-step-4">
                 <li class="active">
-                    <a href="#source-step-3" data-toggle="tab">Source</a>
+                    <a href="#source-step-4" data-toggle="tab">Source</a>
                 </li>
                 <li class="">
-                    <a href="#colorized-key-step-3" data-toggle="tab">Arguments</a>
+                    <a href="#colorized-key-step-4" data-toggle="tab">Arguments</a>
                 </li>
             </ul>
         </div>
         <div>
             <div class="tab-content">
-                <div class="tab-pane fade active in" id="source-step-3">
+                <div class="tab-pane fade active in" id="source-step-4">
                     <div class="code-box max-height ">
 
-                        <span class=""> 9     * @method callDynamic($a, $b, $c)</span>
+                        <span class="">41            }</span>
 
-                        <span class="">10     * @method static TestClass create(array $params)</span>
+                        <span class="">42    </span>
 
-                        <span class="">11     */</span>
+                        <span class="">43            $view = new \Awesomite\ErrorDumper\Views\ViewHtml();</span>
 
-                        <span class="">12    class TestClass</span>
+                        <span class="">44            $view-&gt;display($clone);</span>
 
-                        <span class="">13    {</span>
+                        <span class="">45        }</span>
 
-                        <span class="">14        public function __construct()</span>
+                        <span class="">46    }</span>
 
-                        <span class="">15        {</span>
+                        <span class="">47    </span>
 
-                        <span class="error-line">16            $this-&gt;callDynamic(1, 2, 3);</span>
+                        <span class="">48    </span>
 
-                        <span class="">17        }</span>
+                        <span class="">49    ob_start();</span>
 
-                        <span class="">18    </span>
+                        <span class="error-line">50    TestClass::create(5);</span>
 
-                        <span class="">19        public function __call($name, $arguments)</span>
+                        <span class="">51    $result = ob_get_contents();</span>
 
-                        <span class="">20        {</span>
+                        <span class="">52    ob_end_clean();</span>
 
-                        <span class="">21            return static::myStaticMethod($this);</span>
+                        <span class="">53    </span>
 
-                        <span class="">22        }</span>
+                        <span class="">54    return $result;</span>
 
-                        <span class="">23    </span>
+                        <span class="">55    </span>
                     </div>
-                </div>                            <div class="tab-pane fade " id="colorized-key-step-3">
+                </div>                            <div class="tab-pane fade " id="colorized-key-step-4">
                 <div class="panel-group">
                     <div class="panel panel-default">
                         <div class="panel-heading">
+
+
                             <a
                                     data-toggle="collapse"
-                                    data-target="#parameters-step-3-0"
+                                    data-target="#parameters-step-4-0"
                                     class="var-header "
                             >
-                                unknown0
+                                $name
                             </a>
                         </div>
                         <div
-                                id="parameters-step-3-0"
+                                id="parameters-step-4-0"
                                 class="panel-collapse collapse in"
                         >
                             <div class="panel-body">
-                                                    <pre class="max-height">int(1)
+                                                    <pre class="max-height">“create”
 </pre>
                             </div>
                         </div>
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading">
+
+
                             <a
                                     data-toggle="collapse"
-                                    data-target="#parameters-step-3-1"
+                                    data-target="#parameters-step-4-1"
                                     class="var-header "
                             >
-                                unknown1
+                                $arguments
                             </a>
                         </div>
                         <div
-                                id="parameters-step-3-1"
+                                id="parameters-step-4-1"
                                 class="panel-collapse collapse in"
                         >
                             <div class="panel-body">
-                                                    <pre class="max-height">int(2)
-</pre>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <a
-                                    data-toggle="collapse"
-                                    data-target="#parameters-step-3-2"
-                                    class="var-header "
-                            >
-                                unknown2
-                            </a>
-                        </div>
-                        <div
-                                id="parameters-step-3-2"
-                                class="panel-collapse collapse in"
-                        >
-                            <div class="panel-body">
-                                                    <pre class="max-height">int(3)
+                                                    <pre class="max-height">array(1) {
+    [0] =&gt; 5
+}
 </pre>
                             </div>
                         </div>
@@ -474,59 +510,10 @@
     <div class="panel-heading">
 
 
-        (...)/bin/scripts/testStackTrace.php:26
+        (...)/bin/errordumper_webserver_root/index.php:39
 
 
-        <strong>TestClass-&gt;__construct()</strong>
-    </div>
-
-
-    <div class="panel-body">
-        <div>
-            <div class="tab-content">
-                <div class="tab-pane fade active in" id="source-step-4">
-                    <div class="code-box max-height rounded">
-
-                        <span class="">19        public function __call($name, $arguments)</span>
-
-                        <span class="">20        {</span>
-
-                        <span class="">21            return static::myStaticMethod($this);</span>
-
-                        <span class="">22        }</span>
-
-                        <span class="">23    </span>
-
-                        <span class="">24        public static function __callStatic($name, $arguments)</span>
-
-                        <span class="">25        {</span>
-
-                        <span class="error-line">26            return new static();</span>
-
-                        <span class="">27        }</span>
-
-                        <span class="">28    </span>
-
-                        <span class="">29        public static function myStaticMethod()</span>
-
-                        <span class="">30        {</span>
-
-                        <span class="">31            $clone = new \Awesomite\ErrorDumper\Cloners\ClonedException(new TmpException(&#039;My test exception&#039;));</span>
-
-                        <span class="">32            $clone-&gt;getStackTrace()-&gt;setVarDumper(new \Awesomite\StackTrace\VarDumpers\LightVarDumper());</span>
-
-                        <span class="">33    </span>
-                    </div>
-                </div>                    </div>
-        </div>
-    </div></div>                            <div class="panel panel-default">
-    <div class="panel-heading">
-
-
-        (...)/bin/scripts/testStackTrace.php:47
-
-
-        <strong>TestClass::__callStatic()</strong>
+        <strong>require()</strong>
     </div>
 
 
@@ -546,48 +533,46 @@
                 <div class="tab-pane fade active in" id="source-step-5">
                     <div class="code-box max-height ">
 
-                        <span class="">37                exit;</span>
+                        <span class="">32                    require implode(DIRECTORY_SEPARATOR, array(__DIR__, &#039;..&#039;, &#039;scripts&#039;, $page . &#039;.php&#039;));</span>
 
-                        <span class="">38            }</span>
+                        <span class="">33                };</span>
 
-                        <span class="">39    </span>
+                        <span class="">34    </span>
 
-                        <span class="">40            $view = new \Awesomite\ErrorDumper\Views\ViewHtml();</span>
+                        <span class="">35                return false;</span>
 
-                        <span class="">41            $view-&gt;display($clone);</span>
+                        <span class="">36            }</span>
 
-                        <span class="">42        }</span>
+                        <span class="">37    </span>
 
-                        <span class="">43    }</span>
+                        <span class="">38            if (in_array($page, array_keys($pages))) {</span>
 
-                        <span class="">44    </span>
+                        <span class="error-line">39                return require implode(DIRECTORY_SEPARATOR, array(__DIR__, &#039;..&#039;, &#039;scripts&#039;, $page . &#039;.php&#039;));</span>
 
-                        <span class="">45    </span>
+                        <span class="">40            }</span>
 
-                        <span class="">46    ob_start();</span>
+                        <span class="">41    </span>
 
-                        <span class="error-line">47    TestClass::create(5);</span>
+                        <span class="">42            return $app[&#039;twig&#039;]-&gt;render(&#039;index.twig&#039;, array(</span>
 
-                        <span class="">48    $result = ob_get_contents();</span>
+                        <span class="">43                &#039;pages&#039; =&gt; $pages</span>
 
-                        <span class="">49    ob_end_clean();</span>
+                        <span class="">44            ));</span>
 
-                        <span class="">50    </span>
+                        <span class="">45        })</span>
 
-                        <span class="">51    return $result;</span>
+                        <span class="">46        -&gt;bind(&#039;homepage&#039;)</span>
                     </div>
                 </div>                            <div class="tab-pane fade " id="colorized-key-step-5">
                 <div class="panel-group">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-
-
                             <a
                                     data-toggle="collapse"
                                     data-target="#parameters-step-5-0"
                                     class="var-header "
                             >
-                                $name
+                                unknown0
                             </a>
                         </div>
                         <div
@@ -595,196 +580,7 @@
                                 class="panel-collapse collapse in"
                         >
                             <div class="panel-body">
-                                                    <pre class="max-height">string(6) &#039;create&#039;
-</pre>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-
-
-                            <a
-                                    data-toggle="collapse"
-                                    data-target="#parameters-step-5-1"
-                                    class="var-header "
-                            >
-                                $arguments
-                            </a>
-                        </div>
-                        <div
-                                id="parameters-step-5-1"
-                                class="panel-collapse collapse in"
-                        >
-                            <div class="panel-body">
-                                                    <pre class="max-height">array(1) {
-  [0] =&gt;
-  int(5)
-}
-</pre>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>                    </div>
-        </div>
-    </div></div>                            <div class="panel panel-default">
-    <div class="panel-heading">
-
-
-        (...)/bin/scripts/testStackTrace.php:47
-
-
-        <strong>TestClass::create()</strong>
-    </div>
-
-
-    <div class="panel-body">
-        <div class="padding-menu">
-            <ul class="nav nav-tabs" data-tabs="tabs-step-6">
-                <li class="active">
-                    <a href="#source-step-6" data-toggle="tab">Source</a>
-                </li>
-                <li class="">
-                    <a href="#colorized-key-step-6" data-toggle="tab">Arguments</a>
-                </li>
-            </ul>
-        </div>
-        <div>
-            <div class="tab-content">
-                <div class="tab-pane fade active in" id="source-step-6">
-                    <div class="code-box max-height ">
-
-                        <span class="">37                exit;</span>
-
-                        <span class="">38            }</span>
-
-                        <span class="">39    </span>
-
-                        <span class="">40            $view = new \Awesomite\ErrorDumper\Views\ViewHtml();</span>
-
-                        <span class="">41            $view-&gt;display($clone);</span>
-
-                        <span class="">42        }</span>
-
-                        <span class="">43    }</span>
-
-                        <span class="">44    </span>
-
-                        <span class="">45    </span>
-
-                        <span class="">46    ob_start();</span>
-
-                        <span class="error-line">47    TestClass::create(5);</span>
-
-                        <span class="">48    $result = ob_get_contents();</span>
-
-                        <span class="">49    ob_end_clean();</span>
-
-                        <span class="">50    </span>
-
-                        <span class="">51    return $result;</span>
-                    </div>
-                </div>                            <div class="tab-pane fade " id="colorized-key-step-6">
-                <div class="panel-group">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <a
-                                    data-toggle="collapse"
-                                    data-target="#parameters-step-6-0"
-                                    class="var-header "
-                            >
-                                unknown0
-                            </a>
-                        </div>
-                        <div
-                                id="parameters-step-6-0"
-                                class="panel-collapse collapse in"
-                        >
-                            <div class="panel-body">
-                                                    <pre class="max-height">int(5)
-</pre>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>                    </div>
-        </div>
-    </div></div>                            <div class="panel panel-default">
-    <div class="panel-heading">
-
-
-        (...)/bin/errordumper_webserver_root/index.php:26
-
-
-        <strong>require()</strong>
-    </div>
-
-
-    <div class="panel-body">
-        <div class="padding-menu">
-            <ul class="nav nav-tabs" data-tabs="tabs-step-7">
-                <li class="active">
-                    <a href="#source-step-7" data-toggle="tab">Source</a>
-                </li>
-                <li class="">
-                    <a href="#colorized-key-step-7" data-toggle="tab">Arguments</a>
-                </li>
-            </ul>
-        </div>
-        <div>
-            <div class="tab-content">
-                <div class="tab-pane fade active in" id="source-step-7">
-                    <div class="code-box max-height ">
-
-                        <span class="">19    ));</span>
-
-                        <span class="">20    $app-&gt;register(new Silex\Provider\UrlGeneratorServiceProvider());</span>
-
-                        <span class="">21    $app[&#039;debug&#039;] = true;</span>
-
-                        <span class="">22    </span>
-
-                        <span class="">23    $app</span>
-
-                        <span class="">24        -&gt;get(&#039;/{page}&#039;, function ($page) use ($app, $pages) {</span>
-
-                        <span class="">25            if (in_array($page, array_keys($pages))) {</span>
-
-                        <span class="error-line">26                return require implode(DIRECTORY_SEPARATOR, array(__DIR__, &#039;..&#039;, &#039;scripts&#039;, $page . &#039;.php&#039;));</span>
-
-                        <span class="">27            }</span>
-
-                        <span class="">28    </span>
-
-                        <span class="">29            return $app[&#039;twig&#039;]-&gt;render(&#039;index.twig&#039;, array(</span>
-
-                        <span class="">30                &#039;pages&#039; =&gt; $pages</span>
-
-                        <span class="">31            ));</span>
-
-                        <span class="">32        })</span>
-
-                        <span class="">33        -&gt;bind(&#039;homepage&#039;)</span>
-                    </div>
-                </div>                            <div class="tab-pane fade " id="colorized-key-step-7">
-                <div class="panel-group">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <a
-                                    data-toggle="collapse"
-                                    data-target="#parameters-step-7-0"
-                                    class="var-header "
-                            >
-                                unknown0
-                            </a>
-                        </div>
-                        <div
-                                id="parameters-step-7-0"
-                                class="panel-collapse collapse in"
-                        >
-                            <div class="panel-body">
-                                                    <pre class="max-height">string(74) &#039;(...)/error-dumper/bin/scripts/testStackTrace.php&#039;
+                                                    <pre class="max-height">“(...)/error-dumper/bin/scripts/testStackTrace.php”
 </pre>
                             </div>
                         </div>
@@ -801,37 +597,37 @@
 
     <div class="panel-body">
         <div class="padding-menu">
-            <ul class="nav nav-tabs" data-tabs="tabs-step-8">
+            <ul class="nav nav-tabs" data-tabs="tabs-step-6">
                 <li class="">
-                    <a href="#source-step-8" data-toggle="tab">Source</a>
+                    <a href="#source-step-6" data-toggle="tab">Source</a>
                 </li>
                 <li class="active">
-                    <a href="#colorized-key-step-8" data-toggle="tab">Arguments</a>
+                    <a href="#colorized-key-step-6" data-toggle="tab">Arguments</a>
                 </li>
             </ul>
         </div>
         <div>
             <div class="tab-content">
-                <div class="tab-pane fade " id="source-step-8">
+                <div class="tab-pane fade " id="source-step-6">
                     <p class="code-box max-height">Source code does not exist for this step.</p>
-                </div>                            <div class="tab-pane fade active in" id="colorized-key-step-8">
+                </div>                            <div class="tab-pane fade active in" id="colorized-key-step-6">
                 <div class="panel-group">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <a
                                     data-toggle="collapse"
-                                    data-target="#parameters-step-8-0"
+                                    data-target="#parameters-step-6-0"
                                     class="var-header "
                             >
                                 unknown0
                             </a>
                         </div>
                         <div
-                                id="parameters-step-8-0"
+                                id="parameters-step-6-0"
                                 class="panel-collapse collapse in"
                         >
                             <div class="panel-body">
-                                                    <pre class="max-height">string(14) &#039;testStackTrace&#039;
+                                                    <pre class="max-height">“testStackTrace”
 </pre>
                             </div>
                         </div>
@@ -852,18 +648,18 @@
 
     <div class="panel-body">
         <div class="padding-menu">
-            <ul class="nav nav-tabs" data-tabs="tabs-step-9">
+            <ul class="nav nav-tabs" data-tabs="tabs-step-7">
                 <li class="active">
-                    <a href="#source-step-9" data-toggle="tab">Source</a>
+                    <a href="#source-step-7" data-toggle="tab">Source</a>
                 </li>
                 <li class="">
-                    <a href="#colorized-key-step-9" data-toggle="tab">Arguments</a>
+                    <a href="#colorized-key-step-7" data-toggle="tab">Arguments</a>
                 </li>
             </ul>
         </div>
         <div>
             <div class="tab-content">
-                <div class="tab-pane fade active in" id="source-step-9">
+                <div class="tab-pane fade active in" id="source-step-7">
                     <div class="code-box max-height ">
 
                         <span class="">137            $this-&gt;dispatcher-&gt;dispatch(KernelEvents::CONTROLLER, $event);</span>
@@ -896,7 +692,7 @@
 
                         <span class="">151                if ($event-&gt;hasResponse()) {</span>
                     </div>
-                </div>                            <div class="tab-pane fade " id="colorized-key-step-9">
+                </div>                            <div class="tab-pane fade " id="colorized-key-step-7">
                 <div class="panel-group">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -904,18 +700,22 @@
 
                             <a
                                     data-toggle="collapse"
-                                    data-target="#parameters-step-9-0"
+                                    data-target="#parameters-step-7-0"
                                     class="var-header "
                             >
                                 $function_name
                             </a>
                         </div>
                         <div
-                                id="parameters-step-9-0"
+                                id="parameters-step-7-0"
                                 class="panel-collapse collapse in"
                         >
                             <div class="panel-body">
-                                                    <pre class="max-height">object(Closure) (0) {
+                                                    <pre class="max-height">object(Closure) #2 (4) {
+    $name =&gt;      “{closure}”
+    $filename =&gt;  “(...)/error-dumper/bin/errordumper_webserver_root/index.php”
+    $startLine =&gt; 29
+    $endLine =&gt;   45
 }
 </pre>
                             </div>
@@ -927,20 +727,19 @@
 
                             <a
                                     data-toggle="collapse"
-                                    data-target="#parameters-step-9-1"
+                                    data-target="#parameters-step-7-1"
                                     class="var-header "
                             >
                                 $parameters
                             </a>
                         </div>
                         <div
-                                id="parameters-step-9-1"
+                                id="parameters-step-7-1"
                                 class="panel-collapse collapse in"
                         >
                             <div class="panel-body">
                                                     <pre class="max-height">array(1) {
-  [0] =&gt;
-  string(14) &#039;testStackTrace&#039;
+    [0] =&gt; “testStackTrace”
 }
 </pre>
                             </div>
@@ -962,18 +761,18 @@
 
     <div class="panel-body">
         <div class="padding-menu">
-            <ul class="nav nav-tabs" data-tabs="tabs-step-10">
+            <ul class="nav nav-tabs" data-tabs="tabs-step-8">
                 <li class="active">
-                    <a href="#source-step-10" data-toggle="tab">Source</a>
+                    <a href="#source-step-8" data-toggle="tab">Source</a>
                 </li>
                 <li class="">
-                    <a href="#colorized-key-step-10" data-toggle="tab">Arguments</a>
+                    <a href="#colorized-key-step-8" data-toggle="tab">Arguments</a>
                 </li>
             </ul>
         </div>
         <div>
             <div class="tab-content">
-                <div class="tab-pane fade active in" id="source-step-10">
+                <div class="tab-pane fade active in" id="source-step-8">
                     <div class="code-box max-height ">
 
                         <span class="">57         * {@inheritdoc}</span>
@@ -1006,7 +805,7 @@
 
                         <span class="">71    </span>
                     </div>
-                </div>                            <div class="tab-pane fade " id="colorized-key-step-10">
+                </div>                            <div class="tab-pane fade " id="colorized-key-step-8">
                 <div class="panel-group">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -1014,222 +813,163 @@
 
                             <a
                                     data-toggle="collapse"
-                                    data-target="#parameters-step-10-0"
+                                    data-target="#parameters-step-8-0"
                                     class="var-header "
                             >
                                 Symfony\Component\HttpFoundation\Request: $request
                             </a>
                         </div>
                         <div
-                                id="parameters-step-10-0"
+                                id="parameters-step-8-0"
                                 class="panel-collapse collapse in"
                         >
                             <div class="panel-body">
-                                                    <pre class="max-height">object(Symfony\Component\HttpFoundation\Request) (28) {
-  static protected $trustedProxies =&gt;
-  array(0) {
-  }
-  static protected $trustedHostPatterns =&gt;
-  array(0) {
-  }
-  static protected $trustedHosts =&gt;
-  array(0) {
-  }
-  static protected $trustedHeaders =&gt;
-  array(5) {
-    [forwarded] =&gt;
-    string(9) &#039;FORWARDED&#039;
-    [client_ip] =&gt;
-    string(15) &#039;X_FORWARDED_FOR&#039;
-    [client_host] =&gt;
-    string(16) &#039;X_FORWARDED_HOST&#039;
-    [client_proto] =&gt;
-    string(17) &#039;X_FORWARDED_PROTO&#039;
-    [client_port] =&gt;
-    string(16) &#039;X_FORWARDED_PORT&#039;
-  }
-  static protected $httpMethodParameterOverride =&gt;
-  bool(false)
-  public $attributes =&gt;
-  object(Symfony\Component\HttpFoundation\ParameterBag) (1) {
-    protected $parameters =&gt;
-    array(4) {
-      [_controller] =&gt;
-      object(Closure) (0) {
-      }
-      [page] =&gt;
-      string(14) &#039;testStackTrace&#039;
-      [_route] =&gt;
-      string(8) &#039;homepage&#039;
-      [_route_params] =&gt;
-      array(1) {
-        [page] =&gt;
-        string(14) &#039;testStackTrace&#039;
-      }
-    }
-  }
-  public $request =&gt;
-  object(Symfony\Component\HttpFoundation\ParameterBag) (1) {
-    protected $parameters =&gt;
-    array(0) {
-    }
-  }
-  public $query =&gt;
-  object(Symfony\Component\HttpFoundation\ParameterBag) (1) {
-    protected $parameters =&gt;
-    array(0) {
-    }
-  }
-  public $server =&gt;
-  object(Symfony\Component\HttpFoundation\ServerBag) (1) {
-    protected $parameters @Symfony\Component\HttpFoundation\ParameterBag =&gt;
-    array(24) {
-      [DOCUMENT_ROOT] =&gt;
-      string(74) &#039;(...)/error-dumper/bin/errordumper_webserver_root&#039;
-      [REMOTE_ADDR] =&gt;
-      string(3) &#039;::1&#039;
-      [REMOTE_PORT] =&gt;
-      string(5) &#039;50229&#039;
-      [SERVER_SOFTWARE] =&gt;
-      string(28) &#039;PHP 5.6.4 Development Server&#039;
-      [SERVER_PROTOCOL] =&gt;
-      string(8) &#039;HTTP/1.1&#039;
-      [SERVER_NAME] =&gt;
-      string(9) &#039;localhost&#039;
-      [SERVER_PORT] =&gt;
-      string(4) &#039;8001&#039;
-      [REQUEST_URI] =&gt;
-      string(15) &#039;/testStackTrace&#039;
-      [REQUEST_METHOD] =&gt;
-      string(3) &#039;GET&#039;
-      [SCRIPT_NAME] =&gt;
-      string(10) &#039;/index.php&#039;
-      [SCRIPT_FILENAME] =&gt;
-      string(84) &#039;(...)/error-dumper/bin/errordumper_webserver_root/index.php&#039;
-      [PATH_INFO] =&gt;
-      string(15) &#039;/testStackTrace&#039;
-      [PHP_SELF] =&gt;
-      string(25) &#039;/index.php/testStackTrace&#039;
-      [HTTP_HOST] =&gt;
-      string(14) &#039;localhost:8001&#039;
-      [HTTP_CONNECTION] =&gt;
-      string(10) &#039;keep-alive&#039;
-      [HTTP_CACHE_CONTROL] =&gt;
-      string(9) &#039;max-age=0&#039;
-      [HTTP_UPGRADE_INSECURE_REQUESTS] =&gt;
-      string(1) &#039;1&#039;
-      [HTTP_USER_AGENT] =&gt;
-      string(120) &#039;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.98 Safari/537.36&#039;
-      [HTTP_ACCEPT] =&gt;
-      string(74) &#039;text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8&#039;
-      [HTTP_REFERER] =&gt;
-      string(22) &#039;http://localhost:8001/&#039;
-      (...)
-    }
-  }
-  public $files =&gt;
-  object(Symfony\Component\HttpFoundation\FileBag) (2) {
-    static private $fileKeys =&gt;
-    array(5) {
-      [0] =&gt;
-      string(5) &#039;error&#039;
-      [1] =&gt;
-      string(4) &#039;name&#039;
-      [2] =&gt;
-      string(4) &#039;size&#039;
-      [3] =&gt;
-      string(8) &#039;tmp_name&#039;
-      [4] =&gt;
-      string(4) &#039;type&#039;
-    }
-    protected $parameters @Symfony\Component\HttpFoundation\ParameterBag =&gt;
-    array(0) {
-    }
-  }
-  public $cookies =&gt;
-  object(Symfony\Component\HttpFoundation\ParameterBag) (1) {
-    protected $parameters =&gt;
-    array(0) {
-    }
-  }
-  public $headers =&gt;
-  object(Symfony\Component\HttpFoundation\HeaderBag) (2) {
-    protected $headers =&gt;
-    array(10) {
-      [host] =&gt;
-      array(1) {
-        [0] =&gt;
-        string(14) &#039;localhost:8001&#039;
-      }
-      [connection] =&gt;
-      array(1) {
-        [0] =&gt;
-        string(10) &#039;keep-alive&#039;
-      }
-      [cache-control] =&gt;
-      array(1) {
-        [0] =&gt;
-        string(9) &#039;max-age=0&#039;
-      }
-      [upgrade-insecure-requests] =&gt;
-      array(1) {
-        [0] =&gt;
-        string(1) &#039;1&#039;
-      }
-      [user-agent] =&gt;
-      array(1) {
-        [0] =&gt;
-        string(120) &#039;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.98 Safari/537.36&#039;
-      }
-      [accept] =&gt;
-      array(1) {
-        [0] =&gt;
-        string(74) &#039;text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8&#039;
-      }
-      [referer] =&gt;
-      array(1) {
-        [0] =&gt;
-        string(22) &#039;http://localhost:8001/&#039;
-      }
-      [accept-encoding] =&gt;
-      array(1) {
-        [0] =&gt;
-        string(23) &#039;gzip, deflate, sdch, br&#039;
-      }
-      [accept-language] =&gt;
-      array(1) {
-        [0] =&gt;
-        string(23) &#039;en-US,en;q=0.8,pl;q=0.6&#039;
-      }
-      [x-php-ob-level] =&gt;
-      array(1) {
-        [0] =&gt;
-        int(1)
-      }
-    }
-    protected $cacheControl =&gt;
-    array(1) {
-      [max-age] =&gt;
-      string(1) &#039;0&#039;
-    }
-  }
-  protected $content =&gt;
-  NULL
-  protected $languages =&gt;
-  NULL
-  protected $charsets =&gt;
-  NULL
-  protected $encodings =&gt;
-  NULL
-  protected $acceptableContentTypes =&gt;
-  NULL
-  protected $pathInfo =&gt;
-  string(15) &#039;/testStackTrace&#039;
-  protected $requestUri =&gt;
-  string(15) &#039;/testStackTrace&#039;
-  protected $baseUrl =&gt;
-  string(0) &#039;&#039;
-  (...)
+                                                    <pre class="max-height">object(Symfony\Component\HttpFoundation\Request) #3 (28) {
+    protected static $trustedProxies =&gt;      array(0) {}
+    protected static $trustedHostPatterns =&gt; array(0) {}
+    protected static $trustedHosts =&gt;        array(0) {}
+    protected static $trustedHeaders =&gt;
+        array(5) {
+            [forwarded] =&gt;    “FORWARDED”
+            [client_ip] =&gt;    “X_FORWARDED_FOR”
+            [client_host] =&gt;  “X_FORWARDED_HOST”
+            [client_proto] =&gt; “X_FORWARDED_PROTO”
+            [client_port] =&gt;  “X_FORWARDED_PORT”
+        }
+    protected static $httpMethodParameterOverride =&gt; false
+    public $attributes =&gt;
+        object(Symfony\Component\HttpFoundation\ParameterBag) #4 (1) {
+            protected $parameters =&gt;
+                array(4) {
+                    [_controller] =&gt;
+                        object(Closure) #2 (4) {
+                            $name =&gt;      “{closure}”
+                            $filename =&gt;  “(...)/error-dumper/bin/errordumper_webserver_root/index.php”
+                            $startLine =&gt; 29
+                            $endLine =&gt;   45
+                        }
+                    [page] =&gt;   “testStackTrace”
+                    [_route] =&gt; “homepage”
+                    [_route_params] =&gt;
+                        array(1) {
+                            [page] =&gt; “testStackTrace”
+                        }
+                }
+        }
+    public $request =&gt;
+        object(Symfony\Component\HttpFoundation\ParameterBag) #5 (1) {
+            protected $parameters =&gt; array(0) {}
+        }
+    public $query =&gt;
+        object(Symfony\Component\HttpFoundation\ParameterBag) #6 (1) {
+            protected $parameters =&gt; array(0) {}
+        }
+    public $server =&gt;
+        object(Symfony\Component\HttpFoundation\ServerBag) #7 (1) {
+            protected $parameters =&gt;
+                array(25) {
+                    [DOCUMENT_ROOT] =&gt;                  “(...)/error-dumper/bin/errordumper_webserver_root”
+                    [REMOTE_ADDR] =&gt;                    “::1”
+                    [REMOTE_PORT] =&gt;                    “60827”
+                    [SERVER_SOFTWARE] =&gt;                “PHP 7.1.7 Development Server”
+                    [SERVER_PROTOCOL] =&gt;                “HTTP/1.1”
+                    [SERVER_NAME] =&gt;                    “localhost”
+                    [SERVER_PORT] =&gt;                    “8001”
+                    [REQUEST_URI] =&gt;                    “/testStackTrace”
+                    [REQUEST_METHOD] =&gt;                 “GET”
+                    [SCRIPT_NAME] =&gt;                    “/index.php”
+                    [SCRIPT_FILENAME] =&gt;                “(...)/error-dumper/bin/errordumper_webserver_root/index.php”
+                    [PATH_INFO] =&gt;                      “/testStackTrace”
+                    [PHP_SELF] =&gt;                       “/index.php/testStackTrace”
+                    [HTTP_HOST] =&gt;                      “localhost:8001”
+                    [HTTP_CONNECTION] =&gt;                “keep-alive”
+                    [HTTP_PRAGMA] =&gt;                    “no-cache”
+                    [HTTP_CACHE_CONTROL] =&gt;             “no-cache”
+                    [HTTP_UPGRADE_INSECURE_REQUESTS] =&gt; “1”
+                    [HTTP_USER_AGENT] =&gt;                “Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.101 Safari/537.36”
+                    [HTTP_ACCEPT] =&gt;                    “text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8”
+                    (...)
+                }
+        }
+    public $files =&gt;
+        object(Symfony\Component\HttpFoundation\FileBag) #8 (2) {
+            private static $fileKeys =&gt;
+                array(5) {
+                    [0] =&gt; “error”
+                    [1] =&gt; “name”
+                    [2] =&gt; “size”
+                    [3] =&gt; “tmp_name”
+                    [4] =&gt; “type”
+                }
+            protected $parameters =&gt; array(0) {}
+        }
+    public $cookies =&gt;
+        object(Symfony\Component\HttpFoundation\ParameterBag) #9 (1) {
+            protected $parameters =&gt; array(0) {}
+        }
+    public $headers =&gt;
+        object(Symfony\Component\HttpFoundation\HeaderBag) #10 (2) {
+            protected $headers =&gt;
+                array(11) {
+                    [host] =&gt;
+                        array(1) {
+                            [0] =&gt; “localhost:8001”
+                        }
+                    [connection] =&gt;
+                        array(1) {
+                            [0] =&gt; “keep-alive”
+                        }
+                    [pragma] =&gt;
+                        array(1) {
+                            [0] =&gt; “no-cache”
+                        }
+                    [cache-control] =&gt;
+                        array(1) {
+                            [0] =&gt; “no-cache”
+                        }
+                    [upgrade-insecure-requests] =&gt;
+                        array(1) {
+                            [0] =&gt; “1”
+                        }
+                    [user-agent] =&gt;
+                        array(1) {
+                            [0] =&gt; “Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.101 Safari/537.36”
+                        }
+                    [accept] =&gt;
+                        array(1) {
+                            [0] =&gt; “text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8”
+                        }
+                    [referer] =&gt;
+                        array(1) {
+                            [0] =&gt; “http://localhost:8001/”
+                        }
+                    [accept-encoding] =&gt;
+                        array(1) {
+                            [0] =&gt; “gzip, deflate, br”
+                        }
+                    [accept-language] =&gt;
+                        array(1) {
+                            [0] =&gt; “pl-PL,pl;q=0.8,en-US;q=0.6,en;q=0.4”
+                        }
+                    [x-php-ob-level] =&gt;
+                        array(1) {
+                            [0] =&gt; 1
+                        }
+                }
+            protected $cacheControl =&gt;
+                array(1) {
+                    [no-cache] =&gt; true
+                }
+        }
+    protected $content =&gt;                NULL
+    protected $languages =&gt;              NULL
+    protected $charsets =&gt;               NULL
+    protected $encodings =&gt;              NULL
+    protected $acceptableContentTypes =&gt; NULL
+    protected $pathInfo =&gt;               “/testStackTrace”
+    protected $requestUri =&gt;             “/testStackTrace”
+    protected $baseUrl =&gt;                “”
+    (...)
 }
 </pre>
                             </div>
@@ -1241,7 +981,7 @@
 
                             <a
                                     data-toggle="collapse"
-                                    data-target="#parameters-step-10-1"
+                                    data-target="#parameters-step-8-1"
                                     class="var-header "
                             >
                                 $type
@@ -1249,11 +989,11 @@
                             </a>
                         </div>
                         <div
-                                id="parameters-step-10-1"
+                                id="parameters-step-8-1"
                                 class="panel-collapse collapse in"
                         >
                             <div class="panel-body">
-                                                    <pre class="max-height">int(1)
+                                                    <pre class="max-height">1
 </pre>
                             </div>
                         </div>
@@ -1274,18 +1014,18 @@
 
     <div class="panel-body">
         <div class="padding-menu">
-            <ul class="nav nav-tabs" data-tabs="tabs-step-11">
+            <ul class="nav nav-tabs" data-tabs="tabs-step-9">
                 <li class="active">
-                    <a href="#source-step-11" data-toggle="tab">Source</a>
+                    <a href="#source-step-9" data-toggle="tab">Source</a>
                 </li>
                 <li class="">
-                    <a href="#colorized-key-step-11" data-toggle="tab">Arguments</a>
+                    <a href="#colorized-key-step-9" data-toggle="tab">Arguments</a>
                 </li>
             </ul>
         </div>
         <div>
             <div class="tab-content">
-                <div class="tab-pane fade active in" id="source-step-11">
+                <div class="tab-pane fade active in" id="source-step-9">
                     <div class="code-box max-height ">
 
                         <span class="">579    </span>
@@ -1318,7 +1058,7 @@
 
                         <span class="">593        /**</span>
                     </div>
-                </div>                            <div class="tab-pane fade " id="colorized-key-step-11">
+                </div>                            <div class="tab-pane fade " id="colorized-key-step-9">
                 <div class="panel-group">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -1326,222 +1066,163 @@
 
                             <a
                                     data-toggle="collapse"
-                                    data-target="#parameters-step-11-0"
+                                    data-target="#parameters-step-9-0"
                                     class="var-header "
                             >
                                 Symfony\Component\HttpFoundation\Request: $request
                             </a>
                         </div>
                         <div
-                                id="parameters-step-11-0"
+                                id="parameters-step-9-0"
                                 class="panel-collapse collapse in"
                         >
                             <div class="panel-body">
-                                                    <pre class="max-height">object(Symfony\Component\HttpFoundation\Request) (28) {
-  static protected $trustedProxies =&gt;
-  array(0) {
-  }
-  static protected $trustedHostPatterns =&gt;
-  array(0) {
-  }
-  static protected $trustedHosts =&gt;
-  array(0) {
-  }
-  static protected $trustedHeaders =&gt;
-  array(5) {
-    [forwarded] =&gt;
-    string(9) &#039;FORWARDED&#039;
-    [client_ip] =&gt;
-    string(15) &#039;X_FORWARDED_FOR&#039;
-    [client_host] =&gt;
-    string(16) &#039;X_FORWARDED_HOST&#039;
-    [client_proto] =&gt;
-    string(17) &#039;X_FORWARDED_PROTO&#039;
-    [client_port] =&gt;
-    string(16) &#039;X_FORWARDED_PORT&#039;
-  }
-  static protected $httpMethodParameterOverride =&gt;
-  bool(false)
-  public $attributes =&gt;
-  object(Symfony\Component\HttpFoundation\ParameterBag) (1) {
-    protected $parameters =&gt;
-    array(4) {
-      [_controller] =&gt;
-      object(Closure) (0) {
-      }
-      [page] =&gt;
-      string(14) &#039;testStackTrace&#039;
-      [_route] =&gt;
-      string(8) &#039;homepage&#039;
-      [_route_params] =&gt;
-      array(1) {
-        [page] =&gt;
-        string(14) &#039;testStackTrace&#039;
-      }
-    }
-  }
-  public $request =&gt;
-  object(Symfony\Component\HttpFoundation\ParameterBag) (1) {
-    protected $parameters =&gt;
-    array(0) {
-    }
-  }
-  public $query =&gt;
-  object(Symfony\Component\HttpFoundation\ParameterBag) (1) {
-    protected $parameters =&gt;
-    array(0) {
-    }
-  }
-  public $server =&gt;
-  object(Symfony\Component\HttpFoundation\ServerBag) (1) {
-    protected $parameters @Symfony\Component\HttpFoundation\ParameterBag =&gt;
-    array(24) {
-      [DOCUMENT_ROOT] =&gt;
-      string(74) &#039;(...)/error-dumper/bin/errordumper_webserver_root&#039;
-      [REMOTE_ADDR] =&gt;
-      string(3) &#039;::1&#039;
-      [REMOTE_PORT] =&gt;
-      string(5) &#039;50229&#039;
-      [SERVER_SOFTWARE] =&gt;
-      string(28) &#039;PHP 5.6.4 Development Server&#039;
-      [SERVER_PROTOCOL] =&gt;
-      string(8) &#039;HTTP/1.1&#039;
-      [SERVER_NAME] =&gt;
-      string(9) &#039;localhost&#039;
-      [SERVER_PORT] =&gt;
-      string(4) &#039;8001&#039;
-      [REQUEST_URI] =&gt;
-      string(15) &#039;/testStackTrace&#039;
-      [REQUEST_METHOD] =&gt;
-      string(3) &#039;GET&#039;
-      [SCRIPT_NAME] =&gt;
-      string(10) &#039;/index.php&#039;
-      [SCRIPT_FILENAME] =&gt;
-      string(84) &#039;(...)/error-dumper/bin/errordumper_webserver_root/index.php&#039;
-      [PATH_INFO] =&gt;
-      string(15) &#039;/testStackTrace&#039;
-      [PHP_SELF] =&gt;
-      string(25) &#039;/index.php/testStackTrace&#039;
-      [HTTP_HOST] =&gt;
-      string(14) &#039;localhost:8001&#039;
-      [HTTP_CONNECTION] =&gt;
-      string(10) &#039;keep-alive&#039;
-      [HTTP_CACHE_CONTROL] =&gt;
-      string(9) &#039;max-age=0&#039;
-      [HTTP_UPGRADE_INSECURE_REQUESTS] =&gt;
-      string(1) &#039;1&#039;
-      [HTTP_USER_AGENT] =&gt;
-      string(120) &#039;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.98 Safari/537.36&#039;
-      [HTTP_ACCEPT] =&gt;
-      string(74) &#039;text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8&#039;
-      [HTTP_REFERER] =&gt;
-      string(22) &#039;http://localhost:8001/&#039;
-      (...)
-    }
-  }
-  public $files =&gt;
-  object(Symfony\Component\HttpFoundation\FileBag) (2) {
-    static private $fileKeys =&gt;
-    array(5) {
-      [0] =&gt;
-      string(5) &#039;error&#039;
-      [1] =&gt;
-      string(4) &#039;name&#039;
-      [2] =&gt;
-      string(4) &#039;size&#039;
-      [3] =&gt;
-      string(8) &#039;tmp_name&#039;
-      [4] =&gt;
-      string(4) &#039;type&#039;
-    }
-    protected $parameters @Symfony\Component\HttpFoundation\ParameterBag =&gt;
-    array(0) {
-    }
-  }
-  public $cookies =&gt;
-  object(Symfony\Component\HttpFoundation\ParameterBag) (1) {
-    protected $parameters =&gt;
-    array(0) {
-    }
-  }
-  public $headers =&gt;
-  object(Symfony\Component\HttpFoundation\HeaderBag) (2) {
-    protected $headers =&gt;
-    array(10) {
-      [host] =&gt;
-      array(1) {
-        [0] =&gt;
-        string(14) &#039;localhost:8001&#039;
-      }
-      [connection] =&gt;
-      array(1) {
-        [0] =&gt;
-        string(10) &#039;keep-alive&#039;
-      }
-      [cache-control] =&gt;
-      array(1) {
-        [0] =&gt;
-        string(9) &#039;max-age=0&#039;
-      }
-      [upgrade-insecure-requests] =&gt;
-      array(1) {
-        [0] =&gt;
-        string(1) &#039;1&#039;
-      }
-      [user-agent] =&gt;
-      array(1) {
-        [0] =&gt;
-        string(120) &#039;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.98 Safari/537.36&#039;
-      }
-      [accept] =&gt;
-      array(1) {
-        [0] =&gt;
-        string(74) &#039;text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8&#039;
-      }
-      [referer] =&gt;
-      array(1) {
-        [0] =&gt;
-        string(22) &#039;http://localhost:8001/&#039;
-      }
-      [accept-encoding] =&gt;
-      array(1) {
-        [0] =&gt;
-        string(23) &#039;gzip, deflate, sdch, br&#039;
-      }
-      [accept-language] =&gt;
-      array(1) {
-        [0] =&gt;
-        string(23) &#039;en-US,en;q=0.8,pl;q=0.6&#039;
-      }
-      [x-php-ob-level] =&gt;
-      array(1) {
-        [0] =&gt;
-        int(1)
-      }
-    }
-    protected $cacheControl =&gt;
-    array(1) {
-      [max-age] =&gt;
-      string(1) &#039;0&#039;
-    }
-  }
-  protected $content =&gt;
-  NULL
-  protected $languages =&gt;
-  NULL
-  protected $charsets =&gt;
-  NULL
-  protected $encodings =&gt;
-  NULL
-  protected $acceptableContentTypes =&gt;
-  NULL
-  protected $pathInfo =&gt;
-  string(15) &#039;/testStackTrace&#039;
-  protected $requestUri =&gt;
-  string(15) &#039;/testStackTrace&#039;
-  protected $baseUrl =&gt;
-  string(0) &#039;&#039;
-  (...)
+                                                    <pre class="max-height">object(Symfony\Component\HttpFoundation\Request) #3 (28) {
+    protected static $trustedProxies =&gt;      array(0) {}
+    protected static $trustedHostPatterns =&gt; array(0) {}
+    protected static $trustedHosts =&gt;        array(0) {}
+    protected static $trustedHeaders =&gt;
+        array(5) {
+            [forwarded] =&gt;    “FORWARDED”
+            [client_ip] =&gt;    “X_FORWARDED_FOR”
+            [client_host] =&gt;  “X_FORWARDED_HOST”
+            [client_proto] =&gt; “X_FORWARDED_PROTO”
+            [client_port] =&gt;  “X_FORWARDED_PORT”
+        }
+    protected static $httpMethodParameterOverride =&gt; false
+    public $attributes =&gt;
+        object(Symfony\Component\HttpFoundation\ParameterBag) #4 (1) {
+            protected $parameters =&gt;
+                array(4) {
+                    [_controller] =&gt;
+                        object(Closure) #2 (4) {
+                            $name =&gt;      “{closure}”
+                            $filename =&gt;  “(...)/error-dumper/bin/errordumper_webserver_root/index.php”
+                            $startLine =&gt; 29
+                            $endLine =&gt;   45
+                        }
+                    [page] =&gt;   “testStackTrace”
+                    [_route] =&gt; “homepage”
+                    [_route_params] =&gt;
+                        array(1) {
+                            [page] =&gt; “testStackTrace”
+                        }
+                }
+        }
+    public $request =&gt;
+        object(Symfony\Component\HttpFoundation\ParameterBag) #5 (1) {
+            protected $parameters =&gt; array(0) {}
+        }
+    public $query =&gt;
+        object(Symfony\Component\HttpFoundation\ParameterBag) #6 (1) {
+            protected $parameters =&gt; array(0) {}
+        }
+    public $server =&gt;
+        object(Symfony\Component\HttpFoundation\ServerBag) #7 (1) {
+            protected $parameters =&gt;
+                array(25) {
+                    [DOCUMENT_ROOT] =&gt;                  “(...)/error-dumper/bin/errordumper_webserver_root”
+                    [REMOTE_ADDR] =&gt;                    “::1”
+                    [REMOTE_PORT] =&gt;                    “60827”
+                    [SERVER_SOFTWARE] =&gt;                “PHP 7.1.7 Development Server”
+                    [SERVER_PROTOCOL] =&gt;                “HTTP/1.1”
+                    [SERVER_NAME] =&gt;                    “localhost”
+                    [SERVER_PORT] =&gt;                    “8001”
+                    [REQUEST_URI] =&gt;                    “/testStackTrace”
+                    [REQUEST_METHOD] =&gt;                 “GET”
+                    [SCRIPT_NAME] =&gt;                    “/index.php”
+                    [SCRIPT_FILENAME] =&gt;                “(...)/error-dumper/bin/errordumper_webserver_root/index.php”
+                    [PATH_INFO] =&gt;                      “/testStackTrace”
+                    [PHP_SELF] =&gt;                       “/index.php/testStackTrace”
+                    [HTTP_HOST] =&gt;                      “localhost:8001”
+                    [HTTP_CONNECTION] =&gt;                “keep-alive”
+                    [HTTP_PRAGMA] =&gt;                    “no-cache”
+                    [HTTP_CACHE_CONTROL] =&gt;             “no-cache”
+                    [HTTP_UPGRADE_INSECURE_REQUESTS] =&gt; “1”
+                    [HTTP_USER_AGENT] =&gt;                “Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.101 Safari/537.36”
+                    [HTTP_ACCEPT] =&gt;                    “text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8”
+                    (...)
+                }
+        }
+    public $files =&gt;
+        object(Symfony\Component\HttpFoundation\FileBag) #8 (2) {
+            private static $fileKeys =&gt;
+                array(5) {
+                    [0] =&gt; “error”
+                    [1] =&gt; “name”
+                    [2] =&gt; “size”
+                    [3] =&gt; “tmp_name”
+                    [4] =&gt; “type”
+                }
+            protected $parameters =&gt; array(0) {}
+        }
+    public $cookies =&gt;
+        object(Symfony\Component\HttpFoundation\ParameterBag) #9 (1) {
+            protected $parameters =&gt; array(0) {}
+        }
+    public $headers =&gt;
+        object(Symfony\Component\HttpFoundation\HeaderBag) #10 (2) {
+            protected $headers =&gt;
+                array(11) {
+                    [host] =&gt;
+                        array(1) {
+                            [0] =&gt; “localhost:8001”
+                        }
+                    [connection] =&gt;
+                        array(1) {
+                            [0] =&gt; “keep-alive”
+                        }
+                    [pragma] =&gt;
+                        array(1) {
+                            [0] =&gt; “no-cache”
+                        }
+                    [cache-control] =&gt;
+                        array(1) {
+                            [0] =&gt; “no-cache”
+                        }
+                    [upgrade-insecure-requests] =&gt;
+                        array(1) {
+                            [0] =&gt; “1”
+                        }
+                    [user-agent] =&gt;
+                        array(1) {
+                            [0] =&gt; “Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.101 Safari/537.36”
+                        }
+                    [accept] =&gt;
+                        array(1) {
+                            [0] =&gt; “text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8”
+                        }
+                    [referer] =&gt;
+                        array(1) {
+                            [0] =&gt; “http://localhost:8001/”
+                        }
+                    [accept-encoding] =&gt;
+                        array(1) {
+                            [0] =&gt; “gzip, deflate, br”
+                        }
+                    [accept-language] =&gt;
+                        array(1) {
+                            [0] =&gt; “pl-PL,pl;q=0.8,en-US;q=0.6,en;q=0.4”
+                        }
+                    [x-php-ob-level] =&gt;
+                        array(1) {
+                            [0] =&gt; 1
+                        }
+                }
+            protected $cacheControl =&gt;
+                array(1) {
+                    [no-cache] =&gt; true
+                }
+        }
+    protected $content =&gt;                NULL
+    protected $languages =&gt;              NULL
+    protected $charsets =&gt;               NULL
+    protected $encodings =&gt;              NULL
+    protected $acceptableContentTypes =&gt; NULL
+    protected $pathInfo =&gt;               “/testStackTrace”
+    protected $requestUri =&gt;             “/testStackTrace”
+    protected $baseUrl =&gt;                “”
+    (...)
 }
 </pre>
                             </div>
@@ -1553,7 +1234,7 @@
 
                             <a
                                     data-toggle="collapse"
-                                    data-target="#parameters-step-11-1"
+                                    data-target="#parameters-step-9-1"
                                     class="var-header "
                             >
                                 $type
@@ -1561,11 +1242,11 @@
                             </a>
                         </div>
                         <div
-                                id="parameters-step-11-1"
+                                id="parameters-step-9-1"
                                 class="panel-collapse collapse in"
                         >
                             <div class="panel-body">
-                                                    <pre class="max-height">int(1)
+                                                    <pre class="max-height">1
 </pre>
                             </div>
                         </div>
@@ -1576,7 +1257,7 @@
 
                             <a
                                     data-toggle="collapse"
-                                    data-target="#parameters-step-11-2"
+                                    data-target="#parameters-step-9-2"
                                     class="var-header "
                             >
                                 $catch
@@ -1584,11 +1265,11 @@
                             </a>
                         </div>
                         <div
-                                id="parameters-step-11-2"
+                                id="parameters-step-9-2"
                                 class="panel-collapse collapse in"
                         >
                             <div class="panel-body">
-                                                    <pre class="max-height">bool(true)
+                                                    <pre class="max-height">true
 </pre>
                             </div>
                         </div>
@@ -1609,18 +1290,18 @@
 
     <div class="panel-body">
         <div class="padding-menu">
-            <ul class="nav nav-tabs" data-tabs="tabs-step-12">
+            <ul class="nav nav-tabs" data-tabs="tabs-step-10">
                 <li class="active">
-                    <a href="#source-step-12" data-toggle="tab">Source</a>
+                    <a href="#source-step-10" data-toggle="tab">Source</a>
                 </li>
                 <li class="">
-                    <a href="#colorized-key-step-12" data-toggle="tab">Arguments</a>
+                    <a href="#colorized-key-step-10" data-toggle="tab">Arguments</a>
                 </li>
             </ul>
         </div>
         <div>
             <div class="tab-content">
-                <div class="tab-pane fade active in" id="source-step-12">
+                <div class="tab-pane fade active in" id="source-step-10">
                     <div class="code-box max-height ">
 
                         <span class="">556         */</span>
@@ -1653,7 +1334,7 @@
 
                         <span class="">570         *</span>
                     </div>
-                </div>                            <div class="tab-pane fade " id="colorized-key-step-12">
+                </div>                            <div class="tab-pane fade " id="colorized-key-step-10">
                 <div class="panel-group">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -1661,222 +1342,163 @@
 
                             <a
                                     data-toggle="collapse"
-                                    data-target="#parameters-step-12-0"
+                                    data-target="#parameters-step-10-0"
                                     class="var-header "
                             >
                                 Symfony\Component\HttpFoundation\Request: $request
                             </a>
                         </div>
                         <div
-                                id="parameters-step-12-0"
+                                id="parameters-step-10-0"
                                 class="panel-collapse collapse in"
                         >
                             <div class="panel-body">
-                                                    <pre class="max-height">object(Symfony\Component\HttpFoundation\Request) (28) {
-  static protected $trustedProxies =&gt;
-  array(0) {
-  }
-  static protected $trustedHostPatterns =&gt;
-  array(0) {
-  }
-  static protected $trustedHosts =&gt;
-  array(0) {
-  }
-  static protected $trustedHeaders =&gt;
-  array(5) {
-    [forwarded] =&gt;
-    string(9) &#039;FORWARDED&#039;
-    [client_ip] =&gt;
-    string(15) &#039;X_FORWARDED_FOR&#039;
-    [client_host] =&gt;
-    string(16) &#039;X_FORWARDED_HOST&#039;
-    [client_proto] =&gt;
-    string(17) &#039;X_FORWARDED_PROTO&#039;
-    [client_port] =&gt;
-    string(16) &#039;X_FORWARDED_PORT&#039;
-  }
-  static protected $httpMethodParameterOverride =&gt;
-  bool(false)
-  public $attributes =&gt;
-  object(Symfony\Component\HttpFoundation\ParameterBag) (1) {
-    protected $parameters =&gt;
-    array(4) {
-      [_controller] =&gt;
-      object(Closure) (0) {
-      }
-      [page] =&gt;
-      string(14) &#039;testStackTrace&#039;
-      [_route] =&gt;
-      string(8) &#039;homepage&#039;
-      [_route_params] =&gt;
-      array(1) {
-        [page] =&gt;
-        string(14) &#039;testStackTrace&#039;
-      }
-    }
-  }
-  public $request =&gt;
-  object(Symfony\Component\HttpFoundation\ParameterBag) (1) {
-    protected $parameters =&gt;
-    array(0) {
-    }
-  }
-  public $query =&gt;
-  object(Symfony\Component\HttpFoundation\ParameterBag) (1) {
-    protected $parameters =&gt;
-    array(0) {
-    }
-  }
-  public $server =&gt;
-  object(Symfony\Component\HttpFoundation\ServerBag) (1) {
-    protected $parameters @Symfony\Component\HttpFoundation\ParameterBag =&gt;
-    array(24) {
-      [DOCUMENT_ROOT] =&gt;
-      string(74) &#039;(...)/error-dumper/bin/errordumper_webserver_root&#039;
-      [REMOTE_ADDR] =&gt;
-      string(3) &#039;::1&#039;
-      [REMOTE_PORT] =&gt;
-      string(5) &#039;50229&#039;
-      [SERVER_SOFTWARE] =&gt;
-      string(28) &#039;PHP 5.6.4 Development Server&#039;
-      [SERVER_PROTOCOL] =&gt;
-      string(8) &#039;HTTP/1.1&#039;
-      [SERVER_NAME] =&gt;
-      string(9) &#039;localhost&#039;
-      [SERVER_PORT] =&gt;
-      string(4) &#039;8001&#039;
-      [REQUEST_URI] =&gt;
-      string(15) &#039;/testStackTrace&#039;
-      [REQUEST_METHOD] =&gt;
-      string(3) &#039;GET&#039;
-      [SCRIPT_NAME] =&gt;
-      string(10) &#039;/index.php&#039;
-      [SCRIPT_FILENAME] =&gt;
-      string(84) &#039;(...)/error-dumper/bin/errordumper_webserver_root/index.php&#039;
-      [PATH_INFO] =&gt;
-      string(15) &#039;/testStackTrace&#039;
-      [PHP_SELF] =&gt;
-      string(25) &#039;/index.php/testStackTrace&#039;
-      [HTTP_HOST] =&gt;
-      string(14) &#039;localhost:8001&#039;
-      [HTTP_CONNECTION] =&gt;
-      string(10) &#039;keep-alive&#039;
-      [HTTP_CACHE_CONTROL] =&gt;
-      string(9) &#039;max-age=0&#039;
-      [HTTP_UPGRADE_INSECURE_REQUESTS] =&gt;
-      string(1) &#039;1&#039;
-      [HTTP_USER_AGENT] =&gt;
-      string(120) &#039;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.98 Safari/537.36&#039;
-      [HTTP_ACCEPT] =&gt;
-      string(74) &#039;text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8&#039;
-      [HTTP_REFERER] =&gt;
-      string(22) &#039;http://localhost:8001/&#039;
-      (...)
-    }
-  }
-  public $files =&gt;
-  object(Symfony\Component\HttpFoundation\FileBag) (2) {
-    static private $fileKeys =&gt;
-    array(5) {
-      [0] =&gt;
-      string(5) &#039;error&#039;
-      [1] =&gt;
-      string(4) &#039;name&#039;
-      [2] =&gt;
-      string(4) &#039;size&#039;
-      [3] =&gt;
-      string(8) &#039;tmp_name&#039;
-      [4] =&gt;
-      string(4) &#039;type&#039;
-    }
-    protected $parameters @Symfony\Component\HttpFoundation\ParameterBag =&gt;
-    array(0) {
-    }
-  }
-  public $cookies =&gt;
-  object(Symfony\Component\HttpFoundation\ParameterBag) (1) {
-    protected $parameters =&gt;
-    array(0) {
-    }
-  }
-  public $headers =&gt;
-  object(Symfony\Component\HttpFoundation\HeaderBag) (2) {
-    protected $headers =&gt;
-    array(10) {
-      [host] =&gt;
-      array(1) {
-        [0] =&gt;
-        string(14) &#039;localhost:8001&#039;
-      }
-      [connection] =&gt;
-      array(1) {
-        [0] =&gt;
-        string(10) &#039;keep-alive&#039;
-      }
-      [cache-control] =&gt;
-      array(1) {
-        [0] =&gt;
-        string(9) &#039;max-age=0&#039;
-      }
-      [upgrade-insecure-requests] =&gt;
-      array(1) {
-        [0] =&gt;
-        string(1) &#039;1&#039;
-      }
-      [user-agent] =&gt;
-      array(1) {
-        [0] =&gt;
-        string(120) &#039;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.98 Safari/537.36&#039;
-      }
-      [accept] =&gt;
-      array(1) {
-        [0] =&gt;
-        string(74) &#039;text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8&#039;
-      }
-      [referer] =&gt;
-      array(1) {
-        [0] =&gt;
-        string(22) &#039;http://localhost:8001/&#039;
-      }
-      [accept-encoding] =&gt;
-      array(1) {
-        [0] =&gt;
-        string(23) &#039;gzip, deflate, sdch, br&#039;
-      }
-      [accept-language] =&gt;
-      array(1) {
-        [0] =&gt;
-        string(23) &#039;en-US,en;q=0.8,pl;q=0.6&#039;
-      }
-      [x-php-ob-level] =&gt;
-      array(1) {
-        [0] =&gt;
-        int(1)
-      }
-    }
-    protected $cacheControl =&gt;
-    array(1) {
-      [max-age] =&gt;
-      string(1) &#039;0&#039;
-    }
-  }
-  protected $content =&gt;
-  NULL
-  protected $languages =&gt;
-  NULL
-  protected $charsets =&gt;
-  NULL
-  protected $encodings =&gt;
-  NULL
-  protected $acceptableContentTypes =&gt;
-  NULL
-  protected $pathInfo =&gt;
-  string(15) &#039;/testStackTrace&#039;
-  protected $requestUri =&gt;
-  string(15) &#039;/testStackTrace&#039;
-  protected $baseUrl =&gt;
-  string(0) &#039;&#039;
-  (...)
+                                                    <pre class="max-height">object(Symfony\Component\HttpFoundation\Request) #3 (28) {
+    protected static $trustedProxies =&gt;      array(0) {}
+    protected static $trustedHostPatterns =&gt; array(0) {}
+    protected static $trustedHosts =&gt;        array(0) {}
+    protected static $trustedHeaders =&gt;
+        array(5) {
+            [forwarded] =&gt;    “FORWARDED”
+            [client_ip] =&gt;    “X_FORWARDED_FOR”
+            [client_host] =&gt;  “X_FORWARDED_HOST”
+            [client_proto] =&gt; “X_FORWARDED_PROTO”
+            [client_port] =&gt;  “X_FORWARDED_PORT”
+        }
+    protected static $httpMethodParameterOverride =&gt; false
+    public $attributes =&gt;
+        object(Symfony\Component\HttpFoundation\ParameterBag) #4 (1) {
+            protected $parameters =&gt;
+                array(4) {
+                    [_controller] =&gt;
+                        object(Closure) #2 (4) {
+                            $name =&gt;      “{closure}”
+                            $filename =&gt;  “(...)/error-dumper/bin/errordumper_webserver_root/index.php”
+                            $startLine =&gt; 29
+                            $endLine =&gt;   45
+                        }
+                    [page] =&gt;   “testStackTrace”
+                    [_route] =&gt; “homepage”
+                    [_route_params] =&gt;
+                        array(1) {
+                            [page] =&gt; “testStackTrace”
+                        }
+                }
+        }
+    public $request =&gt;
+        object(Symfony\Component\HttpFoundation\ParameterBag) #5 (1) {
+            protected $parameters =&gt; array(0) {}
+        }
+    public $query =&gt;
+        object(Symfony\Component\HttpFoundation\ParameterBag) #6 (1) {
+            protected $parameters =&gt; array(0) {}
+        }
+    public $server =&gt;
+        object(Symfony\Component\HttpFoundation\ServerBag) #7 (1) {
+            protected $parameters =&gt;
+                array(25) {
+                    [DOCUMENT_ROOT] =&gt;                  “(...)/error-dumper/bin/errordumper_webserver_root”
+                    [REMOTE_ADDR] =&gt;                    “::1”
+                    [REMOTE_PORT] =&gt;                    “60827”
+                    [SERVER_SOFTWARE] =&gt;                “PHP 7.1.7 Development Server”
+                    [SERVER_PROTOCOL] =&gt;                “HTTP/1.1”
+                    [SERVER_NAME] =&gt;                    “localhost”
+                    [SERVER_PORT] =&gt;                    “8001”
+                    [REQUEST_URI] =&gt;                    “/testStackTrace”
+                    [REQUEST_METHOD] =&gt;                 “GET”
+                    [SCRIPT_NAME] =&gt;                    “/index.php”
+                    [SCRIPT_FILENAME] =&gt;                “(...)/error-dumper/bin/errordumper_webserver_root/index.php”
+                    [PATH_INFO] =&gt;                      “/testStackTrace”
+                    [PHP_SELF] =&gt;                       “/index.php/testStackTrace”
+                    [HTTP_HOST] =&gt;                      “localhost:8001”
+                    [HTTP_CONNECTION] =&gt;                “keep-alive”
+                    [HTTP_PRAGMA] =&gt;                    “no-cache”
+                    [HTTP_CACHE_CONTROL] =&gt;             “no-cache”
+                    [HTTP_UPGRADE_INSECURE_REQUESTS] =&gt; “1”
+                    [HTTP_USER_AGENT] =&gt;                “Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.101 Safari/537.36”
+                    [HTTP_ACCEPT] =&gt;                    “text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8”
+                    (...)
+                }
+        }
+    public $files =&gt;
+        object(Symfony\Component\HttpFoundation\FileBag) #8 (2) {
+            private static $fileKeys =&gt;
+                array(5) {
+                    [0] =&gt; “error”
+                    [1] =&gt; “name”
+                    [2] =&gt; “size”
+                    [3] =&gt; “tmp_name”
+                    [4] =&gt; “type”
+                }
+            protected $parameters =&gt; array(0) {}
+        }
+    public $cookies =&gt;
+        object(Symfony\Component\HttpFoundation\ParameterBag) #9 (1) {
+            protected $parameters =&gt; array(0) {}
+        }
+    public $headers =&gt;
+        object(Symfony\Component\HttpFoundation\HeaderBag) #10 (2) {
+            protected $headers =&gt;
+                array(11) {
+                    [host] =&gt;
+                        array(1) {
+                            [0] =&gt; “localhost:8001”
+                        }
+                    [connection] =&gt;
+                        array(1) {
+                            [0] =&gt; “keep-alive”
+                        }
+                    [pragma] =&gt;
+                        array(1) {
+                            [0] =&gt; “no-cache”
+                        }
+                    [cache-control] =&gt;
+                        array(1) {
+                            [0] =&gt; “no-cache”
+                        }
+                    [upgrade-insecure-requests] =&gt;
+                        array(1) {
+                            [0] =&gt; “1”
+                        }
+                    [user-agent] =&gt;
+                        array(1) {
+                            [0] =&gt; “Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.101 Safari/537.36”
+                        }
+                    [accept] =&gt;
+                        array(1) {
+                            [0] =&gt; “text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8”
+                        }
+                    [referer] =&gt;
+                        array(1) {
+                            [0] =&gt; “http://localhost:8001/”
+                        }
+                    [accept-encoding] =&gt;
+                        array(1) {
+                            [0] =&gt; “gzip, deflate, br”
+                        }
+                    [accept-language] =&gt;
+                        array(1) {
+                            [0] =&gt; “pl-PL,pl;q=0.8,en-US;q=0.6,en;q=0.4”
+                        }
+                    [x-php-ob-level] =&gt;
+                        array(1) {
+                            [0] =&gt; 1
+                        }
+                }
+            protected $cacheControl =&gt;
+                array(1) {
+                    [no-cache] =&gt; true
+                }
+        }
+    protected $content =&gt;                NULL
+    protected $languages =&gt;              NULL
+    protected $charsets =&gt;               NULL
+    protected $encodings =&gt;              NULL
+    protected $acceptableContentTypes =&gt; NULL
+    protected $pathInfo =&gt;               “/testStackTrace”
+    protected $requestUri =&gt;             “/testStackTrace”
+    protected $baseUrl =&gt;                “”
+    (...)
 }
 </pre>
                             </div>
@@ -1888,7 +1510,7 @@
 
                             <a
                                     data-toggle="collapse"
-                                    data-target="#parameters-step-12-1"
+                                    data-target="#parameters-step-10-1"
                                     class="var-header "
                             >
                                 $type
@@ -1896,7 +1518,7 @@
                             </a>
                         </div>
                         <div
-                                id="parameters-step-12-1"
+                                id="parameters-step-10-1"
                                 class="panel-collapse collapse in"
                         >
                             <div class="panel-body">
@@ -1910,7 +1532,7 @@
 
                             <a
                                     data-toggle="collapse"
-                                    data-target="#parameters-step-12-2"
+                                    data-target="#parameters-step-10-2"
                                     class="var-header "
                             >
                                 $catch
@@ -1918,7 +1540,7 @@
                             </a>
                         </div>
                         <div
-                                id="parameters-step-12-2"
+                                id="parameters-step-10-2"
                                 class="panel-collapse collapse in"
                         >
                             <div class="panel-body">
@@ -1933,7 +1555,7 @@
     <div class="panel-heading">
 
 
-        (...)/bin/errordumper_webserver_root/index.php:37
+        (...)/bin/errordumper_webserver_root/index.php:50
 
 
         <strong>Silex\Application-&gt;run()</strong>
@@ -1942,51 +1564,51 @@
 
     <div class="panel-body">
         <div class="padding-menu">
-            <ul class="nav nav-tabs" data-tabs="tabs-step-13">
+            <ul class="nav nav-tabs" data-tabs="tabs-step-11">
                 <li class="active">
-                    <a href="#source-step-13" data-toggle="tab">Source</a>
+                    <a href="#source-step-11" data-toggle="tab">Source</a>
                 </li>
                 <li class="">
-                    <a href="#colorized-key-step-13" data-toggle="tab">Arguments</a>
+                    <a href="#colorized-key-step-11" data-toggle="tab">Arguments</a>
                 </li>
             </ul>
         </div>
         <div>
             <div class="tab-content">
-                <div class="tab-pane fade active in" id="source-step-13">
+                <div class="tab-pane fade active in" id="source-step-11">
                     <div class="code-box max-height ">
 
-                        <span class="">23    $app</span>
+                        <span class="">41    </span>
 
-                        <span class="">24        -&gt;get(&#039;/{page}&#039;, function ($page) use ($app, $pages) {</span>
+                        <span class="">42            return $app[&#039;twig&#039;]-&gt;render(&#039;index.twig&#039;, array(</span>
 
-                        <span class="">25            if (in_array($page, array_keys($pages))) {</span>
+                        <span class="">43                &#039;pages&#039; =&gt; $pages</span>
 
-                        <span class="">26                return require implode(DIRECTORY_SEPARATOR, array(__DIR__, &#039;..&#039;, &#039;scripts&#039;, $page . &#039;.php&#039;));</span>
+                        <span class="">44            ));</span>
 
-                        <span class="">27            }</span>
+                        <span class="">45        })</span>
 
-                        <span class="">28    </span>
+                        <span class="">46        -&gt;bind(&#039;homepage&#039;)</span>
 
-                        <span class="">29            return $app[&#039;twig&#039;]-&gt;render(&#039;index.twig&#039;, array(</span>
+                        <span class="">47        -&gt;value(&#039;page&#039;, &#039;index&#039;)</span>
 
-                        <span class="">30                &#039;pages&#039; =&gt; $pages</span>
+                        <span class="">48    ;</span>
 
-                        <span class="">31            ));</span>
+                        <span class="">49    </span>
 
-                        <span class="">32        })</span>
+                        <span class="error-line">50    $app-&gt;run();</span>
 
-                        <span class="">33        -&gt;bind(&#039;homepage&#039;)</span>
+                        <span class="">51    </span>
 
-                        <span class="">34        -&gt;value(&#039;page&#039;, &#039;index&#039;)</span>
+                        <span class="">52    if ($onExit) {</span>
 
-                        <span class="">35    ;</span>
+                        <span class="">53        call_user_func($onExit);</span>
 
-                        <span class="">36    </span>
+                        <span class="">54    }</span>
 
-                        <span class="error-line">37    $app-&gt;run();</span>
+                        <span class="">55    </span>
                     </div>
-                </div>                            <div class="tab-pane fade " id="colorized-key-step-13">
+                </div>                            <div class="tab-pane fade " id="colorized-key-step-11">
                 <div class="panel-group">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -1994,7 +1616,7 @@
 
                             <a
                                     data-toggle="collapse"
-                                    data-target="#parameters-step-13-0"
+                                    data-target="#parameters-step-11-0"
                                     class="var-header "
                             >
                                 Symfony\Component\HttpFoundation\Request: $request
@@ -2002,7 +1624,7 @@
                             </a>
                         </div>
                         <div
-                                id="parameters-step-13-0"
+                                id="parameters-step-11-0"
                                 class="panel-collapse collapse in"
                         >
                             <div class="panel-body">
@@ -2017,15 +1639,26 @@
     <footer>
         <p class="pull-right small">
             Generated by <a href="https://github.com/awesomite/error-dumper" target="_blank">ErrorDumper</a>
-            &bull; PHP 5.6.4
-            &bull; 6.69 MB
+            &bull; PHP 7.1.7
+            &bull; 1.88 MB
         </p>
     </footer>
 </div>
 
-<script type="text/javascript" src="&#x2F;&#x2F;code.jquery.com&#x2F;jquery-2.1.4.min.js" crossorigin="anonymous"></script>
-<script type="text/javascript" src="&#x2F;&#x2F;maxcdn.bootstrapcdn.com&#x2F;bootstrap&#x2F;3.3.5&#x2F;js&#x2F;bootstrap.min.js" crossorigin="anonymous"></script>
+<script
+        type="text/javascript"
+        src="&#x2F;&#x2F;code.jquery.com&#x2F;jquery-2.1.4.min.js"
+        integrity="sha384-R4&#x2F;ztc4ZlRqWjqIuvf6RX5yb&#x2F;v90qNGx6fS48N0tRxiGkqveZETq72KgDVJCp2TC"
+        crossorigin="anonymous"
+></script>
+<script
+        type="text/javascript"
+        src="&#x2F;&#x2F;maxcdn.bootstrapcdn.com&#x2F;bootstrap&#x2F;3.3.5&#x2F;js&#x2F;bootstrap.min.js"
+        integrity="sha384-pPttEvTHTuUJ9L2kCoMnNqCRcaMPMVMsWVO&#x2B;RLaaaYDmfSP5&#x2F;&#x2F;dP6eKRusbPcqhZ"
+        crossorigin="anonymous"
+></script>
 
 <!-- @ErrorDumper -->
+
 </body>
 </html>
