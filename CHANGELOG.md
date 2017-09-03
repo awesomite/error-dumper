@@ -15,6 +15,8 @@ Versions `0.14.*` are **incompatible** with `0.13.*`.
   * `Awesomite\ErrorDumper\Listeners\ValidatorClosure` to `Awesomite\ErrorDumper\Listeners\PreExceptionCallable`
   * `Awesomite\ErrorDumper\Listeners\ValidatorInterface` to `Awesomite\ErrorDumper\Listeners\PreExceptionInterface`
 * Function `Awesomite\ErrorDumper\ErrorDumper::createDevHandler` became static
+* Classes `Awesomite\ErrorDumper\StandardExceptions\ErrorException`
+and `Awesomite\ErrorDumper\StandardExceptions\ShutdownErrorException` are not internal anymore
 
 ## 0.13.7 (2018-09-21)
 
