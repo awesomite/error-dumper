@@ -76,7 +76,7 @@ class CallableReflection
         $first = array_shift($params);
 
         if ($class = $first->getClass()) {
-            $className = version_compare(PHP_VERSION, '7.0') >= 0 ? 'Exception' : 'Throwable';
+            $className = version_compare(PHP_VERSION, '7.0') >= 0 ? 'Throwable' : 'Exception';
             if (!$class->isInterface() && !$class->isSubclassOf($className) && ($class->getName() !== $className)) {
                 return false;
             }
