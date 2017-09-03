@@ -8,6 +8,7 @@ interface ViewInterface
 {
     /**
      * @param SerializableExceptionInterface $exception
+     *
      * @return mixed
      */
     public function display(SerializableExceptionInterface $exception);

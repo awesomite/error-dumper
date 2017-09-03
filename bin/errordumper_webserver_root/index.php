@@ -8,18 +8,18 @@ list($root) = explode(DIRECTORY_SEPARATOR . 'bin' . DIRECTORY_SEPARATOR, __DIR__
 require_once $root . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 
 $pages = array(
-    'testStackTrace' => 'Stack trace',
-    'sandbox' => 'Sandbox',
-    'sandbox2' => 'Sandbox with exception',
-    'skipChosenErrors' => 'Skip chosen errors',
+    'testStackTrace'         => 'Stack trace',
+    'sandbox'                => 'Sandbox',
+    'sandbox2'               => 'Sandbox with exception',
+    'skipChosenErrors'       => 'Skip chosen errors',
     'humanFriendlyErrorCode' => 'Human friendly error code',
-    'skipRuntimeException' => 'Skipping chosen exceptions',
-    'fatalError' => 'Fatal error',
+    'skipRuntimeException'   => 'Skipping chosen exceptions',
+    'fatalError'             => 'Fatal error',
 );
 
 $app = new Silex\Application();
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
-    'twig.path' => __DIR__.'/views',
+    'twig.path' => __DIR__ . '/views',
 ));
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
 $app['debug'] = true;
@@ -40,12 +40,11 @@ $app
         }
 
         return $app['twig']->render('index.twig', array(
-            'pages' => $pages
+            'pages' => $pages,
         ));
     })
     ->bind('homepage')
-    ->value('page', 'index')
-;
+    ->value('page', 'index');
 
 $app->run();
 

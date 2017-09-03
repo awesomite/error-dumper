@@ -47,6 +47,7 @@ class SyntaxTest extends TestBase
 
     /**
      * @param $path
+     *
      * @return \Twig_Environment
      */
     private function createTwig($path, array $filters, array $functions)
@@ -55,11 +56,13 @@ class SyntaxTest extends TestBase
         $twig = new \Twig_Environment($loader);
 
         foreach ($filters as $filter) {
-            $twig->addFilter(new \Twig_SimpleFilter($filter, function () {}));
+            $twig->addFilter(new \Twig_SimpleFilter($filter, function () {
+            }));
         }
 
         foreach ($functions as $function) {
-            $twig->addFunction(new \Twig_SimpleFunction($function, function () {}));
+            $twig->addFunction(new \Twig_SimpleFunction($function, function () {
+            }));
         }
 
         return $twig;
@@ -83,6 +86,7 @@ class SyntaxTest extends TestBase
 
     /**
      * @param string $dir
+     *
      * @return string|bool
      */
     private function preparePathToDir($dir)

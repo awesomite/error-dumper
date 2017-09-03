@@ -10,7 +10,6 @@ class Stringable
     private $callable;
 
     /**
-     * Stringable constructor.
      * @param callable $callable
      */
     public function __construct($callable)

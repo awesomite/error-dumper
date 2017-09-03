@@ -24,11 +24,10 @@ class SerializableException implements SerializableExceptionInterface
     private $previousException = null;
 
     /**
-     * ClonedException constructor.
      * @param \Exception|\Throwable $exception
-     * @param int $stepLimit
-     * @param bool $ignoreArgs
-     * @param bool $withPrevious
+     * @param int                   $stepLimit
+     * @param bool                  $ignoreArgs
+     * @param bool                  $withPrevious
      */
     public function __construct($exception, $stepLimit = 0, $ignoreArgs = false, $withPrevious = true)
     {
@@ -72,13 +71,13 @@ class SerializableException implements SerializableExceptionInterface
     public function serialize()
     {
         return serialize(array(
-            'code' => $this->code,
-            'file' => $this->file,
-            'line' => $this->line,
-            'message' => $this->message,
-            'stackTrace' => $this->stackTrace,
+            'code'          => $this->code,
+            'file'          => $this->file,
+            'line'          => $this->line,
+            'message'       => $this->message,
+            'stackTrace'    => $this->stackTrace,
             'originalClass' => $this->originalClass,
-            'previous' => $this->previousException
+            'previous'      => $this->previousException,
         ));
     }
 

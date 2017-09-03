@@ -2,10 +2,10 @@
 
 namespace Awesomite\ErrorDumper\Views;
 
-use Awesomite\ErrorDumper\Serializable\SerializableException;
-use Awesomite\ErrorDumper\Serializable\SerializableExceptionInterface;
 use Awesomite\ErrorDumper\Editors\EditorInterface;
 use Awesomite\ErrorDumper\Editors\Phpstorm;
+use Awesomite\ErrorDumper\Serializable\SerializableException;
+use Awesomite\ErrorDumper\Serializable\SerializableExceptionInterface;
 use Awesomite\ErrorDumper\TestBase;
 use Awesomite\VarDumper\LightVarDumper;
 use Symfony\Component\Filesystem\Filesystem;
@@ -35,7 +35,7 @@ class ViewHtmlTest extends TestBase
      * @dataProvider providerDisplay
      *
      * @param SerializableExceptionInterface $clonedException
-     * @param EditorInterface|null $editor
+     * @param EditorInterface|null           $editor
      */
     public function testDisplay(SerializableExceptionInterface $clonedException, EditorInterface $editor = null)
     {
@@ -134,7 +134,7 @@ class ViewHtmlTest extends TestBase
     /**
      * @dataProvider providerAppendToBody
      *
-     * @param $toAppend
+     * @param        $toAppend
      * @param string $expected
      */
     public function testAppendToBody($toAppend, $expected)
@@ -152,7 +152,8 @@ class ViewHtmlTest extends TestBase
     public function providerAppendToBody()
     {
         $rand = mt_rand();
-        $scriptTag =<<<SCRIPT
+        $scriptTag
+            = <<<SCRIPT
 <script type="text/javascript">
     console.log(new Date());
     // rand value {$rand}
@@ -162,7 +163,8 @@ SCRIPT;
             return $scriptTag;
         });
 
-        $secondScriptTag = <<<SCRIPT
+        $secondScriptTag
+            = <<<SCRIPT
 <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"></script>
 SCRIPT;
         $secondStringable = new Stringable(function () use ($secondScriptTag) {

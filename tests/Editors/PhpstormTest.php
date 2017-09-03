@@ -32,11 +32,11 @@ class PhpstormTest extends TestBase
     /**
      * @dataProvider providerRegisterPathMapping
      *
-     * @param string $mapFrom
-     * @param string $mapTo
-     * @param string $file
+     * @param string   $mapFrom
+     * @param string   $mapTo
+     * @param string   $file
      * @param int|null $line
-     * @param string $expectedFile
+     * @param string   $expectedFile
      */
     public function testRegisterPathMapping($mapFrom, $mapTo, $file, $line, $expectedFile)
     {

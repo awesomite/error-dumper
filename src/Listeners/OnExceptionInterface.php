@@ -6,6 +6,7 @@ interface OnExceptionInterface
 {
     /**
      * @param \Throwable|\Exception $exception
+     *
      * @return void
      */
     public function onException($exception);
