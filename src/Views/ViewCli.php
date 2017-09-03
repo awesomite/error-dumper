@@ -18,15 +18,14 @@ class ViewCli implements ViewInterface
     private $output;
 
     /**
-     * ViewCli constructor.
-     * @param int $lineLimit
-     * @param int $stepLimit
+     * @param int                  $lineLimit
+     * @param int                  $stepLimit
      * @param OutputInterface|null $output
      */
     public function __construct($lineLimit = 7, $stepLimit = 0, OutputInterface $output = null)
     {
-        $this->lineLimit = (int) $lineLimit;
-        $this->stepLimit = (int) $stepLimit;
+        $this->lineLimit = (int)$lineLimit;
+        $this->stepLimit = (int)$stepLimit;
         if ($output) {
             $this->setFormaters($output);
             $this->output = $output;
@@ -45,7 +44,7 @@ class ViewCli implements ViewInterface
         $output->writeln("<header>{$emptyLine}</header>");
         $output->writeln('');
 
-        $output->writeln((string) $exception->getStackTrace());
+        $output->writeln((string)$exception->getStackTrace());
 
         $stepNo = 0;
         foreach ($exception->getStackTrace() as $step) {
@@ -82,7 +81,7 @@ class ViewCli implements ViewInterface
             $lastLineIndex = $lines->getLastLineIndex();
             foreach ($lines as $line) {
                 $lineNumber = str_pad($line->getLineNumber(), strlen($lastLineIndex), ' ');
-                $escaped = $formatter->escape((string) $line);
+                $escaped = $formatter->escape((string)$line);
                 $message = "#{$lineNumber}     {$escaped}";
                 $tag = $line->getLineNumber() === $placeInCode->getLineNumber() ? 'ecode' : 'code';
                 $output->writeln("<{$tag}>{$message}</{$tag}>");
@@ -96,6 +95,7 @@ class ViewCli implements ViewInterface
         if (!$this->output) {
             $this->output = $this->createOutput();
         }
+
         // @codeCoverageIgnoreEnd
 
         return $this->output;
@@ -118,9 +118,9 @@ class ViewCli implements ViewInterface
     {
         $styles = array(
             'header' => new OutputFormatterStyle('white', 'red', array('bold')),
-            'hcode' => new OutputFormatterStyle('green', 'black'),
-            'code' => new OutputFormatterStyle(),
-            'ecode' => new OutputFormatterStyle('white', 'red'),
+            'hcode'  => new OutputFormatterStyle('green', 'black'),
+            'code'   => new OutputFormatterStyle(),
+            'ecode'  => new OutputFormatterStyle('white', 'red'),
         );
         $formater = $output->getFormatter();
         foreach ($styles as $name => $style) {

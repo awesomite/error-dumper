@@ -12,11 +12,11 @@ class ErrorExceptionTest extends TestBase
     /**
      * @dataProvider providerConstructor
      *
-     * @param string $message
-     * @param int $code
+     * @param string      $message
+     * @param int         $code
      * @param string|null $humanCode
-     * @param string $file
-     * @param int $line
+     * @param string      $file
+     * @param int         $line
      */
     public function testConstructor($message, $code, $humanCode, $file, $line)
     {
@@ -40,9 +40,10 @@ class ErrorExceptionTest extends TestBase
 
     /**
      * @param string $message
-     * @param int $code
+     * @param int    $code
      * @param string $file
-     * @param int $line
+     * @param int    $line
+     *
      * @return ErrorException
      */
     private function createErrorException($message, $code, $file, $line)

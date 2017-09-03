@@ -29,7 +29,8 @@ class ErrorDumperTest extends TestBase
      */
     private function getExceptionHandler()
     {
-        $result = set_exception_handler(function () {});
+        $result = set_exception_handler(function () {
+        });
         restore_exception_handler();
 
         return $result;
@@ -40,7 +41,8 @@ class ErrorDumperTest extends TestBase
      */
     private function getErrorHandler()
     {
-        $result = set_error_handler(function () {});
+        $result = set_error_handler(function () {
+        });
         restore_error_handler();
 
         return $result;

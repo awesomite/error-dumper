@@ -22,6 +22,7 @@ class OnExceptionDevViewTest extends TestBase
 
     /**
      * @param Beeper $beeper
+     *
      * @return ViewInterface
      */
     private function createView(Beeper $beeper)

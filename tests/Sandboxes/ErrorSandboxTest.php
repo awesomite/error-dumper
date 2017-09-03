@@ -17,6 +17,7 @@ class ErrorSandboxTest extends TestBase
         $result = $sandbox->executeSafely(function () use (&$executed, $expectedResult) {
             trigger_error('Test');
             $executed = true;
+
             return $expectedResult;
         });
         $this->assertTrue($executed);
@@ -35,16 +36,17 @@ class ErrorSandboxTest extends TestBase
      * @dataProvider providerExecute
      *
      * @param ErrorSandbox $sandbox
-     * @param int $errorType
-     * @param bool $expectedExecuted
-     * @param bool $expectedThrown
+     * @param int          $errorType
+     * @param bool         $expectedExecuted
+     * @param bool         $expectedThrown
      */
     public function testExecute(ErrorSandbox $sandbox, $errorType, $expectedExecuted, $expectedThrown)
     {
         $executed = false;
         $thrown = false;
 
-        $sandbox->execute(function () {});
+        $sandbox->execute(function () {
+        });
         try {
             $expectedResult = 125;
             $result = $sandbox->execute(function () use (&$executed, $errorType, $expectedResult) {

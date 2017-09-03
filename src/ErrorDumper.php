@@ -13,9 +13,10 @@ use Awesomite\ErrorDumper\Views\ViewInterface;
 class ErrorDumper
 {
     /**
-     * @param int $mode Default E_ALL | E_STRICT
-     * @param int $policy Default ErrorHandler::POLICY_ERROR_REPORTING
+     * @param int                  $mode   Default E_ALL | E_STRICT
+     * @param int                  $policy Default ErrorHandler::POLICY_ERROR_REPORTING
      * @param EditorInterface|null $editor
+     *
      * @return ErrorHandlerInterface
      *
      * @see ErrorHandler::POLICY_ERROR_REPORTING
@@ -31,6 +32,7 @@ class ErrorDumper
 
     /**
      * @param EditorInterface|null $editor
+     *
      * @return ViewInterface
      */
     private static function createDefaultView(EditorInterface $editor = null)

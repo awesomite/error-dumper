@@ -2,17 +2,13 @@
 
 namespace Awesomite\ErrorDumper\StandardExceptions;
 
-/**
- * @internal
- */
 class ErrorException extends \ErrorException
 {
     /**
-     * ErrorException constructor.
-     * @param string $message
-     * @param int $code
-     * @param string $file
-     * @param int $line
+     * @param string          $message
+     * @param int             $code
+     * @param string          $file
+     * @param int             $line
      * @param \Exception|null $previous
      */
     public function __construct($message, $code, $file, $line, $previous = null)
@@ -29,7 +25,34 @@ class ErrorException extends \ErrorException
     }
 
     /**
+     * @return bool
+     */
+    public function isDeprecated()
+    {
+        return $this->isSeverity(E_DEPRECATED | E_USER_DEPRECATED);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isNotice()
+    {
+        return $this->isSeverity(E_NOTICE | E_USER_NOTICE);
+    }
+
+    /**
+     * @param int $severity bitmask e.g. E_DEPRECATED | E_USER_DEPRECATED
+     *
+     * @return bool
+     */
+    public function isSeverity($severity)
+    {
+        return (bool)($severity & $this->getSeverity());
+    }
+
+    /**
      * @param int $code
+     *
      * @return string|null
      */
     private function errorNameToCode($code)

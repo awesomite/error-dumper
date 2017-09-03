@@ -47,14 +47,14 @@ class TestListener implements \PHPUnit_Framework_TestListener
             }
         });
 
-        $header = '<bg=yellow;fg=black>ms        %     ' . str_pad('name', $maxLength, ' ') . '</>';
+        $header = '<bg=yellow;fg=black>ms         %        ' . str_pad('name', $maxLength, ' ') . '</>';
         $output->writeln($header);
         foreach ($cpTimes as $timeData) {
             list($time, $name) = $timeData;
             $output->writeln(sprintf(
-                '<bg=yellow;fg=black>% 6.2f    % 2d    %s</>',
+                '<bg=yellow;fg=black>% 7.2f    % 5.2f    %s</>',
                 $time * 1000,
-                $time/$wholeTime*100,
+                $time / $wholeTime * 100,
                 str_pad($name, $maxLength, ' ')
             ));
         }

@@ -7,26 +7,28 @@ namespace Awesomite\ErrorDumper;
  */
 class UnsafeFunctionsTest extends TestBase
 {
-    private static $unsafeFunctions = array(
-        'system',
-        'exec',
-        'popen',
-        'pcntl_exec',
-        'eval',
-        'create_function',
-        'preg_replace', // /e
-        'override_function',
-        'rename_function',
-        'var_dump',
-        'print_r',
-        'mb_ereg_replace', // /e
-        'mb_eregi_replace', // /e
-    );
+    private static $unsafeFunctions
+        = array(
+            'system',
+            'exec',
+            'popen',
+            'pcntl_exec',
+            'eval',
+            'create_function',
+            'preg_replace', // /e
+            'override_function',
+            'rename_function',
+            'var_dump',
+            'print_r',
+            'mb_ereg_replace', // /e
+            'mb_eregi_replace', // /e
+        );
 
-    private static $exclusions = array(
-        'Handlers/ErrorHandler.php:210' => array('exit'),
-        'Editors/Phpstorm.php:33' => array('preg_replace'),
-    );
+    private static $exclusions
+        = array(
+            'Handlers/ErrorHandler.php:207' => array('exit'),
+            'Editors/Phpstorm.php:33'       => array('preg_replace'),
+        );
 
     /**
      * @dataProvider providerFiles
@@ -83,7 +85,7 @@ class UnsafeFunctionsTest extends TestBase
                 return false;
             }
 
-            return (bool) preg_match($pattern, $file->getRealPath());
+            return (bool)preg_match($pattern, $file->getRealPath());
         };
 
         $result = array();

@@ -28,7 +28,10 @@ class ErrorHandlerTest extends TestBase
     public function providerInvalidConstructor()
     {
         return array(
-            array(function () {}),
+            array(
+                function () {
+                },
+            ),
             array('0'),
             array(false),
             array(E_ALL, false),
@@ -171,14 +174,15 @@ class ErrorHandlerTest extends TestBase
     }
 
     /**
-     * @param Beeper $beeper
+     * @param Beeper   $beeper
      * @param null|int $mode
-     * @param int $policy
+     * @param int      $policy
+     *
      * @return ErrorHandler
      */
     private function createTestErrorHandler(
         Beeper $beeper,
-        $mode = null, 
+        $mode = null,
         $policy = ErrorHandler::POLICY_ERROR_REPORTING
     ) {
         $result = new ErrorHandler($mode, $policy);

@@ -16,7 +16,7 @@ class ViewCliTest extends TestBase
      * @dataProvider providerDisplay
      *
      * @param SerializableExceptionInterface $clonedException
-     * @param int $stepLimit
+     * @param int                            $stepLimit
      */
     public function testDisplay(SerializableExceptionInterface $clonedException, $stepLimit)
     {

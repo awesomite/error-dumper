@@ -14,7 +14,7 @@ class SerializableExceptionTest extends TestBase
      *
      * @param \Exception|\Throwable $exception
      * @param SerializableException $clonedException
-     * @param bool $hasPrevious
+     * @param bool                  $hasPrevious
      */
     public function testAll($exception, SerializableException $clonedException, $hasPrevious)
     {
@@ -43,7 +43,8 @@ class SerializableExceptionTest extends TestBase
         $withPrevious = null;
         try {
             $this->throwExceptionWithPrevious();
-        } catch (\Exception $withPrevious) {}
+        } catch (\Exception $withPrevious) {
+        }
 
         return array(
             array($exception, new SerializableException($exception), false),
@@ -70,7 +71,8 @@ class SerializableExceptionTest extends TestBase
         $exception = null;
         try {
             $this->throwExceptionWithPrevious();
-        } catch (\Exception $exception) {};
+        } catch (\Exception $exception) {
+        };
         $cloned = new SerializableException($exception, 0, false, $clonePrevious);
         $this->assertSame($clonePrevious, $cloned->hasPrevious());
         if ($clonePrevious) {

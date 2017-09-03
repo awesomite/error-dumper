@@ -3,42 +3,38 @@
 namespace Awesomite\ErrorDumper\Handlers;
 
 use Awesomite\ErrorDumper\Listeners\OnExceptionInterface;
-use Awesomite\ErrorDumper\Listeners\StopPropagationException;
 use Awesomite\ErrorDumper\Listeners\PreExceptionInterface;
+use Awesomite\ErrorDumper\Listeners\StopPropagationException;
 use Awesomite\ErrorDumper\Sandboxes\ErrorSandbox;
 use Awesomite\ErrorDumper\StandardExceptions\ErrorException;
 use Awesomite\ErrorDumper\StandardExceptions\ShutdownErrorException;
 
 class ErrorHandler implements ErrorHandlerInterface
 {
-    const HANDLER_ERROR = 'handleError';
+    const HANDLER_ERROR     = 'handleError';
     const HANDLER_EXCEPTION = 'handleException';
-    const HANDLER_SHUTDOWN = 'handleShutdown';
+    const HANDLER_SHUTDOWN  = 'handleShutdown';
 
     const POLICY_ERROR_REPORTING = 1;
-    const POLICY_ALL = 2;
-
-    const TYPE_ERROR = 1; // 0b0001
-    const TYPE_EXCEPTION = 2; // 0b0010
-    const TYPE_FATAL_ERROR = 4; // 0b0100
-    const TYPE_ALL = 7; // 0b0111
+    const POLICY_ALL             = 2;
 
     // Constant can be an array in PHP >=5.6
-    private static $fatalErrors = array(
-        E_ERROR,
-        E_PARSE,
-        E_CORE_ERROR,
-        E_CORE_WARNING,
-        E_COMPILE_ERROR,
-        E_COMPILE_WARNING,
-    );
+    private static $fatalErrors
+        = array(
+            E_ERROR,
+            E_PARSE,
+            E_CORE_ERROR,
+            E_CORE_WARNING,
+            E_COMPILE_ERROR,
+            E_COMPILE_WARNING,
+        );
 
     private $mode;
 
     private $policy;
 
     private $sandbox = null;
-    
+
     private $exitAfterTrigger = true;
 
     /**
@@ -52,8 +48,7 @@ class ErrorHandler implements ErrorHandlerInterface
     private $preListeners = array();
 
     /**
-     * ErrorErrorHandler constructor.
-     * @param int $mode Default E_ALL | E_STRICT
+     * @param int $mode   Default E_ALL | E_STRICT
      * @param int $policy Default ErrorHandler::POLICY_ERROR_REPORTING
      *
      * @see http://php.net/manual/en/errorfunc.constants.php
@@ -85,6 +80,7 @@ class ErrorHandler implements ErrorHandlerInterface
         if ($types & static::TYPE_FATAL_ERROR) {
             $this->registerOnShutdown();
         }
+
         // @codeCoverageIgnoreEnd
 
         return $this;
@@ -125,11 +121,12 @@ class ErrorHandler implements ErrorHandlerInterface
      * @codeCoverageIgnore
      *
      * @param bool $condition
+     *
      * @return $this
      */
     public function exitAfterTrigger($condition)
     {
-        $this->exitAfterTrigger = (bool) $condition;
+        $this->exitAfterTrigger = (bool)$condition;
 
         return $this;
     }
@@ -216,6 +213,7 @@ class ErrorHandler implements ErrorHandlerInterface
      * @codeCoverageIgnore
      *
      * @param int $code
+     *
      * @return bool
      */
     private function isFatalError($code)

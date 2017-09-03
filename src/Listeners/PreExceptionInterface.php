@@ -6,6 +6,7 @@ interface PreExceptionInterface
 {
     /**
      * @param \Exception|\Throwable $exception
+     *
      * @return void
      * @throws StopPropagationException
      */
