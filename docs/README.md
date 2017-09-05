@@ -42,3 +42,11 @@ $handler
 ```
 
 Read [filtering-exceptions.md](filtering-exceptions.md)
+
+
+## Error log
+
+Error Dumper allows for serialization exceptions (for restoring them later).
+Using this feature you can build own error log.
+
+Read [errorlog.md](errorlog.md)
