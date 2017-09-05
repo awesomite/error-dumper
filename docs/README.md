@@ -50,3 +50,9 @@ Error Dumper allows for serialization exceptions (for restoring them later).
 Using this feature you can build own error log.
 
 Read [errorlog.md](errorlog.md)
+
+## Sandbox
+
+Run piece of code outside error handler.
+
+Read [sandbox.md](sandbox.md)

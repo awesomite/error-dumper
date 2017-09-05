@@ -33,7 +33,7 @@ $handler
     ->register();
 ```
 
-## Display error in errorlog
+## Display error in error log
 
 ```php
 <?php
