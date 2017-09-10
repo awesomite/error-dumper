@@ -142,8 +142,6 @@ which will return 0 when the call that triggered the error was preceded by an @.
 
 It means that we should check type of error inside out error handler for each time:
 
-##### error_reporting(E_ALL | E_STRICT)
-
 ```php
 <?php
 
