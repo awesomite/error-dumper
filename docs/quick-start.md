@@ -14,10 +14,8 @@ composer install awesomite/error-dumper
 
 use Awesomite\ErrorDumper\ErrorDumper;
 
-/** @var bool $inDebugMode */
-
 /*
- * Skip E_DEPRECATED_ERRORS
+ * Skip E_DEPRECATED errors
  */
 $mode = E_ALL & ~E_DEPRECATED;
 
