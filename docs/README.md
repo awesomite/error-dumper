@@ -6,15 +6,7 @@ Read [quick-start.md](quick-start.md)
 
 ## Error Preview
 
-### HTML
-
-[See example](https://awesomite.github.io/error-dumper/examples/exception.html)
-
-![Exception displayed as HTML](resources/exception-html.png)
-
-### CLI
-
-![Exception displayed in terminal](resources/exception-cli.png)
+Read [preview.md](preview.md)
 
 ## Filtering exceptions by class
 
