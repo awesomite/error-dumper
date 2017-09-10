@@ -20,6 +20,7 @@ and `Awesomite\ErrorDumper\StandardExceptions\ShutdownErrorException` are not in
 * Removed `Awesomite\ErrorDumper\Handlers\ErrorHandler::POLICY_*`, currently POLICY_ERROR_REPORTING is standard action.
 Argument `$policy` has been removed from `Awesomite\ErrorDumper\ErrorDumper::createDevHandler` and `Awesomite\ErrorDumper\Handlers\ErrorHandler::__construct`.
 
+
 ## 0.13.7 (2018-09-21)
 
 * Fixed bug in `Awesomite\ErrorDumper\Cloners\ClonedException::__constructor`
