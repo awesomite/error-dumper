@@ -15,9 +15,6 @@ class ErrorHandler implements ErrorHandlerInterface
     const HANDLER_EXCEPTION = 'handleException';
     const HANDLER_SHUTDOWN  = 'handleShutdown';
 
-    const POLICY_ERROR_REPORTING = 1;
-    const POLICY_ALL             = 2;
-
     // Constant can be an array in PHP >=5.6
     private static $fatalErrors
         = array(
@@ -30,8 +27,6 @@ class ErrorHandler implements ErrorHandlerInterface
         );
 
     private $mode;
-
-    private $policy;
 
     private $sandbox = null;
 
@@ -49,21 +44,16 @@ class ErrorHandler implements ErrorHandlerInterface
 
     /**
      * @param int $mode   Default E_ALL | E_STRICT
-     * @param int $policy Default ErrorHandler::POLICY_ERROR_REPORTING
      *
      * @see http://php.net/manual/en/errorfunc.constants.php
      */
-    public function __construct($mode = null, $policy = null)
+    public function __construct($mode = null)
     {
         if (!is_int($mode) && !is_null($mode)) {
             throw new \InvalidArgumentException('Argument $mode has to be integer or null!');
         }
-        if (!in_array($policy, array(static::POLICY_ERROR_REPORTING, static::POLICY_ALL, null), true)) {
-            throw new \InvalidArgumentException('Invalid value of $policy!');
-        }
 
         $this->mode = is_null($mode) ? E_ALL | E_STRICT : $mode;
-        $this->policy = is_null($policy) ? static::POLICY_ERROR_REPORTING : $policy;
     }
 
     public function register($types = ErrorHandler::TYPE_ALL)
@@ -142,10 +132,7 @@ class ErrorHandler implements ErrorHandlerInterface
 
     public function handleError($code, $message, $file, $line)
     {
-        if (
-            ($this->mode & $code)
-            && ((error_reporting() & $code) || ($this->policy === static::POLICY_ALL))
-        ) {
+        if (($this->mode & $code) && ((error_reporting() & $code))) {
             $this->onError(new ErrorException($message, $code, $file, $line));
         }
     }
@@ -164,7 +151,7 @@ class ErrorHandler implements ErrorHandlerInterface
         if (!$error || !($error['type'] & $this->mode)) {
             return;
         }
-        if ($this->policy === static::POLICY_ALL || $this->isFatalError($error['type'])) {
+        if ($this->isFatalError($error['type'])) {
             $this->onError(
                 new ShutdownErrorException($error['message'], $error['type'], $error['file'], $error['line'])
             );
