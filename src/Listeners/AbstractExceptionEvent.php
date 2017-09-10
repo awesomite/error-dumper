@@ -6,7 +6,10 @@ abstract class AbstractExceptionEvent
 {
     private $callable;
 
-    private $reflection;
+    /**
+     * @var null|CallableReflection
+     */
+    private $reflection = null;
 
     /**
      * @param callable $callable
@@ -17,17 +20,7 @@ abstract class AbstractExceptionEvent
             throw new \InvalidArgumentException(sprintf('Argument passed to %s must be callable', __METHOD__));
         }
 
-        $reflection = new CallableReflection($callable);
-
-        if (!$reflection->isThrowableCallable()) {
-            $exceptionClass = version_compare(PHP_VERSION, '7.0') ? 'Throwable' : 'Exception';
-            throw new \InvalidArgumentException(
-                sprintf('Invalid callable, first argument must be %s or an interface', $exceptionClass)
-            );
-        }
-
         $this->callable = $callable;
-        $this->reflection = $reflection;
     }
 
     /**
@@ -35,8 +28,17 @@ abstract class AbstractExceptionEvent
      */
     protected function call($exception)
     {
-        if ($this->reflection->isThrowableCallableBy($exception)) {
+        if ($this->getReflection()->isThrowableCallableBy($exception)) {
             call_user_func($this->callable, $exception);
         }
+    }
+
+    private function getReflection()
+    {
+        if (is_null($this->reflection)) {
+            $this->reflection = new CallableReflection($this->callable);
+        }
+
+        return $this->reflection;
     }
 }
