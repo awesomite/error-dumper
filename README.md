@@ -98,8 +98,7 @@ $view->display($unserialized);
 <?php
 
 $sandbox->executeSafely(function () {
-    /** @var \Twig_Environment $twig */
-    $twig->render('template.twig');
+    return require 'data.cache';
 });
 ```
 
@@ -141,7 +140,7 @@ Official PHP [documentation](http://php.net/manual/en/language.operators.errorco
 but this custom error handler can (and should) call error_reporting()
 which will return 0 when the call that triggered the error was preceded by an @.
 
-It means there are two ways depend on your error_reporting settings:
+It means that we should check type of error inside out error handler for each time:
 
 ##### error_reporting(E_ALL | E_STRICT)
 
@@ -160,22 +159,7 @@ set_error_handler(function ($code, $message, $file, $line) {
 @trigger_error('Test'); // will do nothing
 ```
 
-##### error_reporting(0)
-
-```php
-<?php
-
-error_reporting(0);
-
-set_error_handler(function ($code, $message, $file, $line) {
-    echo 'ERROR: ' . $message;
-    exit;
-});
-
-@trigger_error('Test'); // will display "ERROR: Test" and will stop script
-```
-
-If you have `error_reporting(0)` you can need sandbox for errors:
+Instead of using `@` operator you can use built-in sandbox mechanism
 
 ```php
 <?php
@@ -183,7 +167,7 @@ If you have `error_reporting(0)` you can need sandbox for errors:
 use Awesomite\ErrorDumper\ErrorDumper;
 use Awesomite\ErrorDumper\Handlers\ErrorHandler;
 
-$errorHandler = ErrorDumper::createDevHandler(null, ErrorHandler::POLICY_ALL);
+$errorHandler = ErrorDumper::createDevHandler();
 $errorHandler->register();
 
 $sandbox = $errorHandler->getErrorSandbox();
