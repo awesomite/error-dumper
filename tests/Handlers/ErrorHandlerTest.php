@@ -34,7 +34,7 @@ class ErrorHandlerTest extends TestBase
             ),
             array('0'),
             array(false),
-            array(E_ALL, false),
+            array(new \stdClass()),
         );
     }
 
@@ -99,12 +99,12 @@ class ErrorHandlerTest extends TestBase
         $this->assertSame(1, $beeper->countBeeps());
 
         $beeper->reset();
-        $secondErrorHandler = $this->createTestErrorHandler($beeper, null, ErrorHandler::POLICY_ALL);
+        $secondErrorHandler = $this->createTestErrorHandler($beeper, null);
         $secondErrorHandler->handleError(E_NOTICE, 'E_NOTICE', __FILE__, __LINE__);
         $this->assertSame(1, $beeper->countBeeps());
 
         $beeper->reset();
-        $thirdErrorHandler = $this->createTestErrorHandler($beeper, E_ALL ^ E_NOTICE, ErrorHandler::POLICY_ALL);
+        $thirdErrorHandler = $this->createTestErrorHandler($beeper, E_ALL ^ E_NOTICE);
         $thirdErrorHandler->handleError(E_NOTICE, 'E_NOTICE', __FILE__, __LINE__);
         $this->assertSame(0, $beeper->countBeeps());
     }
@@ -122,7 +122,7 @@ class ErrorHandlerTest extends TestBase
     public function testHandleShutdown()
     {
         $beeper = new Beeper();
-        $errorHandler = $this->createTestErrorHandler($beeper, null, ErrorHandler::POLICY_ALL);
+        $errorHandler = $this->createTestErrorHandler($beeper, null);
 
         $this->assertSame(0, $beeper->countBeeps());
         // https://travis-ci.org/awesomite/error-dumper/jobs/240540829
@@ -141,7 +141,7 @@ class ErrorHandlerTest extends TestBase
         $this->assertSame(0, $beeper->countBeeps());
         @trigger_error('Test');
         $errorHandler->handleShutdown();
-        $this->assertSame(1, $beeper->countBeeps());
+        $this->assertSame(0, $beeper->countBeeps());
     }
 
     public function testExitAfterTrigger()
@@ -180,12 +180,9 @@ class ErrorHandlerTest extends TestBase
      *
      * @return ErrorHandler
      */
-    private function createTestErrorHandler(
-        Beeper $beeper,
-        $mode = null,
-        $policy = ErrorHandler::POLICY_ERROR_REPORTING
-    ) {
-        $result = new ErrorHandler($mode, $policy);
+    private function createTestErrorHandler(Beeper $beeper, $mode = null)
+    {
+        $result = new ErrorHandler($mode);
         $result->pushListener(new OnExceptionCallable(function () use ($beeper) {
             $beeper->beep();
         }));

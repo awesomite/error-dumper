@@ -14,17 +14,15 @@ class ErrorDumper
 {
     /**
      * @param int                  $mode   Default E_ALL | E_STRICT
-     * @param int                  $policy Default ErrorHandler::POLICY_ERROR_REPORTING
      * @param EditorInterface|null $editor
      *
      * @return ErrorHandlerInterface
      *
-     * @see ErrorHandler::POLICY_ERROR_REPORTING
      * @see ErrorHandler::__construct
      */
-    public static function createDevHandler($mode = null, $policy = null, EditorInterface $editor = null)
+    public static function createDevHandler($mode = null, EditorInterface $editor = null)
     {
-        $handler = new ErrorHandler($mode, $policy);
+        $handler = new ErrorHandler($mode);
         $handler->pushListener(new OnExceptionDevView(self::createDefaultView($editor)));
 
         return $handler;

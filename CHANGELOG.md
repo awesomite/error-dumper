@@ -17,6 +17,8 @@ Versions `0.14.*` are **incompatible** with `0.13.*`.
 * Function `Awesomite\ErrorDumper\ErrorDumper::createDevHandler` became static
 * Classes `Awesomite\ErrorDumper\StandardExceptions\ErrorException`
 and `Awesomite\ErrorDumper\StandardExceptions\ShutdownErrorException` are not internal anymore
+* Removed `Awesomite\ErrorDumper\Handlers\ErrorHandler::POLICY_*`, currently POLICY_ERROR_REPORTING is standard action.
+Argument `$policy` has been removed from `Awesomite\ErrorDumper\ErrorDumper::createDevHandler` and `Awesomite\ErrorDumper\Handlers\ErrorHandler::__construct`.
 
 ## 0.13.2 (2017-05-05)
 
