@@ -51,7 +51,6 @@ matrix:
 
 install:
   - if [[ "$DEPENDENCIES" = 'high' ]]; then travis_retry composer update --no-interaction --prefer-stable; fi
-  - if [[ "$DEPENDENCIES" = 'hhvm_high' ]]; then echo 'hhvm.php7.all=1' >> /etc/hhvm/php.ini && travis_retry composer update --no-interaction --prefer-stable; fi
   - if [[ "$DEPENDENCIES" = 'low' ]]; then travis_retry composer update --no-interaction --prefer-stable --prefer-lowest; fi
   - composer show
 
