@@ -33,17 +33,6 @@ EXCPECTED;
         $this->assertSame($expected, (string)$string);
     }
 
-    /**
-     * @dataProvider providerInvalidParameters
-     *
-     * @param $callable
-     */
-    public function testInvalidParameters($callable)
-    {
-        $this->setExpectedException('InvalidArgumentException', 'Invalid callable, first argument must be Throwable');
-        new OnExceptionCallable($callable);
-    }
-
     public function providerInvalidParameters()
     {
         return array(
