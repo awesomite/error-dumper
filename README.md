@@ -45,11 +45,15 @@ Read [quick start](docs/quick-start.md#quick-start).
 
 ### HTML
 
+<div style="text-align: center">
 ![Exception displayed as HTML](docs/resources/exception-html.png)
+</div>
 
 ### CLI
 
+<div style="text-align: center">
 ![Exception displayed in terminal](docs/resources/exception-cli.png)
+</div>
 
 ## Versioning
 
