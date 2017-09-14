@@ -1,13 +1,5 @@
 language: php
 
-install:
-  - mkdir -p build/logs
-  - mv .git ~.git
-  - cd dev-tools; composer update; cd ..
-
-sudo: false
-dist: trusty
-
 dist: trusty
 sudo: false
 
@@ -59,12 +51,11 @@ matrix:
 
 install:
   - if [[ "$DEPENDENCIES" = 'high' ]]; then travis_retry composer update --no-interaction --prefer-stable; fi
-  - if [[ "$DEPENDENCIES" = 'hhvm_high' ]]; then travis_retry composer update --no-interaction --prefer-stable; fi
+  - if [[ "$DEPENDENCIES" = 'hhvm_high' ]]; then echo 'hhvm.php7.all=1' >> /etc/hhvm/php.ini && travis_retry composer update --no-interaction --prefer-stable; fi
   - if [[ "$DEPENDENCIES" = 'low' ]]; then travis_retry composer update --no-interaction --prefer-stable --prefer-lowest; fi
   - composer show
 
 before_script:
-  - if [[ "$DEPENDENCIES" = 'hhvm_high' ]]; then echo 'hhvm.php7.all=1' >> /etc/hhvm/php.ini; fi
   - if [[ "$DEPENDENCIES" = 'low' ]]; then export PHP_ARGS=$(php -r "echo '-d error_reporting=', E_ALL ^ (E_DEPRECATED | E_USER_DEPRECATED);"); else export PHP_ARGS=''; fi
 
 script:
