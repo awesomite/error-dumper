@@ -35,7 +35,7 @@ class ErrorDumper
      */
     private static function createDefaultView(EditorInterface $editor = null)
     {
-        if (php_sapi_name() === 'cli') {
+        if ('cli' === php_sapi_name()) {
             return new ViewCli();
         }
 

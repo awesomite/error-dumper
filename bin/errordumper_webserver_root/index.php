@@ -27,7 +27,7 @@ $app['debug'] = true;
 $onExit = null;
 $app
     ->get('/{page}', function ($page) use ($app, $pages, &$onExit) {
-        if ($page === 'skipRuntimeException') {
+        if ('skipRuntimeException' === $page) {
             $onExit = function () use ($page) {
                 require implode(DIRECTORY_SEPARATOR, array(__DIR__, '..', 'scripts', $page . '.php'));
             };

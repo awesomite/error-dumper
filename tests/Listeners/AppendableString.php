@@ -16,7 +16,7 @@ class AppendableString
 
     public function append($string)
     {
-        $this->string .= ($this->string === '' ? '' : "\n") . $string;
+        $this->string .= ('' === $this->string ? '' : "\n") . $string;
 
         return $this;
     }

@@ -38,14 +38,14 @@ class UnsafeFunctionsTest extends TestBase
         $filePath = $file->getRealPath();
         foreach (token_get_all(file_get_contents($filePath)) as $tokenArr) {
             if (!is_array($tokenArr)) {
-                if ($tokenArr === '`') {
+                if ('`' === $tokenArr) {
                     $this->fail("Backtick operator is forbidden {$filePath}");
                 }
                 continue;
             }
             list($token, $source, $line) = $tokenArr;
             $source = strtolower($source);
-            $function = $token === T_EXIT
+            $function = T_EXIT === $token
                 ? 'exit'
                 : $source;
             $explodedPath = explode(DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR, $filePath);

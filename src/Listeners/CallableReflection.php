@@ -69,7 +69,7 @@ class CallableReflection
     {
         $params = $this->reflection->getParameters();
 
-        if (count($params) === 0) {
+        if (0 === count($params)) {
             return true;
         }
 
@@ -114,7 +114,7 @@ class CallableReflection
         }
 
         if (is_string($callable)) {
-            if (strpos($callable, '::') === false) {
+            if (false === strpos($callable, '::')) {
                 return new \ReflectionFunction($callable);
             }
 

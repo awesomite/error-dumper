@@ -34,7 +34,7 @@ class TestClass
         $clone = new \Awesomite\ErrorDumper\Serializable\SerializableException(new TmpException('My test exception'));
         $clone->getStackTrace()->setVarDumper(new \Awesomite\VarDumper\LightVarDumper());
 
-        if (php_sapi_name() === 'cli') {
+        if ('cli' === php_sapi_name()) {
             $view = new \Awesomite\ErrorDumper\Views\ViewCli(7, 3);
             $view->display($clone);
             exit;

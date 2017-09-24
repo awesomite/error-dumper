@@ -54,7 +54,7 @@ class ViewHtml implements ViewInterface
     public function display(SerializableExceptionInterface $exception)
     {
         // @codeCoverageIgnoreStart
-        if ($this->headersEnabled && !headers_sent() && php_sapi_name() !== 'cli') {
+        if ($this->headersEnabled && !headers_sent() && 'cli' !== php_sapi_name()) {
             foreach (self::$headers as $header) {
                 header($header);
             }
