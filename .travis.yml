@@ -62,14 +62,16 @@ install:
       export PHP_CS_FIXER="${HOME}/.composer/vendor/bin/php-cs-fixer";
       export RUN_CS_FIXER="true";
     fi
+  - echo ${TRAVIS_PHP_VERSION}
+  - if [[ ${TRAVIS_PHP_VERSION:0:4} == "hhvm" ]]; then
+      php --php -r "var_dump(ini_get('hhvm.enable_obj_destruct_call'));";
+      echo "hhvm.enable_obj_destruct_call=1" >> /etc/hhvm/php.ini;
+      tail /etc/hhvm/php.ini;
+      php --php -r "var_dump(ini_get('hhvm.enable_obj_destruct_call'));";
+    fi
 
 before_script:
   - if [[ "$DEPENDENCIES" = 'low' ]]; then export PHP_ARGS=$(php -r "echo '-d error_reporting=', E_ALL ^ (E_DEPRECATED | E_USER_DEPRECATED);"); else export PHP_ARGS=''; fi
-  - echo ${TRAVIS_PHP_VERSION}
-  - if [[ ${TRAVIS_PHP_VERSION:0:4} == "hhvm" ]]; then
-      export PHP_ARGS="${PHP_ARGS} -d hhvm.enable_obj_destruct_call=1";
-    fi
-  - echo ${PHP_ARGS}
 
 script:
   - if [[ "$RUN_CS_FIXER" = "true" ]]; then php -n ${PHP_CS_FIXER} --diff --dry-run -v fix; fi
