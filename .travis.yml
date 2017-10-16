@@ -62,11 +62,6 @@ install:
       export PHP_CS_FIXER="${HOME}/.composer/vendor/bin/php-cs-fixer";
       export RUN_CS_FIXER="true";
     fi
-  - echo ${TRAVIS_PHP_VERSION}
-  - if [[ ${TRAVIS_PHP_VERSION:0:4} == "hhvm" ]]; then
-      echo "\Awesomite\ErrorDumper\TestListener::flush();" >> vendor/bin/phpunit;
-      tail vendor/bin/phpunit;
-    fi
 
 before_script:
   - if [[ "$DEPENDENCIES" = 'low' ]]; then export PHP_ARGS=$(php -r "echo '-d error_reporting=', E_ALL ^ (E_DEPRECATED | E_USER_DEPRECATED);"); else export PHP_ARGS=''; fi

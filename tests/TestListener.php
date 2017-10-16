@@ -70,9 +70,11 @@ class TestListener implements \PHPUnit_Framework_TestListener
         }
     }
 
-    public function __destruct()
+    public function __construct()
     {
-        static::flush();
+        register_shutdown_function(function () {
+            TestListener::flush();
+        });
     }
 
     public function startTest(\PHPUnit_Framework_Test $test)
