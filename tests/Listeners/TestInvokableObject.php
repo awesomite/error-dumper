@@ -22,4 +22,12 @@ class TestInvokableObject
     public static function handleStdClass(\stdClass $class)
     {
     }
+
+    public static function handleArray(array $array)
+    {
+    }
+
+    public static function notOptional(\Exception $exception, $param)
+    {
+    }
 }
