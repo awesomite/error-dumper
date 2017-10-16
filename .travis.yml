@@ -57,7 +57,6 @@ install:
   - if [[ "$DEPENDENCIES" = 'high' ]]; then travis_retry composer update --no-interaction --prefer-stable; fi
   - if [[ "$DEPENDENCIES" = 'low' ]]; then travis_retry composer update --no-interaction --prefer-stable --prefer-lowest; fi
   - composer show
-  - echo ${TRAVIS_PHP_VERSION}
   - if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.1" ]]; then
       composer global require friendsofphp/php-cs-fixer:@stable;
       export PHP_CS_FIXER="${HOME}/.composer/vendor/bin/php-cs-fixer";
@@ -66,6 +65,11 @@ install:
 
 before_script:
   - if [[ "$DEPENDENCIES" = 'low' ]]; then export PHP_ARGS=$(php -r "echo '-d error_reporting=', E_ALL ^ (E_DEPRECATED | E_USER_DEPRECATED);"); else export PHP_ARGS=''; fi
+  - echo ${TRAVIS_PHP_VERSION}
+  - if [[ ${TRAVIS_PHP_VERSION:0:4} == "hhvm" ]]; then
+      export PHP_ARGS="${PHP_ARGS} -d hhvm.enable_obj_destruct_call=1"
+    fi
+  - echo ${PHP_ARGS}
 
 script:
   - if [[ "$RUN_CS_FIXER" = "true" ]]; then php -n ${PHP_CS_FIXER} --diff --dry-run -v fix; fi
