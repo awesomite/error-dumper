@@ -11,21 +11,31 @@ class TestListener implements \PHPUnit_Framework_TestListener
 {
     private static $messages = array();
 
-    private $times = array();
+    private static $times = array();
 
     public static function addMessage($message)
     {
         self::$messages[] = $message;
     }
 
-    public function __destruct()
+    public static function flush()
     {
+        $messages = self::$messages;
+        $times = self::$times;
+
+        self::$messages = array();
+        self::$times = array();
+
         $output = new ConsoleOutput();
-        foreach (self::$messages as $message) {
+        foreach ($messages as $message) {
             $output->writeln($message);
         }
 
-        usort($this->times, function ($left, $right) {
+        if (empty($times)) {
+            return;
+        }
+
+        usort($times, function ($left, $right) {
             return $left[0] == $right[0]
                 ? 0
                 : ($left[0] < $right[0] ? 1 : -1);
@@ -33,11 +43,11 @@ class TestListener implements \PHPUnit_Framework_TestListener
 
 
         $wholeTime = 0;
-        array_walk($this->times, function ($element) use (&$wholeTime) {
+        array_walk($times, function ($element) use (&$wholeTime) {
             $wholeTime += $element[0];
         });
 
-        $cpTimes = array_slice($this->times, 0, 10);
+        $cpTimes = array_slice($times, 0, 10);
 
         $maxLength = 0;
         array_walk($cpTimes, function ($element) use (&$maxLength) {
@@ -60,6 +70,11 @@ class TestListener implements \PHPUnit_Framework_TestListener
         }
     }
 
+    public function __destruct()
+    {
+        static::flush();
+    }
+
     public function startTest(\PHPUnit_Framework_Test $test)
     {
     }
@@ -70,7 +85,7 @@ class TestListener implements \PHPUnit_Framework_TestListener
             ? get_class($test) . '::' . $test->getName()
             : get_class($test);
 
-        $this->times[] = array($time, $name);
+        self::$times[] = array($time, $name);
     }
 
     public function addError(\PHPUnit_Framework_Test $test, \Exception $e, $time)

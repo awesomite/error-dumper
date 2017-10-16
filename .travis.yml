@@ -64,10 +64,8 @@ install:
     fi
   - echo ${TRAVIS_PHP_VERSION}
   - if [[ ${TRAVIS_PHP_VERSION:0:4} == "hhvm" ]]; then
-      php --php -r "var_dump(ini_get('hhvm.enable_obj_destruct_call'));";
-      echo "hhvm.enable_obj_destruct_call=1" >> /etc/hhvm/php.ini;
-      tail /etc/hhvm/php.ini;
-      php --php -r "var_dump(ini_get('hhvm.enable_obj_destruct_call'));";
+      echo "\Awesomite\ErrorDumper\TestListener::flush();" >> vendor/bin/phpunit;
+      tail vendor/bin/phpunit;
     fi
 
 before_script:
