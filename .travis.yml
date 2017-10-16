@@ -57,6 +57,7 @@ install:
   - if [[ "$DEPENDENCIES" = 'high' ]]; then travis_retry composer update --no-interaction --prefer-stable; fi
   - if [[ "$DEPENDENCIES" = 'low' ]]; then travis_retry composer update --no-interaction --prefer-stable --prefer-lowest; fi
   - composer show
+  - echo ${TRAVIS_PHP_VERSION}
   - if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.1" ]]; then
       composer global require friendsofphp/php-cs-fixer:@stable;
       export PHP_CS_FIXER="${HOME}/.composer/vendor/bin/php-cs-fixer";
