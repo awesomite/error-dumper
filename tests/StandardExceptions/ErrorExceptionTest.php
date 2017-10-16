@@ -39,6 +39,72 @@ class ErrorExceptionTest extends TestBase
     }
 
     /**
+     * @dataProvider providerIsDeprecated
+     *
+     * @param int  $severity
+     * @param bool $result
+     */
+    public function testIsDeprecated($severity, $result)
+    {
+        $error = $this->createErrorException('', $severity, __FILE__, __LINE__);
+        $this->assertSame($result, $error->isDeprecated());
+    }
+
+    public function providerIsDeprecated()
+    {
+        return array(
+            array(E_DEPRECATED, true),
+            array(E_USER_DEPRECATED, true),
+            array(E_ERROR, false),
+            array(E_USER_ERROR, false),
+        );
+    }
+
+    /**
+     * @dataProvider providerIsNotice
+     *
+     * @param int  $severity
+     * @param bool $result
+     */
+    public function testIsNotice($severity, $result)
+    {
+        $error = $this->createErrorException('', $severity, __FILE__, __LINE__);
+        $this->assertSame($result, $error->isNotice());
+    }
+
+    public function providerIsNotice()
+    {
+        return array(
+            array(E_NOTICE, true),
+            array(E_USER_NOTICE, true),
+            array(E_ERROR, false),
+            array(E_USER_ERROR, false),
+        );
+    }
+
+    /**
+     * @dataProvider providerIsSeverity
+     *
+     * @param int  $severity
+     * @param int  $compareTo
+     * @param bool $result
+     */
+    public function testIsSeverity($severity, $compareTo, $result)
+    {
+        $error = $this->createErrorException('', $severity, __FILE__, __LINE__);
+        $this->assertSame($result, $error->isSeverity($compareTo));
+    }
+
+    public function providerIsSeverity()
+    {
+        return array(
+            array(E_WARNING, E_ALL, true),
+            array(E_ALL & ~E_DEPRECATED, E_DEPRECATED, false),
+            array(E_USER_NOTICE, E_NOTICE, false),
+        );
+    }
+
+    /**
      * @param string $message
      * @param int    $code
      * @param string $file
