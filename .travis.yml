@@ -22,12 +22,9 @@ matrix:
     - php: 5.3
       dist: precise
 
-before_script:
-  - bin/fix-phpunit.php
-
 script:
-  - travis_wait composer update --no-interaction --prefer-lowest && php -d error_reporting=$(php -r "var_export(E_ALL & ~E_DEPRECATED);") vendor/bin/phpunit
-  - travis_wait composer update --no-interaction && vendor/bin/phpunit
+  - travis_wait composer update --no-interaction --prefer-lowest && bin/fix-phpunit.php && php -d error_reporting=$(php -r "var_export(E_ALL & ~E_DEPRECATED);") vendor/bin/phpunit
+  - travis_wait composer update --no-interaction && bin/fix-phpunit.php && vendor/bin/phpunit
 
 after_script:
   - mv ~.git .git
