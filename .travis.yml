@@ -3,6 +3,7 @@ language: php
 install:
   - mkdir -p build/logs
   - mv .git ~.git
+  - cd dev-tools; composer update; cd ..
   
 sudo: false
 dist: trusty
