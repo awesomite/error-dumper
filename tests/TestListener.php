@@ -81,6 +81,9 @@ class TestListener implements \PHPUnit_Framework_TestListener
 
     public function __construct()
     {
+        if (TestEnv::isSpeedTest()) {
+            SyntaxTest::requireWholeSrc();
+        }
         \register_shutdown_function(function () {
             TestListener::flush();
         });
@@ -92,6 +95,9 @@ class TestListener implements \PHPUnit_Framework_TestListener
 
     public function endTest(\PHPUnit_Framework_Test $test, $time)
     {
+        if (!TestEnv::isSpeedTest()) {
+            return;
+        }
         $name = $test instanceof \PHPUnit_Framework_TestCase
             ? \get_class($test) . '::' . $test->getName()
             : \get_class($test);

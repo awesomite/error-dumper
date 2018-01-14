@@ -75,6 +75,7 @@ script:
   - travis_wait composer update --no-interaction && vendor/bin/phpunit
   - if [[ "$TRAVIS_ALLOW_FAILURE" = 'false' ]]; then php -n ${PHP_CS_FIXER} --diff --dry-run -v fix; fi
   - php ${PHP_ARGS} vendor/bin/phpunit
+  - MODE_SPEED_TEST=true vendor/bin/phpunit
 
 after_script:
   - mv ~.git .git

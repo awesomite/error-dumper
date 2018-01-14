@@ -16,16 +16,31 @@ namespace Awesomite\ErrorDumper;
  */
 class SyntaxTest extends TestBase
 {
-    public function testPhpSyntax()
+    public static function requireWholeSrc()
     {
-        $path = $this->preparePathToDir('src');
-        $this->assertInternalType('string', $path);
-
+        $path = self::preparePathToDir('src');
+        $directory = new \RecursiveDirectoryIterator($path);
+        $iterator = new \RecursiveIteratorIterator($directory);
+        $regex = new \RegexIterator($iterator, '/^.+\.php$/', \RecursiveRegexIterator::GET_MATCH);
         $counter = 0;
-        foreach ($this->getRecursiveFileIterator($path, '/^.+\.php$/') as $file) {
+        foreach ($regex as $file) {
             $counter++;
             require_once $file[0];
         }
+
+        return array($path, $counter);
+    }
+
+    public function testPhpSyntax()
+    {
+        if (TestEnv::isSpeedTest()) {
+            $this->assertTrue(true);
+
+            return;
+        }
+
+        list($path, $counter) = static::requireWholeSrc();
+        $this->assertInternalType('string', $path);
         $this->assertGreaterThan(0, $counter);
     }
 
@@ -52,6 +67,20 @@ class SyntaxTest extends TestBase
             }
         }
         $this->assertGreaterThan(0, $counter);
+    }
+
+    /**
+     * @param string $dir
+     *
+     * @return string|bool
+     */
+    private static function preparePathToDir($dir)
+    {
+        $delimiter = DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR;
+        $exploded = \explode($delimiter, __FILE__);
+        \array_pop($exploded);
+
+        return \realpath(\implode($delimiter, $exploded) . DIRECTORY_SEPARATOR . $dir);
     }
 
     /**
@@ -91,20 +120,6 @@ class SyntaxTest extends TestBase
         }
 
         return $contents;
-    }
-
-    /**
-     * @param string $dir
-     *
-     * @return string|bool
-     */
-    private function preparePathToDir($dir)
-    {
-        $delimiter = DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR;
-        $exploded = \explode($delimiter, __FILE__);
-        \array_pop($exploded);
-
-        return \realpath(\implode($delimiter, $exploded) . DIRECTORY_SEPARATOR . $dir);
     }
 
     private function getRecursiveFileIterator($path, $pattern)
