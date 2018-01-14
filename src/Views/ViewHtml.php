@@ -166,7 +166,7 @@ class ViewHtml implements ViewInterface
         \array_pop($parts);
         $root = \implode($delimiter, $parts);
 
-        $path = \implode(DIRECTORY_SEPARATOR, array($root, 'templates', 'optimized'));
+        $path = \implode(DIRECTORY_SEPARATOR, array($root, 'templates_dist'));
 
         return new \Twig_Loader_Filesystem($path);
     }

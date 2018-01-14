@@ -1,6 +1,7 @@
 /bin export-ignore
 /dev-tools export-ignore
 /optimizer export-ignore
+/templates export-ignore
 /tests export-ignore
 /dev-tools export-ignore
 /.coveralls.yml export-ignore

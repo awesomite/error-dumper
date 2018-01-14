@@ -37,11 +37,7 @@ class OptimizerCommand
             /** @var SplFileInfo $file */
             \fputs($output, "  {$file->getPathname()}\n");
 
-            $optimizedName = \implode(DIRECTORY_SEPARATOR, array(
-                \realpath($file->getPath()),
-                'optimized',
-                $file->getFilename(),
-            ));
+            $optimizedName = \realpath($file->getPath()) . '_dist' . DIRECTORY_SEPARATOR . $file->getFilename();
             
             \file_put_contents(
                 $optimizedName,

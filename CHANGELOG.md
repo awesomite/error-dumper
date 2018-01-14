@@ -4,6 +4,8 @@
 
 Versions `0.14.*` are **incompatible** with `0.13.*`.
 
+* Excluded `templates` dir from `git archive`
+* Templates have been compressed, result is placed in `templates_dist` directory
 * Renamed:
   * `Awesomite\ErrorDumper\Cloners\ClonedException` to `Awesomite\ErrorDumper\Serializable\SerializableException`
   * `Awesomite\ErrorDumper\Cloners\ClonedExceptionInterface` to `Awesomite\ErrorDumper\Serializable\SerializableExceptionInterface`
