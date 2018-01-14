@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the awesomite/var-dumper package.
+ *
+ * (c) Bartłomiej Krukowski <bartlomiej@krukowski.me>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Awesomite\ErrorDumper;
 
 /**
@@ -70,7 +79,7 @@ class SyntaxTest extends TestBase
 
     private function getTwigSource($filename)
     {
-        $contents = file_get_contents($filename);
+        $contents = \file_get_contents($filename);
 
         $envReflection = new \ReflectionClass('Twig_Environment');
         $method = $envReflection->getMethod('tokenize');
@@ -92,10 +101,10 @@ class SyntaxTest extends TestBase
     private function preparePathToDir($dir)
     {
         $delimiter = DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR;
-        $exploded = explode($delimiter, __FILE__);
-        array_pop($exploded);
+        $exploded = \explode($delimiter, __FILE__);
+        \array_pop($exploded);
 
-        return realpath(implode($delimiter, $exploded) . DIRECTORY_SEPARATOR . $dir);
+        return \realpath(\implode($delimiter, $exploded) . DIRECTORY_SEPARATOR . $dir);
     }
 
     private function getRecursiveFileIterator($path, $pattern)

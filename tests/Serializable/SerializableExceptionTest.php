@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the awesomite/var-dumper package.
+ *
+ * (c) Bartłomiej Krukowski <bartlomiej@krukowski.me>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Awesomite\ErrorDumper\Serializable;
 
 use Awesomite\ErrorDumper\TestBase;
@@ -25,13 +34,13 @@ class SerializableExceptionTest extends TestBase
         $this->assertInstanceOf($clonedException->getOriginalClass(), $exception);
         $this->assertInstanceOf('Awesomite\StackTrace\StackTraceInterface', $clonedException->getStackTrace());
 
-        $this->assertSame($hasPrevious, !is_null($exception->getPrevious()));
+        $this->assertSame($hasPrevious, !\is_null($exception->getPrevious()));
         $this->assertSame($hasPrevious, $clonedException->hasPrevious());
         if ($hasPrevious) {
             $this->testAll(
                 $exception->getPrevious(),
                 $clonedException->getPrevious(),
-                !is_null($exception->getPrevious()->getPrevious())
+                !\is_null($exception->getPrevious()->getPrevious())
             );
         }
     }
@@ -54,10 +63,10 @@ class SerializableExceptionTest extends TestBase
 
     public function testSerialize()
     {
-        $message = 'Test message ' . mt_rand(1, 10000);
+        $message = 'Test message ' . \mt_rand(1, 10000);
         $clonedException = new SerializableException(new \Exception($message), 5);
         /** @var SerializableException $unserialized */
-        $unserialized = unserialize(serialize($clonedException));
+        $unserialized = \unserialize(\serialize($clonedException));
         $this->assertSame($message, $unserialized->getMessage());
     }
 

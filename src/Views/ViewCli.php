@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the awesomite/var-dumper package.
+ *
+ * (c) Bartłomiej Krukowski <bartlomiej@krukowski.me>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Awesomite\ErrorDumper\Views;
 
 use Awesomite\ErrorDumper\Serializable\SerializableExceptionInterface;
@@ -38,7 +47,7 @@ class ViewCli implements ViewInterface
         $formatter = new OutputFormatter();
 
         $header = "  {$exception->getOriginalClass()}: {$exception->getMessage()}  ";
-        $emptyLine = str_pad('', strlen($header), ' ');
+        $emptyLine = \str_pad('', \mb_strlen($header), ' ');
         $output->writeln("<header>{$emptyLine}</header>");
         $output->writeln("<header>{$formatter->escape($header)}</header>");
         $output->writeln("<header>{$emptyLine}</header>");
@@ -69,9 +78,9 @@ class ViewCli implements ViewInterface
             $placeInCode = $step->getPlaceInCode();
 
             $fileName = $placeInCode->getFileName();
-            $exploded = explode(DIRECTORY_SEPARATOR, $fileName);
-            $last3 = array_slice($exploded, -3);
-            $shortFileName = implode(DIRECTORY_SEPARATOR, $last3);
+            $exploded = \explode(DIRECTORY_SEPARATOR, $fileName);
+            $last3 = \array_slice($exploded, -3);
+            $shortFileName = \implode(DIRECTORY_SEPARATOR, $last3);
             if ($fileName !== $shortFileName) {
                 $shortFileName = '(...)' . DIRECTORY_SEPARATOR . $shortFileName;
             }
@@ -80,7 +89,7 @@ class ViewCli implements ViewInterface
             $lines = $placeInCode->getAdjacentCode($this->lineLimit);
             $lastLineIndex = $lines->getLastLineIndex();
             foreach ($lines as $line) {
-                $lineNumber = str_pad($line->getLineNumber(), strlen($lastLineIndex), ' ');
+                $lineNumber = \str_pad($line->getLineNumber(), \mb_strlen($lastLineIndex), ' ');
                 $escaped = $formatter->escape((string)$line);
                 $message = "#{$lineNumber}     {$escaped}";
                 $tag = $line->getLineNumber() === $placeInCode->getLineNumber() ? 'ecode' : 'code';

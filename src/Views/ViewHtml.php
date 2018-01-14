@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the awesomite/var-dumper package.
+ *
+ * (c) Bartłomiej Krukowski <bartlomiej@krukowski.me>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Awesomite\ErrorDumper\Views;
 
 use Awesomite\ErrorDumper\Editors\EditorInterface;
@@ -54,9 +63,9 @@ class ViewHtml implements ViewInterface
     public function display(SerializableExceptionInterface $exception)
     {
         // @codeCoverageIgnoreStart
-        if ($this->headersEnabled && !headers_sent() && 'cli' !== php_sapi_name()) {
+        if ($this->headersEnabled && !\headers_sent() && 'cli' !== \php_sapi_name()) {
             foreach (self::$headers as $header) {
-                header($header);
+                \header($header);
             }
         }
         // @codeCoverageIgnoreEnd
@@ -66,7 +75,7 @@ class ViewHtml implements ViewInterface
             'tags'              => $this->getTags(),
             'resources'         => $this->getResources(),
             'editor'            => $this->editor,
-            'hasEditor'         => !is_null($this->editor),
+            'hasEditor'         => !\is_null($this->editor),
             'contentUnderTitle' => $this->contentUnderTitle,
             'appendToBody'      => $this->appendToBody,
         ));
@@ -131,20 +140,20 @@ class ViewHtml implements ViewInterface
     private function createTwig()
     {
         $twigOptions = array();
-        if (!is_null($this->cacheDirectory)) {
+        if (!\is_null($this->cacheDirectory)) {
             $twigOptions['cache'] = $this->cacheDirectory;
         }
         $twig = new \Twig_Environment($this->createTwigLoader(), $twigOptions);
         $twig->addFilter(
             new \Twig_SimpleFilter('strpad', function ($input, $padLength, $padString = ' ', $padType = STR_PAD_LEFT) {
-                return str_pad($input, $padLength, $padString, $padType);
+                return \str_pad($input, $padLength, $padString, $padType);
             })
         );
         $twig->addFunction(new \Twig_SimpleFunction('memoryUsage', function () {
-            return number_format(memory_get_peak_usage() / 1024 / 1024, 2) . ' MB';
+            return \number_format(\memory_get_peak_usage() / 1024 / 1024, 2) . ' MB';
         }));
         $twig->addFunction(new \Twig_SimpleFunction('exportDeclaredValue', function ($param) {
-            return var_export($param, true);
+            return \var_export($param, true);
         }));
 
         return $twig;
@@ -153,9 +162,9 @@ class ViewHtml implements ViewInterface
     private function createTwigLoader()
     {
         $delimiter = DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR;
-        $parts = explode($delimiter, __DIR__);
-        array_pop($parts);
-        $root = implode($delimiter, $parts);
+        $parts = \explode($delimiter, __DIR__);
+        \array_pop($parts);
+        $root = \implode($delimiter, $parts);
 
         return new \Twig_Loader_Filesystem($root . DIRECTORY_SEPARATOR . 'templates');
     }

@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the awesomite/var-dumper package.
+ *
+ * (c) Bartłomiej Krukowski <bartlomiej@krukowski.me>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Awesomite\ErrorDumper\Views;
 
 use Awesomite\ErrorDumper\Editors\EditorInterface;
@@ -26,9 +35,9 @@ class ViewHtmlTest extends TestBase
     {
         $view = new ViewHtml();
         $exception = new \Exception();
-        ob_start();
+        \ob_start();
         $view->display(new SerializableException($exception, 1));
-        ob_end_clean();
+        \ob_end_clean();
     }
 
     /**
@@ -43,10 +52,10 @@ class ViewHtmlTest extends TestBase
         if ($editor) {
             $this->assertSame($view, $view->setEditor($editor));
         }
-        ob_start();
+        \ob_start();
         $view->display($clonedException);
-        $contents = ob_get_contents();
-        ob_get_clean();
+        $contents = \ob_get_contents();
+        \ob_get_clean();
         $this->assertContains(ViewHtml::TAG_HTML, $contents);
     }
 
@@ -76,10 +85,10 @@ class ViewHtmlTest extends TestBase
     {
         $view = new ViewHtml();
         $this->assertSame($view, $view->setContentUnderTitle($content));
-        ob_start();
+        \ob_start();
         $view->display(new SerializableException(new \Exception(), 1));
-        $output = ob_get_contents();
-        ob_end_clean();
+        $output = \ob_get_contents();
+        \ob_end_clean();
         $this->assertContains($content, $output);
     }
 
@@ -105,30 +114,30 @@ class ViewHtmlTest extends TestBase
             ->ignoreDotFiles(true)
             ->in($cachePath);
         $filesystem->remove($finder);
-        $this->assertSame(0, count($finder));
+        $this->assertSame(0, \count($finder));
 
         $view = new ViewHtml();
         $this->assertSame($view, $view->enableCaching($cachePath));
-        ob_start();
+        \ob_start();
         $view->display(new SerializableException(new \Exception()));
-        ob_end_clean();
-        $this->assertGreaterThan(0, count($finder));
+        \ob_end_clean();
+        $this->assertGreaterThan(0, \count($finder));
         $filesystem->remove($finder);
 
         $this->assertSame($view, $view->disableCaching());
-        ob_start();
+        \ob_start();
         $view->display(new SerializableException(new \Exception()));
-        ob_end_clean();
-        $this->assertSame(0, count($finder));
+        \ob_end_clean();
+        $this->assertSame(0, \count($finder));
     }
 
     private function getCachePath()
     {
-        $exploded = explode(DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR, __DIR__);
-        array_pop($exploded);
-        $exploded = array_merge($exploded, array('tests', 'cache'));
+        $exploded = \explode(DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR, __DIR__);
+        \array_pop($exploded);
+        $exploded = \array_merge($exploded, array('tests', 'cache'));
 
-        return realpath(implode(DIRECTORY_SEPARATOR, $exploded));
+        return \realpath(\implode(DIRECTORY_SEPARATOR, $exploded));
     }
 
     /**
@@ -142,16 +151,16 @@ class ViewHtmlTest extends TestBase
         $view = new ViewHtml();
         $this->assertSame($view, $view->appendToBody($toAppend));
 
-        ob_start();
+        \ob_start();
         $view->display(new SerializableException(new \Exception(), 1, true));
-        $contents = ob_get_contents();
-        ob_end_clean();
+        $contents = \ob_get_contents();
+        \ob_end_clean();
         $this->assertContains($expected, $contents);
     }
 
     public function providerAppendToBody()
     {
-        $rand = mt_rand();
+        $rand = \mt_rand();
         $scriptTag
             = <<<SCRIPT
 <script type="text/javascript">

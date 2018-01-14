@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the awesomite/var-dumper package.
+ *
+ * (c) Bartłomiej Krukowski <bartlomiej@krukowski.me>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Awesomite\ErrorDumper;
 
 /**
@@ -29,9 +38,9 @@ class ErrorDumperTest extends TestBase
      */
     private function getExceptionHandler()
     {
-        $result = set_exception_handler(function () {
+        $result = \set_exception_handler(function () {
         });
-        restore_exception_handler();
+        \restore_exception_handler();
 
         return $result;
     }
@@ -41,9 +50,9 @@ class ErrorDumperTest extends TestBase
      */
     private function getErrorHandler()
     {
-        $result = set_error_handler(function () {
+        $result = \set_error_handler(function () {
         });
-        restore_error_handler();
+        \restore_error_handler();
 
         return $result;
     }

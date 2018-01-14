@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the awesomite/var-dumper package.
+ *
+ * (c) Bartłomiej Krukowski <bartlomiej@krukowski.me>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Awesomite\ErrorDumper\Handlers;
 
 use Awesomite\ErrorDumper\Listeners\OnExceptionCallable;
@@ -22,7 +31,7 @@ class ErrorHandlerTest extends TestBase
     public function testInvalidConstructor($mode)
     {
         $reflection = new \ReflectionClass('Awesomite\\ErrorDumper\\Handlers\\ErrorHandler');
-        $reflection->newInstanceArgs(func_get_args());
+        $reflection->newInstanceArgs(\func_get_args());
     }
 
     public function providerInvalidConstructor()
@@ -45,16 +54,16 @@ class ErrorHandlerTest extends TestBase
         $this->assertSame($handler, $handler->registerOnError());
 
         $this->assertSame(0, $beeper->countBeeps());
-        trigger_error('Test');
+        \trigger_error('Test');
         $this->assertSame(1, $beeper->countBeeps());
-        restore_error_handler();
+        \restore_error_handler();
     }
 
     public function testGetErrorSandbox()
     {
         $errorHandler = new ErrorHandler();
         $sandbox = new ErrorSandbox();
-        $this->assertInstanceOf(get_class($sandbox), $errorHandler->getErrorSandbox());
+        $this->assertInstanceOf(\get_class($sandbox), $errorHandler->getErrorSandbox());
     }
 
     public function testValidatorAndListener()
@@ -64,7 +73,7 @@ class ErrorHandlerTest extends TestBase
         $this->assertSame($errorHandler, $errorHandler->registerOnError());
 
         $this->assertSame(0, $beeper->countBeeps());
-        trigger_error('Test');
+        \trigger_error('Test');
         $this->assertSame(1, $beeper->countBeeps());
 
         $validator = new PreExceptionCallable(function () {
@@ -73,10 +82,10 @@ class ErrorHandlerTest extends TestBase
         $errorHandler->pushPreListener($validator);
 
         $this->assertSame(1, $beeper->countBeeps());
-        trigger_error('Test');
+        \trigger_error('Test');
         $this->assertSame(1, $beeper->countBeeps());
 
-        restore_error_handler();
+        \restore_error_handler();
     }
 
     public function testHandleException()
@@ -126,8 +135,8 @@ class ErrorHandlerTest extends TestBase
 
         $this->assertSame(0, $beeper->countBeeps());
         // https://travis-ci.org/awesomite/error-dumper/jobs/240540829
-        if ($error = error_get_last()) {
-            TestListener::addMessage(sprintf(
+        if ($error = \error_get_last()) {
+            TestListener::addMessage(\sprintf(
                 '<error>Existing error: %d %s, %s:%d</error>',
                 $error['type'],
                 $error['message'],
@@ -139,7 +148,7 @@ class ErrorHandlerTest extends TestBase
         }
         $errorHandler->handleShutdown();
         $this->assertSame(0, $beeper->countBeeps());
-        @trigger_error('Test');
+        @\trigger_error('Test');
         $errorHandler->handleShutdown();
         $this->assertSame(0, $beeper->countBeeps());
     }
@@ -158,17 +167,17 @@ class ErrorHandlerTest extends TestBase
         $handler = $this->createTestErrorHandler($beeper);
         $handler->register(ErrorHandler::TYPE_ERROR);
         $this->assertSame(0, $beeper->countBeeps());
-        trigger_error('Test');
+        \trigger_error('Test');
         $this->assertSame(1, $beeper->countBeeps());
-        restore_error_handler();
+        \restore_error_handler();
     }
 
     protected function setUp()
     {
         parent::setUp();
-        if (function_exists('error_clear_last')) {
-            while (error_get_last()) {
-                error_clear_last();
+        if (\function_exists('error_clear_last')) {
+            while (\error_get_last()) {
+                \error_clear_last();
             }
         }
     }

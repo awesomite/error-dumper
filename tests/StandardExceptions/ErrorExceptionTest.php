@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the awesomite/var-dumper package.
+ *
+ * (c) Bartłomiej Krukowski <bartlomiej@krukowski.me>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Awesomite\ErrorDumper\StandardExceptions;
 
 use Awesomite\ErrorDumper\TestBase;
@@ -22,7 +31,7 @@ class ErrorExceptionTest extends TestBase
     {
         $exception = $this->createErrorException($message, $code, $file, $line);
         $this->assertInstanceOf('Awesomite\ErrorDumper\StandardExceptions\ErrorException', $exception);
-        $expectedMessage = !is_null($humanCode) ? $humanCode . ' ' . $message : $message;
+        $expectedMessage = !\is_null($humanCode) ? $humanCode . ' ' . $message : $message;
         $this->assertSame($expectedMessage, $exception->getMessage());
         $this->assertSame($code, $exception->getCode());
         $this->assertSame($file, $exception->getFile());

@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the awesomite/var-dumper package.
+ *
+ * (c) Bartłomiej Krukowski <bartlomiej@krukowski.me>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Awesomite\ErrorDumper;
 
 use Awesomite\ErrorDumper\Editors\EditorInterface;
@@ -35,7 +44,7 @@ class ErrorDumper
      */
     private static function createDefaultView(EditorInterface $editor = null)
     {
-        if ('cli' === php_sapi_name()) {
+        if ('cli' === \php_sapi_name()) {
             return new ViewCli();
         }
 

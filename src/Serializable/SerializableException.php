@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the awesomite/var-dumper package.
+ *
+ * (c) Bartłomiej Krukowski <bartlomiej@krukowski.me>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Awesomite\ErrorDumper\Serializable;
 
 use Awesomite\StackTrace\StackTraceFactory;
@@ -37,7 +46,7 @@ class SerializableException implements SerializableExceptionInterface
         $this->message = $exception->getMessage();
         $stackTraceFactory = new StackTraceFactory();
         $this->stackTrace = $stackTraceFactory->createByThrowable($exception, $stepLimit, $ignoreArgs);
-        $this->originalClass = get_class($exception);
+        $this->originalClass = \get_class($exception);
         if ($withPrevious && $exception->getPrevious()) {
             $this->previousException = new static($exception->getPrevious());
         }
@@ -70,7 +79,7 @@ class SerializableException implements SerializableExceptionInterface
 
     public function serialize()
     {
-        return serialize(array(
+        return \serialize(array(
             'code'          => $this->code,
             'file'          => $this->file,
             'line'          => $this->line,
@@ -83,7 +92,7 @@ class SerializableException implements SerializableExceptionInterface
 
     public function unserialize($serialized)
     {
-        $unserialized = unserialize($serialized);
+        $unserialized = \unserialize($serialized);
         $this->code = $unserialized['code'];
         $this->file = $unserialized['file'];
         $this->line = $unserialized['line'];
@@ -109,6 +118,6 @@ class SerializableException implements SerializableExceptionInterface
 
     public function hasPrevious()
     {
-        return !is_null($this->previousException);
+        return !\is_null($this->previousException);
     }
 }

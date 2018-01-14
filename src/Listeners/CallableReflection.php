@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the awesomite/var-dumper package.
+ *
+ * (c) Bartłomiej Krukowski <bartlomiej@krukowski.me>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Awesomite\ErrorDumper\Listeners;
 
 /**
@@ -41,11 +50,11 @@ class CallableReflection
             return false;
         }
 
-        if (is_null($this->throwableReflection)) {
+        if (\is_null($this->throwableReflection)) {
             return true;
         }
 
-        $className = get_class($exception);
+        $className = \get_class($exception);
 
         return $this->throwableReflection->isSubclassOf($className)
             || ($this->throwableReflection->getName() === $className);
@@ -58,7 +67,7 @@ class CallableReflection
      */
     public function isThrowableCallable()
     {
-        if (is_null($this->isThrowable)) {
+        if (\is_null($this->isThrowable)) {
             $this->isThrowable = $this->checkIsThrowableCallable();
         }
 
@@ -69,19 +78,19 @@ class CallableReflection
     {
         $params = $this->reflection->getParameters();
 
-        if (0 === count($params)) {
+        if (0 === \count($params)) {
             return true;
         }
 
-        $first = array_shift($params);
+        $first = \array_shift($params);
 
         if ($class = $first->getClass()) {
-            $className = version_compare(PHP_VERSION, '7.0') >= 0 ? 'Throwable' : 'Exception';
+            $className = \version_compare(PHP_VERSION, '7.0') >= 0 ? 'Throwable' : 'Exception';
             if (!$class->isInterface() && !$class->isSubclassOf($className) && ($class->getName() !== $className)) {
                 return false;
             }
             $this->throwableReflection = $class;
-        } elseif (version_compare(PHP_VERSION, '7.0') >= 0 && $first->hasType()) {
+        } elseif (\version_compare(PHP_VERSION, '7.0') >= 0 && $first->hasType()) {
             return false;
         }
 
@@ -89,7 +98,7 @@ class CallableReflection
             return false;
         }
 
-        if (version_compare(PHP_VERSION, '5.4') >= 0 && $first->isCallable()) {
+        if (\version_compare(PHP_VERSION, '5.4') >= 0 && $first->isCallable()) {
             return false;
         }
 
@@ -109,16 +118,16 @@ class CallableReflection
      */
     private function getReflection($callable)
     {
-        if (is_object($callable)) {
+        if (\is_object($callable)) {
             return new \ReflectionMethod($callable, '__invoke');
         }
 
-        if (is_string($callable)) {
-            if (false === strpos($callable, '::')) {
+        if (\is_string($callable)) {
+            if (false === \mb_strpos($callable, '::')) {
                 return new \ReflectionFunction($callable);
             }
 
-            $callable = explode('::', $callable, 2);
+            $callable = \explode('::', $callable, 2);
         }
 
         return new \ReflectionMethod($callable[0], $callable[1]);

@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the awesomite/var-dumper package.
+ *
+ * (c) Bartłomiej Krukowski <bartlomiej@krukowski.me>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Awesomite\ErrorDumper\Handlers;
 
 use Awesomite\ErrorDumper\Listeners\OnExceptionInterface;
@@ -43,17 +52,17 @@ class ErrorHandler implements ErrorHandlerInterface
     private $preListeners = array();
 
     /**
-     * @param int $mode   Default E_ALL | E_STRICT
+     * @param int $mode Default E_ALL | E_STRICT
      *
      * @see http://php.net/manual/en/errorfunc.constants.php
      */
     public function __construct($mode = null)
     {
-        if (!is_int($mode) && !is_null($mode)) {
+        if (!\is_int($mode) && !\is_null($mode)) {
             throw new \InvalidArgumentException('Argument $mode has to be integer or null!');
         }
 
-        $this->mode = is_null($mode) ? E_ALL | E_STRICT : $mode;
+        $this->mode = \is_null($mode) ? E_ALL | E_STRICT : $mode;
     }
 
     public function register($types = ErrorHandler::TYPE_ALL)
@@ -78,7 +87,7 @@ class ErrorHandler implements ErrorHandlerInterface
 
     public function registerOnError()
     {
-        set_error_handler(array($this, static::HANDLER_ERROR), $this->mode);
+        \set_error_handler(array($this, static::HANDLER_ERROR), $this->mode);
 
         return $this;
     }
@@ -90,7 +99,7 @@ class ErrorHandler implements ErrorHandlerInterface
      */
     public function registerOnException()
     {
-        set_exception_handler(array($this, static::HANDLER_EXCEPTION));
+        \set_exception_handler(array($this, static::HANDLER_EXCEPTION));
 
         return $this;
     }
@@ -102,7 +111,7 @@ class ErrorHandler implements ErrorHandlerInterface
      */
     public function registerOnShutdown()
     {
-        register_shutdown_function(array($this, static::HANDLER_SHUTDOWN));
+        \register_shutdown_function(array($this, static::HANDLER_SHUTDOWN));
 
         return $this;
     }
@@ -123,7 +132,7 @@ class ErrorHandler implements ErrorHandlerInterface
 
     public function getErrorSandbox()
     {
-        if (is_null($this->sandbox)) {
+        if (\is_null($this->sandbox)) {
             $this->sandbox = new ErrorSandbox($this->mode);
         }
 
@@ -132,7 +141,7 @@ class ErrorHandler implements ErrorHandlerInterface
 
     public function handleError($code, $message, $file, $line)
     {
-        if (($this->mode & $code) && ((error_reporting() & $code))) {
+        if (($this->mode & $code) && ((\error_reporting() & $code))) {
             $this->onError(new ErrorException($message, $code, $file, $line));
         }
     }
@@ -147,7 +156,7 @@ class ErrorHandler implements ErrorHandlerInterface
 
     public function handleShutdown()
     {
-        $error = error_get_last();
+        $error = \error_get_last();
         if (!$error || !($error['type'] & $this->mode)) {
             return;
         }

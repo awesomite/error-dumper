@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the awesomite/var-dumper package.
+ *
+ * (c) Bartłomiej Krukowski <bartlomiej@krukowski.me>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Awesomite\ErrorDumper\Sandboxes;
 
 use Awesomite\ErrorDumper\TestBase;
@@ -15,7 +24,7 @@ class ErrorSandboxTest extends TestBase
         $sandbox = new ErrorSandbox();
         $expectedResult = 123;
         $result = $sandbox->executeSafely(function () use (&$executed, $expectedResult) {
-            trigger_error('Test');
+            \trigger_error('Test');
             $executed = true;
 
             return $expectedResult;
@@ -29,7 +38,7 @@ class ErrorSandboxTest extends TestBase
      */
     public function testFrameworkError()
     {
-        trigger_error('Test');
+        \trigger_error('Test');
     }
 
     /**
@@ -50,7 +59,7 @@ class ErrorSandboxTest extends TestBase
         try {
             $expectedResult = 125;
             $result = $sandbox->execute(function () use (&$executed, $errorType, $expectedResult) {
-                @trigger_error('Test', $errorType);
+                @\trigger_error('Test', $errorType);
                 $executed = true;
 
                 return $expectedResult;

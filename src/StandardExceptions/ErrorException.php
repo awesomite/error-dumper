@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the awesomite/var-dumper package.
+ *
+ * (c) Bartłomiej Krukowski <bartlomiej@krukowski.me>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Awesomite\ErrorDumper\StandardExceptions;
 
 class ErrorException extends \ErrorException
@@ -15,7 +24,7 @@ class ErrorException extends \ErrorException
     {
         $humanCode = $this->errorNameToCode($code);
         parent::__construct(
-            (!is_null($humanCode) ? $humanCode . ' ' : '') . $message,
+            (!\is_null($humanCode) ? $humanCode . ' ' : '') . $message,
             $code,
             $code,
             $file,
@@ -75,7 +84,7 @@ class ErrorException extends \ErrorException
         );
 
         foreach ($all as $name) {
-            if (defined($name) && constant($name) === $code) {
+            if (\defined($name) && \constant($name) === $code) {
                 return $name;
             }
         }
