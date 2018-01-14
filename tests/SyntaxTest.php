@@ -49,6 +49,12 @@ class SyntaxTest extends TestBase
      */
     public function testTwigSyntax()
     {
+        if (TestEnv::isSpeedTest()) {
+            $this->assertTrue(true);
+
+            return;
+        }
+
         $path = $this->preparePathToDir('templates');
         $this->assertInternalType('string', $path);
         $twig = $this->createTwig($path, array('strpad'), array('memoryUsage', 'exportDeclaredValue'));
