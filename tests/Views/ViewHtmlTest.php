@@ -105,6 +105,10 @@ class ViewHtmlTest extends TestBase
      */
     public function testCache()
     {
+        if (\defined('HHVM_VERSION')) {
+            return;
+        }
+
         $cachePath = $this->getCachePath();
         $this->assertInternalType('string', $cachePath);
 

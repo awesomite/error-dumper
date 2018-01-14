@@ -49,6 +49,10 @@ class SyntaxTest extends TestBase
      */
     public function testTwigSyntax()
     {
+        if (\defined('HHVM_VERSION')) {
+            return;
+        }
+
         if (TestEnv::isSpeedTest()) {
             $this->assertTrue(true);
 
