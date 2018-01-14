@@ -21,6 +21,7 @@ php:
   - hhvm-nightly
 
 env:
+  - HHVM_DISABLE_NUMA="true"
   matrix:
     - DEPENDENCIES="high"
     - DEPENDENCIES="low"
