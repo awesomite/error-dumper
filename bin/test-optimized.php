@@ -21,10 +21,10 @@ $checkSumReader = function ($templatesDir) use ($createFinder) {
     $finder = $createFinder($templatesDir);
     $md5s = array();
     foreach ($finder as $file) {
-        $md5s[] = md5($file->getContents());
+        $md5s[] = \md5($file->getContents());
     }
     
-    return md5(implode('-', $md5s));
+    return \md5(\implode('-', $md5s));
 };
 
 $getTemplatesDir = function () {
