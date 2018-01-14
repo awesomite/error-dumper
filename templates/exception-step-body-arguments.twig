@@ -50,7 +50,7 @@
                 >
                     <div class="panel-body">
                         {% if param.hasValue() %}
-                            <pre class="max-height">{{ param.getValue().getDump() }}</pre>
+                            <pre class="max-height">{{ param.getValue().dumpAsString() }}</pre>
                         {% else %}
                             <pre>undefined</pre>
                         {% endif %}
