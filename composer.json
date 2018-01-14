@@ -34,7 +34,8 @@
     "autoload-dev": {
         "files": ["tests/functions.php"],
         "psr-4": {
-            "Awesomite\\ErrorDumper\\": "tests/"
+            "Awesomite\\ErrorDumper\\": "tests/",
+            "Awesomite\\ErrorDumper\\Optimizer\\": "optimizer/"
         }
     }
 }
