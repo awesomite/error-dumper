@@ -6,33 +6,34 @@ use Symfony\Component\Finder\Finder;
 
 require \implode(DIRECTORY_SEPARATOR, array(__DIR__, '..', 'vendor', 'autoload.php'));
 
-$checkSumReader = function ($templatesDir) {
-    $command = \sprintf(
-        'find %s -type f -exec md5sum {} \; | sort -k 2 | md5sum',
-        $templatesDir
-    );
+$createFinder = function ($dir) {
+    $finder = new Finder();
+    $finder
+        ->in($dir)
+        ->name('*.twig')
+    ;
+
+    return $finder;
+};
+
+$checkSumReader = function ($templatesDir) use ($createFinder) {
+    /** @var Finder $finder */
+    $finder = $createFinder($templatesDir);
+    $md5s = array();
+    foreach ($finder as $file) {
+        $md5s[] = md5($file->getContents());
+    }
     
-    echo $command, "\n";
-    $result = \shell_exec($command);
-    echo $result, "\n";
-    
-    $result = \trim($result);
-    $result = \trim($result, '-');
-    $result = \trim($result);
-    
-    return $result;
+    return md5(implode('-', $md5s));
 };
 
 $getTemplatesDir = function () {
     return \implode(DIRECTORY_SEPARATOR, array(__DIR__, '..', 'templates', 'optimized'));
 };
 
-$rmDirContents = function ($dir) {
-    $finder = new Finder();
-    $finder
-        ->in($dir)
-        ->name('*.twig')
-    ;
+$rmDirContents = function ($dir) use ($createFinder) {
+    /** @var Finder $finder */
+    $finder = $createFinder($dir);
     foreach ($finder as $file) {
         echo $file->getRealPath(), "\n";
         \unlink($file->getRealPath());
