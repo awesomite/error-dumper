@@ -155,7 +155,7 @@ class ErrorHandlerTest extends TestBase
         $errorHandler->handleShutdown();
         $this->assertSame(0, $beeper->countBeeps());
 
-        $reflectionProperty = new \ReflectionProperty(get_class($errorHandler), 'fatalErrors');
+        $reflectionProperty = new \ReflectionProperty(\get_class($errorHandler), 'fatalErrors');
         $reflectionProperty->setAccessible(true);
         $originalFatalErrors = $reflectionProperty->getValue();
         $reflectionProperty->setValue($errorHandler, array($errorType));
