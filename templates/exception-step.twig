@@ -26,7 +26,7 @@
             {% set calledFunction = step.getCalledFunction() %}
             {% set isDeprecated = calledFunction.isDeprecated() %}
             {% if isDeprecated %}<s>{% endif %}
-            <strong>{{ calledFunction.getName() }}()</strong>
+            {{ ' ' }}<strong>{{ calledFunction.getName() }}()</strong>
             {% if isDeprecated %}</s>{% endif %}
         {% endif %}
     </div>
