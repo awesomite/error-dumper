@@ -58,11 +58,12 @@ install:
   - if [[ "$DEPENDENCIES" = 'high' ]]; then travis_retry composer update --no-interaction --prefer-stable; fi
   - if [[ "$DEPENDENCIES" = 'low' ]]; then travis_retry composer update --no-interaction --prefer-stable --prefer-lowest; fi
   - composer show
-  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.1" ]]; then
-      composer global require friendsofphp/php-cs-fixer:@stable;
-      export PHP_CS_FIXER="${HOME}/.composer/vendor/bin/php-cs-fixer";
+  - |
+    if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.1" ]]; then
+      export PHP_CS_FIXER="./dev-tools/vendor/bin/php-cs-fixer";
       export RUN_CS_FIXER="true";
     fi
+  - cd dev-tools; travis_retry composer update; cd ..
 
 before_script:
   - if [[ "$DEPENDENCIES" = 'low' ]]; then export PHP_ARGS=$(php -r "echo '-d error_reporting=', E_ALL ^ (E_DEPRECATED | E_USER_DEPRECATED);"); else export PHP_ARGS=''; fi
@@ -71,6 +72,7 @@ before_script:
   - if [[ "$IS_HHVM" = 'true' ]]; then export PHPUNIT_ARGS='--exclude-group=separateProcess'; else export PHPUNIT_ARGS=''; fi
 
 script:
+  - if [[ "$RUN_CS_FIXER" = "true" ]]; then php -n ${PHP_CS_FIXER} --diff --dry-run -v --allow-risky=yes fix; fi
   - travis_wait composer update --no-interaction --prefer-lowest && vendor/bin/phpunit-4.8-fixer && php -d error_reporting=$(php -r "var_export(E_ALL & ~E_DEPRECATED);") vendor/bin/phpunit ${PHPUNIT_ARGS}
   - travis_wait composer update --no-interaction && vendor/bin/phpunit-4.8-fixer && vendor/bin/phpunit ${PHPUNIT_ARGS}
   - travis_wait composer update --no-interaction --prefer-lowest && vendor/bin/phpunit-4.8-fixer && php -d error_reporting=$(php -r "var_export(E_ALL & ~E_DEPRECATED);") vendor/bin/phpunit
