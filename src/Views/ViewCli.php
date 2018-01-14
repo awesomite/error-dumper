@@ -104,7 +104,6 @@ class ViewCli implements ViewInterface
         if (!$this->output) {
             $this->output = $this->createOutput();
         }
-
         // @codeCoverageIgnoreEnd
 
         return $this->output;
