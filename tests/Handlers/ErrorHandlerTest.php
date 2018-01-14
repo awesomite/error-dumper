@@ -146,11 +146,25 @@ class ErrorHandlerTest extends TestBase
 
             return;
         }
+
+        $errorType = E_USER_NOTICE;
+
         $errorHandler->handleShutdown();
         $this->assertSame(0, $beeper->countBeeps());
-        @\trigger_error('Test');
+        @\trigger_error('Test', $errorType);
         $errorHandler->handleShutdown();
         $this->assertSame(0, $beeper->countBeeps());
+
+        $reflectionProperty = new \ReflectionProperty(get_class($errorHandler), 'fatalErrors');
+        $reflectionProperty->setAccessible(true);
+        $originalFatalErrors = $reflectionProperty->getValue();
+        $reflectionProperty->setValue($errorHandler, array($errorType));
+
+        @\trigger_error('Test', $errorType);
+        $errorHandler->handleShutdown();
+        $this->assertSame(1, $beeper->countBeeps());
+
+        $reflectionProperty->setValue($errorHandler, $originalFatalErrors);
     }
 
     public function testExitAfterTrigger()
