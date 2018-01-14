@@ -77,7 +77,7 @@ class OptimizerCommand
         // '%}   =' => '%} ='
         $output = \preg_replace('/%\}\s+=/s', '%} =', $output);
 
-//         '<script   src' => '<script src'
+        // '<script   src' => '<script src'
         $output = \preg_replace_callback(
             '/(?<first>[a-zA-Z"])\s{2,}(?<second>[a-zA-Z"])/s',
             function ($match) {
