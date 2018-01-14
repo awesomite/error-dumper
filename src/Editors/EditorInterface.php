@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the awesomite/var-dumper package.
+ * This file is part of the awesomite/error-dumper package.
  *
  * (c) Bartłomiej Krukowski <bartlomiej@krukowski.me>
  *
