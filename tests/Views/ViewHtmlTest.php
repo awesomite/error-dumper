@@ -101,8 +101,7 @@ class ViewHtmlTest extends TestBase
     }
 
     /**
-     * @group separateProcess
-     * @runInSeparateProcess
+     * @group noCoverage
      */
     public function testCache()
     {

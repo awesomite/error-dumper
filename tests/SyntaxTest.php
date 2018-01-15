@@ -13,6 +13,7 @@ namespace Awesomite\ErrorDumper;
 
 /**
  * @internal
+ * @group noCoverage
  */
 class SyntaxTest extends TestBase
 {
@@ -33,29 +34,13 @@ class SyntaxTest extends TestBase
 
     public function testPhpSyntax()
     {
-        if (TestEnv::isSpeedTest()) {
-            $this->assertTrue(true);
-
-            return;
-        }
-
         list($path, $counter) = static::requireWholeSrc();
         $this->assertInternalType('string', $path);
         $this->assertGreaterThan(0, $counter);
     }
 
-    /**
-     * @group separateProcess
-     * @runInSeparateProcess
-     */
     public function testTwigSyntax()
     {
-        if (TestEnv::isSpeedTest()) {
-            $this->assertTrue(true);
-
-            return;
-        }
-
         $path = $this->preparePathToDir('templates');
         $this->assertInternalType('string', $path);
         $twig = $this->createTwig($path, array('strpad'), array('memoryUsage', 'exportDeclaredValue'));

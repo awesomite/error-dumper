@@ -69,7 +69,6 @@ before_script:
   - if [[ "$DEPENDENCIES" = 'low' ]]; then export PHP_ARGS=$(php -r "echo '-d error_reporting=', E_ALL ^ (E_DEPRECATED | E_USER_DEPRECATED);"); else export PHP_ARGS=''; fi
   - |
     export IS_HHVM=$(php -r 'echo defined("HHVM_VERSION") ? "true" : "false";');
-  - if [[ "$IS_HHVM" = 'true' ]]; then export PHPUNIT_ARGS='--exclude-group=separateProcess'; else export PHPUNIT_ARGS=''; fi
 
 script:
   - if [[ "$RUN_CS_FIXER" = "true" ]]; then php -n ${PHP_CS_FIXER} --diff --dry-run -v --allow-risky=yes fix; fi
@@ -85,6 +84,15 @@ script:
   - if [[ "$TRAVIS_ALLOW_FAILURE" = 'false' ]]; then php -n ${PHP_CS_FIXER} --diff --dry-run -v fix; fi
   - php ${PHP_ARGS} vendor/bin/phpunit
   - MODE_SPEED_TEST=true vendor/bin/phpunit
+
+  - travis_wait composer update --no-interaction --prefer-lowest && vendor/bin/phpunit-4.8-fixer
+  - php -d error_reporting=$(php -r "var_export(E_ALL & ~E_DEPRECATED);") vendor/bin/phpunit --group=noCoverage
+  - php -d error_reporting=$(php -r "var_export(E_ALL & ~E_DEPRECATED);") vendor/bin/phpunit --exclude-group=noCoverage
+
+  - travis_wait composer update --no-interaction && vendor/bin/phpunit-4.8-fixer
+  - MODE_SPEED_TEST=true vendor/bin/phpunit --group=noCoverage
+  - vendor/bin/phpunit --exclude-group=noCoverage
+
   - bin/test-optimized.php
 
 after_script:
