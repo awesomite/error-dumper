@@ -14,7 +14,6 @@ class TmpException extends \Exception
 }
 
 /**
- * Class TestClass
  * @method callDynamic($a, $b, $c)
  * @method static TestClass create(array $params)
  */
