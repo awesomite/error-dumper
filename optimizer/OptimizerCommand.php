@@ -102,11 +102,6 @@ class OptimizerCommand
             },
             $output
         );
-
-        $toReplace = array(
-            '%} {%' => '%}{%',
-        );
-        $output = \str_replace(\array_keys($toReplace), \array_values($toReplace), $output);
         
         $output = \trim($output) . "\n";
 
