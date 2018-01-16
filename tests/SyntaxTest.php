@@ -39,9 +39,13 @@ class SyntaxTest extends TestBase
         $this->assertGreaterThan(0, $counter);
     }
 
-    public function testTwigSyntax()
+    /**
+     * @dataProvider providerTwigSyntax
+     *
+     * @param string $path
+     */
+    public function testTwigSyntax($path)
     {
-        $path = $this->preparePathToDir('templates');
         $this->assertInternalType('string', $path);
         $twig = $this->createTwig($path, array('strpad'), array('memoryUsage', 'exportDeclaredValue'));
 
@@ -59,6 +63,14 @@ class SyntaxTest extends TestBase
             }
         }
         $this->assertGreaterThan(0, $counter);
+    }
+
+    public function providerTwigSyntax()
+    {
+        return array(
+            array($this->preparePathToDir('templates')),
+            array($this->preparePathToDir('templates_dist')),
+        );
     }
 
     /**
