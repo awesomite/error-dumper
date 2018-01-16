@@ -115,8 +115,8 @@ class OptimizerCommand
 
     private function removeWhiteSpacesBetween($left, $right, $input)
     {
-        $regex = '/' . preg_quote($left, '/') . '\s{1,}' . preg_quote($right, '/') . '/';
+        $regex = '/' . \preg_quote($left, '/') . '\s{1,}' . \preg_quote($right, '/') . '/';
 
-        return preg_replace($regex, $left . $right, $input);
+        return \preg_replace($regex, $left . $right, $input);
     }
 }
