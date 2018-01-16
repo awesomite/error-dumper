@@ -36,9 +36,9 @@
                             {% set declaration = param.getDeclaration() %}
                             {% if declaration.hasDefaultValue() %}
                                 {% if declaration.hasDefaultValueConstantName() %}
-                                    = <strong>{{ declaration.getDefaultValueConstantName() }}</strong>
+                                    {{ ' ' }}= <strong>{{ declaration.getDefaultValueConstantName() }}</strong>
                                 {% elseif declaration.hasDefaultValue() %}
-                                    = <strong>{{ exportDeclaredValue(declaration.getDefaultValue()) }}</strong>
+                                    {{ ' ' }}= <strong>{{ exportDeclaredValue(declaration.getDefaultValue()) }}</strong>
                                 {% endif %}
                             {% endif %}
                         {% endif %}

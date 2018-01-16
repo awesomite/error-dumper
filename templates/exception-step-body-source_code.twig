@@ -11,11 +11,11 @@
                 {% if hasEditor %}
                     {% set tmpUrl = editor.getLinkToFile(line.getFileName(), line.getLineNumber()) %}
                     {% autoescape false %}
-                        <span class="{{ lineClasses }}"
+                        <span{{ lineClasses ? ' class="' ~ lineClasses ~ '"' }}
                         ><a href="{{ tmpUrl|e('html_attr') }}">{{ lineNumber|e }}</a>{{ '    ' }}{{ lineToDisplay|e }}</span>
                     {% endautoescape %}
                 {% else %}
-                    <span class="{{ lineClasses }}">{{ lineNumber }}{{ '    ' }}{{ lineToDisplay }}</span>
+                    <span{{ lineClasses ? ' class="' ~ lineClasses ~ '"' }}>{{ lineNumber }}{{ '    ' }}{{ lineToDisplay }}</span>
                 {% endif %}
             {% endfor %}
         </div>
