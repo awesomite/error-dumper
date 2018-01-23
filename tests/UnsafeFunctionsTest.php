@@ -13,7 +13,7 @@ namespace Awesomite\ErrorDumper;
 
 /**
  * @internal
- * @group noCoverage
+ * @group noSpeedTest
  */
 class UnsafeFunctionsTest extends TestBase
 {

@@ -13,7 +13,8 @@ namespace Awesomite\ErrorDumper;
 
 /**
  * @internal
- * @group noCoverage
+ * @group noSpeedTest
+ * @runTestsInSeparateProcesses
  */
 class SyntaxTest extends TestBase
 {
