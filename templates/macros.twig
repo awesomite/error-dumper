@@ -4,7 +4,10 @@
 
     <li {{ 1 == no ? 'class="active"' }}>
         <a href="#main-exception-{{ no }}" data-toggle="tab">
-            {{ exception.getOriginalClass() }} #{{ no }}
+            {{ exception.getOriginalClass() }}
+            {% if no > 1 or exception.hasPrevious() %}
+                #{{ no }}
+            {% endif %}
         </a>
     </li>
 
