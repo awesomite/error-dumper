@@ -15,7 +15,7 @@
                         ><a href="{{ tmpUrl|e('html_attr') }}">{{ lineNumber|e }}</a>{{ '    ' }}{{ lineToDisplay|e }}</span>
                     {% endautoescape %}
                 {% else %}
-                    <span{{ lineClasses ? ' class="' ~ lineClasses ~ '"' }}>{{ lineNumber }}{{ '    ' }}{{ lineToDisplay }}</span>
+                    <span{{ (lineClasses ? ' class="' ~ lineClasses ~ '"')|raw }}>{{ lineNumber }}{{ '    ' }}{{ lineToDisplay }}</span>
                 {% endif %}
             {% endfor %}
         </div>
