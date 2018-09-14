@@ -2,7 +2,7 @@
     {% import _self as functions %}
     {% set no = _no|default(1) %}
 
-    <li {{ 1 == no ? 'class="active"' }}>
+    <li {{ (1 == no ? 'class="active"')|raw }}>
         <a href="#main-exception-{{ no }}" data-toggle="tab">
             {{ exception.getOriginalClass() }}
             {% if no > 1 or exception.hasPrevious() %}
