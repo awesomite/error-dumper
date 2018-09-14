@@ -2,7 +2,11 @@
     {% import _self as functions %}
     {% set no = _no|default(1) %}
 
-    <li {{ 1 == no ? 'class="active"' }}><a href="#main-exception-{{ no }}" data-toggle="tab">#{{ no }} {{ exception.getOriginalClass() }}</a></li>
+    <li {{ 1 == no ? 'class="active"' }}>
+        <a href="#main-exception-{{ no }}" data-toggle="tab">
+            {{ exception.getOriginalClass() }} #{{ no }}
+        </a>
+    </li>
 
     {% if exception.hasPrevious() %}
         {{ functions.exceptionChainPills(exception.getPrevious(), no+1) }}
