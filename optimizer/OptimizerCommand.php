@@ -84,7 +84,7 @@ class OptimizerCommand
         
         // '   &bull;' => ' &bull;'
         $output = \preg_replace_callback(
-            '/(?<pre>\s*)(?<entity>&[a-z0-9]+);(?<post>\s*)/s',
+            '/(?<pre>\s*)(?<entity>&[a-z0-9]+;)(?<post>\s*)/s',
                 function ($matches) {
                     $pre = !empty($matches['pre']) ? ' ' : '';
                     $post = !empty($matches['post']) ? ' ' : '';
