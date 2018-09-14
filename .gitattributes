@@ -9,4 +9,5 @@
 /.gitignore export-ignore
 /.php_cs.dist export-ignore
 /.travis.yml export-ignore
+/infection.json.dist export-ignore
 /phpunit.xml.dist export-ignore
