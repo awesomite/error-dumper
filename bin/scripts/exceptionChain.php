@@ -17,6 +17,7 @@ use Awesomite\ErrorDumper\Serializable\SerializableException;
  */
 class CalculatorException extends Exception
 {
+    const CODE_DIVISION_BY_ZERO = 1;
 }
 
 /**
@@ -27,13 +28,16 @@ class Calculator
     public function divide($a, $b)
     {
         if (0 === $b) {
-            throw new CalculatorException('Division by zero');
+            throw new CalculatorException('Division by zero', CalculatorException::CODE_DIVISION_BY_ZERO);
         }
 
         return $a/$b;
     }
 }
 
+/**
+ * @internal
+ */
 class Executor
 {
     public function execute($callable, $arguments)
