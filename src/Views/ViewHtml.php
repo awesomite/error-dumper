@@ -168,7 +168,7 @@ class ViewHtml implements ViewInterface
 
         $path = \implode(DIRECTORY_SEPARATOR, array($root, 'templates_dist'));
 
-        return new \Twig_Loader_Filesystem($path);
+        return new TwigLoader($path);
     }
 
     private function getTags()
