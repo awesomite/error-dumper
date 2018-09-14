@@ -17,10 +17,10 @@
 {% endmacro %}
 
 {% macro exception(exception, editor, hasEditor, no) %}
-    <h2>Message</h2>
+    <h2>Exception</h2>
     {% set class = exception.getOriginalClass() %}
     {% set message = exception.getMessage() %}
-    <pre><strong>{{ class }}</strong>{{ message != '' ? ' ' ~ message }}</pre>
+    <pre><strong>{{ class }} (code {{ exception.getCode() }})</strong>{{ message != '' ? ' ' ~ message }}</pre>
 
     <h2>Stack trace</h2>
 
