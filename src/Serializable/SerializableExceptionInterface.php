@@ -54,4 +54,9 @@ interface SerializableExceptionInterface extends \Serializable
      * @return SerializableExceptionInterface
      */
     public function getPrevious();
+
+    /**
+     * @return VariableInterface[]
+     */
+    public function getContext();
 }

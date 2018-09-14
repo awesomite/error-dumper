@@ -12,6 +12,7 @@
 namespace Awesomite\ErrorDumper\Serializable;
 
 use Awesomite\StackTrace\StackTraceFactory;
+use Awesomite\VarDumper\LightVarDumper;
 
 class SerializableException implements SerializableExceptionInterface
 {
@@ -33,12 +34,23 @@ class SerializableException implements SerializableExceptionInterface
     private $previousException = null;
 
     /**
+     * @var bool
+     */
+    private $withContext;
+
+    /**
+     * @var null|array
+     */
+    private $context = null;
+
+    /**
      * @param \Exception|\Throwable $exception
      * @param int                   $stepLimit
      * @param bool                  $ignoreArgs
      * @param bool                  $withPrevious
+     * @param bool                  $withContext
      */
-    public function __construct($exception, $stepLimit = 0, $ignoreArgs = false, $withPrevious = true)
+    public function __construct($exception, $stepLimit = 0, $ignoreArgs = false, $withPrevious = true, $withContext = true)
     {
         $this->code = $exception->getCode();
         $this->file = $exception->getFile();
@@ -50,6 +62,7 @@ class SerializableException implements SerializableExceptionInterface
         if ($withPrevious && $exception->getPrevious()) {
             $this->previousException = new static($exception->getPrevious());
         }
+        $this->withContext = $withContext;
     }
 
     public function getCode()
@@ -119,5 +132,15 @@ class SerializableException implements SerializableExceptionInterface
     public function hasPrevious()
     {
         return !\is_null($this->previousException);
+    }
+
+    public function getContext()
+    {
+        if (null === $this->context) {
+            // TODO varDumper must be shared between EnvironmentVariablesFactory and stackTrace object
+            $this->context = $this->withContext ? EnvironmentVariablesFactory::create(new LightVarDumper()) : array();
+        }
+
+        return $this->context;
     }
 }

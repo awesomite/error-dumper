@@ -18,6 +18,8 @@
     {% set message = exception.getMessage() %}
     <pre><strong>{{ class }}</strong>{{ message != '' ? ' ' ~ message }}</pre>
 
+    {% include 'exception-context.twig' %}
+
     <h2>Stack trace</h2>
 
     {% set stepIndex = -1 %}
