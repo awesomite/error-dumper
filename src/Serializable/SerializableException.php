@@ -138,7 +138,7 @@ class SerializableException implements SerializableExceptionInterface
     {
         if (null === $this->context) {
             // TODO varDumper must be shared between EnvironmentVariablesFactory and stackTrace object
-            $this->context = $this->withContext ? EnvironmentVariablesFactory::create(new LightVarDumper()) : array();
+            $this->context = $this->withContext ? ContextVariablesFactory::create(new LightVarDumper()) : array();
         }
 
         return $this->context;

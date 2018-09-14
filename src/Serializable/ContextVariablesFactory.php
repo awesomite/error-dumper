@@ -16,7 +16,7 @@ use Awesomite\VarDumper\VarDumperInterface;
 /**
  * @internal
  */
-class EnvironmentVariablesFactory
+class ContextVariablesFactory
 {
     public static function create(VarDumperInterface $varDumper)
     {
