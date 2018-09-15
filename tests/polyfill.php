@@ -17,7 +17,7 @@ if (!\function_exists('is_iterable')) {
      *
      * @return bool
      *
-     * @see https://travis-ci.org/awesomite/var-dumper/jobs/428546478
+     * @see https://travis-ci.org/awesomite/error-dumper/jobs/428909243
      */
     function is_iterable($var)
     {
