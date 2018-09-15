@@ -1,6 +1,6 @@
 {% set unknownCounter = 0 %}
 {% set argIndex = -1 %}
-<div class="tab-pane fade {{ argumentsTab ? 'active in' }}" id="colorized-key-{{ stepKey }}">
+<div class="tab-pane fade {{ argumentsTab ? 'active in' }}" id="params-{{ stepKey }}">
     <div class="panel-group">
         {% for keyParam, param in arguments %}
             {% set argIndex = argIndex + 1 %}
@@ -28,7 +28,7 @@
                     {% endif %}
                     <a
                             data-toggle="collapse"
-                            data-target="#parameters-{{ stepKey }}-{{ keyParam }}"
+                            data-target="#params-{{ stepKey }}-{{ keyParam }}"
                             class="var-header {{ showFull ? '' : 'collapsed' }}"
                     >
                         {{ argumentName }}
@@ -45,7 +45,7 @@
                     </a>
                 </div>
                 <div
-                        id="parameters-{{ stepKey }}-{{ keyParam }}"
+                        id="params-{{ stepKey }}-{{ keyParam }}"
                         class="panel-collapse collapse {{ showFull ? 'in' }}"
                 >
                     <div class="panel-body">

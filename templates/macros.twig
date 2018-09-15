@@ -27,7 +27,7 @@
     {% set stepIndex = -1 %}
     {% for step in exception.getStackTrace() %}
         {% set stepIndex = stepIndex + 1 %}
-        {% set stepKey = 'e-' ~ no ~ 'step-' ~ stepIndex %}
+        {% set stepKey = 'e' ~ no ~ '-s' ~ stepIndex %}
         {% include 'exception-step.twig' %}
     {% endfor %}
 {% endmacro %}
