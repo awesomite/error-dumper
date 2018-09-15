@@ -28,7 +28,7 @@
                     {% endif %}
                     <a
                             data-toggle="collapse"
-                            data-target="#params-{{ stepKey }}-{{ keyParam }}"
+                            data-target="#param-{{ stepKey }}-{{ keyParam }}"
                             class="var-header {{ showFull ? '' : 'collapsed' }}"
                     >
                         {{ argumentName }}
@@ -45,7 +45,7 @@
                     </a>
                 </div>
                 <div
-                        id="params-{{ stepKey }}-{{ keyParam }}"
+                        id="param-{{ stepKey }}-{{ keyParam }}"
                         class="panel-collapse collapse {{ showFull ? 'in' }}"
                 >
                     <div class="panel-body">
