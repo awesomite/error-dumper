@@ -4,7 +4,7 @@
     "prefer-stable": true,
     "require": {
         "php": "^5.3 || ^7.0",
-        "awesomite/stack-trace": "^1.0.0",
+        "awesomite/stack-trace": "^1.0.2",
         "symfony/console": "^2.7 || ^3.0 || ^4.0",
         "twig/twig": "^1.12.0-stable || ^2.0"
     },
