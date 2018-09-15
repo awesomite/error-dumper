@@ -32,6 +32,7 @@
         }
     },
     "autoload-dev": {
+        "files": ["tests/polyfill.php"],
         "files": ["tests/functions.php"],
         "psr-4": {
             "Awesomite\\ErrorDumper\\": "tests/",
