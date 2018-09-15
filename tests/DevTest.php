@@ -21,5 +21,6 @@ class DevTest extends TestBase
         $reflectionClass = new \ReflectionClass('Awesomite\ErrorDumper\Views\ViewHtml');
         $file = \file_get_contents($reflectionClass->getFileName());
         $this->assertContains("'templates_dist'", $file);
+        $this->assertContains("'templates'", $file);
     }
 }
