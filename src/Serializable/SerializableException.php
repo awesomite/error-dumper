@@ -100,6 +100,7 @@ class SerializableException implements SerializableExceptionInterface
             'stackTrace'    => $this->stackTrace,
             'originalClass' => $this->originalClass,
             'previous'      => $this->previousException,
+            'context'       => $this->getContext(),
         ));
     }
 
@@ -113,6 +114,7 @@ class SerializableException implements SerializableExceptionInterface
         $this->stackTrace = $unserialized['stackTrace'];
         $this->originalClass = $unserialized['originalClass'];
         $this->previousException = $unserialized['previous'];
+        $this->context = $unserialized['context'];
     }
 
     public function getOriginalClass()
