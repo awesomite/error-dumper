@@ -17,6 +17,7 @@ list($root) = \explode(DIRECTORY_SEPARATOR . 'bin' . DIRECTORY_SEPARATOR, __DIR_
 require_once $root . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 
 $pages = array(
+    'exceptionChain'         => 'Exception chain',
     'testStackTrace'         => 'Stack trace',
     'sandbox'                => 'Sandbox',
     'sandbox2'               => 'Sandbox with exception',
@@ -24,7 +25,6 @@ $pages = array(
     'humanFriendlyErrorCode' => 'Human friendly error code',
     'skipRuntimeException'   => 'Skipping chosen exceptions',
     'fatalError'             => 'Fatal error',
-    'exceptionChain'         => 'Exception chain',
 );
 
 $app = new Silex\Application();
