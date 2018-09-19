@@ -13,7 +13,7 @@ namespace Awesomite\ErrorDumper\Serializable;
 
 use Awesomite\VarDumper\VarDumperInterface;
 
-final class ContextVariablesFactory implements ContextVariablesFactoryInterface
+final class ContextVarsFactory implements ContextVarsFactoryInterface
 {
     /**
      * @var VarDumperInterface

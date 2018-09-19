@@ -44,17 +44,17 @@ class SerializableException implements SerializableExceptionInterface
     private $context = null;
 
     /**
-     * @var null|ContextVariablesFactoryInterface
+     * @var null|ContextVarsFactoryInterface
      */
     private $contextFactory;
 
     /**
-     * @param \Exception|\Throwable                 $exception
-     * @param int                                   $stepLimit
-     * @param bool                                  $ignoreArgs
-     * @param bool                                  $withPrevious
-     * @param bool                                  $withContext
-     * @param ContextVariablesFactoryInterface|null $contextVariablesFactory
+     * @param \Exception|\Throwable            $exception
+     * @param int                              $stepLimit
+     * @param bool                             $ignoreArgs
+     * @param bool                             $withPrevious
+     * @param bool                             $withContext
+     * @param ContextVarsFactoryInterface|null $contextVariablesFactory
      */
     public function __construct(
         $exception,
@@ -62,7 +62,7 @@ class SerializableException implements SerializableExceptionInterface
         $ignoreArgs = false,
         $withPrevious = true,
         $withContext = true,
-        ContextVariablesFactoryInterface $contextVariablesFactory = null
+        ContextVarsFactoryInterface $contextVariablesFactory = null
     ) {
         $this->code = $exception->getCode();
         $this->file = $exception->getFile();
@@ -161,6 +161,6 @@ class SerializableException implements SerializableExceptionInterface
     private function getContextFactory()
     {
         // TODO varDumper must be shared between EnvironmentVariablesFactory and stackTrace object
-        return $this->contextFactory ?: $this->contextFactory = new ContextVariablesFactory(new LightVarDumper());
+        return $this->contextFactory ?: $this->contextFactory = new ContextVarsFactory(new LightVarDumper());
     }
 }

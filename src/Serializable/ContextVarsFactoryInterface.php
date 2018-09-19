@@ -11,7 +11,7 @@
 
 namespace Awesomite\ErrorDumper\Serializable;
 
-interface ContextVariablesFactoryInterface
+interface ContextVarsFactoryInterface
 {
     /**
      * @return VariableInterface[]
