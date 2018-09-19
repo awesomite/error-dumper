@@ -27,6 +27,7 @@
         }
     ],
     "autoload": {
+        "files": ["src/functions.php"],
         "psr-4": {
             "Awesomite\\ErrorDumper\\": "src/"
         }
