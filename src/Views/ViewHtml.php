@@ -180,7 +180,7 @@ class ViewHtml implements ViewInterface
         \array_pop($parts);
         $root = \implode($delimiter, $parts);
 
-        $path = \implode(DIRECTORY_SEPARATOR, array($root, 'templates_dist'));
+        $path = \implode(DIRECTORY_SEPARATOR, array($root, $this->useDist ? 'templates_dist' : 'templates'));
 
         return new \Twig_Loader_Filesystem($path);
     }
