@@ -30,8 +30,8 @@ class VariableTest extends TestBase
 
         foreach (array($variable, \unserialize(\serialize($variable))) as $current) {
             /** @var Variable $current */
-            $this->assertSame($name, $variable->getName());
-            $this->assertSame($dump, $variable->dumpAsString());
+            $this->assertSame($name, $current->getName());
+            $this->assertSame($dump, $current->dumpAsString());
         }
     }
 
