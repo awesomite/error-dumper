@@ -36,7 +36,7 @@
     {% import _self as functions %}
     {% set no = _no|default(1) %}
 
-    <div class="tab-pane fade active in" id="main-exception-{{ no }}">
+    <div class="tab-pane fade{{ 1 == no ? ' active in' }}" id="main-exception-{{ no }}">
         {{ functions.exception(exception, editor, hasEditor, no) }}
     </div>
 
