@@ -52,7 +52,7 @@ class ViewHtmlTest extends TestBase
 
         $html = $this->printToVar(function () use ($serializable) {
             $view = new ViewHtml();
-            $view->useDistTemplates(true);
+            $view->useDistTemplates();
             $view->display($serializable);
         });
 

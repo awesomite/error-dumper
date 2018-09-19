@@ -12,7 +12,6 @@
 namespace Awesomite\ErrorDumper\Serializable;
 
 use Awesomite\StackTrace\StackTraceFactory;
-use Awesomite\VarDumper\LightVarDumper;
 
 class SerializableException implements SerializableExceptionInterface
 {
@@ -160,7 +159,6 @@ class SerializableException implements SerializableExceptionInterface
 
     private function getContextFactory()
     {
-        // TODO varDumper must be shared between EnvironmentVariablesFactory and stackTrace object
-        return $this->contextFactory ?: $this->contextFactory = new ContextVarsFactory(new LightVarDumper());
+        return $this->contextFactory ?: $this->contextFactory = new ContextVarsFactory($this->getStackTrace()->getVarDumper());
     }
 }
