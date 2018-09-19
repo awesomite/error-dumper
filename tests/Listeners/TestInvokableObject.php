@@ -14,7 +14,7 @@ namespace Awesomite\ErrorDumper\Listeners;
 /**
  * @internal
  */
-class TestInvokableObject
+final class TestInvokableObject
 {
     public function __invoke()
     {

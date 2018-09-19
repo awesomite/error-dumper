@@ -15,7 +15,7 @@ namespace Awesomite\ErrorDumper;
  * @internal
  * @group noSpeedTest
  */
-class UnsafeFunctionsTest extends TestBase
+final class UnsafeFunctionsTest extends AbstractTestCase
 {
     private static $unsafeFunctions
         = array(

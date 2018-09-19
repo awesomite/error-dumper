@@ -14,7 +14,7 @@ namespace Awesomite\ErrorDumper\TestHelpers;
 /**
  * @internal
  */
-class Beeper
+final class Beeper
 {
     private $counter = 0;
 

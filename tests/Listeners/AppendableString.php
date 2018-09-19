@@ -14,7 +14,7 @@ namespace Awesomite\ErrorDumper\Listeners;
 /**
  * @internal
  */
-class AppendableString
+final class AppendableString
 {
     private $string;
 

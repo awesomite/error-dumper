@@ -15,7 +15,7 @@ use Awesomite\ErrorDumper\Editors\EditorInterface;
 use Awesomite\ErrorDumper\Editors\Phpstorm;
 use Awesomite\ErrorDumper\Serializable\SerializableException;
 use Awesomite\ErrorDumper\Serializable\SerializableExceptionInterface;
-use Awesomite\ErrorDumper\TestBase;
+use Awesomite\ErrorDumper\AbstractTestCase;
 use Awesomite\VarDumper\LightVarDumper;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
@@ -23,7 +23,7 @@ use Symfony\Component\Finder\Finder;
 /**
  * @internal
  */
-class ViewHtmlTest extends TestBase
+final class ViewHtmlTest extends AbstractTestCase
 {
     public static function setUpBeforeClass()
     {

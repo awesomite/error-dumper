@@ -11,12 +11,12 @@
 
 namespace Awesomite\ErrorDumper\Listeners;
 
-use Awesomite\ErrorDumper\TestBase;
+use Awesomite\ErrorDumper\AbstractTestCase;
 
 /**
  * @internal
  */
-class CallableReflectionTest extends TestBase
+final class CallableReflectionTest extends AbstractTestCase
 {
     /**
      * @dataProvider providerGetReflection

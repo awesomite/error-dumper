@@ -14,7 +14,7 @@ namespace Awesomite\ErrorDumper;
 /**
  * @internal
  */
-class ErrorDumperTest extends TestBase
+final class ErrorDumperTest extends AbstractTestCase
 {
     public function testCreateDevHandler()
     {

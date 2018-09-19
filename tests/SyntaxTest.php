@@ -16,7 +16,7 @@ namespace Awesomite\ErrorDumper;
  * @group noSpeedTest
  * @runTestsInSeparateProcesses
  */
-class SyntaxTest extends TestBase
+final class SyntaxTest extends AbstractTestCase
 {
     public static function requireWholeSrc()
     {

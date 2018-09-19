@@ -11,12 +11,12 @@
 
 namespace Awesomite\ErrorDumper\StandardExceptions;
 
-use Awesomite\ErrorDumper\TestBase;
+use Awesomite\ErrorDumper\AbstractTestCase;
 
 /**
  * @internal
  */
-class ErrorExceptionTest extends TestBase
+final class ErrorExceptionTest extends AbstractTestCase
 {
     /**
      * @dataProvider providerConstructor

@@ -11,14 +11,14 @@
 
 namespace Awesomite\ErrorDumper\Listeners;
 
-use Awesomite\ErrorDumper\TestBase;
+use Awesomite\ErrorDumper\AbstractTestCase;
 use Awesomite\ErrorDumper\TestHelpers\Beeper;
 use Awesomite\ErrorDumper\Views\ViewInterface;
 
 /**
  * @internal
  */
-class OnExceptionDevViewTest extends TestBase
+final class OnExceptionDevViewTest extends AbstractTestCase
 {
     public function testTrigger()
     {

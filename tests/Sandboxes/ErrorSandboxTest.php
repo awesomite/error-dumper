@@ -11,12 +11,12 @@
 
 namespace Awesomite\ErrorDumper\Sandboxes;
 
-use Awesomite\ErrorDumper\TestBase;
+use Awesomite\ErrorDumper\AbstractTestCase;
 
 /**
  * @internal
  */
-class ErrorSandboxTest extends TestBase
+final class ErrorSandboxTest extends AbstractTestCase
 {
     public function testExecuteSafely()
     {

@@ -11,12 +11,12 @@
 
 namespace Awesomite\ErrorDumper\Serializable;
 
-use Awesomite\ErrorDumper\TestBase;
+use Awesomite\ErrorDumper\AbstractTestCase;
 
 /**
  * @internal
  */
-class SerializableExceptionTest extends TestBase
+final class SerializableExceptionTest extends AbstractTestCase
 {
     /**
      * @dataProvider providerAll

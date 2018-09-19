@@ -13,13 +13,13 @@ namespace Awesomite\ErrorDumper\Views;
 
 use Awesomite\ErrorDumper\Serializable\SerializableException;
 use Awesomite\ErrorDumper\Serializable\SerializableExceptionInterface;
-use Awesomite\ErrorDumper\TestBase;
+use Awesomite\ErrorDumper\AbstractTestCase;
 use Symfony\Component\Console\Output\StreamOutput;
 
 /**
  * @internal
  */
-class ViewCliTest extends TestBase
+final class ViewCliTest extends AbstractTestCase
 {
     /**
      * @dataProvider providerDisplay

@@ -14,7 +14,7 @@ namespace Awesomite\ErrorDumper\Views;
 /**
  * @internal
  */
-class Stringable
+final class Stringable
 {
     private $callable;
 

@@ -12,9 +12,9 @@
 namespace Awesomite\ErrorDumper\Listeners;
 
 use Awesomite\ErrorDumper\Handlers\ErrorHandler;
-use Awesomite\ErrorDumper\TestBase;
+use Awesomite\ErrorDumper\AbstractTestCase;
 
-class CallableValidatorTest extends TestBase
+final class CallableValidatorTest extends AbstractTestCase
 {
     public function testValidator()
     {

@@ -14,7 +14,7 @@ namespace Awesomite\ErrorDumper;
 /**
  * @internal
  */
-class TestBase extends \PHPUnit_Framework_TestCase
+abstract class AbstractTestCase extends \PHPUnit_Framework_TestCase
 {
     protected function setUp()
     {

@@ -14,7 +14,7 @@ namespace Awesomite\ErrorDumper;
 /**
  * @internal
  */
-class TestEnv
+final class TestEnv
 {
     public static function isSpeedTest()
     {
