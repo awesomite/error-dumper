@@ -20,9 +20,15 @@ final class ContextVarsFactory implements ContextVarsFactoryInterface
      */
     private $varDumper;
 
-    public function __construct(VarDumperInterface $varDumper)
+    /**
+     * @var array
+     */
+    private $exclude;
+
+    public function __construct(VarDumperInterface $varDumper, array $exclude = array())
     {
         $this->varDumper = $varDumper;
+        $this->exclude = $exclude;
     }
 
     public function createContext()
@@ -34,26 +40,43 @@ final class ContextVarsFactory implements ContextVarsFactoryInterface
 
     private function createForCli()
     {
-        global $argv;
-
-        return array(
-            $this->createFrom('argv', isset($argv) ? $argv : null),
-            $this->createFrom('_SERVER', isset($_SERVER) ? $_SERVER : null),
-            $this->createFrom('_ENV', isset($_ENV) ? $_ENV : null),
-        );
+         return $this->createFromGlobals(array(
+             'argv',
+             'argc',
+             '_SERVER',
+             '_ENV',
+         ));
     }
 
     private function createForHttp()
     {
-        return array(
-            $this->createFrom('_SERVER', isset($_SERVER) ? $_SERVER : null),
-            $this->createFrom('_GET', isset($_GET) ? $_GET : null),
-            $this->createFrom('_POST', isset($_POST) ? $_POST : null),
-            $this->createFrom('_FILES', isset($_FILES) ? $_FILES : null),
-            $this->createFrom('_COOKIE', isset($_COOKIE) ? $_COOKIE : null),
-            $this->createFrom('_SESSION', isset($_SESSION) ? $_SESSION : null),
-            $this->createFrom('_ENV', isset($_ENV) ? $_ENV : null),
-        );
+        return $this->createFromGlobals(array(
+            '_SERVER',
+            '_GET',
+            '_POST',
+            '_FILES',
+            '_COOKIE',
+            '_SESSION',
+            '_ENV',
+        ));
+    }
+
+    private function createFromGlobals($names)
+    {
+        $result = array();
+        foreach ($names as $name) {
+            if (!in_array($name, $this->exclude, true)) {
+                continue;
+            }
+            $result[] = $this->createFromGlobal($name);
+        }
+
+        return $result;
+    }
+
+    private function createFromGlobal($name)
+    {
+        return $this->createFrom($name, isset($GLOBALS[$name]) ? $GLOBALS[$name] : null);
     }
 
     /**
