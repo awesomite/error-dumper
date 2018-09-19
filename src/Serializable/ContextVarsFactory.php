@@ -65,7 +65,7 @@ final class ContextVarsFactory implements ContextVarsFactoryInterface
     {
         $result = array();
         foreach ($names as $name) {
-            if (!in_array($name, $this->exclude, true)) {
+            if (in_array($name, $this->exclude, true)) {
                 continue;
             }
             $result[] = $this->createFromGlobal($name);
