@@ -13,61 +13,57 @@ namespace Awesomite\ErrorDumper\Serializable;
 
 use Awesomite\VarDumper\VarDumperInterface;
 
-/**
- * @internal
- */
-class ContextVariablesFactory
+final class ContextVariablesFactory implements ContextVariablesFactoryInterface
 {
-    public static function create(VarDumperInterface $varDumper)
+    /**
+     * @var VarDumperInterface
+     */
+    private $varDumper;
+
+    public function __construct(VarDumperInterface $varDumper)
     {
-        return 'cli' === \php_sapi_name()
-            ? static::createForCli($varDumper)
-            : static::createForHttp($varDumper);
+        $this->varDumper = $varDumper;
     }
 
-    /**
-     * @param VarDumperInterface $varDumper
-     *
-     * @return array
-     */
-    public static function createForCli(VarDumperInterface $varDumper)
+    public function createContext()
+    {
+        return 'cli' === \php_sapi_name()
+            ? $this->createForCli()
+            : $this->createForHttp();
+    }
+
+    private function createForCli()
     {
         global $argv;
 
         return array(
-            static::createFrom($varDumper, 'argv', isset($argv) ? $argv : null),
-            static::createFrom($varDumper, '_SERVER', isset($_SERVER) ? $_SERVER : null),
-            static::createFrom($varDumper, '_ENV', isset($_ENV) ? $_ENV : null),
+            $this->createFrom('argv', isset($argv) ? $argv : null),
+            $this->createFrom('_SERVER', isset($_SERVER) ? $_SERVER : null),
+            $this->createFrom('_ENV', isset($_ENV) ? $_ENV : null),
         );
     }
 
-    /**
-     * @param VarDumperInterface $varDumper
-     *
-     * @return VariableInterface[]
-     */
-    public static function createForHttp(VarDumperInterface $varDumper)
+    private function createForHttp()
     {
         return array(
-            static::createFrom($varDumper, '_SERVER', isset($_SERVER) ? $_SERVER : null),
-            static::createFrom($varDumper, '_GET', isset($_GET) ? $_GET : null),
-            static::createFrom($varDumper, '_POST', isset($_POST) ? $_POST : null),
-            static::createFrom($varDumper, '_FILES', isset($_FILES) ? $_FILES : null),
-            static::createFrom($varDumper, '_COOKIE', isset($_COOKIE) ? $_COOKIE : null),
-            static::createFrom($varDumper, '_SESSION', isset($_SESSION) ? $_SESSION : null),
-            static::createFrom($varDumper, '_ENV', isset($_ENV) ? $_ENV : null),
+            $this->createFrom('_SERVER', isset($_SERVER) ? $_SERVER : null),
+            $this->createFrom('_GET', isset($_GET) ? $_GET : null),
+            $this->createFrom('_POST', isset($_POST) ? $_POST : null),
+            $this->createFrom('_FILES', isset($_FILES) ? $_FILES : null),
+            $this->createFrom('_COOKIE', isset($_COOKIE) ? $_COOKIE : null),
+            $this->createFrom('_SESSION', isset($_SESSION) ? $_SESSION : null),
+            $this->createFrom('_ENV', isset($_ENV) ? $_ENV : null),
         );
     }
 
     /**
-     * @param VarDumperInterface $varDumper
-     * @param string             $name
-     * @param mixed              $value
+     * @param string $name
+     * @param mixed  $value
      *
      * @return Variable
      */
-    private static function createFrom(VarDumperInterface $varDumper, $name, $value)
+    private function createFrom($name, $value)
     {
-        return new Variable($name, $varDumper->dumpAsString($value));
+        return new Variable($name, $this->varDumper->dumpAsString($value));
     }
 }

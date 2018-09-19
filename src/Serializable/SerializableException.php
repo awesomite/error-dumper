@@ -44,14 +44,26 @@ class SerializableException implements SerializableExceptionInterface
     private $context = null;
 
     /**
-     * @param \Exception|\Throwable $exception
-     * @param int                   $stepLimit
-     * @param bool                  $ignoreArgs
-     * @param bool                  $withPrevious
-     * @param bool                  $withContext
+     * @var null|ContextVariablesFactoryInterface
      */
-    public function __construct($exception, $stepLimit = 0, $ignoreArgs = false, $withPrevious = true, $withContext = true)
-    {
+    private $contextFactory;
+
+    /**
+     * @param \Exception|\Throwable                 $exception
+     * @param int                                   $stepLimit
+     * @param bool                                  $ignoreArgs
+     * @param bool                                  $withPrevious
+     * @param bool                                  $withContext
+     * @param ContextVariablesFactoryInterface|null $contextVariablesFactory
+     */
+    public function __construct(
+        $exception,
+        $stepLimit = 0,
+        $ignoreArgs = false,
+        $withPrevious = true,
+        $withContext = true,
+        ContextVariablesFactoryInterface $contextVariablesFactory = null
+    ) {
         $this->code = $exception->getCode();
         $this->file = $exception->getFile();
         $this->line = $exception->getLine();
@@ -63,6 +75,7 @@ class SerializableException implements SerializableExceptionInterface
             $this->previousException = new static($exception->getPrevious());
         }
         $this->withContext = $withContext;
+        $this->contextFactory = $contextVariablesFactory;
     }
 
     public function getCode()
@@ -139,10 +152,15 @@ class SerializableException implements SerializableExceptionInterface
     public function getContext()
     {
         if (null === $this->context) {
-            // TODO varDumper must be shared between EnvironmentVariablesFactory and stackTrace object
-            $this->context = $this->withContext ? ContextVariablesFactory::create(new LightVarDumper()) : array();
+            $this->context = $this->withContext ? $this->getContextFactory()->createContext() : array();
         }
 
         return $this->context;
+    }
+
+    private function getContextFactory()
+    {
+        // TODO varDumper must be shared between EnvironmentVariablesFactory and stackTrace object
+        return $this->contextFactory ?: $this->contextFactory = new ContextVariablesFactory(new LightVarDumper());
     }
 }
