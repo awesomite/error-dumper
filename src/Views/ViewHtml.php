@@ -39,6 +39,8 @@ class ViewHtml implements ViewInterface
 
     private $headersEnabled = true;
 
+    private $useDist = true;
+
     /**
      * @param string
      *
@@ -133,6 +135,18 @@ class ViewHtml implements ViewInterface
     public function enableHeaders()
     {
         $this->headersEnabled = true;
+
+        return $this;
+    }
+
+    /**
+     * @param $condition
+     *
+     * @return $this
+     */
+    public function useDistTemplates($condition)
+    {
+        $this->useDist = $condition;
 
         return $this;
     }

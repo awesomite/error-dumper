@@ -40,6 +40,25 @@ class ViewHtmlTest extends TestBase
         \ob_end_clean();
     }
 
+    public function testDistTemplates()
+    {
+        $exception = new \RuntimeException('My test exception', 5);
+        $serializable = new SerializableException($exception);
+
+        $compressedHtml = $this->printToVar(function () use ($serializable) {
+            $view = new ViewHtml();
+            $view->display($serializable);
+        });
+
+        $html = $this->printToVar(function () use ($serializable) {
+            $view = new ViewHtml();
+            $view->useDistTemplates(true);
+            $view->display($serializable);
+        });
+
+        $this->assertTrue(\mb_strlen($html) > \mb_strlen($compressedHtml));
+    }
+
     /**
      * @dataProvider providerDisplay
      *
@@ -193,5 +212,15 @@ SCRIPT;
         $view = new ViewHtml();
         $this->assertSame($view, $view->disableHeaders());
         $this->assertSame($view, $view->enableHeaders());
+    }
+
+    private function printToVar($callable)
+    {
+        \ob_start();
+        $callable();
+        $result = \ob_get_contents();
+        \ob_end_clean();
+
+        return $result;
     }
 }
