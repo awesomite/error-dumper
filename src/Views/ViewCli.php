@@ -46,7 +46,11 @@ class ViewCli implements ViewInterface
         $output = $this->getOutput();
         $formatter = new OutputFormatter();
 
-        $header = "  {$exception->getOriginalClass()}: {$exception->getMessage()}  ";
+        $header = "  {$exception->getOriginalClass()} (code {$exception->getCode()})";
+        if ('' !== $msg = $exception->getMessage()) {
+            $header .= ' ' . $msg;
+        }
+        $header .= '  ';
         $emptyLine = \str_pad('', \mb_strlen($header), ' ');
         $output->writeln("<header>{$emptyLine}</header>");
         $output->writeln("<header>{$formatter->escape($header)}</header>");
