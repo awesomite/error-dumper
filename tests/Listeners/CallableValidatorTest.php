@@ -11,8 +11,8 @@
 
 namespace Awesomite\ErrorDumper\Listeners;
 
-use Awesomite\ErrorDumper\Handlers\ErrorHandler;
 use Awesomite\ErrorDumper\AbstractTestCase;
+use Awesomite\ErrorDumper\Handlers\ErrorHandler;
 
 final class CallableValidatorTest extends AbstractTestCase
 {

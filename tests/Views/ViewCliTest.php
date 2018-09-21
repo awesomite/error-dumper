@@ -11,9 +11,9 @@
 
 namespace Awesomite\ErrorDumper\Views;
 
+use Awesomite\ErrorDumper\AbstractTestCase;
 use Awesomite\ErrorDumper\Serializable\SerializableException;
 use Awesomite\ErrorDumper\Serializable\SerializableExceptionInterface;
-use Awesomite\ErrorDumper\AbstractTestCase;
 use Symfony\Component\Console\Output\StreamOutput;
 
 /**

@@ -44,7 +44,7 @@ final class PhpstormTest extends AbstractTestCase
      * @param string   $mapFrom
      * @param string   $mapTo
      * @param string   $file
-     * @param int|null $line
+     * @param null|int $line
      * @param string   $expectedFile
      */
     public function testRegisterPathMapping($mapFrom, $mapTo, $file, $line, $expectedFile)

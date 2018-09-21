@@ -9,8 +9,8 @@
  * file that was distributed with this source code.
  */
 
-use Awesomite\ErrorDumper\Views\ViewHtml;
 use Awesomite\ErrorDumper\Serializable\SerializableException;
+use Awesomite\ErrorDumper\Views\ViewHtml;
 
 /**
  * @internal

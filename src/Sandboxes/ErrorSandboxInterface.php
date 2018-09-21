@@ -25,9 +25,8 @@ interface ErrorSandboxInterface
      *
      * @param callable $callable
      *
-     * @return mixed Returns the return value of the callback
-     *
      * @throws SandboxException
+     * @return mixed            Returns the return value of the callback
      */
     public function execute($callable);
 }

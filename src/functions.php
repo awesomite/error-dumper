@@ -17,7 +17,7 @@ use Awesomite\ErrorDumper\Views\ViewHtml;
 
 if (!\function_exists('Awesomite\ErrorDumper\exception_dump')) {
     /**
-     * @param \Throwable|\Exception $exception
+     * @param \Exception|\Throwable $exception
      */
     function exception_dump($exception)
     {

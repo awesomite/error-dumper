@@ -23,7 +23,7 @@ final class ErrorExceptionTest extends AbstractTestCase
      *
      * @param string      $message
      * @param int         $code
-     * @param string|null $humanCode
+     * @param null|string $humanCode
      * @param string      $file
      * @param int         $line
      */

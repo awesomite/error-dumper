@@ -14,7 +14,7 @@ namespace Awesomite\ErrorDumper\Listeners;
 interface OnExceptionInterface
 {
     /**
-     * @param \Throwable|\Exception $exception
+     * @param \Exception|\Throwable $exception
      *
      * @return void
      */

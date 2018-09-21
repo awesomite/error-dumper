@@ -16,8 +16,8 @@ interface PreExceptionInterface
     /**
      * @param \Exception|\Throwable $exception
      *
-     * @return void
      * @throws StopPropagationException
+     * @return void
      */
     public function preException($exception);
 }

@@ -81,7 +81,7 @@ interface ErrorHandlerInterface
     public function handleError($code, $message, $file, $line);
 
     /**
-     * @param \Throwable|\Exception $exception
+     * @param \Exception|\Throwable $exception
      *
      * @return void
      */

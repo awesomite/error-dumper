@@ -11,10 +11,10 @@
 
 namespace Awesomite\ErrorDumper\Handlers;
 
+use Awesomite\ErrorDumper\AbstractTestCase;
 use Awesomite\ErrorDumper\Listeners\OnExceptionCallable;
 use Awesomite\ErrorDumper\Listeners\PreExceptionCallable;
 use Awesomite\ErrorDumper\Sandboxes\ErrorSandbox;
-use Awesomite\ErrorDumper\AbstractTestCase;
 use Awesomite\ErrorDumper\TestHelpers\Beeper;
 use Awesomite\ErrorDumper\TestListener;
 

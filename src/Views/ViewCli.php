@@ -29,7 +29,7 @@ class ViewCli implements ViewInterface
     /**
      * @param int                  $lineLimit
      * @param int                  $stepLimit
-     * @param OutputInterface|null $output
+     * @param null|OutputInterface $output
      */
     public function __construct($lineLimit = 7, $stepLimit = 0, OutputInterface $output = null)
     {

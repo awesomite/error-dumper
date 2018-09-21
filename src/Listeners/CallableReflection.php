@@ -24,7 +24,7 @@ class CallableReflection
     private $isThrowable = null;
 
     /**
-     * @var \ReflectionClass|null
+     * @var null|\ReflectionClass
      */
     private $throwableReflection = null;
 

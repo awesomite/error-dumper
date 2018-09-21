@@ -18,7 +18,7 @@ class ErrorException extends \ErrorException
      * @param int             $code
      * @param string          $file
      * @param int             $line
-     * @param \Exception|null $previous
+     * @param null|\Exception $previous
      */
     public function __construct($message, $code, $file, $line, $previous = null)
     {
@@ -62,7 +62,7 @@ class ErrorException extends \ErrorException
     /**
      * @param int $code
      *
-     * @return string|null
+     * @return null|string
      */
     private function errorNameToCode($code)
     {

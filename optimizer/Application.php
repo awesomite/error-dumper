@@ -17,7 +17,7 @@ namespace Awesomite\ErrorDumper\Optimizer;
 class Application
 {
     /**
-     * @param resource|null $output
+     * @param null|resource $output
      */
     public static function run($output = null)
     {

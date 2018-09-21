@@ -12,6 +12,9 @@
 namespace Awesomite\ErrorDumper\Serializable;
 
 use Awesomite\StackTrace\StackTraceFactory;
+use Awesomite\StackTrace\StackTraceFactoryInterface;
+use Awesomite\StackTrace\StackTraceInterface;
+use Awesomite\VarDumper\LightVarDumper;
 
 class SerializableException implements SerializableExceptionInterface
 {
@@ -23,12 +26,15 @@ class SerializableException implements SerializableExceptionInterface
 
     private $message;
 
-    private $stackTrace;
+    /**
+     * @var null|StackTraceInterface
+     */
+    private $stackTrace = null;
 
     private $originalClass;
 
     /**
-     * @var SerializableException|null
+     * @var null|SerializableException
      */
     private $previousException = null;
 
@@ -43,9 +49,20 @@ class SerializableException implements SerializableExceptionInterface
     private $context = null;
 
     /**
-     * @var null|ContextVarsFactoryInterface
+     * @var StackTraceFactoryInterface
      */
-    private $contextFactory;
+
+    private $stackTraceFactory;
+
+    /**
+     * @var ContextVarsFactoryInterface
+     */
+    private $contextVarsFactory;
+
+    /**
+     * @var \Exception|\Throwable
+     */
+    private $exception;
 
     /**
      * @param \Exception|\Throwable            $exception
@@ -53,7 +70,8 @@ class SerializableException implements SerializableExceptionInterface
      * @param bool                             $ignoreArgs
      * @param bool                             $withPrevious
      * @param bool                             $withContext
-     * @param ContextVarsFactoryInterface|null $contextVariablesFactory
+     * @param null|StackTraceFactoryInterface  $stackTraceFactory
+     * @param null|ContextVarsFactoryInterface $contextVarsFactory
      */
     public function __construct(
         $exception,
@@ -61,15 +79,30 @@ class SerializableException implements SerializableExceptionInterface
         $ignoreArgs = false,
         $withPrevious = true,
         $withContext = true,
-        ContextVarsFactoryInterface $contextVariablesFactory = null
+        StackTraceFactoryInterface $stackTraceFactory = null,
+        ContextVarsFactoryInterface $contextVarsFactory = null
     ) {
         $this->code = $exception->getCode();
         $this->file = $exception->getFile();
         $this->line = $exception->getLine();
         $this->message = $exception->getMessage();
-        $stackTraceFactory = new StackTraceFactory();
-        $this->stackTrace = $stackTraceFactory->createByThrowable($exception, $stepLimit, $ignoreArgs);
+
+        if (null === $stackTraceFactory || null === $contextVarsFactory) {
+            $varDumper = new LightVarDumper();
+            $stackTraceFactory = $stackTraceFactory ?: new StackTraceFactory($varDumper);
+            if ($withContext) {
+                $contextVarsFactory = $contextVarsFactory ?: new ContextVarsFactory($varDumper);
+            } else {
+                $this->context = array();
+            }
+        }
+
+        $this->stackTraceFactory = $stackTraceFactory;
+        $this->contextVarsFactory = $contextVarsFactory;
         $this->originalClass = \get_class($exception);
+        $this->withContext = $withContext;
+        $this->exception = $exception;
+
         if ($withPrevious && $exception->getPrevious()) {
             $this->previousException = new static(
                 $exception->getPrevious(),
@@ -77,11 +110,10 @@ class SerializableException implements SerializableExceptionInterface
                 $ignoreArgs,
                 $withPrevious,
                 $withContext,
-                $contextVariablesFactory
+                $stackTraceFactory,
+                $contextVarsFactory
             );
         }
-        $this->withContext = $withContext;
-        $this->contextFactory = $contextVariablesFactory;
     }
 
     public function getCode()
@@ -106,7 +138,9 @@ class SerializableException implements SerializableExceptionInterface
 
     public function getStackTrace()
     {
-        return $this->stackTrace;
+        return null === $this->stackTrace
+            ? $this->stackTrace = $this->stackTraceFactory->createByThrowable($this->exception)
+            : $this->stackTrace;
     }
 
     public function serialize()
@@ -116,7 +150,7 @@ class SerializableException implements SerializableExceptionInterface
             'file'          => $this->file,
             'line'          => $this->line,
             'message'       => $this->message,
-            'stackTrace'    => $this->stackTrace,
+            'stackTrace'    => $this->getStackTrace(),
             'originalClass' => $this->originalClass,
             'previous'      => $this->previousException,
             'context'       => $this->getContext(),
@@ -158,14 +192,9 @@ class SerializableException implements SerializableExceptionInterface
     public function getContext()
     {
         if (null === $this->context) {
-            $this->context = $this->withContext ? $this->getContextFactory()->createContext() : array();
+            $this->context = $this->contextVarsFactory->createContext();
         }
 
         return $this->context;
-    }
-
-    private function getContextFactory()
-    {
-        return $this->contextFactory ?: $this->contextFactory = new ContextVarsFactory($this->getStackTrace()->getVarDumper());
     }
 }

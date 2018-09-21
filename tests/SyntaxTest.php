@@ -77,7 +77,7 @@ final class SyntaxTest extends AbstractTestCase
     /**
      * @param string $dir
      *
-     * @return string|bool
+     * @return bool|string
      */
     private static function preparePathToDir($dir)
     {

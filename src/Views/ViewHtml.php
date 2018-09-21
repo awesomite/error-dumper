@@ -27,7 +27,7 @@ class ViewHtml implements ViewInterface
         );
 
     /**
-     * @var EditorInterface|null
+     * @var null|EditorInterface
      */
     private $editor;
 

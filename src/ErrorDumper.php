@@ -23,7 +23,7 @@ class ErrorDumper
 {
     /**
      * @param int                  $mode   Default E_ALL | E_STRICT
-     * @param EditorInterface|null $editor
+     * @param null|EditorInterface $editor
      *
      * @return ErrorHandlerInterface
      *
@@ -38,7 +38,7 @@ class ErrorDumper
     }
 
     /**
-     * @param EditorInterface|null $editor
+     * @param null|EditorInterface $editor
      *
      * @return ViewInterface
      */

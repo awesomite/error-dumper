@@ -34,7 +34,7 @@ final class ErrorDumperTest extends AbstractTestCase
     }
 
     /**
-     * @return callable|null
+     * @return null|callable
      */
     private function getExceptionHandler()
     {
@@ -46,7 +46,7 @@ final class ErrorDumperTest extends AbstractTestCase
     }
 
     /**
-     * @return callable|null
+     * @return null|callable
      */
     private function getErrorHandler()
     {

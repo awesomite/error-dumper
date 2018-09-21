@@ -11,11 +11,11 @@
 
 namespace Awesomite\ErrorDumper\Views;
 
+use Awesomite\ErrorDumper\AbstractTestCase;
 use Awesomite\ErrorDumper\Editors\EditorInterface;
 use Awesomite\ErrorDumper\Editors\Phpstorm;
 use Awesomite\ErrorDumper\Serializable\SerializableException;
 use Awesomite\ErrorDumper\Serializable\SerializableExceptionInterface;
-use Awesomite\ErrorDumper\AbstractTestCase;
 use Awesomite\VarDumper\LightVarDumper;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
@@ -63,7 +63,7 @@ final class ViewHtmlTest extends AbstractTestCase
      * @dataProvider providerDisplay
      *
      * @param SerializableExceptionInterface $clonedException
-     * @param EditorInterface|null           $editor
+     * @param null|EditorInterface           $editor
      */
     public function testDisplay(SerializableExceptionInterface $clonedException, EditorInterface $editor = null)
     {

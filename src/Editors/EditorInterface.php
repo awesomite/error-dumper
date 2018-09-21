@@ -15,7 +15,7 @@ interface EditorInterface
 {
     /**
      * @param string   $filename
-     * @param int|null $line
+     * @param null|int $line
      *
      * @return string
      */
