@@ -16,8 +16,8 @@
         "symfony/finder": "^2.8.16",
         "symfony/polyfill-php54": "^1.3",
         "sebastian/comparator": ">=1.2.3",
+        "awesomite/var-dumper": "^1.0.0",
         "awesomite/phpunit-4.8-fixer": "^1.0"
-        "awesomite/var-dumper": "^0.6.3 || ^0.7.2 || ^0.8.0 || ^0.9.0"
     },
     "license": "MIT",
     "authors": [
@@ -34,7 +34,6 @@
     },
     "autoload-dev": {
         "files": ["tests/polyfill.php"],
-        "files": ["tests/functions.php"],
         "psr-4": {
             "Awesomite\\ErrorDumper\\": "tests/",
             "Awesomite\\ErrorDumper\\Optimizer\\": "optimizer/"
