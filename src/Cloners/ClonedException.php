@@ -40,7 +40,12 @@ class ClonedException implements ClonedExceptionInterface
         $this->stackTrace = $stackTraceFactory->createByThrowable($exception, $stepLimit, $ignoreArgs);
         $this->originalClass = get_class($exception);
         if ($withPrevious && $exception->getPrevious()) {
-            $this->previousException = new static($exception->getPrevious());
+            $this->previousException = new static(
+                $exception->getPrevious(),
+                $stepLimit,
+                $ignoreArgs,
+                $withPrevious
+            );
         }
     }
 

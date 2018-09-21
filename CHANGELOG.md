@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.13.7 (2018-09-21)
+
+* Fixed bug in `Awesomite\ErrorDumper\Cloners\ClonedException::__constructor`
+- to next exception in chain should be passed the same parameters
+
 ## 0.13.6 (2017-12-22)
 
 * Updated `awesomite/var-dumper` to version `^0.6.3 || ^0.7.2 || ^0.8.0 || ^0.9.0`
