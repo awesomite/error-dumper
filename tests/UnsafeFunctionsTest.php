@@ -13,7 +13,6 @@ namespace Awesomite\ErrorDumper;
 
 /**
  * @internal
- * @group noSpeedTest
  */
 final class UnsafeFunctionsTest extends AbstractTestCase
 {

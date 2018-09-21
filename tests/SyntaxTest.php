@@ -13,7 +13,7 @@ namespace Awesomite\ErrorDumper;
 
 /**
  * @internal
- * @group noSpeedTest
+ *
  * @runTestsInSeparateProcesses
  */
 final class SyntaxTest extends AbstractTestCase

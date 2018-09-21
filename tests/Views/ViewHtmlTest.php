@@ -120,7 +120,6 @@ final class ViewHtmlTest extends AbstractTestCase
     }
 
     /**
-     * @group noSpeedTest
      * @runInSeparateProcess
      */
     public function testCache()
