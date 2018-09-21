@@ -87,14 +87,10 @@ class SerializableException implements SerializableExceptionInterface
         $this->line = $exception->getLine();
         $this->message = $exception->getMessage();
 
-        if (null === $stackTraceFactory || null === $contextVarsFactory) {
+        if (null === $stackTraceFactory || (null === $contextVarsFactory && $withContext)) {
             $varDumper = new LightVarDumper();
             $stackTraceFactory = $stackTraceFactory ?: new StackTraceFactory($varDumper);
-            if ($withContext) {
-                $contextVarsFactory = $contextVarsFactory ?: new ContextVarsFactory($varDumper);
-            } else {
-                $this->context = array();
-            }
+            $contextVarsFactory = $contextVarsFactory ?: new ContextVarsFactory($varDumper);
         }
 
         $this->stackTraceFactory = $stackTraceFactory;
@@ -192,7 +188,7 @@ class SerializableException implements SerializableExceptionInterface
     public function getContext()
     {
         if (null === $this->context) {
-            $this->context = $this->contextVarsFactory->createContext();
+            $this->context = $this->withContext ? $this->contextVarsFactory->createContext() : array();
         }
 
         return $this->context;
