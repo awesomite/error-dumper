@@ -23,7 +23,6 @@ and `Awesomite\ErrorDumper\StandardExceptions\ShutdownErrorException` are not in
 Argument `$policy` has been removed from `Awesomite\ErrorDumper\ErrorDumper::createDevHandler` and `Awesomite\ErrorDumper\Handlers\ErrorHandler::__construct`.
 * Updated `awesomite/stack-trace` to `^1.0`
 
-
 ## 0.13.7 (2018-09-21)
 
 * Fixed bug in `Awesomite\ErrorDumper\Cloners\ClonedException::__constructor`
