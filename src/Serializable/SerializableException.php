@@ -105,9 +105,9 @@ class SerializableException implements SerializableExceptionInterface
                 $stepLimit,
                 $ignoreArgs,
                 $withPrevious,
-                $withContext,
+                false,
                 $stackTraceFactory,
-                $contextVarsFactory
+                null
             );
         }
     }
