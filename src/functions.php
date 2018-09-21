@@ -17,6 +17,8 @@ use Awesomite\ErrorDumper\Views\ViewHtml;
 
 if (!\function_exists('Awesomite\ErrorDumper\exception_dump')) {
     /**
+     * @codeCoverageIgnore
+     *
      * @param \Exception|\Throwable $exception
      */
     function exception_dump($exception)
