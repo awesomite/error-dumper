@@ -39,18 +39,21 @@ use Awesomite\ErrorDumper\Listeners\OnExceptionDevView;
 use Awesomite\ErrorDumper\Views\ViewFactory;
 
 /**
- * Creates new error handler
+ * Create new error handler
+ * If $mode is null will be used default value E_ALL | E_STRICT
+ * 
+ * @see http://php.net/manual/en/errorfunc.constants.php
  */
 $handler = new ErrorHandler(/* optional $mode */);
 
 /**
- * Creates and pushes new error listener 
+ * Create and pushe new error listener 
  */
 $devViewListener = new OnExceptionDevView(ViewFactory::create());
 $handler->pushListener($devViewListener);
 
 /**
- * Registers error handler 
+ * Register error handler 
  */
 $handler->register(/* optional $types param, default ErrorHandler::TYPE_ALL */);
 
