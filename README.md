@@ -44,7 +44,7 @@ use Awesomite\ErrorDumper\Views\ViewFactory;
  * 
  * @see http://php.net/manual/en/errorfunc.constants.php
  */
-$handler = new ErrorHandler(/* optional $mode */);
+$handler = new ErrorHandler(/* optional $mode = null */);
 
 /**
  * Create and push new error listener 
@@ -55,7 +55,7 @@ $handler->pushListener($devViewListener);
 /**
  * Register error handler 
  */
-$handler->register(/* optional $types param, default ErrorHandler::TYPE_ALL */);
+$handler->register(/* optional $types = ErrorHandler::TYPE_ALL */);
 
 ```
 
