@@ -76,8 +76,8 @@ final class ErrorSandboxTest extends AbstractTestCase
     public function providerExecute()
     {
         return array(
-            array(new ErrorSandbox(), E_USER_DEPRECATED, false, true),
-            array(new ErrorSandbox(E_ALL ^ E_USER_WARNING), E_USER_WARNING, true, false),
+            array(new ErrorSandbox(), \E_USER_DEPRECATED, false, true),
+            array(new ErrorSandbox(\E_ALL ^ \E_USER_WARNING), \E_USER_WARNING, true, false),
         );
     }
 }

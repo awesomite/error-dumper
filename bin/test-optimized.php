@@ -4,7 +4,7 @@
 use Awesomite\ErrorDumper\Optimizer\Application as OptimizerApp;
 use Symfony\Component\Finder\Finder;
 
-require \implode(DIRECTORY_SEPARATOR, array(__DIR__, '..', 'vendor', 'autoload.php'));
+require \implode(\DIRECTORY_SEPARATOR, array(__DIR__, '..', 'vendor', 'autoload.php'));
 
 $createFinder = function ($dir) {
     $finder = new Finder();
@@ -28,7 +28,7 @@ $checkSumReader = function ($templatesDir) use ($createFinder) {
 };
 
 $getTemplatesDir = function () {
-    return \implode(DIRECTORY_SEPARATOR, array(__DIR__, '..', 'templates_dist'));
+    return \implode(\DIRECTORY_SEPARATOR, array(__DIR__, '..', 'templates_dist'));
 };
 
 $rmDirContents = function ($dir) use ($createFinder) {

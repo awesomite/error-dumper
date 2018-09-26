@@ -22,7 +22,7 @@ $preListener = new PreExceptionCallable(function ($exception) {
     }
 });
 
-$errorHandler = new ErrorHandler(E_ALL ^ E_USER_DEPRECATED);
+$errorHandler = new ErrorHandler(\E_ALL ^ \E_USER_DEPRECATED);
 $errorHandler->pushListener(new OnExceptionDevView(ViewFactory::create()));
 
 /**

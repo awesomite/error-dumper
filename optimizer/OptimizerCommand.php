@@ -26,7 +26,7 @@ class OptimizerCommand
     {
         $finder = new Finder();
         $finder
-            ->in(\implode(DIRECTORY_SEPARATOR, array(__DIR__, '..', 'templates')))
+            ->in(\implode(\DIRECTORY_SEPARATOR, array(__DIR__, '..', 'templates')))
             ->name('*.twig')
             ->depth('== 0')
         ;
@@ -37,7 +37,7 @@ class OptimizerCommand
             /** @var SplFileInfo $file */
             \fputs($output, "  {$file->getPathname()}\n");
 
-            $optimizedName = \realpath($file->getPath()) . '_dist' . DIRECTORY_SEPARATOR . $file->getFilename();
+            $optimizedName = \realpath($file->getPath()) . '_dist' . \DIRECTORY_SEPARATOR . $file->getFilename();
             
             \file_put_contents(
                 $optimizedName,

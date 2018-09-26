@@ -70,11 +70,11 @@ final class CallableReflectionTest extends AbstractTestCase
             array('Awesomite\ErrorDumper\Listeners\TestInvokableObject::notOptional', false),
         );
 
-        if (\version_compare(PHP_VERSION, '5.4') >= 0) {
+        if (\version_compare(\PHP_VERSION, '5.4') >= 0) {
             $result[] = array('Awesomite\ErrorDumper\Listeners\TestInvokableObject54::handleCallable', false);
         }
 
-        if (\version_compare(PHP_VERSION, '7.0') >= 0) {
+        if (\version_compare(\PHP_VERSION, '7.0') >= 0) {
             $result[] = array('Awesomite\ErrorDumper\Listeners\TestInvokableObject70::handleInt', false);
         }
 

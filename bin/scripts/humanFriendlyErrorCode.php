@@ -13,9 +13,9 @@ use Awesomite\ErrorDumper\Handlers\ErrorHandler;
 use Awesomite\ErrorDumper\Listeners\OnExceptionDevView;
 use Awesomite\ErrorDumper\Views\ViewFactory;
 
-$errorHandler = new ErrorHandler(E_ALL ^ E_USER_DEPRECATED);
+$errorHandler = new ErrorHandler(\E_ALL ^ \E_USER_DEPRECATED);
 $errorHandler->pushListener(new OnExceptionDevView(ViewFactory::create()));
 $errorHandler->register();
 
-\trigger_error('Test error', E_USER_WARNING);
+\trigger_error('Test error', \E_USER_WARNING);
 return 'OK';

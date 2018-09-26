@@ -82,11 +82,11 @@ class ViewCli implements ViewInterface
             $placeInCode = $step->getPlaceInCode();
 
             $fileName = $placeInCode->getFileName();
-            $exploded = \explode(DIRECTORY_SEPARATOR, $fileName);
+            $exploded = \explode(\DIRECTORY_SEPARATOR, $fileName);
             $last3 = \array_slice($exploded, -3);
-            $shortFileName = \implode(DIRECTORY_SEPARATOR, $last3);
+            $shortFileName = \implode(\DIRECTORY_SEPARATOR, $last3);
             if ($fileName !== $shortFileName) {
-                $shortFileName = '(...)' . DIRECTORY_SEPARATOR . $shortFileName;
+                $shortFileName = '(...)' . \DIRECTORY_SEPARATOR . $shortFileName;
             }
 
             $output->writeln("<hcode>{$shortFileName}:{$placeInCode->getLineNumber()}</hcode>");

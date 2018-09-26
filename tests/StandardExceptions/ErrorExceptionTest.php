@@ -41,8 +41,8 @@ final class ErrorExceptionTest extends AbstractTestCase
     public function providerConstructor()
     {
         return array(
-            array('First exception', E_USER_NOTICE, 'E_USER_NOTICE', __FILE__, __LINE__),
-            array('Second exception', E_WARNING, 'E_WARNING', __FILE__, __LINE__),
+            array('First exception', \E_USER_NOTICE, 'E_USER_NOTICE', __FILE__, __LINE__),
+            array('Second exception', \E_WARNING, 'E_WARNING', __FILE__, __LINE__),
             array('Third exception', 0, null, __FILE__, __LINE__),
         );
     }
@@ -62,10 +62,10 @@ final class ErrorExceptionTest extends AbstractTestCase
     public function providerIsDeprecated()
     {
         return array(
-            array(E_DEPRECATED, true),
-            array(E_USER_DEPRECATED, true),
-            array(E_ERROR, false),
-            array(E_USER_ERROR, false),
+            array(\E_DEPRECATED, true),
+            array(\E_USER_DEPRECATED, true),
+            array(\E_ERROR, false),
+            array(\E_USER_ERROR, false),
         );
     }
 
@@ -84,10 +84,10 @@ final class ErrorExceptionTest extends AbstractTestCase
     public function providerIsNotice()
     {
         return array(
-            array(E_NOTICE, true),
-            array(E_USER_NOTICE, true),
-            array(E_ERROR, false),
-            array(E_USER_ERROR, false),
+            array(\E_NOTICE, true),
+            array(\E_USER_NOTICE, true),
+            array(\E_ERROR, false),
+            array(\E_USER_ERROR, false),
         );
     }
 
@@ -107,9 +107,9 @@ final class ErrorExceptionTest extends AbstractTestCase
     public function providerIsSeverity()
     {
         return array(
-            array(E_WARNING, E_ALL, true),
-            array(E_ALL & ~E_DEPRECATED, E_DEPRECATED, false),
-            array(E_USER_NOTICE, E_NOTICE, false),
+            array(\E_WARNING, \E_ALL, true),
+            array(\E_ALL & ~\E_DEPRECATED, \E_DEPRECATED, false),
+            array(\E_USER_NOTICE, \E_NOTICE, false),
         );
     }
 

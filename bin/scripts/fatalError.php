@@ -17,4 +17,4 @@ $errorHandler = new ErrorHandler();
 $errorHandler->pushListener(new OnExceptionDevView(ViewFactory::create()));
 $errorHandler->register();
 
-require_once __DIR__ . DIRECTORY_SEPARATOR . '_fatalError.php.fatal_error';
+require_once __DIR__ . \DIRECTORY_SEPARATOR . '_fatalError.php.fatal_error';

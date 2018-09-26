@@ -38,7 +38,7 @@ class ErrorException extends \ErrorException
      */
     public function isDeprecated()
     {
-        return $this->isSeverity(E_DEPRECATED | E_USER_DEPRECATED);
+        return $this->isSeverity(E_DEPRECATED | \E_USER_DEPRECATED);
     }
 
     /**
@@ -46,7 +46,7 @@ class ErrorException extends \ErrorException
      */
     public function isNotice()
     {
-        return $this->isSeverity(E_NOTICE | E_USER_NOTICE);
+        return $this->isSeverity(E_NOTICE | \E_USER_NOTICE);
     }
 
     /**

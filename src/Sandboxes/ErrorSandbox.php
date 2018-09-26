@@ -17,7 +17,7 @@ class ErrorSandbox implements ErrorSandboxInterface
 
     public function __construct($errorTypes = null)
     {
-        $this->errorTypes = \is_null($errorTypes) ? E_ALL | E_STRICT : $errorTypes;
+        $this->errorTypes = \is_null($errorTypes) ? \E_ALL | \E_STRICT : $errorTypes;
     }
 
     public function executeSafely($callable)

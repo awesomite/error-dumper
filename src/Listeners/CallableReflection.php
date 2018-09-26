@@ -85,12 +85,12 @@ class CallableReflection
         $first = \array_shift($params);
 
         if ($class = $first->getClass()) {
-            $className = \version_compare(PHP_VERSION, '7.0') >= 0 ? 'Throwable' : 'Exception';
+            $className = \version_compare(\PHP_VERSION, '7.0') >= 0 ? 'Throwable' : 'Exception';
             if (!$class->isInterface() && !$class->isSubclassOf($className) && ($class->getName() !== $className)) {
                 return false;
             }
             $this->throwableReflection = $class;
-        } elseif (\version_compare(PHP_VERSION, '7.0') >= 0 && $first->hasType()) {
+        } elseif (\version_compare(\PHP_VERSION, '7.0') >= 0 && $first->hasType()) {
             return false;
         }
 
@@ -98,7 +98,7 @@ class CallableReflection
             return false;
         }
 
-        if (\version_compare(PHP_VERSION, '5.4') >= 0 && $first->isCallable()) {
+        if (\version_compare(\PHP_VERSION, '5.4') >= 0 && $first->isCallable()) {
             return false;
         }
 

@@ -54,25 +54,25 @@ final class UnsafeFunctionsTest extends AbstractTestCase
             }
             list($token, $source, $line) = $tokenArr;
             $source = \mb_strtolower($source);
-            $function = T_EXIT === $token
+            $function = \T_EXIT === $token
                 ? 'exit'
                 : $source;
-            $explodedPath = \explode(DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR, $filePath);
-            $lastPart = \str_replace('\\', DIRECTORY_SEPARATOR, \array_pop($explodedPath));
+            $explodedPath = \explode(\DIRECTORY_SEPARATOR . 'src' . \DIRECTORY_SEPARATOR, $filePath);
+            $lastPart = \str_replace('\\', \DIRECTORY_SEPARATOR, \array_pop($explodedPath));
             $issueKey = $lastPart . ':' . $line;
             if (isset(self::$exclusions[$issueKey]) && \in_array($function, self::$exclusions[$issueKey])) {
                 continue;
             }
 
             switch ($token) {
-                case T_STRING:
+                case \T_STRING:
                     if (\in_array($source, self::$unsafeFunctions, true)) {
                         $this->fail("Function {$source} in {$filePath}:{$line}");
                     }
                     break;
 
-                case T_EXIT:
-                case T_EVAL:
+                case \T_EXIT:
+                case \T_EVAL:
                     $this->fail("Function {$source} in {$filePath}:{$line}");
                     break;
             }
@@ -81,7 +81,7 @@ final class UnsafeFunctionsTest extends AbstractTestCase
 
     public function providerFiles()
     {
-        $exploded = \explode(DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR, __DIR__);
+        $exploded = \explode(\DIRECTORY_SEPARATOR . 'tests' . \DIRECTORY_SEPARATOR, __DIR__);
         \array_pop($exploded);
         $path = \implode('tests', $exploded) . 'src';
         $pattern = '/^.+\.php$/';

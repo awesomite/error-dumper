@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-\error_reporting(E_ALL | E_STRICT);
+\error_reporting(E_ALL | \E_STRICT);
 \ini_set('display_errors', 1);
 \date_default_timezone_set('Europe/Warsaw');
 
-list($root) = \explode(DIRECTORY_SEPARATOR . 'bin' . DIRECTORY_SEPARATOR, __DIR__);
-require_once $root . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
+list($root) = \explode(\DIRECTORY_SEPARATOR . 'bin' . \DIRECTORY_SEPARATOR, __DIR__);
+require_once $root . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
 
 $pages = array(
     'exceptionChain'         => 'Exception chain',
@@ -39,14 +39,14 @@ $app
     ->get('/{page}', function ($page) use ($app, $pages, &$onExit) {
         if ('skipRuntimeException' === $page) {
             $onExit = function () use ($page) {
-                require \implode(DIRECTORY_SEPARATOR, array(__DIR__, '..', 'scripts', $page . '.php'));
+                require \implode(\DIRECTORY_SEPARATOR, array(__DIR__, '..', 'scripts', $page . '.php'));
             };
 
             return false;
         }
 
         if (\in_array($page, \array_keys($pages))) {
-            return require \implode(DIRECTORY_SEPARATOR, array(__DIR__, '..', 'scripts', $page . '.php'));
+            return require \implode(\DIRECTORY_SEPARATOR, array(__DIR__, '..', 'scripts', $page . '.php'));
         }
 
         return $app['twig']->render('index.twig', array(

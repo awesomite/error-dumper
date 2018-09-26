@@ -104,27 +104,27 @@ final class ErrorHandlerTest extends AbstractTestCase
         $errorHandler = $this->createTestErrorHandler($beeper);
 
         $this->assertSame(0, $beeper->countBeeps());
-        $errorHandler->handleError(E_ERROR, 'Test', __FILE__, __LINE__);
+        $errorHandler->handleError(\E_ERROR, 'Test', __FILE__, __LINE__);
         $this->assertSame(1, $beeper->countBeeps());
 
         $beeper->reset();
         $secondErrorHandler = $this->createTestErrorHandler($beeper, null);
-        $secondErrorHandler->handleError(E_NOTICE, 'E_NOTICE', __FILE__, __LINE__);
+        $secondErrorHandler->handleError(\E_NOTICE, 'E_NOTICE', __FILE__, __LINE__);
         $this->assertSame(1, $beeper->countBeeps());
 
         $beeper->reset();
-        $thirdErrorHandler = $this->createTestErrorHandler($beeper, E_ALL ^ E_NOTICE);
-        $thirdErrorHandler->handleError(E_NOTICE, 'E_NOTICE', __FILE__, __LINE__);
+        $thirdErrorHandler = $this->createTestErrorHandler($beeper, \E_ALL ^ \E_NOTICE);
+        $thirdErrorHandler->handleError(\E_NOTICE, 'E_NOTICE', __FILE__, __LINE__);
         $this->assertSame(0, $beeper->countBeeps());
     }
 
     public function testSkippedError()
     {
         $beeper = new Beeper();
-        $errorHandler = $this->createTestErrorHandler($beeper, E_ALL ^ E_DEPRECATED);
+        $errorHandler = $this->createTestErrorHandler($beeper, \E_ALL ^ \E_DEPRECATED);
 
         $this->assertSame(0, $beeper->countBeeps());
-        $errorHandler->handleError(E_DEPRECATED, 'test', __FILE__, __LINE__);
+        $errorHandler->handleError(\E_DEPRECATED, 'test', __FILE__, __LINE__);
         $this->assertSame(0, $beeper->countBeeps());
     }
 
@@ -147,7 +147,7 @@ final class ErrorHandlerTest extends AbstractTestCase
             return;
         }
 
-        $errorType = E_USER_NOTICE;
+        $errorType = \E_USER_NOTICE;
 
         $errorHandler->handleShutdown();
         $this->assertSame(0, $beeper->countBeeps());

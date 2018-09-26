@@ -81,11 +81,11 @@ final class SyntaxTest extends AbstractTestCase
      */
     private static function preparePathToDir($dir)
     {
-        $delimiter = DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR;
+        $delimiter = \DIRECTORY_SEPARATOR . 'tests' . \DIRECTORY_SEPARATOR;
         $exploded = \explode($delimiter, __FILE__);
         \array_pop($exploded);
 
-        return \realpath(\implode($delimiter, $exploded) . DIRECTORY_SEPARATOR . $dir);
+        return \realpath(\implode($delimiter, $exploded) . \DIRECTORY_SEPARATOR . $dir);
     }
 
     /**

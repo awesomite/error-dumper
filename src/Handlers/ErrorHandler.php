@@ -27,12 +27,12 @@ class ErrorHandler implements ErrorHandlerInterface
     // Constant can be an array in PHP >=5.6
     private static $fatalErrors
         = array(
-            E_ERROR,
-            E_PARSE,
-            E_CORE_ERROR,
-            E_CORE_WARNING,
-            E_COMPILE_ERROR,
-            E_COMPILE_WARNING,
+            \E_ERROR,
+            \E_PARSE,
+            \E_CORE_ERROR,
+            \E_CORE_WARNING,
+            \E_COMPILE_ERROR,
+            \E_COMPILE_WARNING,
         );
 
     private $mode;
@@ -62,7 +62,7 @@ class ErrorHandler implements ErrorHandlerInterface
             throw new \InvalidArgumentException('Argument $mode has to be integer or null!');
         }
 
-        $this->mode = \is_null($mode) ? E_ALL | E_STRICT : $mode;
+        $this->mode = \is_null($mode) ? \E_ALL | \E_STRICT : $mode;
     }
 
     public function register($types = ErrorHandler::TYPE_ALL)

@@ -161,7 +161,7 @@ class ViewHtml implements ViewInterface
         }
         $twig = new \Twig_Environment($this->createTwigLoader(), $twigOptions);
         $twig->addFilter(
-            new \Twig_SimpleFilter('strpad', function ($input, $padLength, $padString = ' ', $padType = STR_PAD_LEFT) {
+            new \Twig_SimpleFilter('strpad', function ($input, $padLength, $padString = ' ', $padType = \STR_PAD_LEFT) {
                 return \str_pad($input, $padLength, $padString, $padType);
             })
         );
@@ -177,12 +177,12 @@ class ViewHtml implements ViewInterface
 
     private function createTwigLoader()
     {
-        $delimiter = DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR;
+        $delimiter = \DIRECTORY_SEPARATOR . 'src' . \DIRECTORY_SEPARATOR;
         $parts = \explode($delimiter, __DIR__);
         \array_pop($parts);
         $root = \implode($delimiter, $parts);
 
-        $path = \implode(DIRECTORY_SEPARATOR, array($root, $this->useDist ? 'templates_dist' : 'templates'));
+        $path = \implode(\DIRECTORY_SEPARATOR, array($root, $this->useDist ? 'templates_dist' : 'templates'));
 
         return new \Twig_Loader_Filesystem($path);
     }

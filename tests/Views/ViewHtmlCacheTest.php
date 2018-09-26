@@ -55,10 +55,10 @@ final class ViewHtmlCacheTest extends AbstractTestCase
 
     private function getCachePath()
     {
-        $exploded = \explode(DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR, __DIR__);
+        $exploded = \explode(\DIRECTORY_SEPARATOR . 'tests' . \DIRECTORY_SEPARATOR, __DIR__);
         \array_pop($exploded);
         $exploded = \array_merge($exploded, array('tests', 'cache'));
 
-        return \realpath(\implode(DIRECTORY_SEPARATOR, $exploded));
+        return \realpath(\implode(\DIRECTORY_SEPARATOR, $exploded));
     }
 }
