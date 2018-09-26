@@ -47,7 +47,7 @@ use Awesomite\ErrorDumper\Views\ViewFactory;
 $handler = new ErrorHandler(/* optional $mode */);
 
 /**
- * Create and pushe new error listener 
+ * Create and push new error listener 
  */
 $devViewListener = new OnExceptionDevView(ViewFactory::create());
 $handler->pushListener($devViewListener);
