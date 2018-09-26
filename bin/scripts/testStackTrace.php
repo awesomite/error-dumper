@@ -9,6 +9,12 @@
  * file that was distributed with this source code.
  */
 
+use Awesomite\ErrorDumper\Editors\Phpstorm;
+use Awesomite\ErrorDumper\Serializable\SerializableException;
+use Awesomite\ErrorDumper\Views\ViewCli;
+use Awesomite\ErrorDumper\Views\ViewHtml;
+use Awesomite\VarDumper\LightVarDumper;
+
 class TmpException extends \Exception
 {
 }
@@ -39,18 +45,18 @@ class TestClass
 
     public static function myStaticMethod()
     {
-        $clone = new \Awesomite\ErrorDumper\Serializable\SerializableException(new TmpException('My test exception'));
-        $clone->getStackTrace()->setVarDumper(new \Awesomite\VarDumper\LightVarDumper());
+        $clone = new SerializableException(new TmpException('My test exception'));
+        $clone->getStackTrace()->setVarDumper(new LightVarDumper());
 
         if ('cli' === \php_sapi_name()) {
-            $view = new \Awesomite\ErrorDumper\Views\ViewCli(7, 3);
+            $view = new ViewCli(7, 3);
             $view->display($clone);
             exit;
         }
 
-        $view = new \Awesomite\ErrorDumper\Views\ViewHtml();
+        $view = new ViewHtml();
         $view
-            ->setEditor(new \Awesomite\ErrorDumper\Editors\Phpstorm())
+            ->setEditor(new Phpstorm())
             ->display($clone);
     }
 }
