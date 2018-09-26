@@ -4,8 +4,8 @@
 
 Versions `0.14.*` are **incompatible** with `0.13.*`.
 
-* Excluded `templates` dir from `git archive`
 * Templates have been compressed, result is placed in `templates_dist` directory
+* Added methods `useDistTemplates` and `useSrcTemplates` to class `Awesomite\ErrorDumper\Views\ViewHtml` (distributable directory is used as default)
 * Renamed:
   * `Awesomite\ErrorDumper\Cloners\ClonedException` to `Awesomite\ErrorDumper\Serializable\SerializableException`
   * `Awesomite\ErrorDumper\Cloners\ClonedExceptionInterface` to `Awesomite\ErrorDumper\Serializable\SerializableExceptionInterface`
@@ -16,12 +16,12 @@ Versions `0.14.*` are **incompatible** with `0.13.*`.
   * `Awesomite\ErrorDumper\Listeners\ListenerInterface` to `Awesomite\ErrorDumper\Listeners\OnExceptionInterface`
   * `Awesomite\ErrorDumper\Listeners\ValidatorClosure` to `Awesomite\ErrorDumper\Listeners\PreExceptionCallable`
   * `Awesomite\ErrorDumper\Listeners\ValidatorInterface` to `Awesomite\ErrorDumper\Listeners\PreExceptionInterface`
-* Function `Awesomite\ErrorDumper\ErrorDumper::createDevHandler` became static
+* Removed class `Awesomite\ErrorDumper\ErrorDumper`
 * Classes `Awesomite\ErrorDumper\StandardExceptions\ErrorException`
 and `Awesomite\ErrorDumper\StandardExceptions\ShutdownErrorException` are not internal anymore
 * Removed `Awesomite\ErrorDumper\Handlers\ErrorHandler::POLICY_*`, currently POLICY_ERROR_REPORTING is standard action.
-Argument `$policy` has been removed from `Awesomite\ErrorDumper\ErrorDumper::createDevHandler` and `Awesomite\ErrorDumper\Handlers\ErrorHandler::__construct`.
-* Updated `awesomite/stack-trace` to `^1.0`
+Argument `$policy` has been removed from `Awesomite\ErrorDumper\Handlers\ErrorHandler::__construct`.
+* Updated `awesomite/stack-trace` to `^1.2`
 
 ## 0.13.7 (2018-09-21)
 
