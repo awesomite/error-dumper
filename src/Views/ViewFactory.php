@@ -13,6 +13,9 @@ namespace Awesomite\ErrorDumper\Views;
 
 final class ViewFactory
 {
+    /**
+     * @return ViewInterface
+     */
     public static function create()
     {
         return 'cli' === \php_sapi_name() ? new ViewCli() : new ViewHtml();
