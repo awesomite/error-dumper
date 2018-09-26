@@ -9,8 +9,10 @@
  * file that was distributed with this source code.
  */
 
-use Awesomite\ErrorDumper\ErrorDumper;
+use Awesomite\ErrorDumper\Handlers\ErrorHandler;
+use Awesomite\ErrorDumper\Listeners\OnExceptionDevView;
 use Awesomite\ErrorDumper\Listeners\PreExceptionCallable;
+use Awesomite\ErrorDumper\Views\ViewFactory;
 
 $preListener = new PreExceptionCallable(function ($exception) {
     /** @var \Exception|\Throwable $exception */
@@ -20,8 +22,14 @@ $preListener = new PreExceptionCallable(function ($exception) {
     }
 });
 
-ErrorDumper::createDevHandler()
-    ->pushPreListener($preListener)
-    ->register();
+$errorHandler = new ErrorHandler(E_ALL ^ E_USER_DEPRECATED);
+$errorHandler->pushListener(new OnExceptionDevView(ViewFactory::create()));
+
+/**
+ * preListener can stop propagation next listeners
+ */
+$errorHandler->pushPreListener($preListener);
+
+$errorHandler->register();
 
 throw new \RuntimeException('Test exception!');

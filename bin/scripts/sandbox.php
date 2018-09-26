@@ -9,9 +9,13 @@
  * file that was distributed with this source code.
  */
 
-use Awesomite\ErrorDumper\ErrorDumper;
+use Awesomite\ErrorDumper\Handlers\ErrorHandler;
+use Awesomite\ErrorDumper\Listeners\OnExceptionDevView;
+use Awesomite\ErrorDumper\Views\ViewFactory;
 
-$errorHandler = ErrorDumper::createDevHandler()->register();
+$errorHandler = new ErrorHandler();
+$errorHandler->pushListener(new OnExceptionDevView(ViewFactory::create()));
+$errorHandler->register();
 
 $sandbox = $errorHandler->getErrorSandbox();
 $sandbox->executeSafely(function () {

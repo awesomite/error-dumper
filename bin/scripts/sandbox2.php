@@ -9,11 +9,14 @@
  * file that was distributed with this source code.
  */
 
-use Awesomite\ErrorDumper\ErrorDumper;
+use Awesomite\ErrorDumper\Handlers\ErrorHandler;
+use Awesomite\ErrorDumper\Listeners\OnExceptionDevView;
 use Awesomite\ErrorDumper\Sandboxes\SandboxException;
+use Awesomite\ErrorDumper\Views\ViewFactory;
 use Symfony\Component\HttpFoundation\Response;
 
-$errorHandler = ErrorDumper::createDevHandler();
+$errorHandler = new ErrorHandler();
+$errorHandler->pushListener(new OnExceptionDevView(ViewFactory::create()));
 $errorHandler->register();
 
 try {

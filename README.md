@@ -34,9 +34,26 @@ composer require awesomite/error-dumper
 ```php
 <?php
 
-use Awesomite\ErrorDumper\ErrorDumper;
+use Awesomite\ErrorDumper\Handlers\ErrorHandler;
+use Awesomite\ErrorDumper\Listeners\OnExceptionDevView;
+use Awesomite\ErrorDumper\Views\ViewFactory;
 
-ErrorDumper::createDevHandler()->register();
+/**
+ * Creates new error handler
+ */
+$handler = new ErrorHandler(/* optional $mode */);
+
+/**
+ * Creates and pushes new error listener 
+ */
+$devViewListener = new OnExceptionDevView(ViewFactory::create());
+$handler->pushListener($devViewListener);
+
+/**
+ * Registers error handler 
+ */
+$handler->register(/* optional $types param, default ErrorHandler::TYPE_ALL */);
+
 ```
 
 Read [quick start](docs/quick-start.md#quick-start).
