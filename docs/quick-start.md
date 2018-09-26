@@ -8,29 +8,37 @@ composer install awesomite/error-dumper
 
 ## Integration with your application (only debug mode)
 
-`web/index.php`:
+`index.php`:
 ```php
 <?php
 
-use Awesomite\ErrorDumper\ErrorDumper;
+use Awesomite\ErrorDumper\Handlers\ErrorHandler;
+use Awesomite\ErrorDumper\Listeners\OnExceptionDevView;
+use Awesomite\ErrorDumper\Views\ViewFactory;
 
 /*
  * Skip E_DEPRECATED errors
  */
 $mode = E_ALL & ~E_DEPRECATED;
 
-ErrorDumper::createDevHandler($mode)->register();
+error_reporting($mode);
+$errorHandler = new ErrorHandler($mode);
+$errorHandler->pushListener(new OnExceptionDevView(ViewFactory::create()));
+$errorHandler->register();
 ```
 
 ## Integration with your application
 
-`web/index.php`:
+`index.php`:
 ```php
 <?php
 
-use Awesomite\ErrorDumper\ErrorDumper;
 use Awesomite\ErrorDumper\Handlers\ErrorHandler;
 use Awesomite\ErrorDumper\Listeners\OnExceptionCallable;
+use Awesomite\ErrorDumper\Listeners\OnExceptionDevView;
+use Awesomite\ErrorDumper\Serializable\SerializableException;
+use Awesomite\ErrorDumper\Views\ViewFactory;
+use Awesomite\ErrorDumper\Views\ViewHtml;
 
 /** @var bool $inDebugMode */
 
@@ -39,17 +47,29 @@ use Awesomite\ErrorDumper\Listeners\OnExceptionCallable;
  */
 $mode = E_ALL & ~E_DEPRECATED;
 
+\error_reporting($mode);
+$errorHandler = new ErrorHandler($mode);
+
 if ($inDebugMode) {
-    $handler = ErrorDumper::createDevHandler($mode);
+    $errorHandler->pushListener(new OnExceptionDevView(ViewFactory::create()));
 } else {
-    $handler = new ErrorHandler($mode);
-    $handler->pushListener(new OnExceptionCallable(function ($exception) {
-        /** @var \Exception|\Throwable $exception */
-        // log somewhere $exception
+    $errorHandler->pushListener(new OnExceptionCallable(function ($exception) {
+        /**
+         * Serialize and save exception somewhere:
+         *
+         * $serialized = serialize(new SerializableException($exception));
+         *
+         * Later you can unserialize and display exception in readable format:
+         *
+         * $view = new ViewHtml();
+         * $view->display(unserialize($serialized));
+         */
+
         echo 'Error 503';
         exit;
     }));
 }
 
-$handler->register();
+$errorHandler->register();
+
 ```
