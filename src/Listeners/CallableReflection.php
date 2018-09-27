@@ -21,13 +21,6 @@ class CallableReflection
      */
     private $reflection;
 
-    private $isThrowable = null;
-
-    /**
-     * @var null|\ReflectionClass
-     */
-    private $throwableReflection = null;
-
     /**
      * The following constructor does not validate input parameter,
      * $callable parameter MUST be callable.
@@ -40,77 +33,48 @@ class CallableReflection
     }
 
     /**
-     * @param \Exception|\Throwable $exception
-     *
      * @return bool
      */
-    public function isThrowableCallableBy($exception)
+    public function hasFirstParam()
     {
-        if (!$this->isThrowableCallable()) {
-            return false;
-        }
-
-        if (\is_null($this->throwableReflection)) {
-            return true;
-        }
-
-        $className = \get_class($exception);
-
-        return $this->throwableReflection->isSubclassOf($className)
-            || ($this->throwableReflection->getName() === $className);
+        return \count($this->reflection->getParameters()) > 0;
     }
 
     /**
-     * First parameter must be Throwable or interface, others must be optional
-     *
-     * @return bool
+     * @return null|bool
      */
-    public function isThrowableCallable()
-    {
-        if (\is_null($this->isThrowable)) {
-            $this->isThrowable = $this->checkIsThrowableCallable();
-        }
-
-        return $this->isThrowable;
-    }
-
-    private function checkIsThrowableCallable()
+    public function hasFirstParamClassType()
     {
         $params = $this->reflection->getParameters();
-
         if (0 === \count($params)) {
-            return true;
+            return null;
         }
 
-        $first = \array_shift($params);
-
-        if ($class = $first->getClass()) {
-            $className = \version_compare(\PHP_VERSION, '7.0') >= 0 ? 'Throwable' : 'Exception';
-            if (!$class->isInterface() && !$class->isSubclassOf($className) && ($class->getName() !== $className)) {
-                return false;
-            }
-            $this->throwableReflection = $class;
-        } elseif (\version_compare(\PHP_VERSION, '7.0') >= 0 && $first->hasType()) {
-            return false;
-        }
-
-        if ($first->isArray()) {
-            return false;
-        }
-
-        if (\version_compare(\PHP_VERSION, '5.4') >= 0 && $first->isCallable()) {
-            return false;
-        }
-
-        foreach ($params as $param) {
-            if (!$param->isOptional()) {
-                return false;
-            }
-        }
-
-        return true;
+        return null !== $params[0]->getClass();
     }
 
+    /**
+     * @param \Exception|\Throwable $exception
+     *
+     * @return null|bool
+     *
+     * @return null
+     */
+    public function isFirstParamClassPassTo($exception)
+    {
+        $params = $this->reflection->getParameters();
+        if (0 === \count($params)) {
+            return null;
+        }
+
+        if (null === $paramClassReflection = $params[0]->getClass()) {
+            return null;
+        }
+
+        $paramClass = $paramClassReflection->getName();
+
+        return $exception instanceof $paramClass;
+    }
     /**
      * @param callable $callable
      *

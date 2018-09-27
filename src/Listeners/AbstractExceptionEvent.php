@@ -11,6 +11,9 @@
 
 namespace Awesomite\ErrorDumper\Listeners;
 
+/**
+ * @internal
+ */
 abstract class AbstractExceptionEvent
 {
     private $callable;
@@ -37,17 +40,18 @@ abstract class AbstractExceptionEvent
      */
     protected function call($exception)
     {
-        if ($this->getReflection()->isThrowableCallableBy($exception)) {
+        $reflection = $this->getReflection();
+        if (
+            !$reflection->hasFirstParam()
+            || !$reflection->hasFirstParamClassType()
+            || $reflection->isFirstParamClassPassTo($exception)
+        ) {
             \call_user_func($this->callable, $exception);
         }
     }
 
     private function getReflection()
     {
-        if (\is_null($this->reflection)) {
-            $this->reflection = new CallableReflection($this->callable);
-        }
-
-        return $this->reflection;
+        return $this->reflection ?: $this->reflection = new CallableReflection($this->callable);
     }
 }

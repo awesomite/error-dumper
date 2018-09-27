@@ -11,7 +11,7 @@
 
 namespace Awesomite\ErrorDumper\Listeners;
 
-class PreExceptionCallable extends AbstractExceptionEvent implements PreExceptionInterface
+final class PreExceptionCallable extends AbstractExceptionEvent implements PreExceptionInterface
 {
     public static function stopPropagation()
     {
