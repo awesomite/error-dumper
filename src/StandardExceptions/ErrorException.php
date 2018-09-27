@@ -63,6 +63,8 @@ class ErrorException extends \ErrorException
      * @param int $code
      *
      * @return null|string
+     *
+     * @see http://php.net/manual/en/errorfunc.constants.php
      */
     private function errorNameToCode($code)
     {
