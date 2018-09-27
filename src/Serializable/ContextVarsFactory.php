@@ -43,6 +43,7 @@ final class ContextVarsFactory implements ContextVarsFactoryInterface
             \sprintf('%s %s', $dateTime->format('Y-m-d H:i:s T'), $dateTime->getTimezone()->getName())
         );
         $result[] = $this->createFrom('microtime(true)', \microtime(true));
+        $result[] = $this->createFrom('PHP_VERSION', \PHP_VERSION);
 
         return $result;
     }
