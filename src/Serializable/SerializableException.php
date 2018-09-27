@@ -88,7 +88,7 @@ class SerializableException implements SerializableExceptionInterface
         $this->message = $exception->getMessage();
 
         $varDumper = null;
-        $stackTraceFactory = $stackTraceFactory ?: new StackTraceFactory($varDumper = new LightVarDumper());
+        $stackTraceFactory = $stackTraceFactory ?: new StackTraceFactory($varDumper = new LightVarDumper(), 200);
         if ($withContext) {
             $contextVarsFactory = $contextVarsFactory ?: new ContextVarsFactory($varDumper ?: new LightVarDumper());
         }
