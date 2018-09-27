@@ -70,13 +70,12 @@ Instead of using `@` operator you can use built-in sandbox mechanism
 ```php
 <?php
 
-use Awesomite\ErrorDumper\ErrorDumper;
 use Awesomite\ErrorDumper\Handlers\ErrorHandler;
+use Awesomite\ErrorDumper\Sandboxes\ErrorSandbox;
 
-$errorHandler = ErrorDumper::createDevHandler();
-$errorHandler->register();
+$errorHandler = new ErrorHandler();
 
-$sandbox = $errorHandler->getErrorSandbox();
+$sandbox = $errorHandler->getErrorSandbox(); // or new ErrorSandbox(/* optional $errorTypes */);
 $sandbox->executeSafely(function () {
     trigger_error('test'); // will do nothing
 });
@@ -87,14 +86,12 @@ Instead of `executeSafely` you can use `execute`, which will throw exception in 
 ```php
 <?php
 
-use Awesomite\ErrorDumper\ErrorDumper;
+use Awesomite\ErrorDumper\Sandboxes\ErrorSandbox;
 use Awesomite\ErrorDumper\Sandboxes\SandboxException;
 
-$errorHandler = ErrorDumper::createDevHandler();
-$errorHandler->register();
+$sandbox = new ErrorSandbox();
 
 try {
-    $sandbox = $errorHandler->getErrorSandbox();
     $sandbox->execute(function () {
         trigger_error('test'); // will throw SandboxException
     });
