@@ -11,7 +11,7 @@
 
 namespace Awesomite\ErrorDumper\Serializable;
 
-interface VariableInterface extends \Serializable
+interface ContextVarInterface extends \Serializable
 {
     /**
      * @return string

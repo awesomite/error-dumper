@@ -16,7 +16,7 @@ use Awesomite\ErrorDumper\AbstractTestCase;
 /**
  * @internal
  */
-final class VariableTest extends AbstractTestCase
+final class ContextVarTest extends AbstractTestCase
 {
     /**
      * @dataProvider providerAll
@@ -26,10 +26,10 @@ final class VariableTest extends AbstractTestCase
      */
     public function testAll($name, $dump)
     {
-        $variable = new Variable($name, $dump);
+        $variable = new ContextVar($name, $dump);
 
         foreach (array($variable, \unserialize(\serialize($variable))) as $current) {
-            /** @var Variable $current */
+            /** @var ContextVar $current */
             $this->assertSame($name, $current->getName());
             $this->assertSame($dump, $current->dumpAsString());
         }

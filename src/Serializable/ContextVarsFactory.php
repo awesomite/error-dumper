@@ -92,10 +92,10 @@ final class ContextVarsFactory implements ContextVarsFactoryInterface
      * @param string $name
      * @param mixed  $value
      *
-     * @return Variable
+     * @return ContextVar
      */
     private function createFrom($name, $value)
     {
-        return new Variable($name, $this->varDumper->dumpAsString($value));
+        return new ContextVar($name, $this->varDumper->dumpAsString($value));
     }
 }
