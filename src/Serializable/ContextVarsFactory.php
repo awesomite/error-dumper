@@ -33,9 +33,18 @@ final class ContextVarsFactory implements ContextVarsFactoryInterface
 
     public function createContext()
     {
-        return 'cli' === \php_sapi_name()
+        $result = 'cli' === \php_sapi_name()
             ? $this->createForCli()
             : $this->createForHttp();
+
+        $dateTime = new \DateTime();
+        $result[] = $this->createFrom(
+            'human-friendly time',
+            \sprintf('%s %s', $dateTime->format('Y-m-d H:i:s T'), $dateTime->getTimezone()->getName())
+        );
+        $result[] = $this->createFrom('microtime(true)', \microtime(true));
+
+        return $result;
     }
 
     private function createForCli()
@@ -76,7 +85,7 @@ final class ContextVarsFactory implements ContextVarsFactoryInterface
 
     private function createFromGlobal($name)
     {
-        return $this->createFrom($name, isset($GLOBALS[$name]) ? $GLOBALS[$name] : null);
+        return $this->createFrom('$' . $name, isset($GLOBALS[$name]) ? $GLOBALS[$name] : null);
     }
 
     /**

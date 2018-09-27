@@ -61,7 +61,6 @@ class OptimizerCommand
         $output = $this->removeWhiteSpacesBetween('}}', '{%', $output);
         $output = $this->removeWhiteSpacesBetween('"', '>', $output);
         $output = $this->removeWhiteSpacesBetween('"', '/>', $output);
-        $output = $this->removeWhiteSpacesBetween('">', '${{', $output);
 
         // '<script   src' => '<script src'
         $output = \preg_replace_callback(
