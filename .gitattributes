@@ -1,5 +1,6 @@
 /bin export-ignore
 /dev-tools export-ignore
+/example-exporter export-ignore
 /optimizer export-ignore
 /tests export-ignore
 /dev-tools export-ignore
