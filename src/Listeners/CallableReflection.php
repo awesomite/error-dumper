@@ -29,7 +29,7 @@ class CallableReflection
     private $throwableReflection = null;
 
     /**
-     * The following constructor does not validate input paramter,
+     * The following constructor does not validate input parameter,
      * $callable parameter MUST be callable.
      *
      * @param $callable
