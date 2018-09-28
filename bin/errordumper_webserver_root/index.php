@@ -26,6 +26,7 @@ $pages = array(
     'skipRuntimeException'   => 'Skipping chosen exceptions',
     'fatalError'             => 'Fatal error',
     'ideIntegration'         => 'IDE integration',
+    'symfonyVarDumper'       => 'Symfony VarDumper',
 );
 
 $app = new Silex\Application();

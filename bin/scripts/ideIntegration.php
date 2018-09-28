@@ -23,4 +23,4 @@ $handler->pushListener(new OnExceptionDevView($view));
 $handler->exitAfterTrigger(true);
 $handler->register();
 
-\trigger_error('Test error', E_USER_ERROR);
+\trigger_error('Test error', \E_USER_ERROR);
