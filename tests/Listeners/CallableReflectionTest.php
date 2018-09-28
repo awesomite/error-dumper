@@ -112,4 +112,53 @@ final class CallableReflectionTest extends AbstractTestCase
             ),
         );
     }
+
+    /**
+     * @dataProvider providerIsFirstParamClassPassTo
+     *
+     * @param callable              $callable
+     * @param \Exception|\Throwable $exception
+     * @param null|bool             $expected
+     */
+    public function testIsFirstParamClassPassTo($callable, $exception, $expected)
+    {
+        $reflection = new CallableReflection($callable);
+        $this->assertSame($expected, $reflection->isFirstParamClassPassTo($exception));
+    }
+
+    public function providerIsFirstParamClassPassTo()
+    {
+        return array(
+            array(
+                function () {
+                },
+                new \Exception(),
+                null,
+            ),
+            array(
+                function ($param) {
+                },
+                new \Exception(),
+                null,
+            ),
+            array(
+                function (\Exception $exception) {
+                },
+                new \Exception(),
+                true,
+            ),
+            array(
+                function (\Exception $exception) {
+                },
+                new \LogicException(),
+                true,
+            ),
+            array(
+                function (\LogicException $exception) {
+                },
+                new \Exception(),
+                false,
+            ),
+        );
+    }
 }
