@@ -14,7 +14,7 @@ namespace Awesomite\ErrorDumper\Listeners;
 /**
  * @internal
  */
-class CallableReflection
+final class CallableReflection
 {
     /**
      * @var \ReflectionFunctionAbstract

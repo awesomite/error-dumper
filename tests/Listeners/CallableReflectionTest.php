@@ -46,4 +46,70 @@ final class CallableReflectionTest extends AbstractTestCase
             array(array(new TestInvokableObject(), 'doStaticAction')),
         );
     }
+
+    /**
+     * @dataProvider providerHasFirstParam
+     *
+     * @param callable  $callable
+     * @param null|bool $expected
+     */
+    public function testHasFirstParam($callable, $expected)
+    {
+        $reflection = new CallableReflection($callable);
+        $this->assertSame($expected, $reflection->hasFirstParam());
+    }
+
+    public function providerHasFirstParam()
+    {
+        return array(
+            array(
+                function () {
+                },
+                false
+            ),
+            array(
+                function ($param) {
+                },
+                true
+            ),
+            array(
+                function (\Exception $exception) {
+                },
+                true
+            ),
+        );
+    }
+
+    /**
+     * @dataProvider providerFirstParamClassType
+     *
+     * @param callable  $callable
+     * @param null|bool $expected
+     */
+    public function testHasFirstParamClassType($callable, $expected)
+    {
+        $reflection = new CallableReflection($callable);
+        $this->assertSame($expected, $reflection->hasFirstParamClassType());
+    }
+
+    public function providerFirstParamClassType()
+    {
+        return array(
+            array(
+                function () {
+                },
+                null
+            ),
+            array(
+                function ($param) {
+                },
+                false
+            ),
+            array(
+                function (\LogicException $logicException) {
+                },
+                true,
+            ),
+        );
+    }
 }
