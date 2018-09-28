@@ -25,6 +25,7 @@ $pages = array(
     'humanFriendlyErrorCode' => 'Human friendly error code',
     'skipRuntimeException'   => 'Skipping chosen exceptions',
     'fatalError'             => 'Fatal error',
+    'ideIntegration'         => 'IDE integration',
 );
 
 $app = new Silex\Application();
