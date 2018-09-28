@@ -48,14 +48,14 @@ use Awesomite\ErrorDumper\Views\ViewFactory;
 $handler = new ErrorHandler(/* optional $mode = null */);
 
 /**
- * Create and push new error listener.
+ * Create and push new error listener,
+ * this handler will print programmer-friendly stack trace.
  */
 $devViewListener = new OnExceptionDevView(ViewFactory::create());
 $handler->pushListener($devViewListener);
 
 /**
- * Create and push new custom error listener,
- * this handler will print programmer-friendly stack trace.
+ * Create and push new custom error listener.
  */
 $handler->pushListener(new OnExceptionCallable(function ($exception) {
     // do something with $exception
