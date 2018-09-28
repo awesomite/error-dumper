@@ -65,7 +65,7 @@ Read [quick start](docs/quick-start.md#quick-start).
 
 ### HTML
 
-<p style="text-align: center;">
+<p align="center">
     <a href="docs/resources/exception-html.png">
         <img src="docs/resources/exception-html.png" alt="Exception displayed as HTML" />
     </a>
@@ -73,7 +73,7 @@ Read [quick start](docs/quick-start.md#quick-start).
 
 ### CLI
 
-<p style="text-align: center;">
+<p align="center">
     <a href="docs/resources/exception-cli.png">
         <img src="docs/resources/exception-cli.png" alt="Exception displayed in terminal" />
     </a>
