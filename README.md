@@ -40,33 +40,34 @@ use Awesomite\ErrorDumper\Listeners\OnExceptionDevView;
 use Awesomite\ErrorDumper\Views\ViewFactory;
 
 /**
- * Create new error handler
- * If $mode is null will be used default value E_ALL | E_STRICT
+ * Create new error handler.
+ * If $mode is null will be used default value E_ALL | E_STRICT.
  * 
  * @see http://php.net/manual/en/errorfunc.constants.php
  */
 $handler = new ErrorHandler(/* optional $mode = null */);
 
 /**
- * Create and push new error listener 
+ * Create and push new error listener.
  */
 $devViewListener = new OnExceptionDevView(ViewFactory::create());
 $handler->pushListener($devViewListener);
 
 /**
- * Create and push new custom error listener
+ * Create and push new custom error listener,
+ * this handler will print programmer-friendly stack trace.
  */
 $handler->pushListener(new OnExceptionCallable(function ($exception) {
     // do something with $exception
 }));
 
 /**
- * Exit script when error has been detected after executing all listeners
+ * Exit script when error has been detected after executing all listeners.
  */
 $handler->exitAfterTrigger(true);
 
 /**
- * Register error handler
+ * Register error handler.
  * 
  * Possible types:
  *   - ErrorHandler::TYPE_ERROR
