@@ -37,6 +37,8 @@ final class ErrorSandboxTest extends AbstractTestCase
     {
         if (\version_compare(\PHP_VERSION, '7.0') < 0) {
             $this->assertTrue(true);
+
+            return;
         }
         $sandbox = new ErrorSandbox();
         $caught = false;
