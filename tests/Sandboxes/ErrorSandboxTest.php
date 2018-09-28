@@ -69,6 +69,7 @@ final class ErrorSandboxTest extends AbstractTestCase
         } catch (\ParseError $exception) {
             $caught = true;
         }
+
         $this->assertTrue($caught);
     }
 
