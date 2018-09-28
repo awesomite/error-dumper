@@ -6,8 +6,9 @@
 use Awesomite\ErrorDumper\Handlers\ErrorHandler;
 use Awesomite\ErrorDumper\Listeners\OnExceptionCallable;
 use Awesomite\ErrorDumper\Listeners\PreExceptionCallable;
-use Psr\Log\LoggerInterface;
+use Awesomite\ErrorDumper\Listeners\StopPropagationException;
 use Awesomite\ErrorDumper\StandardExceptions\ErrorException;
+use Psr\Log\LoggerInterface;
 
 /** @var LoggerInterface $deprecationsLogger */
 /** @var LoggerInterface $errorLogger */
@@ -19,7 +20,8 @@ use Awesomite\ErrorDumper\StandardExceptions\ErrorException;
 $deprecationCallback = function (ErrorException $exception) use ($deprecationsLogger) {
     if ($exception->isDeprecated()) {
         $deprecationsLogger->warning($exception->getMessage());
-        PreExceptionCallable::stopPropagation();
+
+        throw new StopPropagationException();
     }
 };
 

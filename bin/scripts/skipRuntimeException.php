@@ -12,13 +12,15 @@
 use Awesomite\ErrorDumper\Handlers\ErrorHandler;
 use Awesomite\ErrorDumper\Listeners\OnExceptionDevView;
 use Awesomite\ErrorDumper\Listeners\PreExceptionCallable;
+use Awesomite\ErrorDumper\Listeners\StopPropagationException;
 use Awesomite\ErrorDumper\Views\ViewFactory;
 
 $preListener = new PreExceptionCallable(function ($exception) {
     /** @var \Exception|\Throwable $exception */
     if ($exception instanceof \RuntimeException) {
         echo '<strong>Exception will be not caught</strong>';
-        PreExceptionCallable::stopPropagation();
+
+        throw new StopPropagationException();
     }
 });
 

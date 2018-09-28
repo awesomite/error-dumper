@@ -14,6 +14,7 @@ namespace Awesomite\ErrorDumper\Handlers;
 use Awesomite\ErrorDumper\AbstractTestCase;
 use Awesomite\ErrorDumper\Listeners\OnExceptionCallable;
 use Awesomite\ErrorDumper\Listeners\PreExceptionCallable;
+use Awesomite\ErrorDumper\Listeners\StopPropagationException;
 use Awesomite\ErrorDumper\Sandboxes\ErrorSandbox;
 use Awesomite\ErrorDumper\TestHelpers\Beeper;
 use Awesomite\ErrorDumper\TestListener;
@@ -77,7 +78,7 @@ final class ErrorHandlerTest extends AbstractTestCase
         $this->assertSame(1, $beeper->countBeeps());
 
         $validator = new PreExceptionCallable(function () {
-            PreExceptionCallable::stopPropagation();
+            throw new StopPropagationException();
         });
         $errorHandler->pushPreListener($validator);
 

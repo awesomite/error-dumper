@@ -32,14 +32,6 @@ final class PreExceptionCallableTest extends AbstractTestCase
     }
 
     /**
-     * @expectedException \Awesomite\ErrorDumper\Listeners\StopPropagationException
-     */
-    public function testStopPropagation()
-    {
-        PreExceptionCallable::stopPropagation();
-    }
-
-    /**
      * @dataProvider providerInvalidConstructor
      *
      * @expectedException \InvalidArgumentException
