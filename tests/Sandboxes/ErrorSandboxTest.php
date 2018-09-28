@@ -18,11 +18,15 @@ use Awesomite\ErrorDumper\AbstractTestCase;
  */
 final class ErrorSandboxTest extends AbstractTestCase
 {
-    public function testExecuteSafely()
+    /**
+     * @dataProvider providerExecuteSafely
+     *
+     * @param $expectedResult
+     */
+    public function testExecuteSafely($expectedResult)
     {
         $executed = false;
         $sandbox = new ErrorSandbox();
-        $expectedResult = 123;
         $result = $sandbox->executeSafely(function () use (&$executed, $expectedResult) {
             \trigger_error('Test');
             $executed = true;
@@ -31,6 +35,18 @@ final class ErrorSandboxTest extends AbstractTestCase
         });
         $this->assertTrue($executed);
         $this->assertSame($expectedResult, $result);
+    }
+
+    public function providerExecuteSafely()
+    {
+        return array(
+            array(123),
+            array(false),
+            array(\M_PI),
+            array(null),
+            array(new \stdClass()),
+            array($this),
+        );
     }
 
     public function testThrowable()
