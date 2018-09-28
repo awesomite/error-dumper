@@ -32,7 +32,6 @@ $realErrorCallback = function ($exception) use ($errorLogger) {
     /** @var \Exception|\Throwable $exception */
     $errorLogger->critical($exception->getMessage());
     echo 'Error';
-    exit(1);
 };
 
 $handler = new ErrorHandler();
@@ -50,7 +49,7 @@ $handler
     ->pushListener(new OnExceptionCallable($realErrorCallback))
     
     /*
-     * Do not call `exit(1)` after trigger listeners
+     * Execute `exit(1)` after trigger listeners
      */
     ->exitAfterTrigger(false)
     
