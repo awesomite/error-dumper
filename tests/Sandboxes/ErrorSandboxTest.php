@@ -33,6 +33,24 @@ final class ErrorSandboxTest extends AbstractTestCase
         $this->assertSame($expectedResult, $result);
     }
 
+    public function testThrowable()
+    {
+        if (\version_compare(\PHP_VERSION, '7.0') < 0) {
+            $this->assertTrue(true);
+        }
+        $sandbox = new ErrorSandbox();
+        $caught = false;
+
+        try {
+            $sandbox->execute(function () {
+                eval('<?php class AwesomeClass {');
+            });
+        } catch (\ParseError $exception) {
+            $caught = true;
+        }
+        $this->assertTrue($caught);
+    }
+
     /**
      * @expectedException \PHPUnit_Framework_Error
      */
