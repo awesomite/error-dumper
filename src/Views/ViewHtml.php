@@ -83,7 +83,7 @@ class ViewHtml implements ViewInterface
     }
 
     /**
-     * @param string $string
+     * @param object|string $string
      *
      * @return $this
      */
@@ -102,9 +102,9 @@ class ViewHtml implements ViewInterface
     }
 
     /**
-     * @param string $string
+     * @param object|string $string
      *
-     * @return $this;
+     * @return $this
      */
     public function appendToBody($string)
     {
@@ -115,7 +115,7 @@ class ViewHtml implements ViewInterface
 
     /**
      * Do not send error headers during view is rendered.
-     * By default this option is enabled.
+     * By default ViewHtml sends headers.
      *
      * @return $this
      */
