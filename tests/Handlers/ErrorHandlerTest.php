@@ -17,7 +17,6 @@ use Awesomite\ErrorDumper\Listeners\PreExceptionCallable;
 use Awesomite\ErrorDumper\Listeners\StopPropagationException;
 use Awesomite\ErrorDumper\Sandboxes\ErrorSandbox;
 use Awesomite\ErrorDumper\TestHelpers\Beeper;
-use Awesomite\ErrorDumper\TestListener;
 
 /**
  * @internal
