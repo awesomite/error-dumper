@@ -35,6 +35,7 @@ composer require awesomite/error-dumper
 <?php
 
 use Awesomite\ErrorDumper\Handlers\ErrorHandler;
+use Awesomite\ErrorDumper\Listeners\OnExceptionCallable;
 use Awesomite\ErrorDumper\Listeners\OnExceptionDevView;
 use Awesomite\ErrorDumper\Views\ViewFactory;
 
@@ -51,6 +52,18 @@ $handler = new ErrorHandler(/* optional $mode = null */);
  */
 $devViewListener = new OnExceptionDevView(ViewFactory::create());
 $handler->pushListener($devViewListener);
+
+/**
+ * Create and push new custom error listener
+ */
+$handler->pushListener(new OnExceptionCallable(function ($exception) {
+    // do something with $exception
+}));
+
+/**
+ * Exit script when error has been detected after executing all listeners
+ */
+$handler->exitAfterTrigger(true);
 
 /**
  * Register error handler 
