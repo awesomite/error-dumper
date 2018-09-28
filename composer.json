@@ -37,5 +37,6 @@
             "Awesomite\\ErrorDumper\\": "tests/",
             "Awesomite\\ErrorDumper\\Optimizer\\": "optimizer/"
         }
-    }
+    },
+    "keywords": ["debug", "debug_backtrace", "exception", "error"]
 }
