@@ -16,9 +16,27 @@ namespace Awesomite\ErrorDumper;
  */
 abstract class AbstractTestCase extends \PHPUnit_Framework_TestCase
 {
+    private $errorHandler;
+
     protected function setUp()
     {
         parent::setUp();
         $this->expectOutputString('');
+        $this->errorHandler = $this->getCurrentErrorHandler();
+    }
+
+    protected function tearDown()
+    {
+        parent::tearDown();
+        $this->assertSame($this->errorHandler, $this->getCurrentErrorHandler(), 'Error handler has changed');
+    }
+
+    private function getCurrentErrorHandler()
+    {
+        $current = \set_error_handler(function () {
+        });
+        \restore_error_handler();
+
+        return $current;
     }
 }
