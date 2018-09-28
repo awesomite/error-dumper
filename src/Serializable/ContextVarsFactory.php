@@ -25,6 +25,10 @@ final class ContextVarsFactory implements ContextVarsFactoryInterface
      */
     private $exclude;
 
+    /**
+     * @param VarDumperInterface $varDumper
+     * @param array              $exclude e.g. array('_SERVER', '_ENV')
+     */
     public function __construct(VarDumperInterface $varDumper, array $exclude = array())
     {
         $this->varDumper = $varDumper;
