@@ -35,7 +35,7 @@ final class UnsafeFunctionsTest extends AbstractTestCase
 
     private static $exclusions
         = array(
-            'Handlers/ErrorHandler.php:203' => array('exit'),
+            'Handlers/ErrorHandler.php:199' => array('exit'),
             'Editors/Phpstorm.php:42'       => array('preg_replace'),
         );
 
