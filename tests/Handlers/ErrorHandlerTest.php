@@ -133,21 +133,7 @@ final class ErrorHandlerTest extends AbstractTestCase
     {
         $beeper = new Beeper();
         $errorHandler = $this->createTestErrorHandler($beeper, null);
-
         $this->assertSame(0, $beeper->countBeeps());
-        // https://travis-ci.org/awesomite/error-dumper/jobs/240540829
-        if ($error = \error_get_last()) {
-            TestListener::addMessage(\sprintf(
-                '<error>Existing error: %d %s, %s:%d</error>',
-                $error['type'],
-                $error['message'],
-                $error['file'],
-                $error['line']
-            ));
-
-            return;
-        }
-
         $errorType = \E_USER_NOTICE;
 
         $errorHandler->handleShutdown();
