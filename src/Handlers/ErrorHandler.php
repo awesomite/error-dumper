@@ -20,10 +20,6 @@ use Awesomite\ErrorDumper\StandardExceptions\ShutdownErrorException;
 
 class ErrorHandler implements ErrorHandlerInterface
 {
-    const HANDLER_ERROR     = 'handleError';
-    const HANDLER_EXCEPTION = 'handleException';
-    const HANDLER_SHUTDOWN  = 'handleShutdown';
-
     // Constant can be an array in PHP >=5.6
     private static $fatalErrors
         = array(

@@ -22,6 +22,10 @@ interface ErrorHandlerInterface
     const TYPE_FATAL_ERROR = 4; // 0b0100
     const TYPE_ALL         = 7; // 0b0111
 
+    const HANDLER_ERROR     = 'handleError';
+    const HANDLER_EXCEPTION = 'handleException';
+    const HANDLER_SHUTDOWN  = 'handleShutdown';
+
     /**
      * @param int $types
      *
