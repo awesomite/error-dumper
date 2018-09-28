@@ -64,11 +64,17 @@ if ($inDebugMode) {
          * $view = new ViewHtml();
          * $view->display(unserialize($serialized));
          */
+        
+        if (!\headers_sent() && 'cli' !== \php_sapi_name()) {
+            \header('HTTP/1.1 503 Service Temporarily Unavailable');
+            \header('Status: 503 Service Temporarily Unavailable');
+        }
 
         echo 'Error 503';
-        exit;
     }));
 }
+
+$errorHandler->exitAfterTrigger(true);
 
 $errorHandler->register();
 
