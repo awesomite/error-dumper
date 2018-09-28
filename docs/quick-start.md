@@ -43,9 +43,9 @@ use Awesomite\ErrorDumper\Views\ViewHtml;
 /** @var bool $inDebugMode */
 
 /*
- * Skip E_DEPRECATED_ERRORS
+ * Skip \E_DEPRECATED_ERRORS
  */
-$mode = E_ALL & ~E_DEPRECATED;
+$mode = \E_ALL & ~\E_DEPRECATED;
 
 \error_reporting($mode);
 $errorHandler = new ErrorHandler($mode);
