@@ -43,22 +43,27 @@ final class ContextVarFactoryTest extends AbstractTestCase
     public function testExclude()
     {
         $factoryWithArgv = new ContextVarsFactory(new LightVarDumper());
-        $namesWithArgv = \array_map(
-            function (ContextVarInterface $var) {
-                return \ltrim($var->getName(), '$');
-            },
-            $this->callPrivateMethod($factoryWithArgv, 'createForCli')
-        );
+        $namesWithArgv = $this->convertVarsToNames($this->callPrivateMethod($factoryWithArgv, 'createForCli'));
         $this->assertContains('argv', $namesWithArgv);
 
-        $factoryWithoutArgv = new ContextVarsFactory(new LightVarDumper(), array('args'));
-        $namesWithoutArgv = \array_map(
+        $factoryWithoutArgv = new ContextVarsFactory(new LightVarDumper(), array('argv'));
+        $namesWithoutArgv = $this->convertVarsToNames($this->callPrivateMethod($factoryWithoutArgv, 'createForCli'));
+        $this->assertNotContains('argv', $namesWithoutArgv);
+    }
+
+    /**
+     * @param ContextVarInterface[] $vars
+     *
+     * @return string[]
+     */
+    private function convertVarsToNames($vars)
+    {
+        return \array_map(
             function (ContextVarInterface $var) {
                 return \ltrim($var->getName(), '$');
             },
-            $this->callPrivateMethod($factoryWithoutArgv, 'createForCli')
+            $vars
         );
-        $this->assertNotContains('args', $namesWithoutArgv);
     }
 
     private function assertContextVars($vars)
