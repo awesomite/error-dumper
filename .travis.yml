@@ -85,7 +85,7 @@ before_script:
 script:
   - if [[ "$RUN_CS_FIXER" = "true" ]]; then php -n ${PHP_CS_FIXER} --diff --dry-run -v --allow-risky=yes fix; fi
   - MODE_SPEED_TEST=true php ${PHP_ARGS} vendor/bin/phpunit
-  - php ${PHP_ARGS} vendor/bin/phpunit
+  - php ${PHP_ARGS} vendor/bin/phpunit -vvv
 
   - bin/test-optimized.php
 
