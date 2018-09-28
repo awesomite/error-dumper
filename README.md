@@ -66,9 +66,14 @@ $handler->pushListener(new OnExceptionCallable(function ($exception) {
 $handler->exitAfterTrigger(true);
 
 /**
- * Register error handler 
+ * Register error handler
+ * 
+ * Possible types:
+ *   - ErrorHandler::TYPE_ERROR
+ *   - ErrorHandler::TYPE_EXCEPTION
+ *   - ErrorHandler::TYPE_FATAL_ERROR
  */
-$handler->register(/* optional $types = ErrorHandler::TYPE_ALL */);
+$handler->register(/* optional bitmask $types = ErrorHandler::TYPE_ALL */);
 
 ```
 
