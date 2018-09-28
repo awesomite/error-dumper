@@ -14,7 +14,7 @@ namespace Awesomite\ErrorDumper\Optimizer;
 /**
  * @internal
  */
-class Application
+final class Application
 {
     /**
      * @param null|resource $output

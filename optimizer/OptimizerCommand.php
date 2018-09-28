@@ -17,7 +17,7 @@ use Symfony\Component\Finder\SplFileInfo;
 /**
  * @internal
  */
-class OptimizerCommand
+final class OptimizerCommand
 {
     /**
      * @param resource $output
