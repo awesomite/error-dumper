@@ -74,7 +74,6 @@ class ViewHtml implements ViewInterface
 
         $this->createTwig()->display('exception.twig', array(
             'exception'         => $exception,
-            'tags'              => $this->getTags(),
             'resources'         => $this->getResources(),
             'editor'            => $this->editor,
             'hasEditor'         => !\is_null($this->editor),
@@ -185,14 +184,6 @@ class ViewHtml implements ViewInterface
         $path = \implode(\DIRECTORY_SEPARATOR, array($root, $this->useDist ? 'templates_dist' : 'templates'));
 
         return new \Twig_Loader_Filesystem($path);
-    }
-
-    private function getTags()
-    {
-        return array(
-            'html'       => static::TAG_HTML,
-            'underTitle' => static::TAG_UNDER_TITLE,
-        );
     }
 
     private function getResources()
