@@ -62,6 +62,14 @@ $handler->pushListener(new OnExceptionCallable(function ($exception) {
 }));
 
 /**
+ * Create and push new custom error listener,
+ * this handler will be used only when $exception is instance of \RuntimeException.
+ */
+$handler->pushListener(new OnExceptionCallable(function (\RuntimeException $exception) {
+    // do something with $exception
+}));
+
+/**
  * Exit script when error has been detected after executing all listeners.
  */
 $handler->exitAfterTrigger(true);
