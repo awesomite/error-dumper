@@ -33,7 +33,7 @@ final class ContextVarFactoryTest extends AbstractTestCase
         $this->assertContextVars($vars);
     }
 
-    public function createForHttp()
+    public function testCreateForHttp()
     {
         $factory = new ContextVarsFactory(new LightVarDumper());
         $vars = $this->callPrivateMethod($factory, 'createForHttp');
