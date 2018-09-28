@@ -100,6 +100,8 @@ script:
       ./infection.phar
     fi
 
+  - bin/test.php || true
+
 after_script:
   - mv ~.git .git
   - travis_retry bin/coveralls.sh
