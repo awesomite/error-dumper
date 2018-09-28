@@ -114,6 +114,29 @@ final class ErrorExceptionTest extends AbstractTestCase
     }
 
     /**
+     * @dataProvider providerErrorNameToCode
+     *
+     * @param int    $code
+     * @param string $name
+     */
+    public function testErrorNameToCode($code, $name)
+    {
+        $exception = new ErrorException('Test', \E_DEPRECATED, __FILE__, __LINE__);
+        $reflectionMethod = new \ReflectionMethod($exception, 'errorNameToCode');
+        $reflectionMethod->setAccessible(true);
+        $this->assertSame($name, $reflectionMethod->invoke($exception, $code));
+    }
+
+    public function providerErrorNameToCode()
+    {
+        return array(
+            array(\E_DEPRECATED, 'E_DEPRECATED'),
+            array(\E_WARNING, 'E_WARNING'),
+            array(\E_COMPILE_ERROR, 'E_COMPILE_ERROR'),
+        );
+    }
+
+    /**
      * @param string $message
      * @param int    $code
      * @param string $file
