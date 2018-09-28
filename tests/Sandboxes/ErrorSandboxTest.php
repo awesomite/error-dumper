@@ -56,6 +56,7 @@ final class ErrorSandboxTest extends AbstractTestCase
 
         $sandbox->execute(function () {
         });
+
         try {
             $expectedResult = 125;
             $result = $sandbox->execute(function () use (&$executed, $errorType, $expectedResult) {

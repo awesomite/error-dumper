@@ -51,7 +51,6 @@ class SerializableException implements SerializableExceptionInterface
     /**
      * @var StackTraceFactoryInterface
      */
-
     private $stackTraceFactory;
 
     /**

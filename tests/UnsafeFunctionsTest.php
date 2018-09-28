@@ -50,6 +50,7 @@ final class UnsafeFunctionsTest extends AbstractTestCase
                 if ('`' === $tokenArr) {
                     $this->fail("Backtick operator is forbidden {$filePath}");
                 }
+
                 continue;
             }
             list($token, $source, $line) = $tokenArr;
@@ -69,11 +70,13 @@ final class UnsafeFunctionsTest extends AbstractTestCase
                     if (\in_array($source, self::$unsafeFunctions, true)) {
                         $this->fail("Function {$source} in {$filePath}:{$line}");
                     }
+
                     break;
 
                 case \T_EXIT:
                 case \T_EVAL:
                     $this->fail("Function {$source} in {$filePath}:{$line}");
+
                     break;
             }
         }

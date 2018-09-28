@@ -55,6 +55,7 @@ final class SyntaxTest extends AbstractTestCase
             $fileName = $file[0];
 
             $counter++;
+
             try {
                 $twig->parse($twig->tokenize($this->getTwigSource($fileName)));
             } catch (\Twig_Error_Syntax $exception) {
@@ -119,7 +120,6 @@ final class SyntaxTest extends AbstractTestCase
         $method = $envReflection->getMethod('tokenize');
         list($firstParameter) = $method->getParameters();
         /** @var \ReflectionParameter $firstParameter */
-
         if ($firstParameter->getClass()) {
             return new \Twig_Source($contents, $filename);
         }

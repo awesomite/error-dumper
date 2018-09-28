@@ -18,4 +18,5 @@ $errorHandler->pushListener(new OnExceptionDevView(ViewFactory::create()));
 $errorHandler->register();
 
 \trigger_error('Test error', \E_USER_WARNING);
+
 return 'OK';

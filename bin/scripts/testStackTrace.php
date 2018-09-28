@@ -61,7 +61,6 @@ class TestClass
     }
 }
 
-
 \ob_start();
 TestClass::create(5);
 $result = \ob_get_contents();

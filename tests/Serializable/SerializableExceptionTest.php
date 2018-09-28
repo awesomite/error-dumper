@@ -50,6 +50,7 @@ final class SerializableExceptionTest extends AbstractTestCase
         $exception = new \Exception('Without previous');
 
         $withPrevious = null;
+
         try {
             $this->throwExceptionWithPrevious();
         } catch (\Exception $withPrevious) {
@@ -78,10 +79,11 @@ final class SerializableExceptionTest extends AbstractTestCase
     public function testConstructorWithPrevious($clonePrevious)
     {
         $exception = null;
+
         try {
             $this->throwExceptionWithPrevious();
         } catch (\Exception $exception) {
-        };
+        }
         $cloned = new SerializableException($exception, 0, false, $clonePrevious);
         $this->assertSame($clonePrevious, $cloned->hasPrevious());
         if ($clonePrevious) {

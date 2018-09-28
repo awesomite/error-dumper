@@ -14,7 +14,6 @@ use GuzzleHttp\Client as Guzzle;
 
 require \implode(\DIRECTORY_SEPARATOR, array(__DIR__, 'vendor', 'autoload.php'));
 
-
 $guzzle = new Guzzle();
 $response = $guzzle->get(
     'http://localhost:8001/exceptionChain',

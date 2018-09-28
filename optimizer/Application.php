@@ -24,10 +24,10 @@ final class Application
         if (null === $output) {
             $output = \fopen('php://output', 'w');
         }
-        
+
         $optimizer = new OptimizerCommand();
         $optimizer->run($output);
-        
-        \fputs($output, "Done\n");
+
+        \fwrite($output, "Done\n");
     }
 }

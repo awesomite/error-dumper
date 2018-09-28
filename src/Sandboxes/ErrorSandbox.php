@@ -43,9 +43,11 @@ class ErrorSandbox implements ErrorSandboxInterface
             return $result;
         } catch (\Throwable $exception) {
             \restore_error_handler();
+
             throw $exception;
         } catch (\Exception $exception) {
             \restore_error_handler();
+
             throw $exception;
         }
     }

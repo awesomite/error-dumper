@@ -32,7 +32,7 @@ $checkSumReader = function ($templatesDir) use ($createFinder) {
     foreach ($finder as $file) {
         $md5s[] = \md5($file->getContents());
     }
-    
+
     return \md5(\implode('-', $md5s));
 };
 

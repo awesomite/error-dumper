@@ -75,6 +75,7 @@ final class CallableReflection
 
         return $exception instanceof $paramClass;
     }
+
     /**
      * @param callable $callable
      *

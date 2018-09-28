@@ -65,17 +65,17 @@ final class CallableReflectionTest extends AbstractTestCase
             array(
                 function () {
                 },
-                false
+                false,
             ),
             array(
                 function ($param) {
                 },
-                true
+                true,
             ),
             array(
                 function (\Exception $exception) {
                 },
-                true
+                true,
             ),
         );
     }
@@ -98,12 +98,12 @@ final class CallableReflectionTest extends AbstractTestCase
             array(
                 function () {
                 },
-                null
+                null,
             ),
             array(
                 function ($param) {
                 },
-                false
+                false,
             ),
             array(
                 function (\LogicException $logicException) {
