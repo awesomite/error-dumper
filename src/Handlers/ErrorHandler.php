@@ -65,7 +65,7 @@ class ErrorHandler implements ErrorHandlerInterface
         $this->mode = \is_null($mode) ? \E_ALL | \E_STRICT : $mode;
     }
 
-    public function register($types = ErrorHandler::TYPE_ALL)
+    public function register($types = ErrorHandlerInterface::TYPE_ALL)
     {
         if ($types & static::TYPE_ERROR) {
             $this->registerOnError();
