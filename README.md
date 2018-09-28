@@ -1,5 +1,12 @@
 # ErrorDumper
 
+<style type="text/css">
+    img[src$="centerme"] {
+      display:block;
+      margin: 0 auto;
+    }
+</style>
+
 [![Latest Stable Version](https://poser.pugx.org/awesomite/error-dumper/v/stable)](https://packagist.org/packages/awesomite/error-dumper)
 [![Latest Unstable Version](https://poser.pugx.org/awesomite/error-dumper/v/unstable)](https://packagist.org/packages/awesomite/error-dumper)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/b86e39c038464d70916e79fb39ea11cc)](https://www.codacy.com/app/awesomite/error-dumper?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=awesomite/error-dumper&amp;utm_campaign=Badge_Grade)
@@ -65,15 +72,11 @@ Read [quick start](docs/quick-start.md#quick-start).
 
 ### HTML
 
-<p style="text-align: center;">
-    ![Exception displayed as HTML](docs/resources/exception-html.png)
-</p>
+![Exception displayed as HTML](docs/resources/exception-html.png?style=centerme)
 
 ### CLI
 
-<p style="text-align: center;">
-    ![Exception displayed in terminal](docs/resources/exception-cli.png)
-</p>
+![Exception displayed in terminal](docs/resources/exception-cli.png?style=centerme)
 
 ## Versioning
 
