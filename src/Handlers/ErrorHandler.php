@@ -51,6 +51,8 @@ class ErrorHandler implements ErrorHandlerInterface
      * @param int $mode Default E_ALL | E_STRICT
      *
      * @see http://php.net/manual/en/errorfunc.constants.php
+     *
+     * @see http://php.net/manual/en/language.operators.bitwise.php
      */
     public function __construct($mode = null)
     {

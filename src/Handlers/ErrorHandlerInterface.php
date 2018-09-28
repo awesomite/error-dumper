@@ -30,6 +30,8 @@ interface ErrorHandlerInterface
      * @param int $types
      *
      * @return ErrorHandlerInterface
+     *
+     * @see http://php.net/manual/en/language.operators.bitwise.php
      */
     public function register($types = self::TYPE_ALL);
 
