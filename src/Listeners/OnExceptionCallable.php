@@ -11,7 +11,7 @@
 
 namespace Awesomite\ErrorDumper\Listeners;
 
-final class OnExceptionCallable extends AbstractExceptionEvent implements OnExceptionInterface
+class OnExceptionCallable extends AbstractExceptionEvent implements OnExceptionInterface
 {
     public function onException($exception)
     {

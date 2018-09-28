@@ -11,7 +11,7 @@
 
 namespace Awesomite\ErrorDumper\Listeners;
 
-final class PreExceptionCallable extends AbstractExceptionEvent implements PreExceptionInterface
+class PreExceptionCallable extends AbstractExceptionEvent implements PreExceptionInterface
 {
     public function preException($exception)
     {
