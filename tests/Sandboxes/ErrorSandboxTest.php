@@ -55,7 +55,7 @@ final class ErrorSandboxTest extends AbstractTestCase
          * Cannot be executed on HHVM
          * https://travis-ci.org/awesomite/error-dumper/jobs/434719255
          */
-        if (\defined('HHVM_VERSION') && \version_compare(\PHP_VERSION, '7.0') < 0) {
+        if (\defined('HHVM_VERSION') || \version_compare(\PHP_VERSION, '7.0') < 0) {
             $this->markTestSkipped('Must be executed on php >= 7.0');
         }
         $sandbox = new ErrorSandbox();
