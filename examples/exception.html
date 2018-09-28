@@ -1,4 +1,4 @@
-<!doctype html><html><head><meta charset="UTF-8"/><title>Error dumper</title><link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAVFFOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEAABEAAAABEAAAARAAAAEQAAABEAAAARAAAAEQAAABEAAAARAAABEAAAAAEQABEAAAAAABEAEQAAAAAAEQABEAAAAAEQAAARAAAAEQAAABEAAAARAAAAEQAAABEAAAARAAAAEQAAAAEQAAEQAAAAAAAAAAAAD//wAA888AAOfnAADn5wAA5+cAAOfnAADP8wAAn/kAAJ/5AADP8wAA5+cAAOfnAADn5wAA5+cAAPPPAAD//wAA" rel="icon" type="image/x-icon"/><link rel="stylesheet" type="text/css" href="&#x2F;&#x2F;maxcdn.bootstrapcdn.com&#x2F;bootstrap&#x2F;3.3.5&#x2F;css&#x2F;bootstrap.min.css" integrity="sha384-pdapHxIh7EYuwy6K7iE41uXVxGCXY0sAjBzaElYGJUrzwodck3Lx6IE2lA0rFREo" crossorigin="anonymous"/><style type="text/css"> .error-line { font-weight: bold; color: red; font-style: italic; } a.var-header { display: block; } a.var-header:after { font-family: 'Glyphicons Halflings'; content: "\e114"; float: right; color: grey; } a.var-header.collapsed:after { content:"\e080"; } .code-box { overflow: auto; background-color: #f5f5f5; border: 1px solid #ccc; padding: 10px; border-radius: 4px; font-family: Menlo, Monaco, Consolas, "Courier New", monospace; font-size: 13px; } .code-box:not(.rounded) { border-top-left-radius: 0; border-top-right-radius: 0; } .code-box > span { white-space: pre; display: block; } .max-height { max-height: 400px; overflow: auto; } .panel-group:last-child { margin-bottom: 0; } a { cursor: pointer; } pre, pre * { word-wrap: normal !important; } pre > pre { padding: 0; } pre { margin-bottom: 0; } pre:last-child { margin-bottom: 0; } .nav-tabs { border-bottom: 0; } .panel-collapse > .panel-body { padding: 0; } .panel-collapse pre { border: 0; background: #fff; }</style>
+<!doctype html><html><head><meta charset="UTF-8"/><title>Error dumper</title><link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAVFFOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEAABEAAAABEAAAARAAAAEQAAABEAAAARAAAAEQAAABEAAAARAAABEAAAAAEQABEAAAAAABEAEQAAAAAAEQABEAAAAAEQAAARAAAAEQAAABEAAAARAAAAEQAAABEAAAARAAAAEQAAAAEQAAEQAAAAAAAAAAAAD//wAA888AAOfnAADn5wAA5+cAAOfnAADP8wAAn/kAAJ/5AADP8wAA5+cAAOfnAADn5wAA5+cAAPPPAAD//wAA" rel="icon" type="image/x-icon"/><link rel="stylesheet" type="text/css" href="&#x2F;&#x2F;maxcdn.bootstrapcdn.com&#x2F;bootstrap&#x2F;3.3.5&#x2F;css&#x2F;bootstrap.min.css" integrity="sha384-pdapHxIh7EYuwy6K7iE41uXVxGCXY0sAjBzaElYGJUrzwodck3Lx6IE2lA0rFREo" crossorigin="anonymous"/><style type="text/css"> .error-line { font-weight: bold; color: red; font-style: italic; background-color: #fefefe; } a.var-header { display: block; } a.var-header:after { font-family: 'Glyphicons Halflings'; content: "\e114"; float: right; color: grey; } a.var-header.collapsed:after { content:"\e080"; } .code-box { overflow: auto; background-color: #f5f5f5; border: 1px solid #ccc; padding: 10px; border-radius: 4px; font-family: Menlo, Monaco, Consolas, "Courier New", monospace; font-size: 13px; } .code-box:not(.rounded) { border-top-left-radius: 0; border-top-right-radius: 0; } .code-box > span { white-space: pre; display: block; } .max-height { max-height: 400px; overflow: auto; } .panel-group:last-child { margin-bottom: 0; } a { cursor: pointer; } pre, pre * { word-wrap: normal !important; } pre > pre { padding: 0; } pre { margin-bottom: 0; } pre:last-child { margin-bottom: 0; } .nav-tabs { border-bottom: 0; } .panel-collapse > .panel-body { padding: 0; } .panel-collapse pre { border: 0; background: #fff; }</style>
 </head><body><div class="container"><h1>Error!</h1><!-- @ErrorDumper under title --><div class="padding-menu"><ul class="nav nav-pills" data-tabs="main-tabs"><li class="active"><a href="#main-exception-1" data-toggle="tab">RuntimeException #1</a></li><li ><a href="#main-exception-2" data-toggle="tab">CalculatorException #2</a></li><li><a href="#main-context" data-toggle="tab">Context</a></li></ul><div class="tab-content"><div class="tab-pane fade active in" id="main-exception-1"><h2>Exception</h2><pre><strong>RuntimeException (code 0)</strong> Uncaught exception CalculatorException</pre><h2>Stack trace</h2><div class="panel panel-default"><div class="panel-heading">(...)/bin/scripts/exceptionChain.php:48</div><div class="panel-body"><div><div class="tab-content"><div class="tab-pane fade active in" id="source-e1-s0"><div class="code-box max-height rounded"><span>41    class Executor</span><span>42    {</span><span>43        public function execute($callable, $arguments)</span><span>44        {</span><span>45            try {</span><span>46                \call_user_func_array($callable, $arguments);</span><span>47            } catch (\Exception $exception) {</span><span class="error-line">48                throw new \RuntimeException(\sprintf(&#039;Uncaught exception %s&#039;, \get_class($exception)), 0, $exception);</span><span>49            }</span><span>50        }</span><span>51    }</span><span>52    </span><span>53    $executor = new Executor();</span><span>54    </span><span>55    try {</span></div></div>
 </div></div></div>
 </div>
@@ -79,7 +79,7 @@
                 array(17) {
                     [DOCUMENT_ROOT] =&gt;      “(...)/bin/errordumper_webserver_root”
                     [REMOTE_ADDR] =&gt;        “::1”
-                    [REMOTE_PORT] =&gt;        “50522”
+                    [REMOTE_PORT] =&gt;        “53644”
                     [SERVER_SOFTWARE] =&gt;    “PHP 7.1.22 Development Server”
                     [SERVER_PROTOCOL] =&gt;    “HTTP/1.1”
                     [SERVER_NAME] =&gt;        “localhost”
@@ -92,8 +92,8 @@
                     [PHP_SELF] =&gt;           “/index.php/exceptionChain”
                     [HTTP_HOST] =&gt;          “example.awesomite.local”
                     [HTTP_USER_AGENT] =&gt;    “GuzzleHttp/6.3.3 curl/7.51.0 PHP/7.1.22”
-                    [REQUEST_TIME_FLOAT] =&gt; 1538086415.288837
-                    [REQUEST_TIME] =&gt;       1538086415
+                    [REQUEST_TIME_FLOAT] =&gt; 1538131526.19816
+                    [REQUEST_TIME] =&gt;       1538131526
                 }
         }
     public $files =&gt;
@@ -183,7 +183,7 @@
                 array(17) {
                     [DOCUMENT_ROOT] =&gt;      “(...)/bin/errordumper_webserver_root”
                     [REMOTE_ADDR] =&gt;        “::1”
-                    [REMOTE_PORT] =&gt;        “50522”
+                    [REMOTE_PORT] =&gt;        “53644”
                     [SERVER_SOFTWARE] =&gt;    “PHP 7.1.22 Development Server”
                     [SERVER_PROTOCOL] =&gt;    “HTTP/1.1”
                     [SERVER_NAME] =&gt;        “localhost”
@@ -196,8 +196,8 @@
                     [PHP_SELF] =&gt;           “/index.php/exceptionChain”
                     [HTTP_HOST] =&gt;          “example.awesomite.local”
                     [HTTP_USER_AGENT] =&gt;    “GuzzleHttp/6.3.3 curl/7.51.0 PHP/7.1.22”
-                    [REQUEST_TIME_FLOAT] =&gt; 1538086415.288837
-                    [REQUEST_TIME] =&gt;       1538086415
+                    [REQUEST_TIME_FLOAT] =&gt; 1538131526.19816
+                    [REQUEST_TIME] =&gt;       1538131526
                 }
         }
     public $files =&gt;
@@ -288,7 +288,7 @@
                 array(17) {
                     [DOCUMENT_ROOT] =&gt;      “(...)/bin/errordumper_webserver_root”
                     [REMOTE_ADDR] =&gt;        “::1”
-                    [REMOTE_PORT] =&gt;        “50522”
+                    [REMOTE_PORT] =&gt;        “53644”
                     [SERVER_SOFTWARE] =&gt;    “PHP 7.1.22 Development Server”
                     [SERVER_PROTOCOL] =&gt;    “HTTP/1.1”
                     [SERVER_NAME] =&gt;        “localhost”
@@ -301,8 +301,8 @@
                     [PHP_SELF] =&gt;           “/index.php/exceptionChain”
                     [HTTP_HOST] =&gt;          “example.awesomite.local”
                     [HTTP_USER_AGENT] =&gt;    “GuzzleHttp/6.3.3 curl/7.51.0 PHP/7.1.22”
-                    [REQUEST_TIME_FLOAT] =&gt; 1538086415.288837
-                    [REQUEST_TIME] =&gt;       1538086415
+                    [REQUEST_TIME_FLOAT] =&gt; 1538131526.19816
+                    [REQUEST_TIME] =&gt;       1538131526
                 }
         }
     public $files =&gt;
@@ -434,7 +434,7 @@
                 array(17) {
                     [DOCUMENT_ROOT] =&gt;      “(...)/bin/errordumper_webserver_root”
                     [REMOTE_ADDR] =&gt;        “::1”
-                    [REMOTE_PORT] =&gt;        “50522”
+                    [REMOTE_PORT] =&gt;        “53644”
                     [SERVER_SOFTWARE] =&gt;    “PHP 7.1.22 Development Server”
                     [SERVER_PROTOCOL] =&gt;    “HTTP/1.1”
                     [SERVER_NAME] =&gt;        “localhost”
@@ -447,8 +447,8 @@
                     [PHP_SELF] =&gt;           “/index.php/exceptionChain”
                     [HTTP_HOST] =&gt;          “example.awesomite.local”
                     [HTTP_USER_AGENT] =&gt;    “GuzzleHttp/6.3.3 curl/7.51.0 PHP/7.1.22”
-                    [REQUEST_TIME_FLOAT] =&gt; 1538086415.288837
-                    [REQUEST_TIME] =&gt;       1538086415
+                    [REQUEST_TIME_FLOAT] =&gt; 1538131526.19816
+                    [REQUEST_TIME] =&gt;       1538131526
                 }
         }
     public $files =&gt;
@@ -538,7 +538,7 @@
                 array(17) {
                     [DOCUMENT_ROOT] =&gt;      “(...)/bin/errordumper_webserver_root”
                     [REMOTE_ADDR] =&gt;        “::1”
-                    [REMOTE_PORT] =&gt;        “50522”
+                    [REMOTE_PORT] =&gt;        “53644”
                     [SERVER_SOFTWARE] =&gt;    “PHP 7.1.22 Development Server”
                     [SERVER_PROTOCOL] =&gt;    “HTTP/1.1”
                     [SERVER_NAME] =&gt;        “localhost”
@@ -551,8 +551,8 @@
                     [PHP_SELF] =&gt;           “/index.php/exceptionChain”
                     [HTTP_HOST] =&gt;          “example.awesomite.local”
                     [HTTP_USER_AGENT] =&gt;    “GuzzleHttp/6.3.3 curl/7.51.0 PHP/7.1.22”
-                    [REQUEST_TIME_FLOAT] =&gt; 1538086415.288837
-                    [REQUEST_TIME] =&gt;       1538086415
+                    [REQUEST_TIME_FLOAT] =&gt; 1538131526.19816
+                    [REQUEST_TIME] =&gt;       1538131526
                 }
         }
     public $files =&gt;
@@ -643,7 +643,7 @@
                 array(17) {
                     [DOCUMENT_ROOT] =&gt;      “(...)/bin/errordumper_webserver_root”
                     [REMOTE_ADDR] =&gt;        “::1”
-                    [REMOTE_PORT] =&gt;        “50522”
+                    [REMOTE_PORT] =&gt;        “53644”
                     [SERVER_SOFTWARE] =&gt;    “PHP 7.1.22 Development Server”
                     [SERVER_PROTOCOL] =&gt;    “HTTP/1.1”
                     [SERVER_NAME] =&gt;        “localhost”
@@ -656,8 +656,8 @@
                     [PHP_SELF] =&gt;           “/index.php/exceptionChain”
                     [HTTP_HOST] =&gt;          “example.awesomite.local”
                     [HTTP_USER_AGENT] =&gt;    “GuzzleHttp/6.3.3 curl/7.51.0 PHP/7.1.22”
-                    [REQUEST_TIME_FLOAT] =&gt; 1538086415.288837
-                    [REQUEST_TIME] =&gt;       1538086415
+                    [REQUEST_TIME_FLOAT] =&gt; 1538131526.19816
+                    [REQUEST_TIME] =&gt;       1538131526
                 }
         }
     public $files =&gt;
@@ -706,7 +706,7 @@
 </div><div class="tab-pane fade" id="main-context"><h2>Context</h2><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#context-variable-1" class="var-header ">$_SERVER</a></div><div id="context-variable-1" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">array(17) {
     [DOCUMENT_ROOT] =&gt;      “(...)/bin/errordumper_webserver_root”
     [REMOTE_ADDR] =&gt;        “::1”
-    [REMOTE_PORT] =&gt;        “50522”
+    [REMOTE_PORT] =&gt;        “53644”
     [SERVER_SOFTWARE] =&gt;    “PHP 7.1.22 Development Server”
     [SERVER_PROTOCOL] =&gt;    “HTTP/1.1”
     [SERVER_NAME] =&gt;        “localhost”
@@ -719,8 +719,8 @@
     [PHP_SELF] =&gt;           “/index.php/exceptionChain”
     [HTTP_HOST] =&gt;          “example.awesomite.local”
     [HTTP_USER_AGENT] =&gt;    “GuzzleHttp/6.3.3 curl/7.51.0 PHP/7.1.22”
-    [REQUEST_TIME_FLOAT] =&gt; 1538086415.288837
-    [REQUEST_TIME] =&gt;       1538086415
+    [REQUEST_TIME_FLOAT] =&gt; 1538131526.19816
+    [REQUEST_TIME] =&gt;       1538131526
 }
 </pre></div></div><div class="panel-heading"><a data-toggle="collapse" data-target="#context-variable-2" class="var-header collapsed">$_GET</a></div><div id="context-variable-2" class="panel-collapse collapse "><div class="panel-body"><pre class="max-height">array(0) {}
 </pre></div></div><div class="panel-heading"><a data-toggle="collapse" data-target="#context-variable-3" class="var-header collapsed">$_POST</a></div><div id="context-variable-3" class="panel-collapse collapse "><div class="panel-body"><pre class="max-height">array(0) {}
@@ -728,7 +728,7 @@
 </pre></div></div><div class="panel-heading"><a data-toggle="collapse" data-target="#context-variable-5" class="var-header collapsed">$_COOKIE</a></div><div id="context-variable-5" class="panel-collapse collapse "><div class="panel-body"><pre class="max-height">array(0) {}
 </pre></div></div><div class="panel-heading"><a data-toggle="collapse" data-target="#context-variable-6" class="var-header collapsed">$_SESSION</a></div><div id="context-variable-6" class="panel-collapse collapse "><div class="panel-body"><pre class="max-height">NULL
 </pre></div></div><div class="panel-heading"><a data-toggle="collapse" data-target="#context-variable-7" class="var-header collapsed">$_ENV</a></div><div id="context-variable-7" class="panel-collapse collapse "><div class="panel-body"><pre class="max-height">array(0) {}
-</pre></div></div><div class="panel-heading"><a data-toggle="collapse" data-target="#context-variable-8" class="var-header collapsed">human-friendly time</a></div><div id="context-variable-8" class="panel-collapse collapse "><div class="panel-body"><pre class="max-height">“2018-09-28 00:13:35 CEST Europe/Warsaw”
-</pre></div></div><div class="panel-heading"><a data-toggle="collapse" data-target="#context-variable-9" class="var-header collapsed">microtime(true)</a></div><div id="context-variable-9" class="panel-collapse collapse "><div class="panel-body"><pre class="max-height">1538086415.348755
+</pre></div></div><div class="panel-heading"><a data-toggle="collapse" data-target="#context-variable-8" class="var-header collapsed">human-friendly time</a></div><div id="context-variable-8" class="panel-collapse collapse "><div class="panel-body"><pre class="max-height">“2018-09-28 12:45:26 CEST Europe/Warsaw”
+</pre></div></div><div class="panel-heading"><a data-toggle="collapse" data-target="#context-variable-9" class="var-header collapsed">microtime(true)</a></div><div id="context-variable-9" class="panel-collapse collapse "><div class="panel-body"><pre class="max-height">1538131526.272415
 </pre></div></div><div class="panel-heading"><a data-toggle="collapse" data-target="#context-variable-10" class="var-header collapsed">PHP_VERSION</a></div><div id="context-variable-10" class="panel-collapse collapse "><div class="panel-body"><pre class="max-height">“7.1.22”
 </pre></div></div></div></div></div></div><footer><p class="pull-right small">Generated by <a href="https://github.com/awesomite/error-dumper" target="_blank" rel="noopener noreferrer">ErrorDumper</a> &bull; PHP 7.1.22 &bull; 2.11 MB</p></footer></div><script type="text/javascript" src="&#x2F;&#x2F;code.jquery.com&#x2F;jquery-2.1.4.min.js" integrity="sha384-R4&#x2F;ztc4ZlRqWjqIuvf6RX5yb&#x2F;v90qNGx6fS48N0tRxiGkqveZETq72KgDVJCp2TC" crossorigin="anonymous"></script><script type="text/javascript" src="&#x2F;&#x2F;maxcdn.bootstrapcdn.com&#x2F;bootstrap&#x2F;3.3.5&#x2F;js&#x2F;bootstrap.min.js" integrity="sha384-pPttEvTHTuUJ9L2kCoMnNqCRcaMPMVMsWVO&#x2B;RLaaaYDmfSP5&#x2F;&#x2F;dP6eKRusbPcqhZ" crossorigin="anonymous"></script><!-- @ErrorDumper --></body></html>
