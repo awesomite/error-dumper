@@ -58,6 +58,7 @@ final class ErrorSandboxTest extends AbstractTestCase
         if (\defined('HHVM_VERSION') || \version_compare(\PHP_VERSION, '7.0') < 0) {
             $this->markTestSkipped('Must be executed on php >= 7.0');
         }
+
         $sandbox = new ErrorSandbox();
         $caught = false;
 
