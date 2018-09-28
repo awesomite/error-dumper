@@ -53,7 +53,7 @@ class ErrorException extends \ErrorException
      * @param int $severity bitmask e.g. E_DEPRECATED | E_USER_DEPRECATED
      *
      * @return bool
-     * 
+     *
      * @see http://php.net/manual/en/errorfunc.constants.php
      */
     public function isSeverity($severity)
