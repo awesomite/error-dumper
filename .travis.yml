@@ -79,7 +79,7 @@ before_script:
     then
       export PHP_ARGS=$(php -r "echo '-d error_reporting=', E_ALL ^ (E_DEPRECATED | E_USER_DEPRECATED);");
     else
-      export PHP_ARGS=$(php -r "echo '-d error_reporting=', E_ALL ^ (E_DEPRECATED | E_STRICT);");
+      export PHP_ARGS=$(php -r "echo '-d error_reporting=', E_ALL | E_STRICT;");
     fi
 
 script:
