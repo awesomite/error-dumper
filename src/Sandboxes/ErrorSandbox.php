@@ -29,7 +29,7 @@ class ErrorSandbox implements ErrorSandboxInterface
     public function execute($callable)
     {
         return $this->metaExecute($callable, function ($number, $message, $file, $line) {
-            throw new SandboxException($message, $number, $file, $line);
+            throw new SandboxException($message, 0, $number, $file, $line);
         });
     }
 

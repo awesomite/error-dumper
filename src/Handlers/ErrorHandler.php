@@ -140,7 +140,7 @@ class ErrorHandler implements ErrorHandlerInterface
     public function handleError($code, $message, $file, $line)
     {
         if (($this->mode & $code) && ((\error_reporting() & $code))) {
-            $this->onError(new ErrorException($message, $code, $file, $line));
+            $this->onError(new ErrorException($message, 0, $code, $file, $line));
         }
     }
 
@@ -160,7 +160,7 @@ class ErrorHandler implements ErrorHandlerInterface
         }
         if ($this->isFatalError($error['type'])) {
             $this->onError(
-                new ShutdownErrorException($error['message'], $error['type'], $error['file'], $error['line'])
+                new ShutdownErrorException($error['message'], 0, $error['type'], $error['file'], $error['line'])
             );
         }
     }

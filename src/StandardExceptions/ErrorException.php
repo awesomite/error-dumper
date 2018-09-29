@@ -14,19 +14,20 @@ namespace Awesomite\ErrorDumper\StandardExceptions;
 class ErrorException extends \ErrorException
 {
     /**
-     * @param string          $message
-     * @param int             $code
-     * @param string          $file
-     * @param int             $line
-     * @param null|\Exception $previous
+     * @param string                     $message
+     * @param int                        $code
+     * @param int                        $severity
+     * @param string                     $file
+     * @param int                        $line
+     * @param null|\Exception|\Throwable $previous
      */
-    public function __construct($message, $code, $file, $line, $previous = null)
+    public function __construct($message, $code, $severity, $file, $line, $previous = null)
     {
-        $humanCode = $this->errorNameToCode($code);
+        $humanCode = $this->errorNameToCode($severity);
         parent::__construct(
             (!\is_null($humanCode) ? $humanCode . ' ' : '') . $message,
             $code,
-            $code,
+            $severity,
             $file,
             $line,
             $previous
@@ -62,13 +63,13 @@ class ErrorException extends \ErrorException
     }
 
     /**
-     * @param int $code
+     * @param int $severity
      *
      * @return null|string
      *
      * @see http://php.net/manual/en/errorfunc.constants.php
      */
-    private function errorNameToCode($code)
+    private function errorNameToCode($severity)
     {
         $all = array(
             'E_ERROR',
@@ -88,7 +89,7 @@ class ErrorException extends \ErrorException
         );
 
         foreach ($all as $name) {
-            if (\defined($name) && \constant($name) === $code) {
+            if (\defined($name) && \constant($name) === $severity) {
                 return $name;
             }
         }

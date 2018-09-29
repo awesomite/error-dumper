@@ -23,17 +23,19 @@ final class ErrorExceptionTest extends AbstractTestCase
      *
      * @param string      $message
      * @param int         $code
+     * @param int         $severity
      * @param null|string $humanCode
      * @param string      $file
      * @param int         $line
      */
-    public function testConstructor($message, $code, $humanCode, $file, $line)
+    public function testConstructor($message, $code, $severity, $humanCode, $file, $line)
     {
-        $exception = $this->createErrorException($message, $code, $file, $line);
+        $exception = $this->createErrorException($message, $code, $severity, $file, $line);
         $this->assertInstanceOf('Awesomite\ErrorDumper\StandardExceptions\ErrorException', $exception);
         $expectedMessage = !\is_null($humanCode) ? $humanCode . ' ' . $message : $message;
         $this->assertSame($expectedMessage, $exception->getMessage());
         $this->assertSame($code, $exception->getCode());
+        $this->assertSame($severity, $exception->getSeverity());
         $this->assertSame($file, $exception->getFile());
         $this->assertSame($line, $exception->getLine());
     }
@@ -41,9 +43,9 @@ final class ErrorExceptionTest extends AbstractTestCase
     public function providerConstructor()
     {
         return array(
-            array('First exception', \E_USER_NOTICE, 'E_USER_NOTICE', __FILE__, __LINE__),
-            array('Second exception', \E_WARNING, 'E_WARNING', __FILE__, __LINE__),
-            array('Third exception', 0, null, __FILE__, __LINE__),
+            array('First exception', 0, \E_USER_NOTICE, 'E_USER_NOTICE', __FILE__, __LINE__),
+            array('Second exception', 1, \E_WARNING, 'E_WARNING', __FILE__, __LINE__),
+            array('Third exception', 2, 0, null, __FILE__, __LINE__),
         );
     }
 
@@ -55,7 +57,7 @@ final class ErrorExceptionTest extends AbstractTestCase
      */
     public function testIsDeprecated($severity, $result)
     {
-        $error = $this->createErrorException('', $severity, __FILE__, __LINE__);
+        $error = $this->createErrorException('', 0, $severity, __FILE__, __LINE__);
         $this->assertSame($result, $error->isDeprecated());
     }
 
@@ -77,7 +79,7 @@ final class ErrorExceptionTest extends AbstractTestCase
      */
     public function testIsNotice($severity, $result)
     {
-        $error = $this->createErrorException('', $severity, __FILE__, __LINE__);
+        $error = $this->createErrorException('', 0, $severity, __FILE__, __LINE__);
         $this->assertSame($result, $error->isNotice());
     }
 
@@ -100,7 +102,7 @@ final class ErrorExceptionTest extends AbstractTestCase
      */
     public function testIsSeverity($severity, $compareTo, $result)
     {
-        $error = $this->createErrorException('', $severity, __FILE__, __LINE__);
+        $error = $this->createErrorException('', 0, $severity, __FILE__, __LINE__);
         $this->assertSame($result, $error->isSeverity($compareTo));
     }
 
@@ -121,7 +123,7 @@ final class ErrorExceptionTest extends AbstractTestCase
      */
     public function testErrorNameToCode($code, $name)
     {
-        $exception = new ErrorException('Test', \E_DEPRECATED, __FILE__, __LINE__);
+        $exception = new ErrorException('Test', 0, \E_DEPRECATED, __FILE__, __LINE__);
         $reflectionMethod = new \ReflectionMethod($exception, 'errorNameToCode');
         $reflectionMethod->setAccessible(true);
         $this->assertSame($name, $reflectionMethod->invoke($exception, $code));
@@ -139,13 +141,14 @@ final class ErrorExceptionTest extends AbstractTestCase
     /**
      * @param string $message
      * @param int    $code
+     * @param int    $severity
      * @param string $file
      * @param int    $line
      *
      * @return ErrorException
      */
-    private function createErrorException($message, $code, $file, $line)
+    private function createErrorException($message, $code, $severity, $file, $line)
     {
-        return new ErrorException($message, $code, $file, $line);
+        return new ErrorException($message, $code, $severity, $file, $line);
     }
 }
