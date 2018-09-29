@@ -9,7 +9,6 @@
  * file that was distributed with this source code.
  */
 
-use Awesomite\ErrorDumper\Editors\Phpstorm;
 use Awesomite\ErrorDumper\Handlers\ErrorHandler;
 use Awesomite\ErrorDumper\Listeners\OnExceptionCallable;
 use Awesomite\ErrorDumper\Serializable\SerializableException;
@@ -25,8 +24,6 @@ $handler->pushListener(new OnExceptionCallable(function ($exception) {
     $serializable = new SerializableException($exception, 0, false, true, true, $stackTraceFactory);
 
     $view = new ViewHtml();
-    $view->setEditor(new Phpstorm());
-
     $view->display($serializable);
 }));
 
