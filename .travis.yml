@@ -80,7 +80,7 @@ before_script:
       export PHP_ARGS=$(php -r "echo '-d error_reporting=', E_ALL ^ (E_DEPRECATED | E_USER_DEPRECATED);");
     else
       export PHP_ARGS=$(php -r "echo '-d error_reporting=', E_ALL ^ (E_DEPRECATED | E_STRICT);");
-      fi
+    fi
 
 script:
   - if [[ "$RUN_CS_FIXER" = "true" ]]; then php -n ${PHP_CS_FIXER} --diff --dry-run -v --allow-risky=yes fix; fi
@@ -94,8 +94,8 @@ script:
     then
       wget https://github.com/infection/infection/releases/download/0.10.3/infection.phar;
       wget https://github.com/infection/infection/releases/download/0.10.3/infection.phar.asc;
-      gpg --keyserver hkps.pool.sks-keyservers.net --recv-keys 493B4AA0
-      gpg --with-fingerprint --verify infection.phar.asc infection.phar
+      gpg --keyserver hkps.pool.sks-keyservers.net --recv-keys 493B4AA0;
+      gpg --with-fingerprint --verify infection.phar.asc infection.phar;
       chmod +x infection.phar;
       ./infection.phar
     fi
