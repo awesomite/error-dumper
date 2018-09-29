@@ -46,7 +46,7 @@ final class ViewCliTest extends AbstractTestCase
     {
         return array(
             array(new SerializableException(new \LogicException()), 1),
-            array(new SerializableException(new \InvalidArgumentException()), 0),
+            array(new SerializableException(new \InvalidArgumentException('Invalid argument')), 0),
         );
     }
 }

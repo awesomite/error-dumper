@@ -48,12 +48,19 @@ final class ViewHtmlTest extends AbstractTestCase
             $view->display($serializable);
         });
 
+        $compressedHtml2 = $this->printToVar(function () use ($serializable) {
+            $view = new ViewHtml();
+            $view->useDistTemplates();
+            $view->display($serializable);
+        });
+
         $html = $this->printToVar(function () use ($serializable) {
             $view = new ViewHtml();
             $view->useSrcTemplates();
             $view->display($serializable);
         });
 
+        $this->assertSame($compressedHtml, $compressedHtml2);
         $this->assertTrue(\mb_strlen($html) > \mb_strlen($compressedHtml));
     }
 
