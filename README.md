@@ -86,7 +86,7 @@ $handler->register(/* optional bitmask $types = ErrorHandler::TYPE_ALL */);
 
 ```
 
-Read [quick start](docs/quick-start.md#quick-start).
+Read [documentation](docs#error-dumper-documentation).
 
 ## Screenshots
 
