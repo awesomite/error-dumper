@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.14.0 (???)
+## 0.14.0 (2018-10-01)
 
 Versions `0.14.*` are **incompatible** with `0.13.*`.
 
@@ -34,11 +34,13 @@ to constructor of `Awesomite\ErrorDumper\Serializable\SerializableException`
 * `Awesomite\ErrorDumper\Listeners\ValidatorInterface` to `Awesomite\ErrorDumper\Listeners\PreExceptionInterface`
 
 **Removed**
+
 * Removed class `Awesomite\ErrorDumper\ErrorDumper`
 * Removed `Awesomite\ErrorDumper\Handlers\ErrorHandler::POLICY_*`, currently `POLICY_ERROR_REPORTING` is standard action.
 Argument `$policy` has been removed from `Awesomite\ErrorDumper\Handlers\ErrorHandler::__construct`.
 
 **Misc**
+
 * Classes `Awesomite\ErrorDumper\StandardExceptions\ErrorException`
 and `Awesomite\ErrorDumper\StandardExceptions\ShutdownErrorException` are not internal anymore
 * Updated `awesomite/stack-trace` to `^1.3`
