@@ -1,32 +1,43 @@
 <?php
 
+/*
+ * This file is part of the awesomite/error-dumper package.
+ *
+ * (c) Bartłomiej Krukowski <bartlomiej@krukowski.me>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Awesomite\ErrorDumper;
 
 /**
  * @internal
  */
-class UnsafeFunctionsTest extends TestBase
+final class UnsafeFunctionsTest extends AbstractTestCase
 {
-    private static $unsafeFunctions = array(
-        'system',
-        'exec',
-        'popen',
-        'pcntl_exec',
-        'eval',
-        'create_function',
-        'preg_replace', // /e
-        'override_function',
-        'rename_function',
-        'var_dump',
-        'print_r',
-        'mb_ereg_replace', // /e
-        'mb_eregi_replace', // /e
-    );
+    private static $unsafeFunctions
+        = array(
+            'system',
+            'exec',
+            'popen',
+            'pcntl_exec',
+            'eval',
+            'create_function',
+            'preg_replace', // /e
+            'override_function',
+            'rename_function',
+            'var_dump',
+            'print_r',
+            'mb_ereg_replace', // /e
+            'mb_eregi_replace', // /e
+        );
 
-    private static $exclusions = array(
-        'Handlers/ErrorHandler.php:210' => array('exit'),
-        'Editors/Phpstorm.php:33' => array('preg_replace'),
-    );
+    private static $exclusions
+        = array(
+            'Handlers/ErrorHandler.php:201' => array('exit'),
+            'Editors/Phpstorm.php:42'       => array('preg_replace'),
+        );
 
     /**
      * @dataProvider providerFiles
@@ -34,35 +45,38 @@ class UnsafeFunctionsTest extends TestBase
     public function testPhp(\SplFileInfo $file)
     {
         $filePath = $file->getRealPath();
-        foreach (token_get_all(file_get_contents($filePath)) as $tokenArr) {
-            if (!is_array($tokenArr)) {
-                if ($tokenArr === '`') {
+        foreach (\token_get_all(\file_get_contents($filePath)) as $tokenArr) {
+            if (!\is_array($tokenArr)) {
+                if ('`' === $tokenArr) {
                     $this->fail("Backtick operator is forbidden {$filePath}");
                 }
+
                 continue;
             }
             list($token, $source, $line) = $tokenArr;
-            $source = strtolower($source);
-            $function = $token === T_EXIT
+            $source = \mb_strtolower($source);
+            $function = \T_EXIT === $token
                 ? 'exit'
                 : $source;
-            $explodedPath = explode(DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR, $filePath);
-            $lastPart = str_replace('\\', DIRECTORY_SEPARATOR, array_pop($explodedPath));
+            $explodedPath = \explode(\DIRECTORY_SEPARATOR . 'src' . \DIRECTORY_SEPARATOR, $filePath);
+            $lastPart = \str_replace('\\', \DIRECTORY_SEPARATOR, \array_pop($explodedPath));
             $issueKey = $lastPart . ':' . $line;
-            if (isset(self::$exclusions[$issueKey]) && in_array($function, self::$exclusions[$issueKey])) {
+            if (isset(self::$exclusions[$issueKey]) && \in_array($function, self::$exclusions[$issueKey])) {
                 continue;
             }
 
             switch ($token) {
-                case T_STRING:
-                    if (in_array($source, self::$unsafeFunctions, true)) {
+                case \T_STRING:
+                    if (\in_array($source, self::$unsafeFunctions, true)) {
                         $this->fail("Function {$source} in {$filePath}:{$line}");
                     }
+
                     break;
 
-                case T_EXIT:
-                case T_EVAL:
+                case \T_EXIT:
+                case \T_EVAL:
                     $this->fail("Function {$source} in {$filePath}:{$line}");
+
                     break;
             }
         }
@@ -70,9 +84,9 @@ class UnsafeFunctionsTest extends TestBase
 
     public function providerFiles()
     {
-        $exploded = explode(DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR, __DIR__);
-        array_pop($exploded);
-        $path = implode('tests', $exploded) . 'src';
+        $exploded = \explode(\DIRECTORY_SEPARATOR . 'tests' . \DIRECTORY_SEPARATOR, __DIR__);
+        \array_pop($exploded);
+        $path = \implode('tests', $exploded) . 'src';
         $pattern = '/^.+\.php$/';
 
         $directory = new \RecursiveDirectoryIterator($path);
@@ -83,7 +97,7 @@ class UnsafeFunctionsTest extends TestBase
                 return false;
             }
 
-            return (bool) preg_match($pattern, $file->getRealPath());
+            return (bool)\preg_match($pattern, $file->getRealPath());
         };
 
         $result = array();

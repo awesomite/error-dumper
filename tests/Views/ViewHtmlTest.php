@@ -1,20 +1,27 @@
 <?php
 
+/*
+ * This file is part of the awesomite/error-dumper package.
+ *
+ * (c) Bartłomiej Krukowski <bartlomiej@krukowski.me>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Awesomite\ErrorDumper\Views;
 
-use Awesomite\ErrorDumper\Cloners\ClonedException;
-use Awesomite\ErrorDumper\Cloners\ClonedExceptionInterface;
+use Awesomite\ErrorDumper\AbstractTestCase;
 use Awesomite\ErrorDumper\Editors\EditorInterface;
 use Awesomite\ErrorDumper\Editors\Phpstorm;
-use Awesomite\ErrorDumper\TestBase;
+use Awesomite\ErrorDumper\Serializable\SerializableException;
+use Awesomite\ErrorDumper\Serializable\SerializableExceptionInterface;
 use Awesomite\VarDumper\LightVarDumper;
-use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Finder\Finder;
 
 /**
  * @internal
  */
-class ViewHtmlTest extends TestBase
+final class ViewHtmlTest extends AbstractTestCase
 {
     public static function setUpBeforeClass()
     {
@@ -26,27 +33,51 @@ class ViewHtmlTest extends TestBase
     {
         $view = new ViewHtml();
         $exception = new \Exception();
-        ob_start();
-        $view->display(new ClonedException($exception, 1));
-        ob_end_clean();
+        \ob_start();
+        $view->display(new SerializableException($exception, 1));
+        \ob_end_clean();
+    }
+
+    public function testDistTemplates()
+    {
+        $exception = new \RuntimeException('My test exception', 5);
+        $serializable = new SerializableException($exception, 0, false, true, false);
+
+        $compressedHtml = $this->printToVar(function () use ($serializable) {
+            $view = new ViewHtml();
+            $view->display($serializable);
+        });
+
+        $compressedHtml2 = $this->printToVar(function () use ($serializable) {
+            $view = new ViewHtml();
+            $view->useDistTemplates();
+            $view->display($serializable);
+        });
+
+        $html = $this->printToVar(function () use ($serializable) {
+            $view = new ViewHtml();
+            $view->useSrcTemplates();
+            $view->display($serializable);
+        });
+
+        $this->assertSame(\strlen($compressedHtml), \strlen($compressedHtml2));
+        $this->assertTrue(\mb_strlen($html) > \mb_strlen($compressedHtml));
     }
 
     /**
      * @dataProvider providerDisplay
      *
-     * @param ClonedExceptionInterface $clonedException
-     * @param EditorInterface|null $editor
+     * @param SerializableExceptionInterface $clonedException
+     * @param null|EditorInterface           $editor
      */
-    public function testDisplay(ClonedExceptionInterface $clonedException, EditorInterface $editor = null)
+    public function testDisplay(SerializableExceptionInterface $clonedException, EditorInterface $editor = null)
     {
         $view = new ViewHtml();
-        if ($editor) {
-            $this->assertSame($view, $view->setEditor($editor));
-        }
-        ob_start();
+        $this->assertSame($view, $view->setEditor($editor));
+        \ob_start();
         $view->display($clonedException);
-        $contents = ob_get_contents();
-        ob_get_clean();
+        $contents = \ob_get_contents();
+        \ob_get_clean();
         $this->assertContains(ViewHtml::TAG_HTML, $contents);
     }
 
@@ -58,7 +89,7 @@ class ViewHtmlTest extends TestBase
             ->setMaxDepth(3)
             ->setMaxStringLength(50);
 
-        $exception = new ClonedException(new \Exception(), 3);
+        $exception = new SerializableException(new \Exception(), 3);
         $exception->getStackTrace()->setVarDumper($varDumper);
 
         return array(
@@ -76,10 +107,10 @@ class ViewHtmlTest extends TestBase
     {
         $view = new ViewHtml();
         $this->assertSame($view, $view->setContentUnderTitle($content));
-        ob_start();
-        $view->display(new ClonedException(new \Exception(), 1));
-        $output = ob_get_contents();
-        ob_end_clean();
+        \ob_start();
+        $view->display(new SerializableException(new \Exception(), 1));
+        $output = \ob_get_contents();
+        \ob_end_clean();
         $this->assertContains($content, $output);
     }
 
@@ -92,49 +123,9 @@ class ViewHtmlTest extends TestBase
     }
 
     /**
-     * @runInSeparateProcess
-     */
-    public function testCache()
-    {
-        $cachePath = $this->getCachePath();
-        $this->assertInternalType('string', $cachePath);
-
-        $finder = new Finder();
-        $filesystem = new Filesystem();
-        $finder
-            ->ignoreDotFiles(true)
-            ->in($cachePath);
-        $filesystem->remove($finder);
-        $this->assertSame(0, count($finder));
-
-        $view = new ViewHtml();
-        $this->assertSame($view, $view->enableCaching($cachePath));
-        ob_start();
-        $view->display(new ClonedException(new \Exception()));
-        ob_end_clean();
-        $this->assertGreaterThan(0, count($finder));
-        $filesystem->remove($finder);
-
-        $this->assertSame($view, $view->disableCaching());
-        ob_start();
-        $view->display(new ClonedException(new \Exception()));
-        ob_end_clean();
-        $this->assertSame(0, count($finder));
-    }
-
-    private function getCachePath()
-    {
-        $exploded = explode(DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR, __DIR__);
-        array_pop($exploded);
-        $exploded = array_merge($exploded, array('tests', 'cache'));
-
-        return realpath(implode(DIRECTORY_SEPARATOR, $exploded));
-    }
-
-    /**
      * @dataProvider providerAppendToBody
      *
-     * @param $toAppend
+     * @param        $toAppend
      * @param string $expected
      */
     public function testAppendToBody($toAppend, $expected)
@@ -142,17 +133,18 @@ class ViewHtmlTest extends TestBase
         $view = new ViewHtml();
         $this->assertSame($view, $view->appendToBody($toAppend));
 
-        ob_start();
-        $view->display(new ClonedException(new \Exception(), 1, true));
-        $contents = ob_get_contents();
-        ob_end_clean();
+        \ob_start();
+        $view->display(new SerializableException(new \Exception(), 1, true));
+        $contents = \ob_get_contents();
+        \ob_end_clean();
         $this->assertContains($expected, $contents);
     }
 
     public function providerAppendToBody()
     {
-        $rand = mt_rand();
-        $scriptTag =<<<SCRIPT
+        $rand = \mt_rand();
+        $scriptTag
+            = <<<SCRIPT
 <script type="text/javascript">
     console.log(new Date());
     // rand value {$rand}
@@ -162,7 +154,8 @@ SCRIPT;
             return $scriptTag;
         });
 
-        $secondScriptTag = <<<SCRIPT
+        $secondScriptTag
+            = <<<SCRIPT
 <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"></script>
 SCRIPT;
         $secondStringable = new Stringable(function () use ($secondScriptTag) {
@@ -181,5 +174,15 @@ SCRIPT;
         $view = new ViewHtml();
         $this->assertSame($view, $view->disableHeaders());
         $this->assertSame($view, $view->enableHeaders());
+    }
+
+    private function printToVar($callable)
+    {
+        \ob_start();
+        $callable();
+        $result = \ob_get_contents();
+        \ob_end_clean();
+
+        return $result;
     }
 }

@@ -1,11 +1,25 @@
 <?php
 
+/*
+ * This file is part of the awesomite/error-dumper package.
+ *
+ * (c) Bartłomiej Krukowski <bartlomiej@krukowski.me>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+use Awesomite\ErrorDumper\Editors\Phpstorm;
+use Awesomite\ErrorDumper\Serializable\SerializableException;
+use Awesomite\ErrorDumper\Views\ViewCli;
+use Awesomite\ErrorDumper\Views\ViewHtml;
+use Awesomite\VarDumper\LightVarDumper;
+
 class TmpException extends \Exception
 {
 }
 
 /**
- * Class TestClass
  * @method callDynamic($a, $b, $c)
  * @method static TestClass create(array $params)
  */
@@ -31,26 +45,25 @@ class TestClass
 
     public static function myStaticMethod()
     {
-        $clone = new \Awesomite\ErrorDumper\Cloners\ClonedException(new TmpException('My test exception'));
-        $clone->getStackTrace()->setVarDumper(new \Awesomite\VarDumper\LightVarDumper());
+        $clone = new SerializableException(new TmpException('My test exception'));
+        $clone->getStackTrace()->setVarDumper(new LightVarDumper());
 
-        if (php_sapi_name() === 'cli') {
-            $view = new \Awesomite\ErrorDumper\Views\ViewCli(7, 3);
+        if ('cli' === \php_sapi_name()) {
+            $view = new ViewCli(7, 3);
             $view->display($clone);
             exit;
         }
 
-        $view = new \Awesomite\ErrorDumper\Views\ViewHtml();
+        $view = new ViewHtml();
         $view
-            ->setEditor(new \Awesomite\ErrorDumper\Editors\Phpstorm())
+            ->setEditor(new Phpstorm())
             ->display($clone);
     }
 }
 
-
-ob_start();
+\ob_start();
 TestClass::create(5);
-$result = ob_get_contents();
-ob_end_clean();
+$result = \ob_get_contents();
+\ob_end_clean();
 
 return $result;

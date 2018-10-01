@@ -1,13 +1,22 @@
 <?php
 
+/*
+ * This file is part of the awesomite/error-dumper package.
+ *
+ * (c) Bartłomiej Krukowski <bartlomiej@krukowski.me>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Awesomite\ErrorDumper\Editors;
 
-use Awesomite\ErrorDumper\TestBase;
+use Awesomite\ErrorDumper\AbstractTestCase;
 
 /**
  * @internal
  */
-class PhpstormTest extends TestBase
+final class PhpstormTest extends AbstractTestCase
 {
     /**
      * @dataProvider providerGetLinkToFile
@@ -18,7 +27,7 @@ class PhpstormTest extends TestBase
     public function testGetLinkToFile($file, $line)
     {
         $phpstorm = new Phpstorm();
-        $this->assertSame('string', gettype($phpstorm->getLinkToFile($file, $line)));
+        $this->assertSame('string', \gettype($phpstorm->getLinkToFile($file, $line)));
     }
 
     public function providerGetLinkToFile()
@@ -32,11 +41,11 @@ class PhpstormTest extends TestBase
     /**
      * @dataProvider providerRegisterPathMapping
      *
-     * @param string $mapFrom
-     * @param string $mapTo
-     * @param string $file
-     * @param int|null $line
-     * @param string $expectedFile
+     * @param string   $mapFrom
+     * @param string   $mapTo
+     * @param string   $file
+     * @param null|int $line
+     * @param string   $expectedFile
      */
     public function testRegisterPathMapping($mapFrom, $mapTo, $file, $line, $expectedFile)
     {
@@ -44,8 +53,8 @@ class PhpstormTest extends TestBase
         $phpstorm2 = $phpstorm->registerPathMapping($mapFrom, $mapTo);
         $this->assertSame($phpstorm, $phpstorm2);
         $link = $phpstorm->getLinkToFile($file, $line);
-        list(, $stringParams) = explode('?', $link, 2);
-        parse_str($stringParams, $data);
+        list(, $stringParams) = \explode('?', $link, 2);
+        \parse_str($stringParams, $data);
         $this->assertEquals($line, isset($data['line']) ? $data['line'] : null);
         $this->assertSame($expectedFile, $data['file']);
     }

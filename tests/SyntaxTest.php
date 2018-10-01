@@ -1,34 +1,52 @@
 <?php
 
+/*
+ * This file is part of the awesomite/error-dumper package.
+ *
+ * (c) Bartłomiej Krukowski <bartlomiej@krukowski.me>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Awesomite\ErrorDumper;
 
 /**
  * @internal
+ *
+ * @runTestsInSeparateProcesses
  */
-class SyntaxTest extends TestBase
+final class SyntaxTest extends AbstractTestCase
 {
-    /**
-     * @runInSeparateProcess
-     */
-    public function testPhpSyntax()
+    public static function requireWholeSrc()
     {
-        $path = $this->preparePathToDir('src');
-        $this->assertInternalType('string', $path);
-
+        $path = self::preparePathToDir('src');
+        $directory = new \RecursiveDirectoryIterator($path);
+        $iterator = new \RecursiveIteratorIterator($directory);
+        $regex = new \RegexIterator($iterator, '/^.+\.php$/', \RecursiveRegexIterator::GET_MATCH);
         $counter = 0;
-        foreach ($this->getRecursiveFileIterator($path, '/^.+\.php$/') as $file) {
+        foreach ($regex as $file) {
             $counter++;
             require_once $file[0];
         }
+
+        return array($path, $counter);
+    }
+
+    public function testPhpSyntax()
+    {
+        list($path, $counter) = static::requireWholeSrc();
+        $this->assertInternalType('string', $path);
         $this->assertGreaterThan(0, $counter);
     }
 
     /**
-     * @runInSeparateProcess
+     * @dataProvider providerTwigSyntax
+     *
+     * @param string $path
      */
-    public function testTwigSyntax()
+    public function testTwigSyntax($path)
     {
-        $path = $this->preparePathToDir('templates');
         $this->assertInternalType('string', $path);
         $twig = $this->createTwig($path, array('strpad'), array('memoryUsage', 'exportDeclaredValue'));
 
@@ -37,6 +55,7 @@ class SyntaxTest extends TestBase
             $fileName = $file[0];
 
             $counter++;
+
             try {
                 $twig->parse($twig->tokenize($this->getTwigSource($fileName)));
             } catch (\Twig_Error_Syntax $exception) {
@@ -48,8 +67,31 @@ class SyntaxTest extends TestBase
         $this->assertGreaterThan(0, $counter);
     }
 
+    public function providerTwigSyntax()
+    {
+        return array(
+            array($this->preparePathToDir('templates')),
+            array($this->preparePathToDir('templates_dist')),
+        );
+    }
+
+    /**
+     * @param string $dir
+     *
+     * @return bool|string
+     */
+    private static function preparePathToDir($dir)
+    {
+        $delimiter = \DIRECTORY_SEPARATOR . 'tests' . \DIRECTORY_SEPARATOR;
+        $exploded = \explode($delimiter, __FILE__);
+        \array_pop($exploded);
+
+        return \realpath(\implode($delimiter, $exploded) . \DIRECTORY_SEPARATOR . $dir);
+    }
+
     /**
      * @param $path
+     *
      * @return \Twig_Environment
      */
     private function createTwig($path, array $filters, array $functions)
@@ -58,11 +100,13 @@ class SyntaxTest extends TestBase
         $twig = new \Twig_Environment($loader);
 
         foreach ($filters as $filter) {
-            $twig->addFilter(new \Twig_SimpleFilter($filter, function () {}));
+            $twig->addFilter(new \Twig_SimpleFilter($filter, function () {
+            }));
         }
 
         foreach ($functions as $function) {
-            $twig->addFunction(new \Twig_SimpleFunction($function, function () {}));
+            $twig->addFunction(new \Twig_SimpleFunction($function, function () {
+            }));
         }
 
         return $twig;
@@ -70,31 +114,17 @@ class SyntaxTest extends TestBase
 
     private function getTwigSource($filename)
     {
-        $contents = file_get_contents($filename);
+        $contents = \file_get_contents($filename);
 
         $envReflection = new \ReflectionClass('Twig_Environment');
         $method = $envReflection->getMethod('tokenize');
         list($firstParameter) = $method->getParameters();
         /** @var \ReflectionParameter $firstParameter */
-
         if ($firstParameter->getClass()) {
             return new \Twig_Source($contents, $filename);
         }
 
         return $contents;
-    }
-
-    /**
-     * @param string $dir
-     * @return string|bool
-     */
-    private function preparePathToDir($dir)
-    {
-        $delimiter = DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR;
-        $exploded = explode($delimiter, __FILE__);
-        array_pop($exploded);
-
-        return realpath(implode($delimiter, $exploded) . DIRECTORY_SEPARATOR . $dir);
     }
 
     private function getRecursiveFileIterator($path, $pattern)

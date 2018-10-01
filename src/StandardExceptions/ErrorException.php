@@ -1,27 +1,33 @@
 <?php
 
+/*
+ * This file is part of the awesomite/error-dumper package.
+ *
+ * (c) Bartłomiej Krukowski <bartlomiej@krukowski.me>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Awesomite\ErrorDumper\StandardExceptions;
 
-/**
- * @internal
- */
 class ErrorException extends \ErrorException
 {
     /**
-     * ErrorException constructor.
-     * @param string $message
-     * @param int $code
-     * @param string $file
-     * @param int $line
-     * @param \Exception|null $previous
+     * @param string                     $message
+     * @param int                        $code
+     * @param int                        $severity
+     * @param string                     $file
+     * @param int                        $line
+     * @param null|\Exception|\Throwable $previous
      */
-    public function __construct($message, $code, $file, $line, $previous = null)
+    public function __construct($message, $code, $severity, $file, $line, $previous = null)
     {
-        $humanCode = $this->errorNameToCode($code);
+        $humanCode = $this->errorNameToCode($severity);
         parent::__construct(
-            (!is_null($humanCode) ? $humanCode . ' ' : '') . $message,
+            (!\is_null($humanCode) ? $humanCode . ' ' : '') . $message,
             $code,
-            $code,
+            $severity,
             $file,
             $line,
             $previous
@@ -29,10 +35,41 @@ class ErrorException extends \ErrorException
     }
 
     /**
-     * @param int $code
-     * @return string|null
+     * @return bool
      */
-    private function errorNameToCode($code)
+    public function isDeprecated()
+    {
+        return $this->isSeverity(\E_DEPRECATED | \E_USER_DEPRECATED);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isNotice()
+    {
+        return $this->isSeverity(\E_NOTICE | \E_USER_NOTICE);
+    }
+
+    /**
+     * @param int $severity bitmask e.g. E_DEPRECATED | E_USER_DEPRECATED
+     *
+     * @return bool
+     *
+     * @see http://php.net/manual/en/errorfunc.constants.php
+     */
+    public function isSeverity($severity)
+    {
+        return (bool)($severity & $this->getSeverity());
+    }
+
+    /**
+     * @param int $severity
+     *
+     * @return null|string
+     *
+     * @see http://php.net/manual/en/errorfunc.constants.php
+     */
+    private function errorNameToCode($severity)
     {
         $all = array(
             'E_ERROR',
@@ -52,7 +89,7 @@ class ErrorException extends \ErrorException
         );
 
         foreach ($all as $name) {
-            if (defined($name) && constant($name) === $code) {
+            if (\defined($name) && \constant($name) === $severity) {
                 return $name;
             }
         }

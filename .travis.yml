@@ -1,12 +1,7 @@
 language: php
 
-install:
-  - mkdir -p build/logs
-  - mv .git ~.git
-  - cd dev-tools; composer update; cd ..
-  
-sudo: false
 dist: trusty
+sudo: false
 
 php:
   - 5.4
@@ -16,16 +11,96 @@ php:
   - 7.1
   - 7.2
   - hhvm
+  - hhvm-3.3
+  - hhvm-3.6
+  - hhvm-3.9
+  - hhvm-3.12
+  - hhvm-3.15
+  - hhvm-3.18
   - nightly
-  
+  - hhvm-nightly
+
+env:
+  matrix:
+    - DEPENDENCIES="high"
+    - DEPENDENCIES="low"
+
 matrix:
+  allow_failures:
+    - php: nightly
+    - php: hhvm-nightly
+
   include:
     - php: 5.3
       dist: precise
+      env: DEPENDENCIES="high"
+
+    - php: 5.3
+      dist: precise
+      env: DEPENDENCIES="low"
+
+    - php: hhvm
+      env: DEPENDENCIES="hhvm_high"
+
+    - php: hhvm-3.12
+      env: DEPENDENCIES="hhvm_high"
+
+    - php: hhvm-3.15
+      env: DEPENDENCIES="hhvm_high"
+
+    - php: hhvm-3.18
+      env: DEPENDENCIES="hhvm_high"
+
+    - php: hhvm-nightly
+      env: DEPENDENCIES="hhvm_high"
+
+install:
+  - if [[ "$DEPENDENCIES" = 'high' ]]; then travis_retry composer update --no-interaction --prefer-stable; fi
+  - if [[ "$DEPENDENCIES" = 'low' ]]; then travis_retry composer update --no-interaction --prefer-stable --prefer-lowest; fi
+  - |
+    if [[ "$DEPENDENCIES" = 'hhvm_high' ]];
+    then
+      bin/composer-set-config.php php $(php -d hhvm.php7.all=1 -r "echo PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION;");
+      travis_retry composer update --no-interaction --prefer-stable;
+    fi
+
+  - composer show
+  - |
+    if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.1" ]]; then
+      cd dev-tools; travis_retry composer update; cd ..
+      export PHP_CS_FIXER="./dev-tools/vendor/bin/php-cs-fixer";
+      export RUN_CS_FIXER="true";
+    fi
+
+before_script:
+  - vendor/bin/phpunit-4.8-fixer
+  - |
+    if [[ "$DEPENDENCIES" = 'low' ]];
+    then
+      export PHP_ARGS=$(php -r "echo '-d error_reporting=', E_ALL ^ (E_DEPRECATED | E_USER_DEPRECATED);");
+    else
+      export PHP_ARGS=$(php -r "echo '-d error_reporting=', E_ALL | E_STRICT;");
+    fi
 
 script:
-  - travis_wait composer update --no-interaction --prefer-lowest && bin/fix-phpunit.php && php -d error_reporting=$(php -r "var_export(E_ALL & ~E_DEPRECATED);") vendor/bin/phpunit
-  - travis_wait composer update --no-interaction && bin/fix-phpunit.php && vendor/bin/phpunit
+  - if [[ "$RUN_CS_FIXER" = "true" ]]; then php -n ${PHP_CS_FIXER} --diff --dry-run -v --allow-risky=yes fix; fi
+  - MODE_SPEED_TEST=true php ${PHP_ARGS} vendor/bin/phpunit
+  - php ${PHP_ARGS} vendor/bin/phpunit -vvv
+
+  - bin/test-optimized.php
+
+  - |
+    if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.1" ]];
+    then
+      wget https://github.com/infection/infection/releases/download/0.10.3/infection.phar;
+      wget https://github.com/infection/infection/releases/download/0.10.3/infection.phar.asc;
+      gpg --keyserver hkps.pool.sks-keyservers.net --recv-keys 493B4AA0;
+      gpg --with-fingerprint --verify infection.phar.asc infection.phar;
+      chmod +x infection.phar;
+      ./infection.phar
+    fi
+
+  - bin/test.php || true
 
 after_script:
   - mv ~.git .git

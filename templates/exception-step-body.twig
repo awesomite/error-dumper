@@ -4,12 +4,12 @@
     {% set argumentsTab = arguments|length > 0 and not step.hasPlaceInCode() %}
     {% if arguments|length > 0 %}
         <div class="padding-menu">
-            <ul class="nav nav-tabs" data-tabs="tabs-{{ stepKey }}">
+            <ul class="nav nav-tabs" >
                 <li class="{{ argumentsTab ? '' : 'active' }}">
                     <a href="#source-{{ stepKey }}" data-toggle="tab">Source</a>
                 </li>
                 <li class="{{ argumentsTab ? 'active' }}">
-                    <a href="#colorized-key-{{ stepKey }}" data-toggle="tab">Arguments</a>
+                    <a href="#params-{{ stepKey }}" data-toggle="tab">Arguments</a>
                 </li>
             </ul>
         </div>

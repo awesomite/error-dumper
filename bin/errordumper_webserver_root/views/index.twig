@@ -1,23 +1,23 @@
 <!doctype html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>Examples</title>
-        <link
-                rel="stylesheet"
-                type="text/css"
-                href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
-                crossorigin="anonymous"
-        />
-    </head>
-    <body>
-        <div class="container">
-            <h1>Examples</h1>
-            <ul>
-                {% for pageCode, page in pages %}
-                    <li><a href="{{ url('homepage', {page: pageCode}) }}">{{ page }}</a></li>
-                {% endfor %}
-            </ul>
-        </div>
-    </body>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Examples</title>
+    <link
+            rel="stylesheet"
+            type="text/css"
+            href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
+            crossorigin="anonymous"
+    />
+</head>
+<body>
+<div class="container">
+    <h1>Examples</h1>
+    <ul>
+        {% for pageCode, page in pages %}
+            <li><a href="{{ url('homepage', {page: pageCode}) }}">{{ page }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+</body>
 </html>

@@ -1,12 +1,14 @@
 <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAVFFOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEAABEAAAABEAAAARAAAAEQAAABEAAAARAAAAEQAAABEAAAARAAABEAAAAAEQABEAAAAAABEAEQAAAAAAEQABEAAAAAEQAAARAAAAEQAAABEAAAARAAAAEQAAABEAAAARAAAAEQAAAAEQAAEQAAAAAAAAAAAAD//wAA888AAOfnAADn5wAA5+cAAOfnAADP8wAAn/kAAJ/5AADP8wAA5+cAAOfnAADn5wAA5+cAAPPPAAD//wAA" rel="icon" type="image/x-icon" />
 {% autoescape 'html_attr' %}
-    <link
-            rel="stylesheet"
-            type="text/css"
-            href="{{ resources.bootstrapCss.link }}"
-            integrity="{{ resources.bootstrapCss.integrity }}"
-            crossorigin="anonymous"
-    />
+    {% for css in resources.css %}
+        <link
+                rel="stylesheet"
+                type="text/css"
+                href="{{ css.link }}"
+                integrity="{{ css.integrity }}"
+                crossorigin="anonymous"
+        />
+    {% endfor %}
 {% endautoescape %}
 <style type="text/css">
     .error-line
@@ -14,6 +16,7 @@
         font-weight: bold;
         color: red;
         font-style: italic;
+        background-color: #fefefe;
     }
     a.var-header
     {

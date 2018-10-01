@@ -1,12 +1,12 @@
 {
     "name": "awesomite/error-dumper",
     "description": "Pretty preview of errors and exceptions",
-    "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
         "php": "^5.3 || ^7.0",
-        "awesomite/stack-trace": "^0.9.0 || ^0.10.0",
-        "symfony/console": "^2.7 || ^3.0",
+        "awesomite/stack-trace": "^1.3.0",
+        "awesomite/var-dumper": "^1.1.0",
+        "symfony/console": "^2.7 || ^3.0 || ^4.0",
         "twig/twig": "^1.12.0-stable || ^2.0"
     },
     "require-dev": {
@@ -16,8 +16,9 @@
         "symfony/filesystem": "^2.8.16",
         "symfony/finder": "^2.8.16",
         "symfony/polyfill-php54": "^1.3",
+        "symfony/var-dumper": "^2.8 || ^3.0 || ^4.0",
         "sebastian/comparator": ">=1.2.3",
-        "awesomite/var-dumper": "^0.6.3 || ^0.7.2 || ^0.8.0 || ^0.9.0"
+        "awesomite/phpunit-4.8-fixer": "^1.0"
     },
     "license": "MIT",
     "authors": [
@@ -32,14 +33,11 @@
         }
     },
     "autoload-dev": {
-        "files": ["tests/functions.php"],
+        "files": ["tests/polyfill.php"],
         "psr-4": {
-            "Awesomite\\ErrorDumper\\": "tests/"
+            "Awesomite\\ErrorDumper\\": "tests/",
+            "Awesomite\\ErrorDumper\\Optimizer\\": "optimizer/"
         }
     },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "0.13-dev"
-        }
-    }
+    "keywords": ["debug", "debug_backtrace", "exception", "error"]
 }
