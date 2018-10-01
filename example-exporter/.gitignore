@@ -1,3 +1,4 @@
 *
 !.gitignore
+!composer.json
 !exporter.php
