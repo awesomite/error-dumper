@@ -94,7 +94,12 @@ class ViewHtml implements ViewInterface
         return $this;
     }
 
-    public function setEditor(EditorInterface $editor)
+    /**
+     * @param null|EditorInterface $editor
+     *
+     * @return $this
+     */
+    public function setEditor(EditorInterface $editor = null)
     {
         $this->editor = $editor;
 

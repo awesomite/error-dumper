@@ -73,9 +73,7 @@ final class ViewHtmlTest extends AbstractTestCase
     public function testDisplay(SerializableExceptionInterface $clonedException, EditorInterface $editor = null)
     {
         $view = new ViewHtml();
-        if ($editor) {
-            $this->assertSame($view, $view->setEditor($editor));
-        }
+        $this->assertSame($view, $view->setEditor($editor));
         \ob_start();
         $view->display($clonedException);
         $contents = \ob_get_contents();
