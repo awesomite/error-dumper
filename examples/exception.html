@@ -2,38 +2,38 @@
 </head><body><div class="container"><h1>Error!</h1><!-- @ErrorDumper under title --><div class="padding-menu"><ul class="nav nav-pills" data-tabs="main-tabs"><li class="active"><a href="#main-exception-1" data-toggle="tab">RuntimeException #1</a></li><li ><a href="#main-exception-2" data-toggle="tab">CalculatorException #2</a></li><li><a href="#main-context" data-toggle="tab">Context</a></li></ul><div class="tab-content"><div class="tab-pane fade active in" id="main-exception-1"><h2>Exception</h2><pre><strong>RuntimeException (code 0)</strong> Uncaught exception CalculatorException</pre><h2>Stack trace</h2><div class="panel panel-default"><div class="panel-heading">(...)/bin/scripts/exceptionChain.php:48</div><div class="panel-body"><div><div class="tab-content"><div class="tab-pane fade active in" id="source-e1-s0"><div class="code-box max-height rounded"><span>41    class Executor</span><span>42    {</span><span>43        public function execute($callable, $arguments)</span><span>44        {</span><span>45            try {</span><span>46                \call_user_func_array($callable, $arguments);</span><span>47            } catch (\Exception $exception) {</span><span class="error-line">48                throw new \RuntimeException(\sprintf(&#039;Uncaught exception %s&#039;, \get_class($exception)), 0, $exception);</span><span>49            }</span><span>50        }</span><span>51    }</span><span>52    </span><span>53    $executor = new Executor();</span><span>54    </span><span>55    try {</span></div></div>
 </div></div></div>
 </div>
-    <div class="panel panel-default"><div class="panel-heading">(...)/bin/scripts/exceptionChain.php:56 <strong>Executor-&gt;execute()</strong></div><div class="panel-body"><div class="padding-menu"><ul class="nav nav-tabs"><li class="active"><a href="#source-e1-s1" data-toggle="tab">Source</a></li><li class=""><a href="#params-e1-s1" data-toggle="tab">Arguments</a></li></ul></div><div><div class="tab-content"><div class="tab-pane fade active in" id="source-e1-s1"><div class="code-box max-height "><span>48                throw new \RuntimeException(\sprintf(&#039;Uncaught exception %s&#039;, \get_class($exception)), 0, $exception);</span><span>49            }</span><span>50        }</span><span>51    }</span><span>52    </span><span>53    $executor = new Executor();</span><span>54    </span><span>55    try {</span><span class="error-line">56        $executor-&gt;execute(array(new Calculator(), &#039;divide&#039;), array(5, 0));</span><span>57    } catch (\Exception $exception) {</span><span>58        $view = new ViewHtml();</span><span>59        $view-&gt;display(new SerializableException($exception));</span><span>60        exit;</span><span>61    }</span><span>62    </span></div></div>
-        <div class="tab-pane fade " id="params-e1-s1"><div class="panel-group"><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e1-s1-0" class="var-header ">$callable</a></div><div id="param-e1-s1-0" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">array(2) {
-    [0] =&gt; object(Calculator) #1 (0) {}
+<div class="panel panel-default"><div class="panel-heading">(...)/bin/scripts/exceptionChain.php:56 <strong>Executor-&gt;execute()</strong></div><div class="panel-body"><div class="padding-menu"><ul class="nav nav-tabs"><li class="active"><a href="#source-e1-s1" data-toggle="tab">Source</a></li><li class=""><a href="#params-e1-s1" data-toggle="tab">Arguments</a></li></ul></div><div><div class="tab-content"><div class="tab-pane fade active in" id="source-e1-s1"><div class="code-box max-height "><span>48                throw new \RuntimeException(\sprintf(&#039;Uncaught exception %s&#039;, \get_class($exception)), 0, $exception);</span><span>49            }</span><span>50        }</span><span>51    }</span><span>52    </span><span>53    $executor = new Executor();</span><span>54    </span><span>55    try {</span><span class="error-line">56        $executor-&gt;execute(array(new Calculator(), &#039;divide&#039;), array(5, 0));</span><span>57    } catch (\Exception $exception) {</span><span>58        $view = new ViewHtml();</span><span>59        $view-&gt;display(new SerializableException($exception));</span><span>60        exit;</span><span>61    }</span><span>62    </span></div></div>
+<div class="tab-pane fade " id="params-e1-s1"><div class="panel-group"><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e1-s1-0" class="var-header ">$callable</a></div><div id="param-e1-s1-0" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">array(2) {
+    [0] =&gt; object(Calculator) #70 (0) {}
     [1] =&gt; “divide”
 }
 </pre></div></div></div><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e1-s1-1" class="var-header ">$arguments</a></div><div id="param-e1-s1-1" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">array(2) {5, 0}
 </pre></div></div></div></div></div>
-    </div></div></div>
-    </div>
-    <div class="panel panel-default"><div class="panel-heading">(...)/bin/errordumper_webserver_root/index.php:49 <strong>require()</strong></div><div class="panel-body"><div class="padding-menu"><ul class="nav nav-tabs"><li class="active"><a href="#source-e1-s2" data-toggle="tab">Source</a></li><li class=""><a href="#params-e1-s2" data-toggle="tab">Arguments</a></li></ul></div><div><div class="tab-content"><div class="tab-pane fade active in" id="source-e1-s2"><div class="code-box max-height "><span>42                    require \implode(\DIRECTORY_SEPARATOR, array(__DIR__, &#039;..&#039;, &#039;scripts&#039;, $page . &#039;.php&#039;));</span><span>43                };</span><span>44    </span><span>45                return false;</span><span>46            }</span><span>47    </span><span>48            if (\in_array($page, \array_keys($pages))) {</span><span class="error-line">49                return require \implode(\DIRECTORY_SEPARATOR, array(__DIR__, &#039;..&#039;, &#039;scripts&#039;, $page . &#039;.php&#039;));</span><span>50            }</span><span>51    </span><span>52            return $app[&#039;twig&#039;]-&gt;render(&#039;index.twig&#039;, array(</span><span>53                &#039;pages&#039; =&gt; $pages,</span><span>54            ));</span><span>55        })</span><span>56        -&gt;bind(&#039;homepage&#039;)</span></div></div>
-        <div class="tab-pane fade " id="params-e1-s2"><div class="panel-group"><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e1-s2-0" class="var-header ">unknown0</a></div><div id="param-e1-s2-0" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">“(...)/bin/scripts/exceptionChain.php”
+</div></div></div>
+</div>
+<div class="panel panel-default"><div class="panel-heading">(...)/bin/errordumper_webserver_root/index.php:51 <strong>require()</strong></div><div class="panel-body"><div class="padding-menu"><ul class="nav nav-tabs"><li class="active"><a href="#source-e1-s2" data-toggle="tab">Source</a></li><li class=""><a href="#params-e1-s2" data-toggle="tab">Arguments</a></li></ul></div><div><div class="tab-content"><div class="tab-pane fade active in" id="source-e1-s2"><div class="code-box max-height "><span>44                    require \implode(\DIRECTORY_SEPARATOR, array(__DIR__, &#039;..&#039;, &#039;scripts&#039;, $page . &#039;.php&#039;));</span><span>45                };</span><span>46    </span><span>47                return false;</span><span>48            }</span><span>49    </span><span>50            if (\in_array($page, \array_keys($pages))) {</span><span class="error-line">51                return require \implode(\DIRECTORY_SEPARATOR, array(__DIR__, &#039;..&#039;, &#039;scripts&#039;, $page . &#039;.php&#039;));</span><span>52            }</span><span>53    </span><span>54            return $app[&#039;twig&#039;]-&gt;render(&#039;index.twig&#039;, array(</span><span>55                &#039;pages&#039; =&gt; $pages,</span><span>56            ));</span><span>57        })</span><span>58        -&gt;bind(&#039;homepage&#039;)</span></div></div>
+<div class="tab-pane fade " id="params-e1-s2"><div class="panel-group"><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e1-s2-0" class="var-header ">unknown0</a></div><div id="param-e1-s2-0" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">“(...)/bin/scripts/exceptionChain.php”
 </pre></div></div></div></div></div>
-    </div></div></div>
-    </div>
-    <div class="panel panel-default"><div class="panel-heading"> <strong>{closure}()</strong></div><div class="panel-body"><div class="padding-menu"><ul class="nav nav-tabs"><li class=""><a href="#source-e1-s3" data-toggle="tab">Source</a></li><li class="active"><a href="#params-e1-s3" data-toggle="tab">Arguments</a></li></ul></div><div><div class="tab-content"><div class="tab-pane fade " id="source-e1-s3"><p class="code-box max-height">Source code does not exist for this step.</p></div>
-        <div class="tab-pane fade active in" id="params-e1-s3"><div class="panel-group"><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e1-s3-0" class="var-header ">unknown0</a></div><div id="param-e1-s3-0" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">“exceptionChain”
+</div></div></div>
+</div>
+<div class="panel panel-default"><div class="panel-heading"> <strong>{closure}()</strong></div><div class="panel-body"><div class="padding-menu"><ul class="nav nav-tabs"><li class=""><a href="#source-e1-s3" data-toggle="tab">Source</a></li><li class="active"><a href="#params-e1-s3" data-toggle="tab">Arguments</a></li></ul></div><div><div class="tab-content"><div class="tab-pane fade " id="source-e1-s3"><p class="code-box max-height">Source code does not exist for this step.</p></div>
+<div class="tab-pane fade active in" id="params-e1-s3"><div class="panel-group"><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e1-s3-0" class="var-header ">unknown0</a></div><div id="param-e1-s3-0" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">“exceptionChain”
 </pre></div></div></div></div></div>
-    </div></div></div>
-    </div>
-    <div class="panel panel-default"><div class="panel-heading">(...)/symfony/http-kernel/HttpKernel.php:144 <strong>call_user_func_array()</strong></div><div class="panel-body"><div class="padding-menu"><ul class="nav nav-tabs"><li class="active"><a href="#source-e1-s4" data-toggle="tab">Source</a></li><li class=""><a href="#params-e1-s4" data-toggle="tab">Arguments</a></li></ul></div><div><div class="tab-content"><div class="tab-pane fade active in" id="source-e1-s4"><div class="code-box max-height "><span>137            $this-&gt;dispatcher-&gt;dispatch(KernelEvents::CONTROLLER, $event);</span><span>138            $controller = $event-&gt;getController();</span><span>139    </span><span>140            // controller arguments</span><span>141            $arguments = $this-&gt;resolver-&gt;getArguments($request, $controller);</span><span>142    </span><span>143            // call controller</span><span class="error-line">144            $response = call_user_func_array($controller, $arguments);</span><span>145    </span><span>146            // view</span><span>147            if (!$response instanceof Response) {</span><span>148                $event = new GetResponseForControllerResultEvent($this, $request, $type, $response);</span><span>149                $this-&gt;dispatcher-&gt;dispatch(KernelEvents::VIEW, $event);</span><span>150    </span><span>151                if ($event-&gt;hasResponse()) {</span></div></div>
-        <div class="tab-pane fade " id="params-e1-s4"><div class="panel-group"><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e1-s4-0" class="var-header ">$function_name</a></div><div id="param-e1-s4-0" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">object(Closure) #2 (4) {
+</div></div></div>
+</div>
+<div class="panel panel-default"><div class="panel-heading">(...)/symfony/http-kernel/HttpKernel.php:144 <strong>call_user_func_array()</strong></div><div class="panel-body"><div class="padding-menu"><ul class="nav nav-tabs"><li class="active"><a href="#source-e1-s4" data-toggle="tab">Source</a></li><li class=""><a href="#params-e1-s4" data-toggle="tab">Arguments</a></li></ul></div><div><div class="tab-content"><div class="tab-pane fade active in" id="source-e1-s4"><div class="code-box max-height "><span>137            $this-&gt;dispatcher-&gt;dispatch(KernelEvents::CONTROLLER, $event);</span><span>138            $controller = $event-&gt;getController();</span><span>139    </span><span>140            // controller arguments</span><span>141            $arguments = $this-&gt;resolver-&gt;getArguments($request, $controller);</span><span>142    </span><span>143            // call controller</span><span class="error-line">144            $response = call_user_func_array($controller, $arguments);</span><span>145    </span><span>146            // view</span><span>147            if (!$response instanceof Response) {</span><span>148                $event = new GetResponseForControllerResultEvent($this, $request, $type, $response);</span><span>149                $this-&gt;dispatcher-&gt;dispatch(KernelEvents::VIEW, $event);</span><span>150    </span><span>151                if ($event-&gt;hasResponse()) {</span></div></div>
+<div class="tab-pane fade " id="params-e1-s4"><div class="panel-group"><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e1-s4-0" class="var-header ">$function_name</a></div><div id="param-e1-s4-0" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">object(Closure) #39 (4) {
     $name =&gt;      “{closure}”
     $filename =&gt;  “(...)/bin/errordumper_webserver_root/index.php”
-    $startLine =&gt; 39
-    $endLine =&gt;   55
+    $startLine =&gt; 41
+    $endLine =&gt;   57
 }
 </pre></div></div></div><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e1-s4-1" class="var-header ">$parameters</a></div><div id="param-e1-s4-1" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">array(1) {“exceptionChain”}
 </pre></div></div></div></div></div>
-    </div></div></div>
-    </div>
-    <div class="panel panel-default"><div class="panel-heading">(...)/symfony/http-kernel/HttpKernel.php:64 <strong>Symfony\Component\HttpKernel\HttpKernel-&gt;handleRaw()</strong></div><div class="panel-body"><div class="padding-menu"><ul class="nav nav-tabs"><li class="active"><a href="#source-e1-s5" data-toggle="tab">Source</a></li><li class=""><a href="#params-e1-s5" data-toggle="tab">Arguments</a></li></ul></div><div><div class="tab-content"><div class="tab-pane fade active in" id="source-e1-s5"><div class="code-box max-height "><span>57         * {@inheritdoc}</span><span>58         */</span><span>59        public function handle(Request $request, $type = HttpKernelInterface::MASTER_REQUEST, $catch = true)</span><span>60        {</span><span>61            $request-&gt;headers-&gt;set(&#039;X-Php-Ob-Level&#039;, ob_get_level());</span><span>62    </span><span>63            try {</span><span class="error-line">64                return $this-&gt;handleRaw($request, $type);</span><span>65            } catch (\Exception $e) {</span><span>66                if ($e instanceof ConflictingHeadersException) {</span><span>67                    $e = new BadRequestHttpException(&#039;The request headers contain conflicting information regarding the origin of this request.&#039;, $e);</span><span>68                }</span><span>69                if (false === $catch) {</span><span>70                    $this-&gt;finishRequest($request, $type);</span><span>71    </span></div></div>
-        <div class="tab-pane fade " id="params-e1-s5"><div class="panel-group"><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e1-s5-0" class="var-header ">Symfony\Component\HttpFoundation\Request: $request</a></div><div id="param-e1-s5-0" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">object(Symfony\Component\HttpFoundation\Request) #3 (28) {
+</div></div></div>
+</div>
+<div class="panel panel-default"><div class="panel-heading">(...)/symfony/http-kernel/HttpKernel.php:64 <strong>Symfony\Component\HttpKernel\HttpKernel-&gt;handleRaw()</strong></div><div class="panel-body"><div class="padding-menu"><ul class="nav nav-tabs"><li class="active"><a href="#source-e1-s5" data-toggle="tab">Source</a></li><li class=""><a href="#params-e1-s5" data-toggle="tab">Arguments</a></li></ul></div><div><div class="tab-content"><div class="tab-pane fade active in" id="source-e1-s5"><div class="code-box max-height "><span>57         * {@inheritdoc}</span><span>58         */</span><span>59        public function handle(Request $request, $type = HttpKernelInterface::MASTER_REQUEST, $catch = true)</span><span>60        {</span><span>61            $request-&gt;headers-&gt;set(&#039;X-Php-Ob-Level&#039;, ob_get_level());</span><span>62    </span><span>63            try {</span><span class="error-line">64                return $this-&gt;handleRaw($request, $type);</span><span>65            } catch (\Exception $e) {</span><span>66                if ($e instanceof ConflictingHeadersException) {</span><span>67                    $e = new BadRequestHttpException(&#039;The request headers contain conflicting information regarding the origin of this request.&#039;, $e);</span><span>68                }</span><span>69                if (false === $catch) {</span><span>70                    $this-&gt;finishRequest($request, $type);</span><span>71    </span></div></div>
+<div class="tab-pane fade " id="params-e1-s5"><div class="panel-group"><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e1-s5-0" class="var-header ">Symfony\Component\HttpFoundation\Request: $request</a></div><div id="param-e1-s5-0" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">object(Symfony\Component\HttpFoundation\Request) #45 (28) {
     protected static $trustedProxies =&gt;      array(0) {}
     protected static $trustedHostPatterns =&gt; array(0) {}
     protected static $trustedHosts =&gt;        array(0) {}
@@ -47,15 +47,15 @@
         }
     protected static $httpMethodParameterOverride =&gt; false
     public $attributes =&gt;
-        object(Symfony\Component\HttpFoundation\ParameterBag) #4 (1) {
+        object(Symfony\Component\HttpFoundation\ParameterBag) #48 (1) {
             protected $parameters =&gt;
                 array(4) {
                     [_controller] =&gt;
-                        object(Closure) #2 (4) {
+                        object(Closure) #39 (4) {
                             $name =&gt;      “{closure}”
                             $filename =&gt;  “(...)/bin/errordumper_webserver_root/index.php”
-                            $startLine =&gt; 39
-                            $endLine =&gt;   55
+                            $startLine =&gt; 41
+                            $endLine =&gt;   57
                         }
                     [page] =&gt;   “exceptionChain”
                     [_route] =&gt; “homepage”
@@ -66,20 +66,20 @@
                 }
         }
     public $request =&gt;
-        object(Symfony\Component\HttpFoundation\ParameterBag) #5 (1) {
+        object(Symfony\Component\HttpFoundation\ParameterBag) #46 (1) {
             protected $parameters =&gt; array(0) {}
         }
     public $query =&gt;
-        object(Symfony\Component\HttpFoundation\ParameterBag) #6 (1) {
+        object(Symfony\Component\HttpFoundation\ParameterBag) #47 (1) {
             protected $parameters =&gt; array(0) {}
         }
     public $server =&gt;
-        object(Symfony\Component\HttpFoundation\ServerBag) #7 (1) {
+        object(Symfony\Component\HttpFoundation\ServerBag) #51 (1) {
             protected $parameters =&gt;
                 array(17) {
                     [DOCUMENT_ROOT] =&gt;      “(...)/bin/errordumper_webserver_root”
                     [REMOTE_ADDR] =&gt;        “::1”
-                    [REMOTE_PORT] =&gt;        “53644”
+                    [REMOTE_PORT] =&gt;        “65320”
                     [SERVER_SOFTWARE] =&gt;    “PHP 7.1.22 Development Server”
                     [SERVER_PROTOCOL] =&gt;    “HTTP/1.1”
                     [SERVER_NAME] =&gt;        “localhost”
@@ -91,13 +91,13 @@
                     [PATH_INFO] =&gt;          “/exceptionChain”
                     [PHP_SELF] =&gt;           “/index.php/exceptionChain”
                     [HTTP_HOST] =&gt;          “example.awesomite.local”
-                    [HTTP_USER_AGENT] =&gt;    “GuzzleHttp/6.3.3 curl/7.51.0 PHP/7.1.22”
-                    [REQUEST_TIME_FLOAT] =&gt; 1538131526.19816
-                    [REQUEST_TIME] =&gt;       1538131526
+                    [HTTP_USER_AGENT] =&gt;    “GuzzleHttp/6.3.3 curl/7.54.0 PHP/7.1.22”
+                    [REQUEST_TIME_FLOAT] =&gt; 1538411149.592781
+                    [REQUEST_TIME] =&gt;       1538411149
                 }
         }
     public $files =&gt;
-        object(Symfony\Component\HttpFoundation\FileBag) #8 (2) {
+        object(Symfony\Component\HttpFoundation\FileBag) #50 (2) {
             private static $fileKeys =&gt;
                 array(5) {
                     [0] =&gt; “error”
@@ -109,15 +109,15 @@
             protected $parameters =&gt; array(0) {}
         }
     public $cookies =&gt;
-        object(Symfony\Component\HttpFoundation\ParameterBag) #9 (1) {
+        object(Symfony\Component\HttpFoundation\ParameterBag) #49 (1) {
             protected $parameters =&gt; array(0) {}
         }
     public $headers =&gt;
-        object(Symfony\Component\HttpFoundation\HeaderBag) #10 (2) {
+        object(Symfony\Component\HttpFoundation\HeaderBag) #52 (2) {
             protected $headers =&gt;
                 array(3) {
                     [host] =&gt;           array(1) {“example.awesomite.local”}
-                    [user-agent] =&gt;     array(1) {“GuzzleHttp/6.3.3 curl/7.51.0 PHP/7.1.22”}
+                    [user-agent] =&gt;     array(1) {“GuzzleHttp/6.3.3 curl/7.54.0 PHP/7.1.22”}
                     [x-php-ob-level] =&gt; array(1) {1}
                 }
             protected $cacheControl =&gt; array(0) {}
@@ -134,10 +134,10 @@
 }
 </pre></div></div></div><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e1-s5-1" class="var-header ">$type = <strong>self::MASTER_REQUEST</strong></a></div><div id="param-e1-s5-1" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">1
 </pre></div></div></div></div></div>
-    </div></div></div>
-    </div>
-    <div class="panel panel-default"><div class="panel-heading">(...)/src/Silex/Application.php:586 <strong>Symfony\Component\HttpKernel\HttpKernel-&gt;handle()</strong></div><div class="panel-body"><div class="padding-menu"><ul class="nav nav-tabs"><li class="active"><a href="#source-e1-s6" data-toggle="tab">Source</a></li><li class=""><a href="#params-e1-s6" data-toggle="tab">Arguments</a></li></ul></div><div><div class="tab-content"><div class="tab-pane fade active in" id="source-e1-s6"><div class="code-box max-height "><span>579    </span><span>580            $current = HttpKernelInterface::SUB_REQUEST === $type ? $this[&#039;request&#039;] : $this[&#039;request_error&#039;];</span><span>581    </span><span>582            $this[&#039;request&#039;] = $request;</span><span>583    </span><span>584            $this-&gt;flush();</span><span>585    </span><span class="error-line">586            $response = $this[&#039;kernel&#039;]-&gt;handle($request, $type, $catch);</span><span>587    </span><span>588            $this[&#039;request&#039;] = $current;</span><span>589    </span><span>590            return $response;</span><span>591        }</span><span>592    </span><span>593        /**</span></div></div>
-        <div class="tab-pane fade " id="params-e1-s6"><div class="panel-group"><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e1-s6-0" class="var-header ">Symfony\Component\HttpFoundation\Request: $request</a></div><div id="param-e1-s6-0" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">object(Symfony\Component\HttpFoundation\Request) #3 (28) {
+</div></div></div>
+</div>
+<div class="panel panel-default"><div class="panel-heading">(...)/src/Silex/Application.php:586 <strong>Symfony\Component\HttpKernel\HttpKernel-&gt;handle()</strong></div><div class="panel-body"><div class="padding-menu"><ul class="nav nav-tabs"><li class="active"><a href="#source-e1-s6" data-toggle="tab">Source</a></li><li class=""><a href="#params-e1-s6" data-toggle="tab">Arguments</a></li></ul></div><div><div class="tab-content"><div class="tab-pane fade active in" id="source-e1-s6"><div class="code-box max-height "><span>579    </span><span>580            $current = HttpKernelInterface::SUB_REQUEST === $type ? $this[&#039;request&#039;] : $this[&#039;request_error&#039;];</span><span>581    </span><span>582            $this[&#039;request&#039;] = $request;</span><span>583    </span><span>584            $this-&gt;flush();</span><span>585    </span><span class="error-line">586            $response = $this[&#039;kernel&#039;]-&gt;handle($request, $type, $catch);</span><span>587    </span><span>588            $this[&#039;request&#039;] = $current;</span><span>589    </span><span>590            return $response;</span><span>591        }</span><span>592    </span><span>593        /**</span></div></div>
+<div class="tab-pane fade " id="params-e1-s6"><div class="panel-group"><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e1-s6-0" class="var-header ">Symfony\Component\HttpFoundation\Request: $request</a></div><div id="param-e1-s6-0" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">object(Symfony\Component\HttpFoundation\Request) #45 (28) {
     protected static $trustedProxies =&gt;      array(0) {}
     protected static $trustedHostPatterns =&gt; array(0) {}
     protected static $trustedHosts =&gt;        array(0) {}
@@ -151,15 +151,15 @@
         }
     protected static $httpMethodParameterOverride =&gt; false
     public $attributes =&gt;
-        object(Symfony\Component\HttpFoundation\ParameterBag) #4 (1) {
+        object(Symfony\Component\HttpFoundation\ParameterBag) #48 (1) {
             protected $parameters =&gt;
                 array(4) {
                     [_controller] =&gt;
-                        object(Closure) #2 (4) {
+                        object(Closure) #39 (4) {
                             $name =&gt;      “{closure}”
                             $filename =&gt;  “(...)/bin/errordumper_webserver_root/index.php”
-                            $startLine =&gt; 39
-                            $endLine =&gt;   55
+                            $startLine =&gt; 41
+                            $endLine =&gt;   57
                         }
                     [page] =&gt;   “exceptionChain”
                     [_route] =&gt; “homepage”
@@ -170,20 +170,20 @@
                 }
         }
     public $request =&gt;
-        object(Symfony\Component\HttpFoundation\ParameterBag) #5 (1) {
+        object(Symfony\Component\HttpFoundation\ParameterBag) #46 (1) {
             protected $parameters =&gt; array(0) {}
         }
     public $query =&gt;
-        object(Symfony\Component\HttpFoundation\ParameterBag) #6 (1) {
+        object(Symfony\Component\HttpFoundation\ParameterBag) #47 (1) {
             protected $parameters =&gt; array(0) {}
         }
     public $server =&gt;
-        object(Symfony\Component\HttpFoundation\ServerBag) #7 (1) {
+        object(Symfony\Component\HttpFoundation\ServerBag) #51 (1) {
             protected $parameters =&gt;
                 array(17) {
                     [DOCUMENT_ROOT] =&gt;      “(...)/bin/errordumper_webserver_root”
                     [REMOTE_ADDR] =&gt;        “::1”
-                    [REMOTE_PORT] =&gt;        “53644”
+                    [REMOTE_PORT] =&gt;        “65320”
                     [SERVER_SOFTWARE] =&gt;    “PHP 7.1.22 Development Server”
                     [SERVER_PROTOCOL] =&gt;    “HTTP/1.1”
                     [SERVER_NAME] =&gt;        “localhost”
@@ -195,13 +195,13 @@
                     [PATH_INFO] =&gt;          “/exceptionChain”
                     [PHP_SELF] =&gt;           “/index.php/exceptionChain”
                     [HTTP_HOST] =&gt;          “example.awesomite.local”
-                    [HTTP_USER_AGENT] =&gt;    “GuzzleHttp/6.3.3 curl/7.51.0 PHP/7.1.22”
-                    [REQUEST_TIME_FLOAT] =&gt; 1538131526.19816
-                    [REQUEST_TIME] =&gt;       1538131526
+                    [HTTP_USER_AGENT] =&gt;    “GuzzleHttp/6.3.3 curl/7.54.0 PHP/7.1.22”
+                    [REQUEST_TIME_FLOAT] =&gt; 1538411149.592781
+                    [REQUEST_TIME] =&gt;       1538411149
                 }
         }
     public $files =&gt;
-        object(Symfony\Component\HttpFoundation\FileBag) #8 (2) {
+        object(Symfony\Component\HttpFoundation\FileBag) #50 (2) {
             private static $fileKeys =&gt;
                 array(5) {
                     [0] =&gt; “error”
@@ -213,15 +213,15 @@
             protected $parameters =&gt; array(0) {}
         }
     public $cookies =&gt;
-        object(Symfony\Component\HttpFoundation\ParameterBag) #9 (1) {
+        object(Symfony\Component\HttpFoundation\ParameterBag) #49 (1) {
             protected $parameters =&gt; array(0) {}
         }
     public $headers =&gt;
-        object(Symfony\Component\HttpFoundation\HeaderBag) #10 (2) {
+        object(Symfony\Component\HttpFoundation\HeaderBag) #52 (2) {
             protected $headers =&gt;
                 array(3) {
                     [host] =&gt;           array(1) {“example.awesomite.local”}
-                    [user-agent] =&gt;     array(1) {“GuzzleHttp/6.3.3 curl/7.51.0 PHP/7.1.22”}
+                    [user-agent] =&gt;     array(1) {“GuzzleHttp/6.3.3 curl/7.54.0 PHP/7.1.22”}
                     [x-php-ob-level] =&gt; array(1) {1}
                 }
             protected $cacheControl =&gt; array(0) {}
@@ -239,10 +239,10 @@
 </pre></div></div></div><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e1-s6-1" class="var-header ">$type = <strong>Symfony\Component\HttpKernel\HttpKernelInterface::MASTER_REQUEST</strong></a></div><div id="param-e1-s6-1" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">1
 </pre></div></div></div><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e1-s6-2" class="var-header ">$catch = <strong>true</strong></a></div><div id="param-e1-s6-2" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">true
 </pre></div></div></div></div></div>
-    </div></div></div>
-    </div>
-    <div class="panel panel-default"><div class="panel-heading">(...)/src/Silex/Application.php:563 <strong>Silex\Application-&gt;handle()</strong></div><div class="panel-body"><div class="padding-menu"><ul class="nav nav-tabs"><li class="active"><a href="#source-e1-s7" data-toggle="tab">Source</a></li><li class=""><a href="#params-e1-s7" data-toggle="tab">Arguments</a></li></ul></div><div><div class="tab-content"><div class="tab-pane fade active in" id="source-e1-s7"><div class="code-box max-height "><span>556         */</span><span>557        public function run(Request $request = null)</span><span>558        {</span><span>559            if (null === $request) {</span><span>560                $request = Request::createFromGlobals();</span><span>561            }</span><span>562    </span><span class="error-line">563            $response = $this-&gt;handle($request);</span><span>564            $response-&gt;send();</span><span>565            $this-&gt;terminate($request, $response);</span><span>566        }</span><span>567    </span><span>568        /**</span><span>569         * {@inheritdoc}</span><span>570         *</span></div></div>
-        <div class="tab-pane fade " id="params-e1-s7"><div class="panel-group"><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e1-s7-0" class="var-header ">Symfony\Component\HttpFoundation\Request: $request</a></div><div id="param-e1-s7-0" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">object(Symfony\Component\HttpFoundation\Request) #3 (28) {
+</div></div></div>
+</div>
+<div class="panel panel-default"><div class="panel-heading">(...)/src/Silex/Application.php:563 <strong>Silex\Application-&gt;handle()</strong></div><div class="panel-body"><div class="padding-menu"><ul class="nav nav-tabs"><li class="active"><a href="#source-e1-s7" data-toggle="tab">Source</a></li><li class=""><a href="#params-e1-s7" data-toggle="tab">Arguments</a></li></ul></div><div><div class="tab-content"><div class="tab-pane fade active in" id="source-e1-s7"><div class="code-box max-height "><span>556         */</span><span>557        public function run(Request $request = null)</span><span>558        {</span><span>559            if (null === $request) {</span><span>560                $request = Request::createFromGlobals();</span><span>561            }</span><span>562    </span><span class="error-line">563            $response = $this-&gt;handle($request);</span><span>564            $response-&gt;send();</span><span>565            $this-&gt;terminate($request, $response);</span><span>566        }</span><span>567    </span><span>568        /**</span><span>569         * {@inheritdoc}</span><span>570         *</span></div></div>
+<div class="tab-pane fade " id="params-e1-s7"><div class="panel-group"><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e1-s7-0" class="var-header ">Symfony\Component\HttpFoundation\Request: $request</a></div><div id="param-e1-s7-0" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">object(Symfony\Component\HttpFoundation\Request) #45 (28) {
     protected static $trustedProxies =&gt;      array(0) {}
     protected static $trustedHostPatterns =&gt; array(0) {}
     protected static $trustedHosts =&gt;        array(0) {}
@@ -256,15 +256,15 @@
         }
     protected static $httpMethodParameterOverride =&gt; false
     public $attributes =&gt;
-        object(Symfony\Component\HttpFoundation\ParameterBag) #4 (1) {
+        object(Symfony\Component\HttpFoundation\ParameterBag) #48 (1) {
             protected $parameters =&gt;
                 array(4) {
                     [_controller] =&gt;
-                        object(Closure) #2 (4) {
+                        object(Closure) #39 (4) {
                             $name =&gt;      “{closure}”
                             $filename =&gt;  “(...)/bin/errordumper_webserver_root/index.php”
-                            $startLine =&gt; 39
-                            $endLine =&gt;   55
+                            $startLine =&gt; 41
+                            $endLine =&gt;   57
                         }
                     [page] =&gt;   “exceptionChain”
                     [_route] =&gt; “homepage”
@@ -275,20 +275,20 @@
                 }
         }
     public $request =&gt;
-        object(Symfony\Component\HttpFoundation\ParameterBag) #5 (1) {
+        object(Symfony\Component\HttpFoundation\ParameterBag) #46 (1) {
             protected $parameters =&gt; array(0) {}
         }
     public $query =&gt;
-        object(Symfony\Component\HttpFoundation\ParameterBag) #6 (1) {
+        object(Symfony\Component\HttpFoundation\ParameterBag) #47 (1) {
             protected $parameters =&gt; array(0) {}
         }
     public $server =&gt;
-        object(Symfony\Component\HttpFoundation\ServerBag) #7 (1) {
+        object(Symfony\Component\HttpFoundation\ServerBag) #51 (1) {
             protected $parameters =&gt;
                 array(17) {
                     [DOCUMENT_ROOT] =&gt;      “(...)/bin/errordumper_webserver_root”
                     [REMOTE_ADDR] =&gt;        “::1”
-                    [REMOTE_PORT] =&gt;        “53644”
+                    [REMOTE_PORT] =&gt;        “65320”
                     [SERVER_SOFTWARE] =&gt;    “PHP 7.1.22 Development Server”
                     [SERVER_PROTOCOL] =&gt;    “HTTP/1.1”
                     [SERVER_NAME] =&gt;        “localhost”
@@ -300,13 +300,13 @@
                     [PATH_INFO] =&gt;          “/exceptionChain”
                     [PHP_SELF] =&gt;           “/index.php/exceptionChain”
                     [HTTP_HOST] =&gt;          “example.awesomite.local”
-                    [HTTP_USER_AGENT] =&gt;    “GuzzleHttp/6.3.3 curl/7.51.0 PHP/7.1.22”
-                    [REQUEST_TIME_FLOAT] =&gt; 1538131526.19816
-                    [REQUEST_TIME] =&gt;       1538131526
+                    [HTTP_USER_AGENT] =&gt;    “GuzzleHttp/6.3.3 curl/7.54.0 PHP/7.1.22”
+                    [REQUEST_TIME_FLOAT] =&gt; 1538411149.592781
+                    [REQUEST_TIME] =&gt;       1538411149
                 }
         }
     public $files =&gt;
-        object(Symfony\Component\HttpFoundation\FileBag) #8 (2) {
+        object(Symfony\Component\HttpFoundation\FileBag) #50 (2) {
             private static $fileKeys =&gt;
                 array(5) {
                     [0] =&gt; “error”
@@ -318,15 +318,15 @@
             protected $parameters =&gt; array(0) {}
         }
     public $cookies =&gt;
-        object(Symfony\Component\HttpFoundation\ParameterBag) #9 (1) {
+        object(Symfony\Component\HttpFoundation\ParameterBag) #49 (1) {
             protected $parameters =&gt; array(0) {}
         }
     public $headers =&gt;
-        object(Symfony\Component\HttpFoundation\HeaderBag) #10 (2) {
+        object(Symfony\Component\HttpFoundation\HeaderBag) #52 (2) {
             protected $headers =&gt;
                 array(3) {
                     [host] =&gt;           array(1) {“example.awesomite.local”}
-                    [user-agent] =&gt;     array(1) {“GuzzleHttp/6.3.3 curl/7.51.0 PHP/7.1.22”}
+                    [user-agent] =&gt;     array(1) {“GuzzleHttp/6.3.3 curl/7.54.0 PHP/7.1.22”}
                     [x-php-ob-level] =&gt; array(1) {1}
                 }
             protected $cacheControl =&gt; array(0) {}
@@ -342,53 +342,53 @@
     (...)
 }
 </pre></div></div></div><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e1-s7-1" class="var-header ">$type = <strong>Symfony\Component\HttpKernel\HttpKernelInterface::MASTER_REQUEST</strong></a></div><div id="param-e1-s7-1" class="panel-collapse collapse in"><div class="panel-body"><pre>undefined</pre></div></div></div><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e1-s7-2" class="var-header ">$catch = <strong>true</strong></a></div><div id="param-e1-s7-2" class="panel-collapse collapse in"><div class="panel-body"><pre>undefined</pre></div></div></div></div></div>
-    </div></div></div>
-    </div>
-    <div class="panel panel-default"><div class="panel-heading">(...)/bin/errordumper_webserver_root/index.php:59 <strong>Silex\Application-&gt;run()</strong></div><div class="panel-body"><div class="padding-menu"><ul class="nav nav-tabs"><li class="active"><a href="#source-e1-s8" data-toggle="tab">Source</a></li><li class=""><a href="#params-e1-s8" data-toggle="tab">Arguments</a></li></ul></div><div><div class="tab-content"><div class="tab-pane fade active in" id="source-e1-s8"><div class="code-box max-height "><span>50            }</span><span>51    </span><span>52            return $app[&#039;twig&#039;]-&gt;render(&#039;index.twig&#039;, array(</span><span>53                &#039;pages&#039; =&gt; $pages,</span><span>54            ));</span><span>55        })</span><span>56        -&gt;bind(&#039;homepage&#039;)</span><span>57        -&gt;value(&#039;page&#039;, &#039;index&#039;);</span><span>58    </span><span class="error-line">59    $app-&gt;run();</span><span>60    </span><span>61    if ($onExit) {</span><span>62        \call_user_func($onExit);</span><span>63    }</span><span>64    </span></div></div>
-        <div class="tab-pane fade " id="params-e1-s8"><div class="panel-group"><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e1-s8-0" class="var-header ">Symfony\Component\HttpFoundation\Request: $request = <strong>NULL</strong></a></div><div id="param-e1-s8-0" class="panel-collapse collapse in"><div class="panel-body"><pre>undefined</pre></div></div></div></div></div>
-    </div></div></div>
-    </div>
+</div></div></div>
+</div>
+<div class="panel panel-default"><div class="panel-heading">(...)/bin/errordumper_webserver_root/index.php:61 <strong>Silex\Application-&gt;run()</strong></div><div class="panel-body"><div class="padding-menu"><ul class="nav nav-tabs"><li class="active"><a href="#source-e1-s8" data-toggle="tab">Source</a></li><li class=""><a href="#params-e1-s8" data-toggle="tab">Arguments</a></li></ul></div><div><div class="tab-content"><div class="tab-pane fade active in" id="source-e1-s8"><div class="code-box max-height "><span>52            }</span><span>53    </span><span>54            return $app[&#039;twig&#039;]-&gt;render(&#039;index.twig&#039;, array(</span><span>55                &#039;pages&#039; =&gt; $pages,</span><span>56            ));</span><span>57        })</span><span>58        -&gt;bind(&#039;homepage&#039;)</span><span>59        -&gt;value(&#039;page&#039;, &#039;index&#039;);</span><span>60    </span><span class="error-line">61    $app-&gt;run();</span><span>62    </span><span>63    if ($onExit) {</span><span>64        \call_user_func($onExit);</span><span>65    }</span><span>66    </span></div></div>
+<div class="tab-pane fade " id="params-e1-s8"><div class="panel-group"><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e1-s8-0" class="var-header ">Symfony\Component\HttpFoundation\Request: $request = <strong>NULL</strong></a></div><div id="param-e1-s8-0" class="panel-collapse collapse in"><div class="panel-body"><pre>undefined</pre></div></div></div></div></div>
+</div></div></div>
+</div>
 </div><div class="tab-pane fade" id="main-exception-2"><h2>Exception</h2><pre><strong>CalculatorException (code 1)</strong> Division by zero</pre><h2>Stack trace</h2><div class="panel panel-default"><div class="panel-heading">(...)/bin/scripts/exceptionChain.php:31</div><div class="panel-body"><div><div class="tab-content"><div class="tab-pane fade active in" id="source-e2-s0"><div class="code-box max-height rounded"><span>24     * @internal</span><span>25     */</span><span>26    class Calculator</span><span>27    {</span><span>28        public function divide($a, $b)</span><span>29        {</span><span>30            if (0 === $b) {</span><span class="error-line">31                throw new CalculatorException(&#039;Division by zero&#039;, CalculatorException::CODE_DIVISION_BY_ZERO);</span><span>32            }</span><span>33    </span><span>34            return $a/$b;</span><span>35        }</span><span>36    }</span><span>37    </span><span>38    /**</span></div></div>
 </div></div></div>
 </div>
-    <div class="panel panel-default"><div class="panel-heading">(...)/bin/scripts/exceptionChain.php:46 <strong>Calculator-&gt;divide()</strong></div><div class="panel-body"><div class="padding-menu"><ul class="nav nav-tabs"><li class="active"><a href="#source-e2-s1" data-toggle="tab">Source</a></li><li class=""><a href="#params-e2-s1" data-toggle="tab">Arguments</a></li></ul></div><div><div class="tab-content"><div class="tab-pane fade active in" id="source-e2-s1"><div class="code-box max-height "><span>39     * @internal</span><span>40     */</span><span>41    class Executor</span><span>42    {</span><span>43        public function execute($callable, $arguments)</span><span>44        {</span><span>45            try {</span><span class="error-line">46                \call_user_func_array($callable, $arguments);</span><span>47            } catch (\Exception $exception) {</span><span>48                throw new \RuntimeException(\sprintf(&#039;Uncaught exception %s&#039;, \get_class($exception)), 0, $exception);</span><span>49            }</span><span>50        }</span><span>51    }</span><span>52    </span><span>53    $executor = new Executor();</span></div></div>
-        <div class="tab-pane fade " id="params-e2-s1"><div class="panel-group"><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e2-s1-0" class="var-header ">$a</a></div><div id="param-e2-s1-0" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">5
+<div class="panel panel-default"><div class="panel-heading">(...)/bin/scripts/exceptionChain.php:46 <strong>Calculator-&gt;divide()</strong></div><div class="panel-body"><div class="padding-menu"><ul class="nav nav-tabs"><li class="active"><a href="#source-e2-s1" data-toggle="tab">Source</a></li><li class=""><a href="#params-e2-s1" data-toggle="tab">Arguments</a></li></ul></div><div><div class="tab-content"><div class="tab-pane fade active in" id="source-e2-s1"><div class="code-box max-height "><span>39     * @internal</span><span>40     */</span><span>41    class Executor</span><span>42    {</span><span>43        public function execute($callable, $arguments)</span><span>44        {</span><span>45            try {</span><span class="error-line">46                \call_user_func_array($callable, $arguments);</span><span>47            } catch (\Exception $exception) {</span><span>48                throw new \RuntimeException(\sprintf(&#039;Uncaught exception %s&#039;, \get_class($exception)), 0, $exception);</span><span>49            }</span><span>50        }</span><span>51    }</span><span>52    </span><span>53    $executor = new Executor();</span></div></div>
+<div class="tab-pane fade " id="params-e2-s1"><div class="panel-group"><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e2-s1-0" class="var-header ">$a</a></div><div id="param-e2-s1-0" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">5
 </pre></div></div></div><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e2-s1-1" class="var-header ">$b</a></div><div id="param-e2-s1-1" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">0
 </pre></div></div></div></div></div>
-    </div></div></div>
-    </div>
-    <div class="panel panel-default"><div class="panel-heading">(...)/bin/scripts/exceptionChain.php:56 <strong>Executor-&gt;execute()</strong></div><div class="panel-body"><div class="padding-menu"><ul class="nav nav-tabs"><li class="active"><a href="#source-e2-s2" data-toggle="tab">Source</a></li><li class=""><a href="#params-e2-s2" data-toggle="tab">Arguments</a></li></ul></div><div><div class="tab-content"><div class="tab-pane fade active in" id="source-e2-s2"><div class="code-box max-height "><span>48                throw new \RuntimeException(\sprintf(&#039;Uncaught exception %s&#039;, \get_class($exception)), 0, $exception);</span><span>49            }</span><span>50        }</span><span>51    }</span><span>52    </span><span>53    $executor = new Executor();</span><span>54    </span><span>55    try {</span><span class="error-line">56        $executor-&gt;execute(array(new Calculator(), &#039;divide&#039;), array(5, 0));</span><span>57    } catch (\Exception $exception) {</span><span>58        $view = new ViewHtml();</span><span>59        $view-&gt;display(new SerializableException($exception));</span><span>60        exit;</span><span>61    }</span><span>62    </span></div></div>
-        <div class="tab-pane fade " id="params-e2-s2"><div class="panel-group"><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e2-s2-0" class="var-header ">$callable</a></div><div id="param-e2-s2-0" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">array(2) {
-    [0] =&gt; object(Calculator) #1 (0) {}
+</div></div></div>
+</div>
+<div class="panel panel-default"><div class="panel-heading">(...)/bin/scripts/exceptionChain.php:56 <strong>Executor-&gt;execute()</strong></div><div class="panel-body"><div class="padding-menu"><ul class="nav nav-tabs"><li class="active"><a href="#source-e2-s2" data-toggle="tab">Source</a></li><li class=""><a href="#params-e2-s2" data-toggle="tab">Arguments</a></li></ul></div><div><div class="tab-content"><div class="tab-pane fade active in" id="source-e2-s2"><div class="code-box max-height "><span>48                throw new \RuntimeException(\sprintf(&#039;Uncaught exception %s&#039;, \get_class($exception)), 0, $exception);</span><span>49            }</span><span>50        }</span><span>51    }</span><span>52    </span><span>53    $executor = new Executor();</span><span>54    </span><span>55    try {</span><span class="error-line">56        $executor-&gt;execute(array(new Calculator(), &#039;divide&#039;), array(5, 0));</span><span>57    } catch (\Exception $exception) {</span><span>58        $view = new ViewHtml();</span><span>59        $view-&gt;display(new SerializableException($exception));</span><span>60        exit;</span><span>61    }</span><span>62    </span></div></div>
+<div class="tab-pane fade " id="params-e2-s2"><div class="panel-group"><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e2-s2-0" class="var-header ">$callable</a></div><div id="param-e2-s2-0" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">array(2) {
+    [0] =&gt; object(Calculator) #70 (0) {}
     [1] =&gt; “divide”
 }
 </pre></div></div></div><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e2-s2-1" class="var-header ">$arguments</a></div><div id="param-e2-s2-1" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">array(2) {5, 0}
 </pre></div></div></div></div></div>
-    </div></div></div>
-    </div>
-    <div class="panel panel-default"><div class="panel-heading">(...)/bin/errordumper_webserver_root/index.php:49 <strong>require()</strong></div><div class="panel-body"><div class="padding-menu"><ul class="nav nav-tabs"><li class="active"><a href="#source-e2-s3" data-toggle="tab">Source</a></li><li class=""><a href="#params-e2-s3" data-toggle="tab">Arguments</a></li></ul></div><div><div class="tab-content"><div class="tab-pane fade active in" id="source-e2-s3"><div class="code-box max-height "><span>42                    require \implode(\DIRECTORY_SEPARATOR, array(__DIR__, &#039;..&#039;, &#039;scripts&#039;, $page . &#039;.php&#039;));</span><span>43                };</span><span>44    </span><span>45                return false;</span><span>46            }</span><span>47    </span><span>48            if (\in_array($page, \array_keys($pages))) {</span><span class="error-line">49                return require \implode(\DIRECTORY_SEPARATOR, array(__DIR__, &#039;..&#039;, &#039;scripts&#039;, $page . &#039;.php&#039;));</span><span>50            }</span><span>51    </span><span>52            return $app[&#039;twig&#039;]-&gt;render(&#039;index.twig&#039;, array(</span><span>53                &#039;pages&#039; =&gt; $pages,</span><span>54            ));</span><span>55        })</span><span>56        -&gt;bind(&#039;homepage&#039;)</span></div></div>
-        <div class="tab-pane fade " id="params-e2-s3"><div class="panel-group"><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e2-s3-0" class="var-header ">unknown0</a></div><div id="param-e2-s3-0" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">“(...)/bin/scripts/exceptionChain.php”
+</div></div></div>
+</div>
+<div class="panel panel-default"><div class="panel-heading">(...)/bin/errordumper_webserver_root/index.php:51 <strong>require()</strong></div><div class="panel-body"><div class="padding-menu"><ul class="nav nav-tabs"><li class="active"><a href="#source-e2-s3" data-toggle="tab">Source</a></li><li class=""><a href="#params-e2-s3" data-toggle="tab">Arguments</a></li></ul></div><div><div class="tab-content"><div class="tab-pane fade active in" id="source-e2-s3"><div class="code-box max-height "><span>44                    require \implode(\DIRECTORY_SEPARATOR, array(__DIR__, &#039;..&#039;, &#039;scripts&#039;, $page . &#039;.php&#039;));</span><span>45                };</span><span>46    </span><span>47                return false;</span><span>48            }</span><span>49    </span><span>50            if (\in_array($page, \array_keys($pages))) {</span><span class="error-line">51                return require \implode(\DIRECTORY_SEPARATOR, array(__DIR__, &#039;..&#039;, &#039;scripts&#039;, $page . &#039;.php&#039;));</span><span>52            }</span><span>53    </span><span>54            return $app[&#039;twig&#039;]-&gt;render(&#039;index.twig&#039;, array(</span><span>55                &#039;pages&#039; =&gt; $pages,</span><span>56            ));</span><span>57        })</span><span>58        -&gt;bind(&#039;homepage&#039;)</span></div></div>
+<div class="tab-pane fade " id="params-e2-s3"><div class="panel-group"><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e2-s3-0" class="var-header ">unknown0</a></div><div id="param-e2-s3-0" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">“(...)/bin/scripts/exceptionChain.php”
 </pre></div></div></div></div></div>
-    </div></div></div>
-    </div>
-    <div class="panel panel-default"><div class="panel-heading"> <strong>{closure}()</strong></div><div class="panel-body"><div class="padding-menu"><ul class="nav nav-tabs"><li class=""><a href="#source-e2-s4" data-toggle="tab">Source</a></li><li class="active"><a href="#params-e2-s4" data-toggle="tab">Arguments</a></li></ul></div><div><div class="tab-content"><div class="tab-pane fade " id="source-e2-s4"><p class="code-box max-height">Source code does not exist for this step.</p></div>
-        <div class="tab-pane fade active in" id="params-e2-s4"><div class="panel-group"><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e2-s4-0" class="var-header ">unknown0</a></div><div id="param-e2-s4-0" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">“exceptionChain”
+</div></div></div>
+</div>
+<div class="panel panel-default"><div class="panel-heading"> <strong>{closure}()</strong></div><div class="panel-body"><div class="padding-menu"><ul class="nav nav-tabs"><li class=""><a href="#source-e2-s4" data-toggle="tab">Source</a></li><li class="active"><a href="#params-e2-s4" data-toggle="tab">Arguments</a></li></ul></div><div><div class="tab-content"><div class="tab-pane fade " id="source-e2-s4"><p class="code-box max-height">Source code does not exist for this step.</p></div>
+<div class="tab-pane fade active in" id="params-e2-s4"><div class="panel-group"><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e2-s4-0" class="var-header ">unknown0</a></div><div id="param-e2-s4-0" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">“exceptionChain”
 </pre></div></div></div></div></div>
-    </div></div></div>
-    </div>
-    <div class="panel panel-default"><div class="panel-heading">(...)/symfony/http-kernel/HttpKernel.php:144 <strong>call_user_func_array()</strong></div><div class="panel-body"><div class="padding-menu"><ul class="nav nav-tabs"><li class="active"><a href="#source-e2-s5" data-toggle="tab">Source</a></li><li class=""><a href="#params-e2-s5" data-toggle="tab">Arguments</a></li></ul></div><div><div class="tab-content"><div class="tab-pane fade active in" id="source-e2-s5"><div class="code-box max-height "><span>137            $this-&gt;dispatcher-&gt;dispatch(KernelEvents::CONTROLLER, $event);</span><span>138            $controller = $event-&gt;getController();</span><span>139    </span><span>140            // controller arguments</span><span>141            $arguments = $this-&gt;resolver-&gt;getArguments($request, $controller);</span><span>142    </span><span>143            // call controller</span><span class="error-line">144            $response = call_user_func_array($controller, $arguments);</span><span>145    </span><span>146            // view</span><span>147            if (!$response instanceof Response) {</span><span>148                $event = new GetResponseForControllerResultEvent($this, $request, $type, $response);</span><span>149                $this-&gt;dispatcher-&gt;dispatch(KernelEvents::VIEW, $event);</span><span>150    </span><span>151                if ($event-&gt;hasResponse()) {</span></div></div>
-        <div class="tab-pane fade " id="params-e2-s5"><div class="panel-group"><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e2-s5-0" class="var-header ">$function_name</a></div><div id="param-e2-s5-0" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">object(Closure) #2 (4) {
+</div></div></div>
+</div>
+<div class="panel panel-default"><div class="panel-heading">(...)/symfony/http-kernel/HttpKernel.php:144 <strong>call_user_func_array()</strong></div><div class="panel-body"><div class="padding-menu"><ul class="nav nav-tabs"><li class="active"><a href="#source-e2-s5" data-toggle="tab">Source</a></li><li class=""><a href="#params-e2-s5" data-toggle="tab">Arguments</a></li></ul></div><div><div class="tab-content"><div class="tab-pane fade active in" id="source-e2-s5"><div class="code-box max-height "><span>137            $this-&gt;dispatcher-&gt;dispatch(KernelEvents::CONTROLLER, $event);</span><span>138            $controller = $event-&gt;getController();</span><span>139    </span><span>140            // controller arguments</span><span>141            $arguments = $this-&gt;resolver-&gt;getArguments($request, $controller);</span><span>142    </span><span>143            // call controller</span><span class="error-line">144            $response = call_user_func_array($controller, $arguments);</span><span>145    </span><span>146            // view</span><span>147            if (!$response instanceof Response) {</span><span>148                $event = new GetResponseForControllerResultEvent($this, $request, $type, $response);</span><span>149                $this-&gt;dispatcher-&gt;dispatch(KernelEvents::VIEW, $event);</span><span>150    </span><span>151                if ($event-&gt;hasResponse()) {</span></div></div>
+<div class="tab-pane fade " id="params-e2-s5"><div class="panel-group"><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e2-s5-0" class="var-header ">$function_name</a></div><div id="param-e2-s5-0" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">object(Closure) #39 (4) {
     $name =&gt;      “{closure}”
     $filename =&gt;  “(...)/bin/errordumper_webserver_root/index.php”
-    $startLine =&gt; 39
-    $endLine =&gt;   55
+    $startLine =&gt; 41
+    $endLine =&gt;   57
 }
 </pre></div></div></div><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e2-s5-1" class="var-header ">$parameters</a></div><div id="param-e2-s5-1" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">array(1) {“exceptionChain”}
 </pre></div></div></div></div></div>
-    </div></div></div>
-    </div>
-    <div class="panel panel-default"><div class="panel-heading">(...)/symfony/http-kernel/HttpKernel.php:64 <strong>Symfony\Component\HttpKernel\HttpKernel-&gt;handleRaw()</strong></div><div class="panel-body"><div class="padding-menu"><ul class="nav nav-tabs"><li class="active"><a href="#source-e2-s6" data-toggle="tab">Source</a></li><li class=""><a href="#params-e2-s6" data-toggle="tab">Arguments</a></li></ul></div><div><div class="tab-content"><div class="tab-pane fade active in" id="source-e2-s6"><div class="code-box max-height "><span>57         * {@inheritdoc}</span><span>58         */</span><span>59        public function handle(Request $request, $type = HttpKernelInterface::MASTER_REQUEST, $catch = true)</span><span>60        {</span><span>61            $request-&gt;headers-&gt;set(&#039;X-Php-Ob-Level&#039;, ob_get_level());</span><span>62    </span><span>63            try {</span><span class="error-line">64                return $this-&gt;handleRaw($request, $type);</span><span>65            } catch (\Exception $e) {</span><span>66                if ($e instanceof ConflictingHeadersException) {</span><span>67                    $e = new BadRequestHttpException(&#039;The request headers contain conflicting information regarding the origin of this request.&#039;, $e);</span><span>68                }</span><span>69                if (false === $catch) {</span><span>70                    $this-&gt;finishRequest($request, $type);</span><span>71    </span></div></div>
-        <div class="tab-pane fade " id="params-e2-s6"><div class="panel-group"><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e2-s6-0" class="var-header ">Symfony\Component\HttpFoundation\Request: $request</a></div><div id="param-e2-s6-0" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">object(Symfony\Component\HttpFoundation\Request) #3 (28) {
+</div></div></div>
+</div>
+<div class="panel panel-default"><div class="panel-heading">(...)/symfony/http-kernel/HttpKernel.php:64 <strong>Symfony\Component\HttpKernel\HttpKernel-&gt;handleRaw()</strong></div><div class="panel-body"><div class="padding-menu"><ul class="nav nav-tabs"><li class="active"><a href="#source-e2-s6" data-toggle="tab">Source</a></li><li class=""><a href="#params-e2-s6" data-toggle="tab">Arguments</a></li></ul></div><div><div class="tab-content"><div class="tab-pane fade active in" id="source-e2-s6"><div class="code-box max-height "><span>57         * {@inheritdoc}</span><span>58         */</span><span>59        public function handle(Request $request, $type = HttpKernelInterface::MASTER_REQUEST, $catch = true)</span><span>60        {</span><span>61            $request-&gt;headers-&gt;set(&#039;X-Php-Ob-Level&#039;, ob_get_level());</span><span>62    </span><span>63            try {</span><span class="error-line">64                return $this-&gt;handleRaw($request, $type);</span><span>65            } catch (\Exception $e) {</span><span>66                if ($e instanceof ConflictingHeadersException) {</span><span>67                    $e = new BadRequestHttpException(&#039;The request headers contain conflicting information regarding the origin of this request.&#039;, $e);</span><span>68                }</span><span>69                if (false === $catch) {</span><span>70                    $this-&gt;finishRequest($request, $type);</span><span>71    </span></div></div>
+<div class="tab-pane fade " id="params-e2-s6"><div class="panel-group"><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e2-s6-0" class="var-header ">Symfony\Component\HttpFoundation\Request: $request</a></div><div id="param-e2-s6-0" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">object(Symfony\Component\HttpFoundation\Request) #45 (28) {
     protected static $trustedProxies =&gt;      array(0) {}
     protected static $trustedHostPatterns =&gt; array(0) {}
     protected static $trustedHosts =&gt;        array(0) {}
@@ -402,15 +402,15 @@
         }
     protected static $httpMethodParameterOverride =&gt; false
     public $attributes =&gt;
-        object(Symfony\Component\HttpFoundation\ParameterBag) #4 (1) {
+        object(Symfony\Component\HttpFoundation\ParameterBag) #48 (1) {
             protected $parameters =&gt;
                 array(4) {
                     [_controller] =&gt;
-                        object(Closure) #2 (4) {
+                        object(Closure) #39 (4) {
                             $name =&gt;      “{closure}”
                             $filename =&gt;  “(...)/bin/errordumper_webserver_root/index.php”
-                            $startLine =&gt; 39
-                            $endLine =&gt;   55
+                            $startLine =&gt; 41
+                            $endLine =&gt;   57
                         }
                     [page] =&gt;   “exceptionChain”
                     [_route] =&gt; “homepage”
@@ -421,20 +421,20 @@
                 }
         }
     public $request =&gt;
-        object(Symfony\Component\HttpFoundation\ParameterBag) #5 (1) {
+        object(Symfony\Component\HttpFoundation\ParameterBag) #46 (1) {
             protected $parameters =&gt; array(0) {}
         }
     public $query =&gt;
-        object(Symfony\Component\HttpFoundation\ParameterBag) #6 (1) {
+        object(Symfony\Component\HttpFoundation\ParameterBag) #47 (1) {
             protected $parameters =&gt; array(0) {}
         }
     public $server =&gt;
-        object(Symfony\Component\HttpFoundation\ServerBag) #7 (1) {
+        object(Symfony\Component\HttpFoundation\ServerBag) #51 (1) {
             protected $parameters =&gt;
                 array(17) {
                     [DOCUMENT_ROOT] =&gt;      “(...)/bin/errordumper_webserver_root”
                     [REMOTE_ADDR] =&gt;        “::1”
-                    [REMOTE_PORT] =&gt;        “53644”
+                    [REMOTE_PORT] =&gt;        “65320”
                     [SERVER_SOFTWARE] =&gt;    “PHP 7.1.22 Development Server”
                     [SERVER_PROTOCOL] =&gt;    “HTTP/1.1”
                     [SERVER_NAME] =&gt;        “localhost”
@@ -446,13 +446,13 @@
                     [PATH_INFO] =&gt;          “/exceptionChain”
                     [PHP_SELF] =&gt;           “/index.php/exceptionChain”
                     [HTTP_HOST] =&gt;          “example.awesomite.local”
-                    [HTTP_USER_AGENT] =&gt;    “GuzzleHttp/6.3.3 curl/7.51.0 PHP/7.1.22”
-                    [REQUEST_TIME_FLOAT] =&gt; 1538131526.19816
-                    [REQUEST_TIME] =&gt;       1538131526
+                    [HTTP_USER_AGENT] =&gt;    “GuzzleHttp/6.3.3 curl/7.54.0 PHP/7.1.22”
+                    [REQUEST_TIME_FLOAT] =&gt; 1538411149.592781
+                    [REQUEST_TIME] =&gt;       1538411149
                 }
         }
     public $files =&gt;
-        object(Symfony\Component\HttpFoundation\FileBag) #8 (2) {
+        object(Symfony\Component\HttpFoundation\FileBag) #50 (2) {
             private static $fileKeys =&gt;
                 array(5) {
                     [0] =&gt; “error”
@@ -464,15 +464,15 @@
             protected $parameters =&gt; array(0) {}
         }
     public $cookies =&gt;
-        object(Symfony\Component\HttpFoundation\ParameterBag) #9 (1) {
+        object(Symfony\Component\HttpFoundation\ParameterBag) #49 (1) {
             protected $parameters =&gt; array(0) {}
         }
     public $headers =&gt;
-        object(Symfony\Component\HttpFoundation\HeaderBag) #10 (2) {
+        object(Symfony\Component\HttpFoundation\HeaderBag) #52 (2) {
             protected $headers =&gt;
                 array(3) {
                     [host] =&gt;           array(1) {“example.awesomite.local”}
-                    [user-agent] =&gt;     array(1) {“GuzzleHttp/6.3.3 curl/7.51.0 PHP/7.1.22”}
+                    [user-agent] =&gt;     array(1) {“GuzzleHttp/6.3.3 curl/7.54.0 PHP/7.1.22”}
                     [x-php-ob-level] =&gt; array(1) {1}
                 }
             protected $cacheControl =&gt; array(0) {}
@@ -489,10 +489,10 @@
 }
 </pre></div></div></div><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e2-s6-1" class="var-header ">$type = <strong>self::MASTER_REQUEST</strong></a></div><div id="param-e2-s6-1" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">1
 </pre></div></div></div></div></div>
-    </div></div></div>
-    </div>
-    <div class="panel panel-default"><div class="panel-heading">(...)/src/Silex/Application.php:586 <strong>Symfony\Component\HttpKernel\HttpKernel-&gt;handle()</strong></div><div class="panel-body"><div class="padding-menu"><ul class="nav nav-tabs"><li class="active"><a href="#source-e2-s7" data-toggle="tab">Source</a></li><li class=""><a href="#params-e2-s7" data-toggle="tab">Arguments</a></li></ul></div><div><div class="tab-content"><div class="tab-pane fade active in" id="source-e2-s7"><div class="code-box max-height "><span>579    </span><span>580            $current = HttpKernelInterface::SUB_REQUEST === $type ? $this[&#039;request&#039;] : $this[&#039;request_error&#039;];</span><span>581    </span><span>582            $this[&#039;request&#039;] = $request;</span><span>583    </span><span>584            $this-&gt;flush();</span><span>585    </span><span class="error-line">586            $response = $this[&#039;kernel&#039;]-&gt;handle($request, $type, $catch);</span><span>587    </span><span>588            $this[&#039;request&#039;] = $current;</span><span>589    </span><span>590            return $response;</span><span>591        }</span><span>592    </span><span>593        /**</span></div></div>
-        <div class="tab-pane fade " id="params-e2-s7"><div class="panel-group"><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e2-s7-0" class="var-header ">Symfony\Component\HttpFoundation\Request: $request</a></div><div id="param-e2-s7-0" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">object(Symfony\Component\HttpFoundation\Request) #3 (28) {
+</div></div></div>
+</div>
+<div class="panel panel-default"><div class="panel-heading">(...)/src/Silex/Application.php:586 <strong>Symfony\Component\HttpKernel\HttpKernel-&gt;handle()</strong></div><div class="panel-body"><div class="padding-menu"><ul class="nav nav-tabs"><li class="active"><a href="#source-e2-s7" data-toggle="tab">Source</a></li><li class=""><a href="#params-e2-s7" data-toggle="tab">Arguments</a></li></ul></div><div><div class="tab-content"><div class="tab-pane fade active in" id="source-e2-s7"><div class="code-box max-height "><span>579    </span><span>580            $current = HttpKernelInterface::SUB_REQUEST === $type ? $this[&#039;request&#039;] : $this[&#039;request_error&#039;];</span><span>581    </span><span>582            $this[&#039;request&#039;] = $request;</span><span>583    </span><span>584            $this-&gt;flush();</span><span>585    </span><span class="error-line">586            $response = $this[&#039;kernel&#039;]-&gt;handle($request, $type, $catch);</span><span>587    </span><span>588            $this[&#039;request&#039;] = $current;</span><span>589    </span><span>590            return $response;</span><span>591        }</span><span>592    </span><span>593        /**</span></div></div>
+<div class="tab-pane fade " id="params-e2-s7"><div class="panel-group"><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e2-s7-0" class="var-header ">Symfony\Component\HttpFoundation\Request: $request</a></div><div id="param-e2-s7-0" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">object(Symfony\Component\HttpFoundation\Request) #45 (28) {
     protected static $trustedProxies =&gt;      array(0) {}
     protected static $trustedHostPatterns =&gt; array(0) {}
     protected static $trustedHosts =&gt;        array(0) {}
@@ -506,15 +506,15 @@
         }
     protected static $httpMethodParameterOverride =&gt; false
     public $attributes =&gt;
-        object(Symfony\Component\HttpFoundation\ParameterBag) #4 (1) {
+        object(Symfony\Component\HttpFoundation\ParameterBag) #48 (1) {
             protected $parameters =&gt;
                 array(4) {
                     [_controller] =&gt;
-                        object(Closure) #2 (4) {
+                        object(Closure) #39 (4) {
                             $name =&gt;      “{closure}”
                             $filename =&gt;  “(...)/bin/errordumper_webserver_root/index.php”
-                            $startLine =&gt; 39
-                            $endLine =&gt;   55
+                            $startLine =&gt; 41
+                            $endLine =&gt;   57
                         }
                     [page] =&gt;   “exceptionChain”
                     [_route] =&gt; “homepage”
@@ -525,20 +525,20 @@
                 }
         }
     public $request =&gt;
-        object(Symfony\Component\HttpFoundation\ParameterBag) #5 (1) {
+        object(Symfony\Component\HttpFoundation\ParameterBag) #46 (1) {
             protected $parameters =&gt; array(0) {}
         }
     public $query =&gt;
-        object(Symfony\Component\HttpFoundation\ParameterBag) #6 (1) {
+        object(Symfony\Component\HttpFoundation\ParameterBag) #47 (1) {
             protected $parameters =&gt; array(0) {}
         }
     public $server =&gt;
-        object(Symfony\Component\HttpFoundation\ServerBag) #7 (1) {
+        object(Symfony\Component\HttpFoundation\ServerBag) #51 (1) {
             protected $parameters =&gt;
                 array(17) {
                     [DOCUMENT_ROOT] =&gt;      “(...)/bin/errordumper_webserver_root”
                     [REMOTE_ADDR] =&gt;        “::1”
-                    [REMOTE_PORT] =&gt;        “53644”
+                    [REMOTE_PORT] =&gt;        “65320”
                     [SERVER_SOFTWARE] =&gt;    “PHP 7.1.22 Development Server”
                     [SERVER_PROTOCOL] =&gt;    “HTTP/1.1”
                     [SERVER_NAME] =&gt;        “localhost”
@@ -550,13 +550,13 @@
                     [PATH_INFO] =&gt;          “/exceptionChain”
                     [PHP_SELF] =&gt;           “/index.php/exceptionChain”
                     [HTTP_HOST] =&gt;          “example.awesomite.local”
-                    [HTTP_USER_AGENT] =&gt;    “GuzzleHttp/6.3.3 curl/7.51.0 PHP/7.1.22”
-                    [REQUEST_TIME_FLOAT] =&gt; 1538131526.19816
-                    [REQUEST_TIME] =&gt;       1538131526
+                    [HTTP_USER_AGENT] =&gt;    “GuzzleHttp/6.3.3 curl/7.54.0 PHP/7.1.22”
+                    [REQUEST_TIME_FLOAT] =&gt; 1538411149.592781
+                    [REQUEST_TIME] =&gt;       1538411149
                 }
         }
     public $files =&gt;
-        object(Symfony\Component\HttpFoundation\FileBag) #8 (2) {
+        object(Symfony\Component\HttpFoundation\FileBag) #50 (2) {
             private static $fileKeys =&gt;
                 array(5) {
                     [0] =&gt; “error”
@@ -568,15 +568,15 @@
             protected $parameters =&gt; array(0) {}
         }
     public $cookies =&gt;
-        object(Symfony\Component\HttpFoundation\ParameterBag) #9 (1) {
+        object(Symfony\Component\HttpFoundation\ParameterBag) #49 (1) {
             protected $parameters =&gt; array(0) {}
         }
     public $headers =&gt;
-        object(Symfony\Component\HttpFoundation\HeaderBag) #10 (2) {
+        object(Symfony\Component\HttpFoundation\HeaderBag) #52 (2) {
             protected $headers =&gt;
                 array(3) {
                     [host] =&gt;           array(1) {“example.awesomite.local”}
-                    [user-agent] =&gt;     array(1) {“GuzzleHttp/6.3.3 curl/7.51.0 PHP/7.1.22”}
+                    [user-agent] =&gt;     array(1) {“GuzzleHttp/6.3.3 curl/7.54.0 PHP/7.1.22”}
                     [x-php-ob-level] =&gt; array(1) {1}
                 }
             protected $cacheControl =&gt; array(0) {}
@@ -594,10 +594,10 @@
 </pre></div></div></div><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e2-s7-1" class="var-header ">$type = <strong>Symfony\Component\HttpKernel\HttpKernelInterface::MASTER_REQUEST</strong></a></div><div id="param-e2-s7-1" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">1
 </pre></div></div></div><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e2-s7-2" class="var-header ">$catch = <strong>true</strong></a></div><div id="param-e2-s7-2" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">true
 </pre></div></div></div></div></div>
-    </div></div></div>
-    </div>
-    <div class="panel panel-default"><div class="panel-heading">(...)/src/Silex/Application.php:563 <strong>Silex\Application-&gt;handle()</strong></div><div class="panel-body"><div class="padding-menu"><ul class="nav nav-tabs"><li class="active"><a href="#source-e2-s8" data-toggle="tab">Source</a></li><li class=""><a href="#params-e2-s8" data-toggle="tab">Arguments</a></li></ul></div><div><div class="tab-content"><div class="tab-pane fade active in" id="source-e2-s8"><div class="code-box max-height "><span>556         */</span><span>557        public function run(Request $request = null)</span><span>558        {</span><span>559            if (null === $request) {</span><span>560                $request = Request::createFromGlobals();</span><span>561            }</span><span>562    </span><span class="error-line">563            $response = $this-&gt;handle($request);</span><span>564            $response-&gt;send();</span><span>565            $this-&gt;terminate($request, $response);</span><span>566        }</span><span>567    </span><span>568        /**</span><span>569         * {@inheritdoc}</span><span>570         *</span></div></div>
-        <div class="tab-pane fade " id="params-e2-s8"><div class="panel-group"><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e2-s8-0" class="var-header ">Symfony\Component\HttpFoundation\Request: $request</a></div><div id="param-e2-s8-0" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">object(Symfony\Component\HttpFoundation\Request) #3 (28) {
+</div></div></div>
+</div>
+<div class="panel panel-default"><div class="panel-heading">(...)/src/Silex/Application.php:563 <strong>Silex\Application-&gt;handle()</strong></div><div class="panel-body"><div class="padding-menu"><ul class="nav nav-tabs"><li class="active"><a href="#source-e2-s8" data-toggle="tab">Source</a></li><li class=""><a href="#params-e2-s8" data-toggle="tab">Arguments</a></li></ul></div><div><div class="tab-content"><div class="tab-pane fade active in" id="source-e2-s8"><div class="code-box max-height "><span>556         */</span><span>557        public function run(Request $request = null)</span><span>558        {</span><span>559            if (null === $request) {</span><span>560                $request = Request::createFromGlobals();</span><span>561            }</span><span>562    </span><span class="error-line">563            $response = $this-&gt;handle($request);</span><span>564            $response-&gt;send();</span><span>565            $this-&gt;terminate($request, $response);</span><span>566        }</span><span>567    </span><span>568        /**</span><span>569         * {@inheritdoc}</span><span>570         *</span></div></div>
+<div class="tab-pane fade " id="params-e2-s8"><div class="panel-group"><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e2-s8-0" class="var-header ">Symfony\Component\HttpFoundation\Request: $request</a></div><div id="param-e2-s8-0" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">object(Symfony\Component\HttpFoundation\Request) #45 (28) {
     protected static $trustedProxies =&gt;      array(0) {}
     protected static $trustedHostPatterns =&gt; array(0) {}
     protected static $trustedHosts =&gt;        array(0) {}
@@ -611,15 +611,15 @@
         }
     protected static $httpMethodParameterOverride =&gt; false
     public $attributes =&gt;
-        object(Symfony\Component\HttpFoundation\ParameterBag) #4 (1) {
+        object(Symfony\Component\HttpFoundation\ParameterBag) #48 (1) {
             protected $parameters =&gt;
                 array(4) {
                     [_controller] =&gt;
-                        object(Closure) #2 (4) {
+                        object(Closure) #39 (4) {
                             $name =&gt;      “{closure}”
                             $filename =&gt;  “(...)/bin/errordumper_webserver_root/index.php”
-                            $startLine =&gt; 39
-                            $endLine =&gt;   55
+                            $startLine =&gt; 41
+                            $endLine =&gt;   57
                         }
                     [page] =&gt;   “exceptionChain”
                     [_route] =&gt; “homepage”
@@ -630,20 +630,20 @@
                 }
         }
     public $request =&gt;
-        object(Symfony\Component\HttpFoundation\ParameterBag) #5 (1) {
+        object(Symfony\Component\HttpFoundation\ParameterBag) #46 (1) {
             protected $parameters =&gt; array(0) {}
         }
     public $query =&gt;
-        object(Symfony\Component\HttpFoundation\ParameterBag) #6 (1) {
+        object(Symfony\Component\HttpFoundation\ParameterBag) #47 (1) {
             protected $parameters =&gt; array(0) {}
         }
     public $server =&gt;
-        object(Symfony\Component\HttpFoundation\ServerBag) #7 (1) {
+        object(Symfony\Component\HttpFoundation\ServerBag) #51 (1) {
             protected $parameters =&gt;
                 array(17) {
                     [DOCUMENT_ROOT] =&gt;      “(...)/bin/errordumper_webserver_root”
                     [REMOTE_ADDR] =&gt;        “::1”
-                    [REMOTE_PORT] =&gt;        “53644”
+                    [REMOTE_PORT] =&gt;        “65320”
                     [SERVER_SOFTWARE] =&gt;    “PHP 7.1.22 Development Server”
                     [SERVER_PROTOCOL] =&gt;    “HTTP/1.1”
                     [SERVER_NAME] =&gt;        “localhost”
@@ -655,13 +655,13 @@
                     [PATH_INFO] =&gt;          “/exceptionChain”
                     [PHP_SELF] =&gt;           “/index.php/exceptionChain”
                     [HTTP_HOST] =&gt;          “example.awesomite.local”
-                    [HTTP_USER_AGENT] =&gt;    “GuzzleHttp/6.3.3 curl/7.51.0 PHP/7.1.22”
-                    [REQUEST_TIME_FLOAT] =&gt; 1538131526.19816
-                    [REQUEST_TIME] =&gt;       1538131526
+                    [HTTP_USER_AGENT] =&gt;    “GuzzleHttp/6.3.3 curl/7.54.0 PHP/7.1.22”
+                    [REQUEST_TIME_FLOAT] =&gt; 1538411149.592781
+                    [REQUEST_TIME] =&gt;       1538411149
                 }
         }
     public $files =&gt;
-        object(Symfony\Component\HttpFoundation\FileBag) #8 (2) {
+        object(Symfony\Component\HttpFoundation\FileBag) #50 (2) {
             private static $fileKeys =&gt;
                 array(5) {
                     [0] =&gt; “error”
@@ -673,15 +673,15 @@
             protected $parameters =&gt; array(0) {}
         }
     public $cookies =&gt;
-        object(Symfony\Component\HttpFoundation\ParameterBag) #9 (1) {
+        object(Symfony\Component\HttpFoundation\ParameterBag) #49 (1) {
             protected $parameters =&gt; array(0) {}
         }
     public $headers =&gt;
-        object(Symfony\Component\HttpFoundation\HeaderBag) #10 (2) {
+        object(Symfony\Component\HttpFoundation\HeaderBag) #52 (2) {
             protected $headers =&gt;
                 array(3) {
                     [host] =&gt;           array(1) {“example.awesomite.local”}
-                    [user-agent] =&gt;     array(1) {“GuzzleHttp/6.3.3 curl/7.51.0 PHP/7.1.22”}
+                    [user-agent] =&gt;     array(1) {“GuzzleHttp/6.3.3 curl/7.54.0 PHP/7.1.22”}
                     [x-php-ob-level] =&gt; array(1) {1}
                 }
             protected $cacheControl =&gt; array(0) {}
@@ -697,16 +697,16 @@
     (...)
 }
 </pre></div></div></div><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e2-s8-1" class="var-header ">$type = <strong>Symfony\Component\HttpKernel\HttpKernelInterface::MASTER_REQUEST</strong></a></div><div id="param-e2-s8-1" class="panel-collapse collapse in"><div class="panel-body"><pre>undefined</pre></div></div></div><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e2-s8-2" class="var-header ">$catch = <strong>true</strong></a></div><div id="param-e2-s8-2" class="panel-collapse collapse in"><div class="panel-body"><pre>undefined</pre></div></div></div></div></div>
-    </div></div></div>
-    </div>
-    <div class="panel panel-default"><div class="panel-heading">(...)/bin/errordumper_webserver_root/index.php:59 <strong>Silex\Application-&gt;run()</strong></div><div class="panel-body"><div class="padding-menu"><ul class="nav nav-tabs"><li class="active"><a href="#source-e2-s9" data-toggle="tab">Source</a></li><li class=""><a href="#params-e2-s9" data-toggle="tab">Arguments</a></li></ul></div><div><div class="tab-content"><div class="tab-pane fade active in" id="source-e2-s9"><div class="code-box max-height "><span>50            }</span><span>51    </span><span>52            return $app[&#039;twig&#039;]-&gt;render(&#039;index.twig&#039;, array(</span><span>53                &#039;pages&#039; =&gt; $pages,</span><span>54            ));</span><span>55        })</span><span>56        -&gt;bind(&#039;homepage&#039;)</span><span>57        -&gt;value(&#039;page&#039;, &#039;index&#039;);</span><span>58    </span><span class="error-line">59    $app-&gt;run();</span><span>60    </span><span>61    if ($onExit) {</span><span>62        \call_user_func($onExit);</span><span>63    }</span><span>64    </span></div></div>
-        <div class="tab-pane fade " id="params-e2-s9"><div class="panel-group"><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e2-s9-0" class="var-header ">Symfony\Component\HttpFoundation\Request: $request = <strong>NULL</strong></a></div><div id="param-e2-s9-0" class="panel-collapse collapse in"><div class="panel-body"><pre>undefined</pre></div></div></div></div></div>
-    </div></div></div>
-    </div>
+</div></div></div>
+</div>
+<div class="panel panel-default"><div class="panel-heading">(...)/bin/errordumper_webserver_root/index.php:61 <strong>Silex\Application-&gt;run()</strong></div><div class="panel-body"><div class="padding-menu"><ul class="nav nav-tabs"><li class="active"><a href="#source-e2-s9" data-toggle="tab">Source</a></li><li class=""><a href="#params-e2-s9" data-toggle="tab">Arguments</a></li></ul></div><div><div class="tab-content"><div class="tab-pane fade active in" id="source-e2-s9"><div class="code-box max-height "><span>52            }</span><span>53    </span><span>54            return $app[&#039;twig&#039;]-&gt;render(&#039;index.twig&#039;, array(</span><span>55                &#039;pages&#039; =&gt; $pages,</span><span>56            ));</span><span>57        })</span><span>58        -&gt;bind(&#039;homepage&#039;)</span><span>59        -&gt;value(&#039;page&#039;, &#039;index&#039;);</span><span>60    </span><span class="error-line">61    $app-&gt;run();</span><span>62    </span><span>63    if ($onExit) {</span><span>64        \call_user_func($onExit);</span><span>65    }</span><span>66    </span></div></div>
+<div class="tab-pane fade " id="params-e2-s9"><div class="panel-group"><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#param-e2-s9-0" class="var-header ">Symfony\Component\HttpFoundation\Request: $request = <strong>NULL</strong></a></div><div id="param-e2-s9-0" class="panel-collapse collapse in"><div class="panel-body"><pre>undefined</pre></div></div></div></div></div>
+</div></div></div>
+</div>
 </div><div class="tab-pane fade" id="main-context"><h2>Context</h2><div class="panel panel-default"><div class="panel-heading"><a data-toggle="collapse" data-target="#context-variable-1" class="var-header ">$_SERVER</a></div><div id="context-variable-1" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">array(17) {
     [DOCUMENT_ROOT] =&gt;      “(...)/bin/errordumper_webserver_root”
     [REMOTE_ADDR] =&gt;        “::1”
-    [REMOTE_PORT] =&gt;        “53644”
+    [REMOTE_PORT] =&gt;        “65320”
     [SERVER_SOFTWARE] =&gt;    “PHP 7.1.22 Development Server”
     [SERVER_PROTOCOL] =&gt;    “HTTP/1.1”
     [SERVER_NAME] =&gt;        “localhost”
@@ -718,17 +718,17 @@
     [PATH_INFO] =&gt;          “/exceptionChain”
     [PHP_SELF] =&gt;           “/index.php/exceptionChain”
     [HTTP_HOST] =&gt;          “example.awesomite.local”
-    [HTTP_USER_AGENT] =&gt;    “GuzzleHttp/6.3.3 curl/7.51.0 PHP/7.1.22”
-    [REQUEST_TIME_FLOAT] =&gt; 1538131526.19816
-    [REQUEST_TIME] =&gt;       1538131526
+    [HTTP_USER_AGENT] =&gt;    “GuzzleHttp/6.3.3 curl/7.54.0 PHP/7.1.22”
+    [REQUEST_TIME_FLOAT] =&gt; 1538411149.592781
+    [REQUEST_TIME] =&gt;       1538411149
 }
-</pre></div></div><div class="panel-heading"><a data-toggle="collapse" data-target="#context-variable-2" class="var-header collapsed">$_GET</a></div><div id="context-variable-2" class="panel-collapse collapse "><div class="panel-body"><pre class="max-height">array(0) {}
-</pre></div></div><div class="panel-heading"><a data-toggle="collapse" data-target="#context-variable-3" class="var-header collapsed">$_POST</a></div><div id="context-variable-3" class="panel-collapse collapse "><div class="panel-body"><pre class="max-height">array(0) {}
-</pre></div></div><div class="panel-heading"><a data-toggle="collapse" data-target="#context-variable-4" class="var-header collapsed">$_FILES</a></div><div id="context-variable-4" class="panel-collapse collapse "><div class="panel-body"><pre class="max-height">array(0) {}
-</pre></div></div><div class="panel-heading"><a data-toggle="collapse" data-target="#context-variable-5" class="var-header collapsed">$_COOKIE</a></div><div id="context-variable-5" class="panel-collapse collapse "><div class="panel-body"><pre class="max-height">array(0) {}
-</pre></div></div><div class="panel-heading"><a data-toggle="collapse" data-target="#context-variable-6" class="var-header collapsed">$_SESSION</a></div><div id="context-variable-6" class="panel-collapse collapse "><div class="panel-body"><pre class="max-height">NULL
-</pre></div></div><div class="panel-heading"><a data-toggle="collapse" data-target="#context-variable-7" class="var-header collapsed">$_ENV</a></div><div id="context-variable-7" class="panel-collapse collapse "><div class="panel-body"><pre class="max-height">array(0) {}
-</pre></div></div><div class="panel-heading"><a data-toggle="collapse" data-target="#context-variable-8" class="var-header collapsed">human-friendly time</a></div><div id="context-variable-8" class="panel-collapse collapse "><div class="panel-body"><pre class="max-height">“2018-09-28 12:45:26 CEST Europe/Warsaw”
-</pre></div></div><div class="panel-heading"><a data-toggle="collapse" data-target="#context-variable-9" class="var-header collapsed">microtime(true)</a></div><div id="context-variable-9" class="panel-collapse collapse "><div class="panel-body"><pre class="max-height">1538131526.272415
-</pre></div></div><div class="panel-heading"><a data-toggle="collapse" data-target="#context-variable-10" class="var-header collapsed">PHP_VERSION</a></div><div id="context-variable-10" class="panel-collapse collapse "><div class="panel-body"><pre class="max-height">“7.1.22”
+</pre></div></div><div class="panel-heading"><a data-toggle="collapse" data-target="#context-variable-2" class="var-header ">$_GET</a></div><div id="context-variable-2" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">array(0) {}
+</pre></div></div><div class="panel-heading"><a data-toggle="collapse" data-target="#context-variable-3" class="var-header ">$_POST</a></div><div id="context-variable-3" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">array(0) {}
+</pre></div></div><div class="panel-heading"><a data-toggle="collapse" data-target="#context-variable-4" class="var-header ">$_FILES</a></div><div id="context-variable-4" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">array(0) {}
+</pre></div></div><div class="panel-heading"><a data-toggle="collapse" data-target="#context-variable-5" class="var-header ">$_COOKIE</a></div><div id="context-variable-5" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">array(0) {}
+</pre></div></div><div class="panel-heading"><a data-toggle="collapse" data-target="#context-variable-6" class="var-header ">$_SESSION</a></div><div id="context-variable-6" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">NULL
+</pre></div></div><div class="panel-heading"><a data-toggle="collapse" data-target="#context-variable-7" class="var-header ">$_ENV</a></div><div id="context-variable-7" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">array(0) {}
+</pre></div></div><div class="panel-heading"><a data-toggle="collapse" data-target="#context-variable-8" class="var-header ">human-friendly time</a></div><div id="context-variable-8" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">“2018-10-01 18:25:49 CEST Europe/Warsaw”
+</pre></div></div><div class="panel-heading"><a data-toggle="collapse" data-target="#context-variable-9" class="var-header ">microtime(true)</a></div><div id="context-variable-9" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">1538411149.64535
+</pre></div></div><div class="panel-heading"><a data-toggle="collapse" data-target="#context-variable-10" class="var-header ">PHP_VERSION</a></div><div id="context-variable-10" class="panel-collapse collapse in"><div class="panel-body"><pre class="max-height">“7.1.22”
 </pre></div></div></div></div></div></div><footer><p class="pull-right small">Generated by <a href="https://github.com/awesomite/error-dumper" target="_blank" rel="noopener noreferrer">ErrorDumper</a> &bull; PHP 7.1.22 &bull; 2.11 MB</p></footer></div><script type="text/javascript" src="&#x2F;&#x2F;code.jquery.com&#x2F;jquery-2.1.4.min.js" integrity="sha384-R4&#x2F;ztc4ZlRqWjqIuvf6RX5yb&#x2F;v90qNGx6fS48N0tRxiGkqveZETq72KgDVJCp2TC" crossorigin="anonymous"></script><script type="text/javascript" src="&#x2F;&#x2F;maxcdn.bootstrapcdn.com&#x2F;bootstrap&#x2F;3.3.5&#x2F;js&#x2F;bootstrap.min.js" integrity="sha384-pPttEvTHTuUJ9L2kCoMnNqCRcaMPMVMsWVO&#x2B;RLaaaYDmfSP5&#x2F;&#x2F;dP6eKRusbPcqhZ" crossorigin="anonymous"></script><!-- @ErrorDumper --></body></html>
