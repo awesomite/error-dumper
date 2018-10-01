@@ -95,6 +95,8 @@ class ViewHtml implements ViewInterface
     }
 
     /**
+     * Argument $editor is optional, because there is not other option to make argument nullable in php < 7.1
+     *
      * @param null|EditorInterface $editor
      *
      * @return $this
