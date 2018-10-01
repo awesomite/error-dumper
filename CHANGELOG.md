@@ -4,24 +4,40 @@
 
 Versions `0.14.*` are **incompatible** with `0.13.*`.
 
-* Templates have been compressed, result is placed in `templates_dist` directory
+**Views**
+
+* Templates have been compressed, result is placed in `templates_dist` directory (see `bin/optimize-twig.php`)
 * Added methods `useDistTemplates` and `useSrcTemplates` to class `Awesomite\ErrorDumper\Views\ViewHtml` (distributable directory is used as default)
-* Renamed:
-  * `Awesomite\ErrorDumper\Cloners\ClonedException` to `Awesomite\ErrorDumper\Serializable\SerializableException`
-  * `Awesomite\ErrorDumper\Cloners\ClonedExceptionInterface` to `Awesomite\ErrorDumper\Serializable\SerializableExceptionInterface`
-  * `Awesomite\ErrorDumper\Handlers\ErrorHandler::pushValidator` to `Awesomite\ErrorDumper\Handlers\ErrorHandler::pushPreListener`
-  * `Awesomite\ErrorDumper\Handlers\ErrorHandlerInterface::pushValidator` to `Awesomite\ErrorDumper\Handlers\ErrorHandlerInterface::pushPreListener`
-  * `Awesomite\ErrorDumper\Listeners\ListenerClosure` to `Awesomite\ErrorDumper\Listeners\OnExceptionCallable`
-  * `Awesomite\ErrorDumper\Listeners\ListenerDevView` to `Awesomite\ErrorDumper\Listeners\OnExceptionDevView`
-  * `Awesomite\ErrorDumper\Listeners\ListenerInterface` to `Awesomite\ErrorDumper\Listeners\OnExceptionInterface`
-  * `Awesomite\ErrorDumper\Listeners\ValidatorClosure` to `Awesomite\ErrorDumper\Listeners\PreExceptionCallable`
-  * `Awesomite\ErrorDumper\Listeners\ValidatorInterface` to `Awesomite\ErrorDumper\Listeners\PreExceptionInterface`
+* Updated views, now Error Dumper prints whole exception chain
+* Argument $editor has become nullable in `Awesomite\ErrorDumper\Views\ViewHtml::setEditor`
+
+**Serializable**
+
+* Added optional arguments `$withContext`, `$stackTraceFactory`, `$contextVarsFactory`
+to constructor of `Awesomite\ErrorDumper\Serializable\SerializableException`
+
+**Renamed**
+
+* `Awesomite\ErrorDumper\Cloners\ClonedException` to `Awesomite\ErrorDumper\Serializable\SerializableException`
+* `Awesomite\ErrorDumper\Cloners\ClonedExceptionInterface` to `Awesomite\ErrorDumper\Serializable\SerializableExceptionInterface`
+* `Awesomite\ErrorDumper\Handlers\ErrorHandler::pushValidator` to `Awesomite\ErrorDumper\Handlers\ErrorHandler::pushPreListener`
+* `Awesomite\ErrorDumper\Handlers\ErrorHandlerInterface::pushValidator` to `Awesomite\ErrorDumper\Handlers\ErrorHandlerInterface::pushPreListener`
+* `Awesomite\ErrorDumper\Listeners\ListenerClosure` to `Awesomite\ErrorDumper\Listeners\OnExceptionCallable`
+* `Awesomite\ErrorDumper\Listeners\ListenerDevView` to `Awesomite\ErrorDumper\Listeners\OnExceptionDevView`
+* `Awesomite\ErrorDumper\Listeners\ListenerInterface` to `Awesomite\ErrorDumper\Listeners\OnExceptionInterface`
+* `Awesomite\ErrorDumper\Listeners\ValidatorClosure` to `Awesomite\ErrorDumper\Listeners\PreExceptionCallable`
+* `Awesomite\ErrorDumper\Listeners\ValidatorInterface` to `Awesomite\ErrorDumper\Listeners\PreExceptionInterface`
+
+**Removed**
 * Removed class `Awesomite\ErrorDumper\ErrorDumper`
+* Removed `Awesomite\ErrorDumper\Handlers\ErrorHandler::POLICY_*`, currently `POLICY_ERROR_REPORTING` is standard action.
+Argument `$policy` has been removed from `Awesomite\ErrorDumper\Handlers\ErrorHandler::__construct`.
+
+**Misc**
 * Classes `Awesomite\ErrorDumper\StandardExceptions\ErrorException`
 and `Awesomite\ErrorDumper\StandardExceptions\ShutdownErrorException` are not internal anymore
-* Removed `Awesomite\ErrorDumper\Handlers\ErrorHandler::POLICY_*`, currently POLICY_ERROR_REPORTING is standard action.
-Argument `$policy` has been removed from `Awesomite\ErrorDumper\Handlers\ErrorHandler::__construct`.
-* Updated `awesomite/stack-trace` to `^1.2`
+* Updated `awesomite/stack-trace` to `^1.3`
+* Added `awesomite/var-dumper:^1.1` to `composer.json`
 
 ## 0.13.7 (2018-09-21)
 
