@@ -11,7 +11,7 @@
 
 namespace Awesomite\ErrorDumper\Serializable;
 
-final class ContextVar implements ContextVarInterface
+class ContextVar implements ContextVarInterface
 {
     /**
      * @var string

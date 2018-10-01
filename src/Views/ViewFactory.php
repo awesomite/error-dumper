@@ -11,7 +11,7 @@
 
 namespace Awesomite\ErrorDumper\Views;
 
-final class ViewFactory
+class ViewFactory
 {
     /**
      * @return ViewInterface
