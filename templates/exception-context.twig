@@ -3,7 +3,7 @@
 
     <div class="panel panel-default">
         {% for var in exception.getContext %}
-            {% set showFull = loop.index0 < 1 %}
+            {% set showFull = loop.index0 < 10 %}
             {% set varId = 'context-variable-' ~ loop.index %}
 
             <div class="panel-heading">
