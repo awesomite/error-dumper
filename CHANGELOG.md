@@ -15,6 +15,11 @@ Versions `0.14.*` are **incompatible** with `0.13.*`.
 
 * Added optional arguments `$withContext`, `$stackTraceFactory`, `$contextVarsFactory`
 to constructor of `Awesomite\ErrorDumper\Serializable\SerializableException`
+* Added in namespace `Awesomite\ErrorDumper\Serializable`:
+  * `Awesomite\ErrorDumper\Serializable\ContextVar`
+  * `Awesomite\ErrorDumper\Serializable\ContextVarInterface`
+  * `Awesomite\ErrorDumper\Serializable\ContextVarsFactory`
+  * `Awesomite\ErrorDumper\Serializable\ContextVarsFactoryInterface`
 
 **Renamed**
 
