@@ -41,7 +41,7 @@ final class ViewHtmlTest extends AbstractTestCase
     public function testDistTemplates()
     {
         $exception = new \RuntimeException('My test exception', 5);
-        $serializable = new SerializableException($exception);
+        $serializable = new SerializableException($exception, 0, false, true, false);
 
         $compressedHtml = $this->printToVar(function () use ($serializable) {
             $view = new ViewHtml();
