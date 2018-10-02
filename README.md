@@ -11,23 +11,29 @@ Debugger integrated with PhpStorm.
 You will be able to serialize, restore and display them later in readable form.
 [@See](https://awesomite.github.io/error-dumper/examples/exception.html) example.
 
-## Table of contents
-
-* [Installation](#installation)
-* [How to use?](#how-to-use)
-* [Screenshots](#screenshots)
-  * [HTML](#html)
-  * [CLI](#cli)
-* [Versioning](#versioning)
-* [Examples](#examples)
-* [Content Security Policy](#content-security-policy)
-* [Symfony integration](#symfony-integration)
-
 ## Installation
 
 ```bash
 composer require awesomite/error-dumper
 ```
+
+## Screenshots
+
+### HTML
+
+<p align="center">
+    <a href="docs/resources/exception-html.png">
+        <img src="docs/resources/exception-html.png" alt="Exception displayed as HTML" />
+    </a>
+</p>
+
+### CLI
+
+<p align="center">
+    <a href="docs/resources/exception-cli.png">
+        <img src="docs/resources/exception-cli.png" alt="Exception displayed in terminal" />
+    </a>
+</p>
 
 ## How to use?
 
@@ -87,24 +93,6 @@ $handler->register(/* optional bitmask $types = ErrorHandler::TYPE_ALL */);
 ```
 
 Read [documentation](docs#error-dumper-documentation).
-
-## Screenshots
-
-### HTML
-
-<p align="center">
-    <a href="docs/resources/exception-html.png">
-        <img src="docs/resources/exception-html.png" alt="Exception displayed as HTML" />
-    </a>
-</p>
-
-### CLI
-
-<p align="center">
-    <a href="docs/resources/exception-cli.png">
-        <img src="docs/resources/exception-cli.png" alt="Exception displayed in terminal" />
-    </a>
-</p>
 
 ## Versioning
 
