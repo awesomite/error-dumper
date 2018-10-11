@@ -21,7 +21,7 @@
         {{ functions.exceptionChain(exception, editor, hasEditor) }}
         {% if hasContext %}
             <div class="tab-pane fade view-tab" id="main-context">
-                {% include 'exception-context.twig' %}
+                {% include 'exception-context_vars.twig' %}
             </div>
         {% endif %}
     </div>
