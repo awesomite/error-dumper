@@ -1,4 +1,4 @@
-<div class="tab-pane fade {{ argumentsTab ? '' : 'active in' }}" id="source-{{ stepKey }}">
+<div class="tab-pane fade {{ not argumentsTab ? 'show active' }}" id="source-{{ stepKey }}">
     {% if step.hasPlaceInCode() %}
         {% set placeInCode = step.getPlaceInCode() %}
         {% set lines = placeInCode.getAdjacentCode(15) %}
@@ -20,6 +20,6 @@
             {% endfor %}
         </div>
     {% else %}
-        <p class="code-box max-height">Source code does not exist for this step.</p>
+        <p class="code-box max-height {{ arguments|length == 0 ? 'rounded' }}">Source code does not exist for this step.</p>
     {% endif %}
 </div>

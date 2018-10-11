@@ -11,12 +11,22 @@
     {% endfor %}
 {% endautoescape %}
 <style type="text/css">
-    .error-line
+    .collapse
     {
-        font-weight: bold;
-        color: red;
-        font-style: italic;
-        background-color: #fefefe;
+        filter: rotateZ(0);
+    }
+    body.night-mode
+    {
+        filter: invert(85%);
+        background-color: #262626;
+    }
+    pre > pre
+    {
+        padding: 0;
+    }
+    a
+    {
+        cursor: pointer;
     }
     a.var-header
     {
@@ -24,47 +34,13 @@
     }
     a.var-header:after
     {
-        font-family: 'Glyphicons Halflings';
-        content: "\e114";
+        content: "\21E9";
         float: right;
         color: grey;
     }
     a.var-header.collapsed:after
     {
-        content:"\e080";
-    }
-    .code-box
-    {
-        overflow: auto;
-        background-color: #f5f5f5;
-        border: 1px solid #ccc;
-        padding: 10px;
-        border-radius: 4px;
-        font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
-        font-size: 13px;
-    }
-    .code-box:not(.rounded)
-    {
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
-    }
-    .code-box > span
-    {
-        white-space: pre;
-        display: block;
-    }
-    .max-height
-    {
-        max-height: 400px;
-        overflow: auto;
-    }
-    .panel-group:last-child
-    {
-        margin-bottom: 0;
-    }
-    a
-    {
-        cursor: pointer;
+        content:"\21E8";
     }
     pre, pre *
     {
@@ -82,17 +58,85 @@
     {
         margin-bottom: 0;
     }
-    .nav-tabs
+    .max-height
     {
-        border-bottom: 0;
+        max-height: 400px;
+        overflow: auto;
     }
-    .panel-collapse > .panel-body
+    .code-box
     {
+        overflow: auto;
+        background-color: #f5f5f5;
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 4px;
+        font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+        font-size: 13px;
+    }
+    .code-box > span
+    {
+        white-space: pre;
+        display: block;
+    }
+    .code-box:not(.rounded), .top-border-0
+    {
+        border-top: 0;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    .error-line
+    {
+         font-weight: bold;
+         color: red;
+         font-style: italic;
+         background-color: #fefefe;
+    }
+    .short-stack-trace {
+        font-family: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+        margin: 0;
         padding: 0;
     }
-    .panel-collapse pre
+    .short-stack-trace > li {
+        list-style: none;
+    }
+    h2 {
+        margin-bottom: .3em;
+        margin-top: .6em;
+    }
+    .view-tab > div {
+        margin-bottom: 1em;
+    }
+    p.code-box {
+        margin-bottom: 0;
+    }
+    :target {
+        -webkit-animation: target-fade 1s;
+        -moz-animation: target-fade 1s;
+        -o-animation: target-fade 1s;
+        animation: target-fade 1s;
+    }
+    @-webkit-keyframes target-fade {
+        from { background-color: #888; }
+        to { background-color: transparent; }
+    }
+
+    @-moz-keyframes target-fade {
+        from { background-color: #888; }
+        to { background-color: transparent; }
+    }
+
+    @-o-keyframes target-fade {
+        from { background-color: #888; }
+        to { background-color: transparent; }
+    }
+
+    @keyframes target-fade {
+        from { background-color: #888; } /* [1] */
+        to { background-color: transparent; }
+    }
+    h1
     {
-        border: 0;
-        background: #fff;
+        font-size: 130%;
+        margin: 0;
     }
 </style>

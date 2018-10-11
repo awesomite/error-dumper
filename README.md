@@ -112,8 +112,8 @@ To run example in terminal, execute `bin/test.php`.
 
 ## Content Security Policy
 
-This library uses *.js files hosted on `maxcdn.bootstrapcdn.com` and `code.jquery.com`
-(`@see \Awesomite\ErrorDumper\Views\ViewHtml::getResources`).
+This library uses *.js files hosted on `maxcdn.bootstrapcdn.com`, `code.jquery.com`
+and `cdnjs.cloudflare.com` (`@see \Awesomite\ErrorDumper\Views\ViewHtml::getResources`).
 Add those domains to your `Content-Security-Policy` header during display errors.
 
 ## Symfony integration

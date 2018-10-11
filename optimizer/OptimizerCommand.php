@@ -61,12 +61,34 @@ final class OptimizerCommand
         $output = $this->removeWhiteSpacesBetween('}}', '{%', $output);
         $output = $this->removeWhiteSpacesBetween('"', '>', $output);
         $output = $this->removeWhiteSpacesBetween('"', '/>', $output);
+        $output = $this->removeWhiteSpacesBetween('}}()', '{%', $output);
+        $output = $this->removeWhiteSpacesBetween('>', '#{{', $output);
 
         // '<script   src' => '<script src'
         $output = \preg_replace_callback(
             '/(?<first>[a-zA-Z"])\s{2,}(?<second>[a-zA-Z"])/s',
             function ($match) {
                 return $match['first'] . ' ' . $match['second'];
+            },
+            $output
+        );
+
+        $output = \preg_replace_callback(
+            '/(?<start>\<script.*?\>)(?<script>.*?)\<\/script\>/s',
+            function ($match) {
+                if ('' === $match['script']) {
+                    return $match[0];
+                }
+
+                $parts = \array_map(
+                    function ($part) {
+                        return \preg_replace('/\s/', '', $part);
+                    },
+                    \explode('var ', $match['script'])
+                );
+                $script = \implode('var ', $parts);
+
+                return $match['start'] . $script . '</script>';
             },
             $output
         );

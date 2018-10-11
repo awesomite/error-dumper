@@ -16,8 +16,8 @@ use Awesomite\ErrorDumper\Serializable\SerializableExceptionInterface;
 
 class ViewHtml implements ViewInterface
 {
-    const TAG_HTML        = '<!-- @ErrorDumper -->';
-    const TAG_UNDER_TITLE = '<!-- @ErrorDumper under title -->';
+    const TAG_HTML       = '<!-- @ErrorDumper -->';
+    const TAG_UNDER_MENU = '<!-- @ErrorDumper under menu -->';
 
     private static $headers
         = array(
@@ -31,7 +31,7 @@ class ViewHtml implements ViewInterface
      */
     private $editor;
 
-    private $contentUnderTitle;
+    private $contentUnderMenu;
 
     private $cacheDirectory;
 
@@ -77,19 +77,19 @@ class ViewHtml implements ViewInterface
             'resources'         => $this->getResources(),
             'editor'            => $this->editor,
             'hasEditor'         => !\is_null($this->editor),
-            'contentUnderTitle' => $this->contentUnderTitle,
+            'contentUnderMenu'  => $this->contentUnderMenu,
             'appendToBody'      => $this->appendToBody,
         ));
     }
 
     /**
-     * @param object|string $string
+     * @param object|string $stringable
      *
      * @return $this
      */
-    public function setContentUnderTitle($string)
+    public function setContentUnderMenu($stringable)
     {
-        $this->contentUnderTitle = $string;
+        $this->contentUnderMenu = $stringable;
 
         return $this;
     }
@@ -109,13 +109,13 @@ class ViewHtml implements ViewInterface
     }
 
     /**
-     * @param object|string $string
+     * @param object|string $stringable
      *
      * @return $this
      */
-    public function appendToBody($string)
+    public function appendToBody($stringable)
     {
-        $this->appendToBody[] = $string;
+        $this->appendToBody[] = $stringable;
 
         return $this;
     }
@@ -198,18 +198,22 @@ class ViewHtml implements ViewInterface
         return array(
             'css' => array(
                 array(
-                    'link'      => '//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
-                    'integrity' => 'sha384-pdapHxIh7EYuwy6K7iE41uXVxGCXY0sAjBzaElYGJUrzwodck3Lx6IE2lA0rFREo',
+                    'link'      => 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',
+                    'integrity' => 'sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm',
                 ),
             ),
             'js'  => array(
                 array(
-                    'link'      => '//code.jquery.com/jquery-2.1.4.min.js',
-                    'integrity' => 'sha384-R4/ztc4ZlRqWjqIuvf6RX5yb/v90qNGx6fS48N0tRxiGkqveZETq72KgDVJCp2TC',
+                    'link'      => 'https://code.jquery.com/jquery-3.2.1.slim.min.js',
+                    'integrity' => 'sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN',
                 ),
                 array(
-                    'link'      => '//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js',
-                    'integrity' => 'sha384-pPttEvTHTuUJ9L2kCoMnNqCRcaMPMVMsWVO+RLaaaYDmfSP5//dP6eKRusbPcqhZ',
+                    'link'      => 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js',
+                    'integrity' => 'sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q',
+                ),
+                array(
+                    'link'      => 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js',
+                    'integrity' => 'sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl',
                 ),
             ),
         );

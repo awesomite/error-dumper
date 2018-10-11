@@ -1,9 +1,10 @@
 {% macro exceptionChainPills(exception, _no) %}
     {% import _self as functions %}
+
     {% set no = _no|default(1) %}
 
-    <li {{ (1 == no ? 'class="active"')|raw }}>
-        <a href="#main-exception-{{ no }}" data-toggle="tab">
+    <li class="nav-item">
+        <a href="#main-exception-{{ no }}" class="nav-link{{ (1 == no ? ' active')|raw }}" data-toggle="tab">
             {{ exception.getOriginalClass() }}
             {% if no > 1 or exception.hasPrevious() %}
                 {{ ' ' }}#{{ no }}
@@ -20,13 +21,53 @@
     <h2>Exception</h2>
     {% set class = exception.getOriginalClass() %}
     {% set message = exception.getMessage() %}
-    <pre><strong>{{ class }} (code {{ exception.getCode() }})</strong>{{ message != '' ? ' ' ~ message }}</pre>
+
+    <div class="card">
+        <div class="card-header">
+            <strong>{{ class }} (code {{ exception.getCode() }})</strong>{{ message != '' ? ' ' ~ message }}
+        </div>
+        <div class="card-body">
+            <ul class="short-stack-trace">
+                {% set ds = constant('DIRECTORY_SEPARATOR') %}
+                {% for step in exception.getStackTrace() %}
+
+                    {% set stepIndex = loop.index0 %}
+                    {% set stepKey = 'e' ~ no ~ '-s' ~ stepIndex %}
+
+                    <li>
+                        <a href="#step-{{ stepKey }}">
+                            #{{ loop.index0 }}
+
+                            {% if step.hasCalledFunction %}
+                                {% set calledFunction = step.getCalledFunction() %}
+                                {% set isDeprecated = calledFunction.isDeprecated() %}
+                                {% if isDeprecated %}<s>{% endif %}
+                                {{ ' ' }}{{ calledFunction.getName() }}()
+                                {% if isDeprecated %}</s>{% endif %}
+                            {% endif %}
+
+                            {% if step.hasPlaceInCode %}
+
+                                {% if step.hasCalledFunction %} at{% endif %}
+
+                                {% set placeInCode = step.getPlaceInCode() %}
+                                {% set fileName = placeInCode.getFileName()|split(ds)|slice(-3)|join(ds) %}
+                                {% if fileName != placeInCode.getFileName() %}
+                                    {% set fileName = '(...)' ~ ds ~ fileName %}
+                                {% endif %}
+                                {{ ' ' }}{{ fileName }}:{{ placeInCode.getLineNumber() }}
+                            {% endif %}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
 
     <h2>Stack trace</h2>
 
-    {% set stepIndex = -1 %}
     {% for step in exception.getStackTrace() %}
-        {% set stepIndex = stepIndex + 1 %}
+        {% set stepIndex = loop.index0 %}
         {% set stepKey = 'e' ~ no ~ '-s' ~ stepIndex %}
         {% include 'exception-step.twig' %}
     {% endfor %}
@@ -34,9 +75,10 @@
 
 {% macro exceptionChain(exception, editor, hasEditor, _no) %}
     {% import _self as functions %}
+
     {% set no = _no|default(1) %}
 
-    <div class="tab-pane fade{{ 1 == no ? ' active in' }}" id="main-exception-{{ no }}">
+    <div class="tab-pane fade{{ 1 == no ? ' show active' }} view-tab" id="main-exception-{{ no }}">
         {{ functions.exception(exception, editor, hasEditor, no) }}
     </div>
 

@@ -27,7 +27,7 @@ final class TemplatesTest extends AbstractTestCase
 
         $this->assertGreaterThan(0, \count($finder));
         foreach ($finder as $file) {
-            $this->assertSame(1, \mb_substr_count($file->getContents(), "\n"));
+            $this->assertSame(1, \mb_substr_count($file->getContents(), "\n"), $file->getFilename());
         }
     }
 }

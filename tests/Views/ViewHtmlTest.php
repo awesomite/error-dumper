@@ -99,25 +99,30 @@ final class ViewHtmlTest extends AbstractTestCase
     }
 
     /**
-     * @dataProvider providerContentUnderTitle
+     * @dataProvider providerContentUnderMenu
      *
      * @param string $content
      */
-    public function testContentUnderTitle($content)
+    public function testContentUnderMenu($content)
     {
         $view = new ViewHtml();
-        $this->assertSame($view, $view->setContentUnderTitle($content));
+        $this->assertSame($view, $view->setContentUnderMenu($content));
         \ob_start();
         $view->display(new SerializableException(new \Exception(), 1));
         $output = \ob_get_contents();
         \ob_end_clean();
-        $this->assertContains($content, $output);
+        $this->assertContains((string)$content, $output);
     }
 
-    public function providerContentUnderTitle()
+    public function providerContentUnderMenu()
     {
         return array(
             array('<a href="http://localhost:8001">Test</a>'),
+            array(
+                new Stringable(function () {
+                    return '<a href="http://localhost:8001">Test</a>';
+                }),
+            ),
             array('Test'),
         );
     }
