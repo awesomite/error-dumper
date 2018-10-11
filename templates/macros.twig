@@ -5,7 +5,7 @@
 
     <li class="nav-item">
         <a href="#main-exception-{{ no }}" class="nav-link{{ (1 == no ? ' active')|raw }}" data-toggle="tab">
-            {{ exception.getOriginalClass() }}
+            {{ exception.getOriginalClass()|split('\\')|slice(-1)[0] }}
             {% if no > 1 or exception.hasPrevious() %}
                 {{ ' ' }}#{{ no }}
             {% endif %}
