@@ -11,6 +11,7 @@
 
 use Awesomite\ErrorDumper\Handlers\ErrorHandler;
 use Awesomite\ErrorDumper\Listeners\OnExceptionCallable;
+use Awesomite\ErrorDumper\Serializable\ContextVarsFactory;
 use Awesomite\ErrorDumper\Serializable\SerializableException;
 use Awesomite\ErrorDumper\Views\ViewHtml;
 use Awesomite\StackTrace\StackTraceFactory;
@@ -20,8 +21,10 @@ use Symfony\Component\VarDumper\Dumper\CliDumper;
 $handler = new ErrorHandler();
 
 $handler->pushListener(new OnExceptionCallable(function ($exception) {
-    $stackTraceFactory = new StackTraceFactory(new SymfonyVarDumper(new CliDumper()));
-    $serializable = new SerializableException($exception, 0, false, true, true, $stackTraceFactory);
+    $varDumper = new SymfonyVarDumper(new CliDumper());
+    $stackTraceFactory = new StackTraceFactory($varDumper);
+    $contextVarsFactory = new ContextVarsFactory($varDumper);
+    $serializable = new SerializableException($exception, 0, false, true, true, $stackTraceFactory, $contextVarsFactory);
 
     $view = new ViewHtml();
     $view->display($serializable);
