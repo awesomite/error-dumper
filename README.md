@@ -44,6 +44,8 @@ use Awesomite\ErrorDumper\Handlers\ErrorHandler;
 use Awesomite\ErrorDumper\Listeners\OnExceptionCallable;
 use Awesomite\ErrorDumper\Listeners\OnExceptionDevView;
 use Awesomite\ErrorDumper\Views\ViewFactory;
+use Awesomite\ErrorDumper\Views\ViewHtml;
+use Awesomite\ErrorDumper\Views\ViewCli;
 
 /**
  * Create new error handler.
@@ -56,9 +58,12 @@ $handler = new ErrorHandler(/* optional $mode = null */);
 /**
  * Create and push new error listener,
  * this handler will print programmer-friendly stack trace.
+ * 
+ * You can use ViewCli for displaying error in cli mode.
+ * ViewFactory::create() creates ViewCli or ViewHtml depending on php_sapi_name().
  */
-$devViewListener = new OnExceptionDevView(ViewFactory::create());
-$handler->pushListener($devViewListener);
+$htmlView = new OnExceptionDevView(new ViewHtml());
+$handler->pushListener($htmlView);
 
 /**
  * Create and push new custom error listener.
@@ -112,8 +117,8 @@ To run example in terminal, execute `bin/test.php`.
 
 ## Content Security Policy
 
-This library uses *.js files hosted on `maxcdn.bootstrapcdn.com` and `code.jquery.com`
-(`@see \Awesomite\ErrorDumper\Views\ViewHtml::getResources`).
+This library uses *.js files hosted on `maxcdn.bootstrapcdn.com`, `code.jquery.com`
+and `cdnjs.cloudflare.com` (`@see \Awesomite\ErrorDumper\Views\ViewHtml::getResources`).
 Add those domains to your `Content-Security-Policy` header during display errors.
 
 ## Symfony integration

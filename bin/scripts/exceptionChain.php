@@ -9,8 +9,11 @@
  * file that was distributed with this source code.
  */
 
+use Awesomite\ErrorDumper\Serializable\ContextVarsFactory;
 use Awesomite\ErrorDumper\Serializable\SerializableException;
 use Awesomite\ErrorDumper\Views\ViewHtml;
+use Awesomite\StackTrace\StackTraceFactory;
+use Awesomite\VarDumper\LightVarDumper;
 
 /**
  * @internal
@@ -56,6 +59,14 @@ try {
     $executor->execute(array(new Calculator(), 'divide'), array(5, 0));
 } catch (\Exception $exception) {
     $view = new ViewHtml();
-    $view->display(new SerializableException($exception));
+
+    $varDumper = new LightVarDumper();
+    $varDumper
+        ->setMaxChildren(100)
+        ->setMaxDepth(100);
+    $stackTraceFactory = new StackTraceFactory($varDumper);
+    $contextFactory = new ContextVarsFactory($varDumper);
+
+    $view->display(new SerializableException($exception, 0, false, true, true, $stackTraceFactory, $contextFactory));
     exit;
 }

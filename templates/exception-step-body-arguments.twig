@@ -1,12 +1,12 @@
 {% set unknownCounter = 0 %}
 {% set argIndex = -1 %}
-<div class="tab-pane fade {{ argumentsTab ? 'active in' }}" id="params-{{ stepKey }}">
-    <div class="panel-group">
+<div class="tab-pane fade {{ argumentsTab ? 'show active' }}" id="params-{{ stepKey }}">
+    <div>
         {% for keyParam, param in arguments %}
             {% set argIndex = argIndex + 1 %}
             {% set showFull = argIndex < 5 %}
-            <div class="panel panel-default">
-                <div class="panel-heading">
+            <div class="card top-border-0">
+                <div class="card-header">
                     {% if param.hasDeclaration() %}
                         {% set declaration = param.getDeclaration() %}
 
@@ -46,9 +46,9 @@
                 </div>
                 <div
                         id="param-{{ stepKey }}-{{ keyParam }}"
-                        class="panel-collapse collapse {{ showFull ? 'in' }}"
+                        class="panel-collapse collapse {{ showFull ? 'show active' }}"
                 >
-                    <div class="panel-body">
+                    <div class="card-body">
                         {% if param.hasValue() %}
                             <pre class="max-height">{{ param.getValue().dumpAsString() }}</pre>
                         {% else %}
